@@ -13,5 +13,4 @@ public class Carrier extends AbstractShip {
     public final int getDimension() {
         return 5;
     }
-
 }

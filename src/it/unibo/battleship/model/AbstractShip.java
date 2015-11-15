@@ -28,7 +28,10 @@ public abstract class AbstractShip implements Ship {
         this.cells = new ArrayList<>();
     }
 
-    public abstract int getDimension();
+    //public abstract String getType();
+    public String getType() {
+        return this.getClass().getSimpleName().toString();
+    }
 
     public Point2d getStartingPosition() {
         return this.startingPosition;

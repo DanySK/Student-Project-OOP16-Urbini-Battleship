@@ -6,9 +6,14 @@ import it.unibo.battleship.common.Cell;
 import it.unibo.battleship.common.Point2d;
 
 public interface Ship {
-    
+
     /***
-     * 
+     *
+     * @return returns the type of the ship 
+     */
+    String getType();
+    /***
+     *
      * @return returns the dimension of the ship.
      */
     int getDimension();
@@ -20,7 +25,7 @@ public interface Ship {
     Point2d getStartingPosition();
 
     /***
-     * 
+     *
      * @return 
      */
     Point2d getEndingPosition();
@@ -38,7 +43,7 @@ public interface Ship {
     boolean isPlaced();
 
     /***
-     * 
+     *
      * @param point
      * @return
      */
