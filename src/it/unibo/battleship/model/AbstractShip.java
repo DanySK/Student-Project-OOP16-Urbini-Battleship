@@ -9,46 +9,41 @@ import java.util.List;
 
 public abstract class AbstractShip implements Ship {
 
-    private final int dimension;
+//    private final int dimension;
     private Point2d startingPosition;
     private Point2d endingPosition;
-    private boolean isSank;
-    private boolean isPlaced;
+    private boolean sank;
+    private boolean placed;
     private List<Cell> cells;
 
-    public AbstractShip(int dimension, Point2d startingPos, Point2d endingPos) {
+    public AbstractShip(final Point2d startingPos, final Point2d endingPos) {
         // Controllare che la dimensione sia ok
         // Controllare che le posizioni siano permesse DALLA MAPPA
         // Il controllo di altre navi viene fatto invece dalla flotta
-        this.dimension = dimension;
+//        this.dimension = dimension;
         this.startingPosition = startingPos;
         this.endingPosition = endingPos;
-        this.isPlaced = true;
-        this.isSank = false;
+        this.placed = true;
+        this.sank = false;
         this.cells = new ArrayList<>();
     }
 
-    /***
-     * @see 
-     */
-    public final int getDimension() {
-        return this.dimension;
-    }
+    public abstract int getDimension();
 
-    public Point2d getStartingPoint() {
+    public Point2d getStartingPosition() {
         return this.startingPosition;
     }
 
-    public Point2d getEndingPoint() {
+    public Point2d getEndingPosition() {
         return this.endingPosition;
     }
 
     public boolean isSank() {
-        return this.isSank;
+        return this.sank;
     }
 
     public boolean isPlaced() {
-        return this.isPlaced;
+        return this.placed;
     }
 
     public boolean tryHit(Point2d point) {
@@ -56,16 +51,18 @@ public abstract class AbstractShip implements Ship {
         // Usare uno stream
         int hit = 0;
         for (Cell c : this.cells) {
-            if (c.getState() == State.hit) {
-                hit++;
-            }
             // EQUALS
             if (c.getCurrentPoint().equals(point)) {
                 c.setState(State.hit);
             }
+            // Se la cella è stata colpita, aumenta il conteggio
+            if (c.getState() == State.hit) {
+                hit++;
+            }
         }
         // Nave affondata? -> set degli stati
-        if (hit == this.dimension ) {
+        // Template method usato
+        if (hit == this.getDimension()) {
             for (Cell c : this.cells) {
                 c.setState(State.sank);
             }
@@ -74,7 +71,7 @@ public abstract class AbstractShip implements Ship {
         return false;
     }
 
-    public boolean move(Point2d startingPoint, Point2d endingPoint) {
+    public boolean move(final Point2d startingPoint, final Point2d endingPoint) {
         this.startingPosition = startingPoint;
         this.endingPosition = endingPoint;
         return true;

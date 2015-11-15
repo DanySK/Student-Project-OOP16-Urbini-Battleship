@@ -12,31 +12,31 @@ public interface Ship {
      * @return returns the dimension of the ship.
      */
     int getDimension();
-    
+
+    /***
+     *
+     * @return
+     */
+    Point2d getStartingPosition();
+
     /***
      * 
      * @return
      */
-    Point2d getStartingPoint();
-    
+    Point2d getEndingPosition();
+
     /***
-     * 
-     * @return
-     */
-    Point2d getEndingPoint();
-    
-    /***
-     * 
+     *
      * @return
      */
     boolean isSank();
-    
+
     /***
-     * 
+     *
      * @return
      */
     boolean isPlaced();
-    
+
     /***
      * 
      * @param point
@@ -44,7 +44,7 @@ public interface Ship {
      */
     boolean tryHit(Point2d point);
     /***
-     * 
+     *
      * @param startingPoint
      * @param endingPoint
      * @return
@@ -52,7 +52,7 @@ public interface Ship {
     boolean move(Point2d startingPoint, Point2d endingPoint);
     
     /***
-     * 
+     *
      * @return
      */
     List<Cell> getCellsList();

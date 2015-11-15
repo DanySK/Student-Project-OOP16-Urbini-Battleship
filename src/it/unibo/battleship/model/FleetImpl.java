@@ -7,27 +7,38 @@ import it.unibo.battleship.common.Point2d;
 
 public class FleetImpl implements Fleet {
 
-    private boolean isPlaced;
-    private boolean isSank;
+    private boolean placed;
+    private boolean sank;
     private List<Ship> ships;
-    
+
     public FleetImpl() {
-        this.isPlaced = false;
-        this.isSank = false;
+        this.placed = false;
+        this.sank = false;
         this.ships = new ArrayList<>(); // La creazione potrebbe esser delegata ad un metodo astratto
         // Flotta astratta -> metodo protetto. Implementazione riguardo all'interfaccia List
     }
-    
+
     public boolean tryHit(Point2d point) {
-        return false;
+        boolean retVal = false;
+        if (point == null) {
+            return false; // THROW EXCEPTION
+            // SARA' DA CAMBIARE NELL'INTERFACCIA -> THROWS EXCEPTION
+        }
+        for (Ship s : this.ships) {
+            if (s.tryHit(point)) {
+                retVal = true;
+                break;
+            }
+        }
+        return retVal;
     }
 
     public boolean isPlaced() {
-        return this.isPlaced;
+        return this.placed;
     }
 
     public boolean isSank() {
-        return this.isSank;
+        return this.sank;
     }
 
     public boolean addShip(Ship ship) {
