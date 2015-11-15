@@ -21,7 +21,7 @@ public interface Ship {
 
     /***
      * 
-     * @return
+     * @return 
      */
     Point2d getEndingPosition();
 
