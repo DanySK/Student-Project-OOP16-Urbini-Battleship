@@ -8,12 +8,12 @@ import it.unibo.battleship.common.Point2d;
 public class FleetImpl implements Fleet {
 
     private boolean placed;
-    private boolean sank;
+    private boolean sunk;
     private List<Ship> ships;
 
     public FleetImpl() {
         this.placed = false;
-        this.sank = false;
+        this.sunk = false;
         this.ships = new ArrayList<>(); // La creazione potrebbe esser delegata ad un metodo astratto
         // Flotta astratta -> metodo protetto. Implementazione riguardo all'interfaccia List
     }
@@ -37,8 +37,8 @@ public class FleetImpl implements Fleet {
         return this.placed;
     }
 
-    public boolean isSank() {
-        return this.sank;
+    public boolean isSunk() {
+        return this.sunk;
     }
 
     public boolean addShip(Ship ship) {

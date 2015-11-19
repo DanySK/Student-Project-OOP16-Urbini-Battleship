@@ -34,7 +34,7 @@ public interface Ship {
      *
      * @return
      */
-    boolean isSank();
+    boolean isSunk();
 
     /***
      *

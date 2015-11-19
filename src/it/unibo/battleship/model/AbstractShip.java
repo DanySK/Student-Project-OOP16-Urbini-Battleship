@@ -41,7 +41,7 @@ public abstract class AbstractShip implements Ship {
         return this.endingPosition;
     }
 
-    public boolean isSank() {
+    public boolean isSunk() {
         return this.sank;
     }
 

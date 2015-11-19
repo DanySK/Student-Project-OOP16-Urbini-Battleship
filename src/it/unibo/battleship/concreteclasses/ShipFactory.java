@@ -23,7 +23,7 @@ public class ShipFactory {
             case 2: retVal = new Submarine(start, end); break;
             case 3: retVal = new Cruiser(start, end); break;
             case 4: retVal = new Destroyer(start, end); break;
-            case 5: retVal = new Carrier(start, end); break;
+            case 5: retVal = new AircraftCarrier(start, end); break;
             default : retVal = null; // Ovviamente da correggere
         }
         
@@ -37,7 +37,7 @@ public class ShipFactory {
             case 2: retVal = new Submarine(startingPos, endingPos); break;
             case 3: retVal = new Cruiser(startingPos, endingPos); break;
             case 4: retVal = new Destroyer(startingPos, endingPos); break;
-            case 5: retVal = new Carrier(startingPos, endingPos); break;
+            case 5: retVal = new AircraftCarrier(startingPos, endingPos); break;
             default : retVal = null; // Ovviamente da correggere
         }
         return retVal;

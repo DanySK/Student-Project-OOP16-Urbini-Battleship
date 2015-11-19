@@ -60,6 +60,7 @@ public class Point2d {
 //        return result;
 //    }
 
+	// RIFATTORIZZARE 
     public boolean equals(Object point) {
         if (point != null) {
             if (point.getClass() == this.getClass()) {
