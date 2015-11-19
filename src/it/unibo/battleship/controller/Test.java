@@ -45,7 +45,7 @@ public class Test {
         tmp = factory.createShip(5, 55, 59);
         f1.addShip(tmp);
         f2.addShip(tmp);
-        
+
         // Stampa delle due navi
         System.out.println("tipi navi flotta 1");
         for (Ship s : f1.getShips()) {
@@ -54,7 +54,7 @@ public class Test {
             System.out.print(s.getType() + " (" + sp.getX() + ";" + sp.getY() + ")");
             System.out.println(" to : (" + ep.getX() + ";" + ep.getY() + ")");
         }
-        
+
         System.out.println("\n\ntipi navi flotta 2");
         for (Ship s : f2.getShips()) {
             Point2d sp = s.getStartingPosition();
@@ -62,12 +62,12 @@ public class Test {
             System.out.print(s.getType() + " (" + sp.getX() + ";" + sp.getY() + ")");
             System.out.println(" to : (" + ep.getX() + ";" + ep.getY() + ")");
         }
-        
+
         // Simulazione di spari senza controllo esterno
         for (int i = 2; i < 100; i++) {
             f1.tryHit(new Point2d(i, boundary));
             if (f1.isSunk()) {
-                System.out.println("Affondata!!" +i);
+                System.out.println("Affondata!!" + i);
                 break;
             }
         }
