@@ -20,6 +20,7 @@ public class Boundary {
     }
 
     /***
+     * 
      * @return returns the Horizontal bound (x)
      */
     public final int getHorizontalBound() {

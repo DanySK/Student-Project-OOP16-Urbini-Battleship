@@ -6,7 +6,7 @@ package it.unibo.battleship.common;
  * @author fabio
  * interface of a Cell
  */
-public interface Cell { // NOPMD by fabio on 15/11/15 1.17
+public interface Square { // NOPMD by fabio on 15/11/15 1.17
 
     /***
      *

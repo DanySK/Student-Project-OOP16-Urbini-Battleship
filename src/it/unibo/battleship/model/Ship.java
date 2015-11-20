@@ -2,19 +2,24 @@ package it.unibo.battleship.model;
 
 import java.util.List;
 
-import it.unibo.battleship.common.Cell;
+import it.unibo.battleship.common.Square;
 import it.unibo.battleship.common.Point2d;
 
+/***
+ * This interface represents a Ship and its public methods.
+ * @author Fabio Urbini
+ * 
+ */
 public interface Ship {
 
     /***
-     *
-     * @return returns the type of the ship 
+     * Gets the type of the ship
+     * @return returns a string
      */
     String getType();
     /***
-     *
-     * @return returns the dimension of the ship.
+     * Gets the dimension of the ship.
+     * @return returns a int value
      */
     int getDimension();
 
@@ -60,5 +65,5 @@ public interface Ship {
      *
      * @return
      */
-    List<Cell> getCellsList();
+    List<Square> getSquareList();
 }

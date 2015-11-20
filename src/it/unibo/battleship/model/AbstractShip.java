@@ -1,6 +1,6 @@
 package it.unibo.battleship.model;
 
-import it.unibo.battleship.common.Cell;
+import it.unibo.battleship.common.Square;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.State;
 
@@ -12,9 +12,9 @@ public abstract class AbstractShip implements Ship {
 //    private final int dimension;
     private Point2d startingPosition;
     private Point2d endingPosition;
-    private boolean sank;
+    private boolean sunk;
     private boolean placed;
-    private List<Cell> cells;
+    private List<Square> squares;
 
     public AbstractShip(final Point2d startingPos, final Point2d endingPos) {
         // Controllare che la dimensione sia ok
@@ -24,8 +24,8 @@ public abstract class AbstractShip implements Ship {
         this.startingPosition = startingPos;
         this.endingPosition = endingPos;
         this.placed = true;
-        this.sank = false;
-        this.cells = new ArrayList<>();
+        this.sunk = false;
+        this.squares = new ArrayList<>();
     }
 
     //public abstract String getType();
@@ -42,7 +42,7 @@ public abstract class AbstractShip implements Ship {
     }
 
     public boolean isSunk() {
-        return this.sank;
+        return this.sunk;
     }
 
     public boolean isPlaced() {
@@ -53,21 +53,21 @@ public abstract class AbstractShip implements Ship {
         // Cambia lo stato delle celle
         // Usare uno stream
         int hit = 0;
-        for (Cell c : this.cells) {
+        for (Square c : this.squares) {
             // EQUALS
             if (c.getCurrentPoint().equals(point)) {
-                c.setState(State.hit);
+                c.setState(State.HIT);
             }
             // Se la cella è stata colpita, aumenta il conteggio
-            if (c.getState() == State.hit) {
+            if (c.getState() == State.HIT) {
                 hit++;
             }
         }
         // Nave affondata? -> set degli stati
         // Template method usato
         if (hit == this.getDimension()) {
-            for (Cell c : this.cells) {
-                c.setState(State.sank);
+            for (Square c : this.squares) {
+                c.setState(State.SUNK);
             }
         }
 
@@ -80,9 +80,9 @@ public abstract class AbstractShip implements Ship {
         return true;
     }
 
-    public List<Cell> getCellsList() {
+    public List<Square> getSquareList() {
         // PASSARE UNA COPIA
-        return this.cells;
+        return this.squares;
     }
 
 }

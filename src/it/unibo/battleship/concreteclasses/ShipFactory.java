@@ -13,7 +13,18 @@ public class ShipFactory {
         this.boundary = boundary;
     }
     
-    public Ship createShip (final int dimension, int startIndex, int endIndex) {
+    /**
+     * Builds a new {@link Ship}.
+     * @param dimension
+     *              Dimension of the Ship
+     * @param startIndex    
+     *              Starting index of the ship
+     * @param endIndex
+     *              Ending index of the ship
+     * @return returns a Ship
+     */
+    public final Ship createShip (final int dimension, final int startIndex,
+            final int endIndex) {
         Ship retVal;
         Point2d start = new Point2d(startIndex, this.boundary);
         Point2d end = new Point2d(endIndex, this.boundary);
