@@ -4,7 +4,7 @@ package it.unibo.battleship.common;
 /***
  *
  * @author fabio
- * interface of a Cell
+ * interface of a Square
  */
 public interface Square { // NOPMD by fabio on 15/11/15 1.17
 
@@ -17,7 +17,7 @@ public interface Square { // NOPMD by fabio on 15/11/15 1.17
      *
      * @return returns the current state of a cell
      */
-    State getState();
+    State getState(); // Eliminare lo stato
 
     /***
      * 
@@ -25,5 +25,5 @@ public interface Square { // NOPMD by fabio on 15/11/15 1.17
      * @param state is the new state.
      * @return returns true if it was OK.
      */
-    boolean setState(State state);
+    boolean setState(State state);  // Anche questo da eliminare
 }

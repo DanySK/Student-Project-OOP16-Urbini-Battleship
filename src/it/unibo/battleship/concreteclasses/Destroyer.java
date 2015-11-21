@@ -5,7 +5,7 @@ import it.unibo.battleship.model.AbstractShip;
 
 public class Destroyer extends AbstractShip {
 
-    public Destroyer(Point2d startingPos, Point2d endingPos) {
+    public Destroyer(final Point2d startingPos, final Point2d endingPos) {
         super(startingPos, endingPos);
     }
 

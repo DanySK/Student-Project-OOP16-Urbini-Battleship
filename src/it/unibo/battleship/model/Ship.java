@@ -34,6 +34,8 @@ public interface Ship {
      * @return 
      */
     Point2d getEndingPosition();
+    
+    // getDirection
 
     /***
      *

@@ -27,7 +27,7 @@ public class FleetImpl implements Fleet {
         for (Ship s : this.ships) {
             if (s.tryHit(point)) {
                 retVal = true;
-                break;
+                break; // togliere obrobrio
             }
         }
         return retVal;
@@ -38,7 +38,14 @@ public class FleetImpl implements Fleet {
     }
 
     public boolean isSunk() {
-        return this.sunk;
+        //return this.sunk;
+        
+        for (final Ship s : ships) {
+            if (!s.isSunk()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean addShip(Ship ship) {

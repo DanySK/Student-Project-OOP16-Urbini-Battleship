@@ -5,7 +5,7 @@ import it.unibo.battleship.model.AbstractShip;
 
 public class AircraftCarrier extends AbstractShip {
 
-    public AircraftCarrier(Point2d startingPos, Point2d endingPos) {
+    public AircraftCarrier(final Point2d startingPos, final Point2d endingPos) {
         super(startingPos, endingPos);
     }
 

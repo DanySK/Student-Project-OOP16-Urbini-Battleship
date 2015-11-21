@@ -1,7 +1,9 @@
 package it.unibo.battleship.model;
 
+import it.unibo.battleship.common.Boundary;
 import it.unibo.battleship.common.Square;
 import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.SquareImpl;
 import it.unibo.battleship.common.State;
 
 import java.util.ArrayList;
@@ -26,8 +28,16 @@ public abstract class AbstractShip implements Ship {
         this.placed = true;
         this.sunk = false;
         this.squares = new ArrayList<>();
+        setSquares();
     }
 
+    private void setSquares() {
+        Boundary tmp = new Boundary(10,10);
+        for (int i = startingPosition.getIndex(); i < endingPosition.getIndex() + 1; i++) {
+            this.squares.add(new SquareImpl(new Point2d(i, tmp), State.PRESENT));
+            
+        }
+    }
     //public abstract String getType();
     public String getType() {
         return this.getClass().getSimpleName().toString();
@@ -53,10 +63,13 @@ public abstract class AbstractShip implements Ship {
         // Cambia lo stato delle celle
         // Usare uno stream
         int hit = 0;
+        boolean retVal = false;
+        
         for (Square c : this.squares) {
             // EQUALS
             if (c.getCurrentPoint().equals(point)) {
                 c.setState(State.HIT);
+                retVal = true;
             }
             // Se la cella è stata colpita, aumenta il conteggio
             if (c.getState() == State.HIT) {
@@ -66,12 +79,13 @@ public abstract class AbstractShip implements Ship {
         // Nave affondata? -> set degli stati
         // Template method usato
         if (hit == this.getDimension()) {
-            for (Square c : this.squares) {
+            for (final Square c : this.squares) {
                 c.setState(State.SUNK);
             }
+            this.sunk = true;
         }
 
-        return false;
+        return retVal;
     }
 
     public boolean move(final Point2d startingPoint, final Point2d endingPoint) {

@@ -2,10 +2,17 @@ package it.unibo.battleship.common;
 
 public class Point2d {
 
-    private int x;
-    private int y;
-    private int index;
-    private Boundary boundary;
+    /*
+     * Probabilmente è da togliere Boundary come parametro nel costruttore
+     * L'informazione è molto ridondante in un set di boundary
+     */
+    
+    
+    
+    private final int x;
+    private final int y;
+    private final int index;
+    private final Boundary boundary;
 
     public Point2d(final int x, final int y, final Boundary boundary) {
         // Control : x >= 0, y >= 0

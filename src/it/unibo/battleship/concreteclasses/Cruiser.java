@@ -5,7 +5,7 @@ import it.unibo.battleship.model.AbstractShip;
 
 public class Cruiser extends AbstractShip {
 
-    public Cruiser(Point2d startingPos, Point2d endingPos) {
+    public Cruiser(final Point2d startingPos, final Point2d endingPos) {
         super(startingPos, endingPos);
     }
 

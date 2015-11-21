@@ -7,9 +7,9 @@ import it.unibo.battleship.model.Ship;
 // Commentare
 public class ShipFactory {
     
-    private Boundary boundary;
+    private final Boundary boundary;
     
-    public ShipFactory(Boundary boundary) {
+    public ShipFactory(final Boundary boundary) {
         this.boundary = boundary;
     }
     
@@ -26,8 +26,8 @@ public class ShipFactory {
     public final Ship createShip (final int dimension, final int startIndex,
             final int endIndex) {
         Ship retVal;
-        Point2d start = new Point2d(startIndex, this.boundary);
-        Point2d end = new Point2d(endIndex, this.boundary);
+        final Point2d start = new Point2d(startIndex, this.boundary);
+        final Point2d end = new Point2d(endIndex, this.boundary);
         
         // CODICE DUPLICATO : FARE METODO COMUNE
         switch (dimension) {

@@ -72,6 +72,16 @@ public class Test {
             }
         }
         System.out.println("f1 affondata: " + f1.isSunk());
+        for (final Ship s : f1.getShips()) {
+            System.out.println(s.getType() + ": Affondata : " + s.isSunk());
+        }
+        
+        System.out.println("\n\n\n\n\n");
+        System.out.println("f2 affondata: " + f2.isSunk());
+        for (final Ship s : f2.getShips()) {
+            System.out.println(s.getType() + ": Affondata : " + s.isSunk());
+        }
+
     }
 
 }
