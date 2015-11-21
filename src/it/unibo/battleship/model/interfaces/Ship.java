@@ -1,9 +1,9 @@
-package it.unibo.battleship.model;
+package it.unibo.battleship.model.interfaces;
 
 import java.util.List;
 
-import it.unibo.battleship.common.Square;
-import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.Square;
 
 /***
  * This interface represents a Ship and its public methods.

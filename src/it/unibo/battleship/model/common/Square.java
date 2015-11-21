@@ -1,4 +1,4 @@
-package it.unibo.battleship.common;
+package it.unibo.battleship.model.common;
 
 
 /***

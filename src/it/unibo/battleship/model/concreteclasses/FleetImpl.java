@@ -1,9 +1,11 @@
-package it.unibo.battleship.model;
+package it.unibo.battleship.model.concreteclasses;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.interfaces.Fleet;
+import it.unibo.battleship.model.interfaces.Ship;
 
 public class FleetImpl implements Fleet {
 
@@ -18,19 +20,17 @@ public class FleetImpl implements Fleet {
         // Flotta astratta -> metodo protetto. Implementazione riguardo all'interfaccia List
     }
 
-    public boolean tryHit(Point2d point) {
-        boolean retVal = false;
+    public boolean tryHit(final Point2d point) {
         if (point == null) {
             return false; // THROW EXCEPTION
             // SARA' DA CAMBIARE NELL'INTERFACCIA -> THROWS EXCEPTION
         }
-        for (Ship s : this.ships) {
+        for (final Ship s : this.ships) {
             if (s.tryHit(point)) {
-                retVal = true;
-                break; // togliere obrobrio
+                return true;
             }
         }
-        return retVal;
+        return false;
     }
 
     public boolean isPlaced() {
@@ -48,7 +48,7 @@ public class FleetImpl implements Fleet {
         return true;
     }
 
-    public boolean addShip(Ship ship) {
+    public boolean addShip(final Ship ship) {
         this.ships.add(ship);
         return true;
     }

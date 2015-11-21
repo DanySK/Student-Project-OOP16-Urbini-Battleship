@@ -1,8 +1,8 @@
-package it.unibo.battleship.concreteclasses;
+package it.unibo.battleship.model.concreteclasses;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.model.Ship;
+import it.unibo.battleship.model.common.Boundary;
+import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.interfaces.Ship;
 
 // Commentare
 public class ShipFactory {

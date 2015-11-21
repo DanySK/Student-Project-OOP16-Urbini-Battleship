@@ -1,10 +1,11 @@
-package it.unibo.battleship.model;
+package it.unibo.battleship.model.concreteclasses;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.Square;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.common.SquareImpl;
-import it.unibo.battleship.common.State;
+import it.unibo.battleship.model.common.Boundary;
+import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.Square;
+import it.unibo.battleship.model.common.SquareImpl;
+import it.unibo.battleship.model.common.State;
+import it.unibo.battleship.model.interfaces.Ship;
 
 import java.util.ArrayList;
 import java.util.List;

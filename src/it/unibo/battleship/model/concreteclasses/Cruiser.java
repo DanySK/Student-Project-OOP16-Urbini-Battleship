@@ -1,7 +1,6 @@
-package it.unibo.battleship.concreteclasses;
+package it.unibo.battleship.model.concreteclasses;
 
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.model.AbstractShip;
+import it.unibo.battleship.model.common.Point2d;
 
 public class Cruiser extends AbstractShip {
 

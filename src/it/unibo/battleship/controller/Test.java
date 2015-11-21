@@ -1,11 +1,11 @@
 package it.unibo.battleship.controller;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.concreteclasses.ShipFactory;
-import it.unibo.battleship.model.Fleet;
-import it.unibo.battleship.model.FleetImpl;
-import it.unibo.battleship.model.Ship;
+import it.unibo.battleship.model.common.Boundary;
+import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.concreteclasses.FleetImpl;
+import it.unibo.battleship.model.concreteclasses.ShipFactory;
+import it.unibo.battleship.model.interfaces.Fleet;
+import it.unibo.battleship.model.interfaces.Ship;
 
 public class Test {
 
