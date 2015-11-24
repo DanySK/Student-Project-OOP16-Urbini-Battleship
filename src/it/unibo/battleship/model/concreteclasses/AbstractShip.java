@@ -1,7 +1,7 @@
 package it.unibo.battleship.model.concreteclasses;
 
 import it.unibo.battleship.model.common.Boundary;
-import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.PointImpl;
 import it.unibo.battleship.model.common.Square;
 import it.unibo.battleship.model.common.SquareImpl;
 import it.unibo.battleship.model.common.State;
@@ -13,13 +13,13 @@ import java.util.List;
 public abstract class AbstractShip implements Ship {
 
 //    private final int dimension;
-    private Point2d startingPosition;
-    private Point2d endingPosition;
+    private PointImpl startingPosition;
+    private PointImpl endingPosition;
     private boolean sunk;
     private boolean placed;
     private List<Square> squares;
 
-    public AbstractShip(final Point2d startingPos, final Point2d endingPos) {
+    public AbstractShip(final PointImpl startingPos, final PointImpl endingPos) {
         // Controllare che la dimensione sia ok
         // Controllare che le posizioni siano permesse DALLA MAPPA
         // Il controllo di altre navi viene fatto invece dalla flotta
@@ -35,7 +35,7 @@ public abstract class AbstractShip implements Ship {
     private void setSquares() {
         Boundary tmp = new Boundary(10,10);
         for (int i = startingPosition.getIndex(); i < endingPosition.getIndex() + 1; i++) {
-            this.squares.add(new SquareImpl(new Point2d(i, tmp), State.PRESENT));
+            this.squares.add(new SquareImpl(new PointImpl(i, tmp), State.PRESENT));
             
         }
     }
@@ -44,23 +44,28 @@ public abstract class AbstractShip implements Ship {
         return this.getClass().getSimpleName().toString();
     }
 
-    public Point2d getStartingPosition() {
+    @Override
+    public final PointImpl getStartingPosition() {
         return this.startingPosition;
     }
 
-    public Point2d getEndingPosition() {
+    @Override
+    public final PointImpl getEndingPosition() {
         return this.endingPosition;
     }
 
-    public boolean isSunk() {
+    @Override
+    public final boolean isSunk() {
         return this.sunk;
     }
 
-    public boolean isPlaced() {
+    @Override
+    public final boolean isPlaced() {
         return this.placed;
     }
 
-    public boolean tryHit(Point2d point) {
+    @Override
+    public final boolean tryHit(PointImpl point) {
         // Cambia lo stato delle celle
         // Usare uno stream
         int hit = 0;
@@ -89,7 +94,7 @@ public abstract class AbstractShip implements Ship {
         return retVal;
     }
 
-    public boolean move(final Point2d startingPoint, final Point2d endingPoint) {
+    public boolean move(final PointImpl startingPoint, final PointImpl endingPoint) {
         this.startingPosition = startingPoint;
         this.endingPosition = endingPoint;
         return true;

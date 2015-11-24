@@ -2,15 +2,15 @@ package it.unibo.battleship.model.common;
 
 public class SquareImpl implements Square {
 
-    private final Point2d currentPoint;
+    private final PointImpl currentPoint;
     private State state;
     
-    public SquareImpl(final Point2d currentPoint, final State state) {
+    public SquareImpl(final PointImpl currentPoint, final State state) {
         this.currentPoint = currentPoint;
         this.state = state;
     }
     @Override
-    public Point2d getCurrentPoint() {
+    public PointImpl getCurrentPoint() {
         return this.currentPoint;
     }
 

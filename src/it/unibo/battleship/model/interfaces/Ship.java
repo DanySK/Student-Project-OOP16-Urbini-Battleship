@@ -2,7 +2,7 @@ package it.unibo.battleship.model.interfaces;
 
 import java.util.List;
 
-import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.PointImpl;
 import it.unibo.battleship.model.common.Square;
 
 /***
@@ -27,13 +27,13 @@ public interface Ship {
      *
      * @return
      */
-    Point2d getStartingPosition();
+    PointImpl getStartingPosition();
 
     /***
      *
      * @return 
      */
-    Point2d getEndingPosition();
+    PointImpl getEndingPosition();
     
     // getDirection
 
@@ -54,14 +54,14 @@ public interface Ship {
      * @param point
      * @return
      */
-    boolean tryHit(Point2d point);
+    boolean tryHit(PointImpl point);
     /***
      *
      * @param startingPoint
      * @param endingPoint
      * @return
      */
-    boolean move(Point2d startingPoint, Point2d endingPoint);
+    boolean move(PointImpl startingPoint, PointImpl endingPoint);
     
     /***
      *

@@ -1,6 +1,6 @@
 package it.unibo.battleship.model.common;
 
-public class Point2d {
+public class PointImpl {
 
     /*
      * Probabilmente è da togliere Boundary come parametro nel costruttore
@@ -8,13 +8,13 @@ public class Point2d {
      */
     
     
-    
+        
     private final int x;
     private final int y;
     private final int index;
     private final Boundary boundary;
 
-    public Point2d(final int x, final int y, final Boundary boundary) {
+    public PointImpl(final int x, final int y, final Boundary boundary) {
         // Control : x >= 0, y >= 0
         // Lazy pattern implementable
         this.x = x;
@@ -23,7 +23,7 @@ public class Point2d {
         this.index = this.x + this.y * boundary.getHorizontalBound();
     }
 
-    public Point2d(final int index, final Boundary boundary) {
+    public PointImpl(final int index, final Boundary boundary) {
         this.boundary = boundary;
         this.index = index;
         // Lazy pattern implementable
@@ -71,7 +71,7 @@ public class Point2d {
     public boolean equals(Object point) {
         if (point != null) {
             if (point.getClass() == this.getClass()) {
-                if ((this.x == ((Point2d)point).getX()) && (this.y == ((Point2d)point).getY())) {
+                if ((this.x == ((PointImpl)point).getX()) && (this.y == ((PointImpl)point).getY())) {
                     return true;
                 }
             }

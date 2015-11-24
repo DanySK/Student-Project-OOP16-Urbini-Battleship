@@ -1,7 +1,7 @@
 package it.unibo.battleship.controller;
 
 import it.unibo.battleship.model.common.Boundary;
-import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.PointImpl;
 import it.unibo.battleship.model.concreteclasses.FleetImpl;
 import it.unibo.battleship.model.concreteclasses.ShipFactory;
 import it.unibo.battleship.model.interfaces.Fleet;
@@ -46,26 +46,11 @@ public class Test {
         f1.addShip(tmp);
         f2.addShip(tmp);
 
-        // Stampa delle due navi
-        System.out.println("tipi navi flotta 1");
-        for (Ship s : f1.getShips()) {
-            Point2d sp = s.getStartingPosition();
-            Point2d ep = s.getEndingPosition();
-            System.out.print(s.getType() + " (" + sp.getX() + ";" + sp.getY() + ")");
-            System.out.println(" to : (" + ep.getX() + ";" + ep.getY() + ")");
-        }
-
-        System.out.println("\n\ntipi navi flotta 2");
-        for (Ship s : f2.getShips()) {
-            Point2d sp = s.getStartingPosition();
-            Point2d ep = s.getEndingPosition();
-            System.out.print(s.getType() + " (" + sp.getX() + ";" + sp.getY() + ")");
-            System.out.println(" to : (" + ep.getX() + ";" + ep.getY() + ")");
-        }
+        showFleets(f1, f2);
 
         // Simulazione di spari senza controllo esterno
         for (int i = 2; i < 100; i++) {
-            f1.tryHit(new Point2d(i, boundary));
+            f1.tryHit(new PointImpl(i, boundary));
             if (f1.isSunk()) {
                 System.out.println("Affondata!!" + i);
                 break;
@@ -82,6 +67,24 @@ public class Test {
             System.out.println(s.getType() + ": Affondata : " + s.isSunk());
         }
 
+    }
+
+    private static void showFleets(final Fleet f1, final Fleet f2) {
+        // Stampa delle due navi
+        System.out.println("tipi navi flotta 1");
+        showFleet(f1);
+
+        System.out.println("\n\ntipi navi flotta 2");
+        showFleet(f2);
+    }
+
+    private static void showFleet(final Fleet fleet) {
+        for (final Ship s : fleet.getShips()) {
+            PointImpl sp = s.getStartingPosition();
+            PointImpl ep = s.getEndingPosition();
+            System.out.print(s.getType() + " (" + sp.getX() + ";" + sp.getY() + ")");
+            System.out.println(" to : (" + ep.getX() + ";" + ep.getY() + ")");
+        }
     }
 
 }

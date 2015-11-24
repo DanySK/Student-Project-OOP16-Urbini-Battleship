@@ -2,7 +2,7 @@ package it.unibo.battleship.model.interfaces;
 
 import java.util.List;
 
-import it.unibo.battleship.model.common.Point2d;
+import it.unibo.battleship.model.common.PointImpl;
 
 /***
  *
@@ -16,7 +16,7 @@ public interface Fleet {
      * @param point coordinate of the point which is wanted to be hit.
      * @return returns true if the fleet was hit.
      */
-    boolean tryHit(Point2d point);
+    boolean tryHit(PointImpl point);
 
     /***
      *
