@@ -1,16 +1,11 @@
 package it.unibo.battleship.model.concreteclasses;
 
 import it.unibo.battleship.model.common.PointImpl;
+import it.unibo.battleship.model.interfaces.AbstractShip;
 
 public class Cruiser extends AbstractShip {
 
     public Cruiser(final PointImpl startingPos, final PointImpl endingPos) {
-        super(startingPos, endingPos);
+        super(Utilities.CRUISER_DIMENSION, startingPos, endingPos);
     }
-
-    @Override
-    public final int getDimension() {
-        return 3;
-    }
-
 }

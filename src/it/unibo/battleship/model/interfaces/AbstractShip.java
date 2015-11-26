@@ -1,11 +1,10 @@
-package it.unibo.battleship.model.concreteclasses;
+package it.unibo.battleship.model.interfaces;
 
 import it.unibo.battleship.model.common.Boundary;
 import it.unibo.battleship.model.common.PointImpl;
 import it.unibo.battleship.model.common.Square;
 import it.unibo.battleship.model.common.SquareImpl;
 import it.unibo.battleship.model.common.State;
-import it.unibo.battleship.model.interfaces.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,29 +17,44 @@ public abstract class AbstractShip implements Ship {
     private boolean sunk;
     private boolean placed;
     private List<Square> squares;
+    private final int dimension;
 
-    public AbstractShip(final PointImpl startingPos, final PointImpl endingPos) {
+    public AbstractShip(final int dimension) {
+        this.dimension = dimension;
+        setPrivateFields(dimension, false);
+    }
+    public AbstractShip(final int dimension, final PointImpl startingPos,
+            final PointImpl endingPos) {
         // Controllare che la dimensione sia ok
         // Controllare che le posizioni siano permesse DALLA MAPPA
         // Il controllo di altre navi viene fatto invece dalla flotta
 //        this.dimension = dimension;
         this.startingPosition = startingPos;
         this.endingPosition = endingPos;
-        this.placed = true;
-        this.sunk = false;
+        this.dimension = dimension;
+        
+        setPrivateFields(dimension, true);
         this.squares = new ArrayList<>();
         setSquares();
     }
 
+    private void setPrivateFields(int dimension, boolean placed) {
+        this.sunk = false;
+        this.placed = placed;
+    }
+    
     private void setSquares() {
         Boundary tmp = new Boundary(10,10);
         for (int i = startingPosition.getIndex(); i < endingPosition.getIndex() + 1; i++) {
             this.squares.add(new SquareImpl(new PointImpl(i, tmp), State.PRESENT));
-            
         }
     }
-    //public abstract String getType();
-    public String getType() {
+    
+    public final int getDimension() {
+        return this.dimension;
+    }
+
+    public final String getType() {
         return this.getClass().getSimpleName().toString();
     }
 
