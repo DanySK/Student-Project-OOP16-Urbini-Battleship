@@ -20,7 +20,7 @@ public interface Square { // NOPMD by fabio on 15/11/15 1.17
     State getState(); // Eliminare lo stato
 
     /***
-     * 
+     *
      * Sets a new state.
      * @param state is the new state.
      * @return returns true if it was OK.
