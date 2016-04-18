@@ -16,10 +16,19 @@ public class test {
         Field f1 = new Field(rows, columns);
         Field f2 = new Field(rows, columns);
         
-        Fleet fleet1 = new Fleet();
-        Fleet fleet2 = new Fleet();
+        Fleet fleet1 = Ruleset.getNewFleet();
+        Fleet fleet2 = Ruleset.getNewFleet();
         
-        // f1.fill -> riempie il campo con la flotta
-    }
 
+        
+        // FASE DI COMBATTIMENTO
+        if (fleet1.isReady() && fleet2.isReady()) {
+            
+            f1.placeFleet(fleet1);
+            f1.placeFleet(fleet2);
+            
+            
+            
+        }
+    }
 }

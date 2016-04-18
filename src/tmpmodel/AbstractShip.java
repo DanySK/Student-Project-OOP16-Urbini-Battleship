@@ -3,15 +3,31 @@ package tmpmodel;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * come mantenere size final e che abbia quel valore alla scelta del sottotipo?
+ * 
+ * 
+ * 
+ */
 public abstract class AbstractShip {
-    private final Point2d pos;
-    private final int size; 
+    private Point2d pos; // final 
+    private int size; // final
     private boolean sunk;
+    private boolean placed; 
 
     public AbstractShip(final Point2d start, final int size) {
+        this(size);
         this.pos = start;
+        this.placed = true;
+    }
+    
+    public AbstractShip(final int size) {
+        this();
         this.size = size;
-        this.sunk = false;
+    }
+    public AbstractShip() {
+        this.sunk = false; 
+        this.placed = false;
     }
 
     public boolean isSunk() {
@@ -36,22 +52,45 @@ public abstract class AbstractShip {
         return tmp;
     }
     
-    public boolean containsPosition(final Point2d p) {
-        return getAllPositions().contains(p);
+    public boolean containsPosition(final Point2d point) {
+        return getAllPositions().contains(point);
     }
     
     // Metodo da ridefinire : metodo che restituisce tutte le posizioni occupate
     
+    public void place(final Point2d start) {
+        // Fare un controllo sulle navi già presenti da qui? 
+        this.pos = start;
+    }
+    
+    public boolean isPlaced () {
+        return this.placed;
+    }
     
     
     
     
+    
+    // CLASSI INNESTATE
     public static class Submarine extends AbstractShip {
 
-        public Submarine(Point2d start, int size) {
-            super(start, size);
-            
+        public Submarine(Point2d start) {
+            super(start, Ruleset.getSubmarineSize());
         }
         
+        public Submarine() {
+            super(Ruleset.getSubmarineSize());
+        }
+        
+    }
+    public static class Cruiser extends AbstractShip {
+        
+        public Cruiser(Point2d start, int size) {
+            super(start, size);
+        }
+        
+        public Cruiser() {
+            // creare metodo in Ruleset
+        }
     }
 }

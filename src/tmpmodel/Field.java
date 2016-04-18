@@ -23,6 +23,13 @@ public class Field {
         int x = p.getX();
         int y = p.getY();
         
+        
+        if (matrix[x][y].getCurrentState() == State.HIT) {
+           // throw new Exception("Nave già colpita");
+        }
+        
+        
+        // Se la nave è presente, viene colpita
         if (matrix[x][y].getCurrentState() == State.PRESENT ) {
             matrix[x][y].setState(State.HIT);
         } else {
@@ -30,7 +37,14 @@ public class Field {
         }
     }
 
+    public void placeFleet(final Fleet fleet) {
+        for (final AbstractShip s : fleet.getAllShips()) {
+            this.placeShip(s);
+        }
+    }
     public void placeShip(final AbstractShip ship) {
+        // Per il momento viene solo messo lo stato delle celle a presente
+        // TO DO : controllo sulla presenza di navi 
         for ( final Point2d point : ship.getAllPositions() ) {
             matrix[point.getX()][point.getY()].setState(State.PRESENT);
         }

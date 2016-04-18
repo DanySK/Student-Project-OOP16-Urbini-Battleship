@@ -5,16 +5,18 @@ import java.util.List;
 
 public class Fleet {
     private final List<AbstractShip> ships;
-    private boolean isSunk;
+    private boolean sunk;
+    private boolean ready;
     
     public Fleet() {
         this.ships = new ArrayList<>();
-        isSunk = false;
+        sunk = false;
+        ready = false;
     }
     
     public List<AbstractShip> getAllShips() {
         // Usare la copia non modificabile, andare a rivedere 
-        return ships;
+        return this.ships;
     }
     
     public void addShip(AbstractShip s) {
@@ -22,6 +24,18 @@ public class Fleet {
     }
     
     public boolean isSunk() {
-        return this.isSunk;
+        return this.sunk;
+    }
+    
+    public boolean isReady() {
+        //return this.ready;
+        
+        for (final AbstractShip s : this.ships ) {
+            if (!s.isPlaced()) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }
