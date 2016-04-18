@@ -20,7 +20,7 @@ public abstract class AbstractShip {
         this.pos = start;
         this.placed = true;
     }
-    
+
     public AbstractShip(final int size) {
         this();
         this.size = size;
@@ -41,56 +41,53 @@ public abstract class AbstractShip {
     public Point2d getPos() {
         return this.pos;
     }
-    
+
     // Fare metodo cached 
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             tmp.add(new Point2dImpl(pos.getX() + i, pos.getY()));
         }
-        
+
         return tmp;
     }
-    
+
     public boolean containsPosition(final Point2d point) {
         return getAllPositions().contains(point);
     }
-    
+
     // Metodo da ridefinire : metodo che restituisce tutte le posizioni occupate
-    
+
     public void place(final Point2d start) {
         // Fare un controllo sulle navi già presenti da qui? 
         this.pos = start;
     }
-    
+
     public boolean isPlaced () {
         return this.placed;
     }
-    
-    
-    
-    
-    
-    // CLASSI INNESTATE
+
+
+    // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
     public static class Submarine extends AbstractShip {
 
         public Submarine(Point2d start) {
             super(start, Ruleset.getSubmarineSize());
         }
-        
+
         public Submarine() {
             super(Ruleset.getSubmarineSize());
         }
-        
+
     }
     public static class Cruiser extends AbstractShip {
-        
-        public Cruiser(Point2d start, int size) {
-            super(start, size);
+
+        public Cruiser(Point2d start) {
+            super(start, Ruleset.getCruiserSize());
         }
-        
+
         public Cruiser() {
-            // creare metodo in Ruleset
+            super(Ruleset.getCruiserSize());
         }
     }
 }

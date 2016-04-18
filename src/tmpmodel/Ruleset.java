@@ -1,21 +1,29 @@
 package tmpmodel;
 
 public final class Ruleset {
-    static final int N_SUBMARINES = 10;
-    
-    
+    static final int N_SUBMARINES = 5;
+    static final int N_CRUISERS = 3;
+
     public static final Fleet getNewFleet(){
-        Fleet f1 = new Fleet();
+        Fleet fleet = new Fleet();
 
         // Creazione di 10 navi, aggiunte alla flotta
         for (int i = 0; i < N_SUBMARINES; i++) {
-            f1.addShip(new AbstractShip.Submarine());
+            fleet.addShip(new AbstractShip.Submarine());
         }
-        
-        return f1;
+
+        for (int i = 0; i < N_CRUISERS; i++) {
+            fleet.addShip(new AbstractShip.Cruiser());
+        }
+        return fleet;
     }
-    
-    public static final int getSubmarineSize(){
+
+    // magic numbers?
+    public static final int getSubmarineSize() {
         return 2;
+    }
+
+    public static final int getCruiserSize() {
+        return 3;
     }
 }
