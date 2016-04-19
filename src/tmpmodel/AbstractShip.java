@@ -10,10 +10,11 @@ import java.util.List;
  * 
  */
 public abstract class AbstractShip {
-    private Point2d pos; // final 
+    private Point2d pos; // final
     private int size; // final
     private boolean sunk;
-    private boolean placed; 
+    private boolean placed;
+    private final List<Point2d> hitPoints; // array delle posizioni colpite
 
     public AbstractShip(final Point2d start, final int size) {
         this(size);
@@ -25,9 +26,11 @@ public abstract class AbstractShip {
         this();
         this.size = size;
     }
-    public AbstractShip() {
+    
+    private AbstractShip() {
         this.sunk = false; 
         this.placed = false;
+        hitPoints = new ArrayList<Point2d>(size);
     }
 
     public boolean isSunk() {
@@ -61,10 +64,24 @@ public abstract class AbstractShip {
     public void place(final Point2d start) {
         // Fare un controllo sulle navi già presenti da qui? 
         this.pos = start;
+        placed = true;
     }
 
     public boolean isPlaced () {
         return this.placed;
+    }
+
+    public boolean shoot (Shot shot) {
+        // Controllo : già colpita?
+        // shot non valido? 
+        // Metodo valido al momento solo per una casella
+        
+        if (containsPosition(shot.getPoint())) {
+            hitPoints.add(shot.getPoint());
+            return true;
+        }
+        
+        return false;
     }
 
 

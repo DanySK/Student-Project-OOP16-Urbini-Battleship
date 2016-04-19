@@ -9,7 +9,7 @@ public class Point2dImpl implements Point2d {
         this.x = x;
         this.y = y;
     }
-    
+
     public final int getX() {
         return x;
     }

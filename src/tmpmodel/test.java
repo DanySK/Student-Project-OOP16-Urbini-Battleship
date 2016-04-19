@@ -3,7 +3,12 @@ package tmpmodel;
 public class test {
 
     public static void main(String[] args) {
-
+        // OGNI CELLA CON PRESENT HA LA NAVE
+        // field cerca di piazzare la nave -> prima si verifica che possa stare nello spazio
+        // poi si verifica che non ci siano altre navi vicine
+        
+        
+        // nave affondata -> evento
         /* PROBLEMA :
          * Come piazzare tutte le navi non piazzate? Come ordinarle e modificarle? 
          * Le flotte ricordano dove sono state colpite? Se affondate (cached?) ? 
@@ -35,22 +40,38 @@ public class test {
         if (fleet1.isReady() && fleet2.isReady()) {
             System.out.println("flotte pronte");
 
-            f1.placeFleet(fleet1);
-            f1.placeFleet(fleet2);
+//            f1.placeFleet(fleet1);
+//            f2.placeFleet(fleet2);
 
             stampa(fleet1);
             stampa(fleet2);
 
 
             // Creazione spari
+            
+            
+            
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private static void stampa(Fleet f) {
         System.out.println("Stampa flotta:");
 
         for ( final AbstractShip s : f.getAllShips()) {
             System.out.println(s.getClass().getSimpleName() + "; Pos : " + s.getPos().getX() +" : " + s.getPos().getY());
+            
+            for ( final Point2d p : s.getAllPositions()) {
+                System.out.println(p.getX() + " : " + p.getY() );
+            }
         }
         System.out.println();
     }
