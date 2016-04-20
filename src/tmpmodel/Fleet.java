@@ -23,6 +23,8 @@ public class Fleet {
     public List<AbstractShip> getAllNonPlacedShips() {
         // Metodo da rivedere per il momento
         List<AbstractShip> npShips = new ArrayList<>();
+        
+        // ogni nave non piazzata viene aggiunta alla lista
         for (final AbstractShip s : this.getAllShips()) {
             if (!s.isPlaced()) {
                 npShips.add(s);
@@ -33,8 +35,7 @@ public class Fleet {
     }
     // public void placeNextShip(Type t) 
 
-    
-    
+
     public void addShip(AbstractShip s) {
         this.ships.add(s);
     }

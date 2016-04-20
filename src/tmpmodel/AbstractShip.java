@@ -30,7 +30,7 @@ public abstract class AbstractShip {
     private AbstractShip() {
         this.sunk = false; 
         this.placed = false;
-        hitPoints = new ArrayList<Point2d>(size);
+        hitPoints = new ArrayList<Point2d>();
     }
 
     public boolean isSunk() {

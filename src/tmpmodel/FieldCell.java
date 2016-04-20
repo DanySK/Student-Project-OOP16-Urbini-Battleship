@@ -16,7 +16,7 @@ public class FieldCell {
         this.ship = Optional.empty();
     }
 
-    // tryPlaceShip
+    // tryPlaceShip -> restituire eccezione
     public void placeShip( AbstractShip s) {
         this.ship = Optional.of(s);
         this.currentState = State.PRESENT;

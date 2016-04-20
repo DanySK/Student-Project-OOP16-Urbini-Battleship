@@ -6,9 +6,7 @@ public class PointImpl {
      * Probabilmente è da togliere Boundary come parametro nel costruttore
      * L'informazione è molto ridondante in un set di boundary
      */
-    
-    
-        
+
     private final int x;
     private final int y;
     private final int index;
@@ -32,9 +30,9 @@ public class PointImpl {
     }
 
     /***
-	 *
-	 * @return returns the x value of the 2 dimension point
-	 */
+     *
+     * @return returns the x value of the 2 dimension point
+    */
 	public final int getX() {
 	    return this.x;
 	}

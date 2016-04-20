@@ -1,0 +1,41 @@
+
+
++++++++++++++++    NOTE    +++++++++++++++++
+
+Click per piazzare una nave :
+	- viene salvata temporaneamente la posizione ( x, y )
+	- la cella è libera?
+	- la nave è entro il bordo della mappa? ( dimensione + x, y)
+	- la nave non tocca altre navi? 
+	- OK, nave piazzata
+	
+	- la nave può esser ripiazzata in qualche modo
+		- nave entro il bordo?
+		- la nave non tocca altre navi?
+		
+	------ traduzione in passaggi ------
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
