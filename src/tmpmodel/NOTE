@@ -21,7 +21,13 @@ Click per piazzare una nave :
 
 
 
+------
 
+
+Fleet -> getAllNonPlacedShips -> serve per piazzare le navi
+		-> getAllNonPlacedShipsByType (Class ... )
+		
+		
 
 
 

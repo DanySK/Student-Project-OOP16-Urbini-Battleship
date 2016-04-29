@@ -2,6 +2,7 @@ package tmpmodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Fleet {
     private final List<AbstractShip> ships;
@@ -33,8 +34,32 @@ public class Fleet {
 
         return npShips;
     }
-    // public void placeNextShip(Type t) 
+    
+    // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
+    public List<AbstractShip> getShipsByType(Class c) {
+        List<AbstractShip> as = new ArrayList<AbstractShip>();
+        
+        for (AbstractShip ship : this.ships) {
+            if ( c.getSimpleName().equals(ship.getClass().getSimpleName())) {
+                if ( !ship.isPlaced()) {
+                    as.add(ship);
+                }
+            }
+        }
+        
+        return as;
+    }
 
+    // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
+    public Optional<AbstractShip> getNextShipByType(Class c) {
+        Optional<AbstractShip> s = Optional.empty();
+        
+        if (!getShipsByType(c).isEmpty()) {
+            s = Optional.of(getShipsByType(c).get(0)); // PRESO IL PRIMO ELEMENTO
+        }
+        
+        return s;
+    }
 
     public void addShip(AbstractShip s) {
         this.ships.add(s);
