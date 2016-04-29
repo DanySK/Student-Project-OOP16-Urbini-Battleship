@@ -60,6 +60,17 @@ public class Fleet {
         
         return s;
     }
+    
+    // RESTITUISCE la prossima nave NON PIAZZATA. Non la toglie dalla collezione
+    public Optional<AbstractShip> getNextNonPlacedShip() {
+        Optional<AbstractShip> s = Optional.empty();
+        
+        if (!getAllNonPlacedShips().isEmpty()) {
+            s = Optional.of(getAllNonPlacedShips().get(0)); // PRESO IL PRIMO ELEMENTO
+        }
+        
+        return s;
+    }
 
     public void addShip(AbstractShip s) {
         this.ships.add(s);

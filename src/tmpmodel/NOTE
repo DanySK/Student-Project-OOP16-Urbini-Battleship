@@ -27,9 +27,14 @@ Click per piazzare una nave :
 Fleet -> getAllNonPlacedShips -> serve per piazzare le navi
 		-> getAllNonPlacedShipsByType (Class ... )
 		
+		POSSIBILI PROBLEMI : prendere la prossima nave da piazzare
+		Può esser chiesta in modo concorrente da più istanze e causare problemi
 		
 
 
+***** PROBLEMA : La flotta conosce le dimensioni del campo?
+			1) sì, in base a Ruleset --> OK controlli sul posizionamento
+			2) no, delegato al campo --> Nessun controllo sulla flotta
 
 
 

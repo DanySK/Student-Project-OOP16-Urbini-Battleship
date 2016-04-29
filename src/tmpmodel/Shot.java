@@ -11,8 +11,11 @@ public class Shot {
    */
     private final Point2d point;
 
-    public Shot (Point2d point) {
-        this.point = point;
+    public Shot (Point2d p) {
+        if (Ruleset.isPointWithinLimits(p)) {
+            this.point = p;
+        } else this.point = null;
+        // else throw ECCEZIONE
     }
 
     public Point2d getPoint() {

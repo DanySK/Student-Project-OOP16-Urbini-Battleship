@@ -10,6 +10,8 @@ import java.util.List;
  * 
  */
 public abstract class AbstractShip {
+    // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
+    private ShipDirection shipDirection;
     private Point2d pos; // final
     private int size; // final
     private boolean sunk;
@@ -30,6 +32,7 @@ public abstract class AbstractShip {
     private AbstractShip() {
         this.sunk = false; 
         this.placed = false;
+        this.shipDirection = ShipDirection.East;
         hitPoints = new ArrayList<Point2d>();
     }
 
@@ -46,6 +49,7 @@ public abstract class AbstractShip {
     }
 
     // Fare metodo cached 
+    // RESTITUISCE I PUNTI OCCUPATI DALLA NAVE
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -62,9 +66,14 @@ public abstract class AbstractShip {
     // Metodo da ridefinire : metodo che restituisce tutte le posizioni occupate
 
     public void place(final Point2d start) {
+        //  DIREZIONE DATA IN MODO STANDARD
         // Fare un controllo sulle navi già presenti da qui? 
-        this.pos = start;
-        placed = true;
+        if (!placed) {
+            this.pos = start;
+            placed = true;
+        } else {
+            this.pos = start;
+        }
     }
 
     public boolean isPlaced () {
