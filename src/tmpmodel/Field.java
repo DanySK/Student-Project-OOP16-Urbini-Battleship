@@ -46,6 +46,27 @@ public class Field {
 
     }
 
+    public char[][] getMatrix() {
+        char[][] chars = new char[rows][columns];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                
+                if (matrix[i][j].isEmpty()) {
+                    chars[i][j] = 'E';
+                }
+                if (matrix[i][j].isPresent()) {
+                    chars[i][j] = 'P';
+                }
+                if (matrix[i][j].isMissed()) {
+                    chars[i][j] = 'M';
+                }
+            }
+        }
+        
+        return chars;
+    }
+    
     public boolean isShipSunk(final AbstractShip s) {
         // Il controllo potrebbe esser fatto su Field
         return s.isSunk();

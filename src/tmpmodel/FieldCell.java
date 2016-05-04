@@ -40,11 +40,15 @@ public class FieldCell {
         return State.MISSED == this.currentState;
     }
 
-    public boolean isWater() {
-        return State.WATER == this.currentState;
-    }
+//    public boolean isWater() {
+//        return State.WATER == this.currentState;
+//    }
 
     public boolean isEmpty() {
         return (currentState == State.WATER);
+    }
+    
+    public boolean isPresent() {
+        return currentState == State.PRESENT;
     }
 }

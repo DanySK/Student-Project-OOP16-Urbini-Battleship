@@ -12,7 +12,7 @@ import java.util.List;
 public abstract class AbstractShip {
     // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
     private ShipDirection shipDirection;
-    private Point2d pos; // final
+    private Point2d pos; // final - OPTIONAL? 
     private int size; // final
     private boolean sunk;
     private boolean placed;
@@ -43,7 +43,8 @@ public abstract class AbstractShip {
     public int getSize() {
         return this.size;
     }
-
+    
+    // METODO OPTIONAL - può ritornare null
     public Point2d getPos() {
         return this.pos;
     }
@@ -92,7 +93,18 @@ public abstract class AbstractShip {
         
         return false;
     }
-
+    
+    // Può esser chiamato quando la flotta è pronta? 
+    // Errore progettuale o dell'utente?
+    // public o protected?
+    public void reset() {
+        this.placed = false;
+        pos = null; // USARE OPTIONAL?
+    }
+    
+    public String getType() {
+        return this.getClass().getSimpleName();
+    }
 
     // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
     public static class Submarine extends AbstractShip {

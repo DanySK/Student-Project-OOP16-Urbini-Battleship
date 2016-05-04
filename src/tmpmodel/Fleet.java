@@ -76,6 +76,13 @@ public class Fleet {
         this.ships.add(s);
     }
 
+    public void reset () {
+        for (AbstractShip ship : this.getAllShips()) {
+            ship.reset();
+        }
+        this.ready = false;
+    }
+    
     public boolean isSunk() {
         return this.sunk;
     }

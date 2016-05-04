@@ -96,7 +96,7 @@ public class test {
     
     
     
-    private static void stampa(Fleet f) {
+    private static void stampa(final Fleet f) {
         System.out.println("Stampa flotta:");
 
         for ( final AbstractShip s : f.getAllShips()) {
@@ -109,24 +109,23 @@ public class test {
         System.out.println();
     }
 
-    private static void creaFlottaEPosiziona(Fleet fleet) {
+    private static void creaFlottaEPosiziona(final Fleet fleet) {
         int i = 0, j = 0;
-        for (; i < Ruleset.N_SUBMARINES; i++, j++) {
+        for (; i < Ruleset.getSubmarinesNumber(); i++, j++) {
             fleet.addShip(new AbstractShip.Submarine(new Point2dImpl(j, i)));
         }
 
-        for (; i < Ruleset.N_SUBMARINES + Ruleset.N_CRUISERS; i++, j++) {
+        for (; i < Ruleset.getSubmarinesNumber() + Ruleset.getCruisersNumber(); i++, j++) {
             fleet.addShip(new AbstractShip.Cruiser(new Point2dImpl(j, i)));
         }
     }
     
-    private static void creaFlotta(Fleet fleet) {
-        int i = 0, j = 0;
-        for (; i < Ruleset.N_SUBMARINES; i++, j++) {
+    private static void creaFlotta(final Fleet fleet) {
+        for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
             fleet.addShip(new AbstractShip.Submarine());
         }
 
-        for (; i < Ruleset.N_SUBMARINES + Ruleset.N_CRUISERS; i++, j++) {
+        for (int j = 0; j < Ruleset.getCruisersNumber(); j++) {
             fleet.addShip(new AbstractShip.Cruiser());
         }
     }
