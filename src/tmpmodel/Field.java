@@ -1,6 +1,11 @@
 package tmpmodel;
 
-
+/**
+ * TO DO :
+ * ----- VISTA DEL NEMICO / VISTA DEL GIOCATORE ---------
+ * @author fabio
+ *
+ */
 public class Field {
     private final FieldCell[][] matrix;
     private final int rows;
@@ -25,7 +30,7 @@ public class Field {
 
         // I VALORI DEVONO ESSER ENTRO I LIMITI!!!!
         // LANCIARE ECCEZIONE? 
-        this.matrix[x][y].tryShoot(shot);
+        this.matrix[y][x].tryShoot(shot);
     }
 
 //    public void placeFleet(final Fleet fleet) {
@@ -49,12 +54,18 @@ public class Field {
             return; // ECCEZIONE
         }
         
-        //  CONTROLLO 2 : CELLA LIBERA
-        FieldCell fieldCell = this.matrix[point.getX()][point.getY()];
-        if ( !fieldCell.isEmpty() ) {
-            System.out.println("Cella selezionata non libera");
-            return; // CELLA GIA' OCCUPATA
+        //  CONTROLLO 3 : CELLE LIBERE
+        
+        if ( !isShipPlaceable(ship, point)) {
+            System.out.println("Celle selezionate non libere");
+            return; // CELLE SELEZIONATE NON LIBERE - ECCEZIONE
         }
+        
+//        FieldCell fieldCell = this.matrix[point.getX()][point.getY()];
+//        if ( !fieldCell.isEmpty() ) {
+//            System.out.println("Cella selezionata non libera");
+//            return; // CELLA GIA' OCCUPATA
+//        }
         
         // CONTROLLO 3 : NAVE DENTRO LA MAPPA
         if ( !Ruleset.isShipWithinLimits(ship, point)) {
@@ -62,11 +73,7 @@ public class Field {
             return; // ECCEZIONE - nave fuori dalla mappa
         }
         
-        // CONTROLLO 4 : CELLE SELEZIONATE LIBERE
-        if ( !isShipPlaceable(ship, point)) {
-            System.out.println("Celle selezionate non libere");
-            return; // CELLE SELEZIONATE NON LIBERE - ECCEZIONE
-        }
+
         ship.place(point);
         for (Point2d p : ship.getAllPositions()) {
             this.matrix[p.getY()][p.getX()].placeShip(ship);

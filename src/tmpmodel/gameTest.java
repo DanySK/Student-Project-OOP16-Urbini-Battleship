@@ -5,12 +5,13 @@ public class gameTest {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-        // Piazzamento flotta 
+        // CREAZIONE FIELD e FLOTTA
         Field field1 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         Fleet fleet1 = Ruleset.getNewFleet();
 
         int i = 0, j = 0;
 
+        // PIAZZAMENTO FLOTTA
         while (!fleet1.isReady()) {
             AbstractShip ship;
             if (fleet1.getNextNonPlacedShip().isPresent()) {
@@ -25,21 +26,21 @@ public class gameTest {
 
         System.out.println("FLOTTA PRONTA!!");
 
-        // INIZIO SPARI
         i = 0;
         j = 0;
 
+        // SPARA FINCHE' LA FLOTTA NON E' AFFONDATA
         while (!fleet1.isSunk()) {
-            for (i = 0; i < Ruleset.getRows(); i++) {
-                for (j = 0; j < Ruleset.getColumns(); j++) {
-                    Shot shot = new Shot(new Point2dImpl(i, j));
+            for (i = 0; i < Ruleset.getRows() && !fleet1.isSunk(); i++) {
+                for (j = 0; j < Ruleset.getColumns() && !fleet1.isSunk(); j++) {
+                    Shot shot = new Shot(new Point2dImpl(j, i));
+                    System.out.println("Sparo in posizione : " + i + ";" + j);
                     field1.updateStateWithShot(shot);
+
                 }
             }
-
-
         }
-        
+
         System.out.println("VINTO!");
     }
 

@@ -5,7 +5,8 @@ public final class Ruleset {
 
     private static final int N_SUBMARINES = 3;
     private static final int N_CRUISERS = 2;
-
+    private static final int N_BATTLESHIPS = 2;
+    
     private static final int NORTHERN_LIMIT = 0;
     private static final int SOUTHERN_LIMIT = 9;
     private static final int EASTERN_LIMIT = 9;
@@ -50,6 +51,10 @@ public final class Ruleset {
         for (int i = 0; i < N_CRUISERS; i++) {
             fleet.addShip(new AbstractShip.Cruiser());
         }
+        
+        for (int i = 0; i < N_BATTLESHIPS; i++) {
+            fleet.addShip(new AbstractShip.Battleship());
+        }
         return fleet;
     }
 
@@ -92,5 +97,9 @@ public final class Ruleset {
     
     public static int getCruisersNumber() {
         return Ruleset.N_CRUISERS;
+    }
+    
+    public static int getBattleshipsNumber() {
+        return Ruleset.N_BATTLESHIPS;
     }
 }

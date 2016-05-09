@@ -112,7 +112,7 @@ public abstract class AbstractShip {
             hitPoints.add(shot.getPoint());
             // AFFONDATA? 
             if (hitPoints.size() == this.size) {
-                System.out.println("AS.shoot - affondata!!");
+                System.out.println(getType() + ": nave affondata!!");
                 this.sunk = true;
             }
             return true;
@@ -145,6 +145,7 @@ public abstract class AbstractShip {
         }
 
     }
+    
     public static class Cruiser extends AbstractShip {
 
         public Cruiser(Point2d start) {
@@ -153,6 +154,17 @@ public abstract class AbstractShip {
 
         public Cruiser() {
             super(Ruleset.getCruiserSize());
+        }
+    }
+    
+    public static class Battleship extends AbstractShip {
+        
+        public Battleship(Point2d start) {
+            super(start, Ruleset.getBattleshipSize());
+        }
+        
+        public Battleship() {
+            super(Ruleset.getBattleshipSize());
         }
     }
 }
