@@ -23,6 +23,8 @@ public class Field {
         int x = p.getX();
         int y = p.getY();
 
+        // I VALORI DEVONO ESSER ENTRO I LIMITI!!!!
+        // LANCIARE ECCEZIONE? 
         this.matrix[x][y].tryShoot(shot);
     }
 

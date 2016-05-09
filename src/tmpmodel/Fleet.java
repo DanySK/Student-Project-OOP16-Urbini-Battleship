@@ -85,7 +85,15 @@ public class Fleet {
     }
     
     public boolean isSunk() {
-        return this.sunk;
+        // EVENTO --> SUNK! 
+        //
+        //return this.sunk;
+        for (AbstractShip ship : this.ships) {
+            if (!ship.isSunk()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean isReady() {

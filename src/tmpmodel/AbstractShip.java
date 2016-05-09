@@ -72,10 +72,20 @@ public abstract class AbstractShip {
         
         return points;
     }
-    public boolean containsPosition(final Point2d point) {
-        return getAllPositions().contains(point);
-    }
+//    public boolean containsPosition(final Point2d point) {
+//        return getAllPositions().contains(point);
+//    }
 
+    public boolean containsPosition(final Point2d point) {
+        for (Point2d p : this.getAllPositions()) {
+            // SERVE metodo EQUALS
+            if ((p.getX() == point.getX() && p.getY() == point.getY())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // Metodo da ridefinire : metodo che restituisce tutte le posizioni occupate
 
     public void place(final Point2d start) {
@@ -100,6 +110,11 @@ public abstract class AbstractShip {
         
         if (containsPosition(shot.getPoint())) {
             hitPoints.add(shot.getPoint());
+            // AFFONDATA? 
+            if (hitPoints.size() == this.size) {
+                System.out.println("AS.shoot - affondata!!");
+                this.sunk = true;
+            }
             return true;
         }
         

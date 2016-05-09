@@ -25,8 +25,8 @@ public class FieldCell {
     public void tryShoot(final Shot s ) {
         switch (currentState) {
             case WATER: this.currentState = State.MISSED; break;
-            case MISSED : break;
-            case PRESENT : this.ship.get().shoot(s); break;
+            case MISSED : break; // ECCEZIONE
+            case PRESENT : this.ship.get().shoot(s); break; // POSSIBILE ERRORE OPTIONAL?
             default : break; // ECCEZIONE 
 
         }

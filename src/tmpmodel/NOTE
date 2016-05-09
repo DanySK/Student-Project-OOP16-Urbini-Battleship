@@ -73,6 +73,7 @@ FieldContainer -> Contiene entrambi i Field, accetta come costruttore Ruleset
 
 CONTROLLO CELLE LIBERE -> FARE UNA VOLTA SOLA
 Field -> piazzare le navi da lì -> deve funzionare tutto per bene
+fare EQUALS per i punti
 
 
 

@@ -1,0 +1,8 @@
+
+Eccezioni da usare principalmente : IllegalState  /  IllegalArgument
+Possibili eccezioni :
+
+Nave affondata : si cerca di posizionare    ( illegal state )
+Flotta affondata : si continua a sparare/giocare?   ( illegal state )
+Posizione fuori dal bordo ( illegal argument --> posizionamento nave o sparo )
+
