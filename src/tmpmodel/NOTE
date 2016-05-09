@@ -1,4 +1,7 @@
 
+X = COLONNE
+Y = RIGHE
+matrix[y][x]
 
 +++++++++++++++    NOTE    +++++++++++++++++
 
@@ -54,6 +57,7 @@ Fare tutti i controlli sulla mappa e sull'aggiunta di navi
 	
 		Ruleset controlla che i punti siano dentro la mappa
 		
+			STANDARD : SEMPRE A DESTRA 
 			Posizione { Punto, direzione }
 		oppure...
 			Posizione { Punto, direzione, lunghezza }
@@ -62,9 +66,13 @@ Fare tutti i controlli sulla mappa e sull'aggiunta di navi
 FACTORY e BUILDER per creare nuove flotte in modo semplice senza tanti problemi
 Iniziare a pensare di fare navi solo di diversa grandezza e non di diversa forma
 
+FieldContainer -> Contiene entrambi i Field, accetta come costruttore Ruleset
 
 
+--------------
 
+CONTROLLO CELLE LIBERE -> FARE UNA VOLTA SOLA
+Field -> piazzare le navi da lì -> deve funzionare tutto per bene
 
 
 

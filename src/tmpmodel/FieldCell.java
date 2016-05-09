@@ -17,16 +17,17 @@ public class FieldCell {
     }
 
     // tryPlaceShip -> restituire eccezione
-    public void placeShip( AbstractShip s) {
+    public void placeShip(final AbstractShip s) {
         this.ship = Optional.of(s);
         this.currentState = State.PRESENT;
     }
 
-    public void tryShoot( Shot s ) {
+    public void tryShoot(final Shot s ) {
         switch (currentState) {
             case WATER: this.currentState = State.MISSED; break;
             case MISSED : break;
             case PRESENT : this.ship.get().shoot(s); break;
+            default : break; // ECCEZIONE 
 
         }
     }
@@ -37,7 +38,7 @@ public class FieldCell {
 //    }
 
     public boolean isMissed() {
-        return State.MISSED == this.currentState;
+        return this.currentState == State.MISSED;
     }
 
 //    public boolean isWater() {
@@ -45,10 +46,10 @@ public class FieldCell {
 //    }
 
     public boolean isEmpty() {
-        return (currentState == State.WATER);
+        return this.currentState == State.WATER;
     }
     
     public boolean isPresent() {
-        return currentState == State.PRESENT;
+        return this.currentState == State.PRESENT;
     }
 }

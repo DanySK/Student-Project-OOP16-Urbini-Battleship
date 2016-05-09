@@ -9,6 +9,7 @@ public class Fleet {
     private boolean sunk;
     private boolean ready;
 
+    // COSTRUTTORE PROTETTO PER IL MOMENTO? -> LA FLOTTA VIENE CREATA SOLO CON RULESET
     public Fleet() {
         this.ships = new ArrayList<>();
         sunk = false;

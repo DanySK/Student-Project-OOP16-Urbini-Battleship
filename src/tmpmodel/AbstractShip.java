@@ -51,6 +51,7 @@ public abstract class AbstractShip {
 
     // Fare metodo cached 
     // RESTITUISCE I PUNTI OCCUPATI DALLA NAVE
+    // OPTIONAL!!!!
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
         for (int i = 0; i < size; i++) {
@@ -59,7 +60,18 @@ public abstract class AbstractShip {
 
         return tmp;
     }
-
+    
+    // restituisce tutti i punti occupati virtualmente
+    public List<Point2d> getProjectionPoints (final Point2d point) {
+        // DIREZIONE EST (x++)
+        List<Point2d> points = new ArrayList<>();
+        
+        for (int x = point.getX(); x < (point.getX() + this.size); x++) {
+            points.add(new Point2dImpl(x, point.getY()));
+        }
+        
+        return points;
+    }
     public boolean containsPosition(final Point2d point) {
         return getAllPositions().contains(point);
     }

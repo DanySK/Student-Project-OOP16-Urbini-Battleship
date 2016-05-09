@@ -1,3 +1,3 @@
 package tmpmodel;
 
-public enum ShipDirection { North, East, South, West }
+public enum ShipDirection { East, South }

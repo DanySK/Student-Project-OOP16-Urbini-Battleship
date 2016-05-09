@@ -87,6 +87,8 @@ public class test2 {
 
         System.out.println();
         stampaField(field1);
+        
+        
     }
 
     private static void stampaFlotta (final Fleet fleet) {
