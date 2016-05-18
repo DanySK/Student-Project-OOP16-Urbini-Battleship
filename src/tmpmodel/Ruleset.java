@@ -6,14 +6,14 @@ public final class Ruleset {
     private static final int N_SUBMARINES = 3;
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
-    
+
     private static final int NORTHERN_LIMIT = 0;
     private static final int SOUTHERN_LIMIT = 9;
     private static final int EASTERN_LIMIT = 9;
     private static final int WESTERN_LIMIT = 0;
     private static final int ROWS = 10;
     private static final int COLUMNS = 10;
-    
+
     private static final int SUBMARINE_SIZE = 2;
     private static final int CRUISER_SIZE = 3;
     private static final int BATTLESHIP_SIZE = 4;
@@ -32,7 +32,7 @@ public final class Ruleset {
         // DIREZIONE EST ( x++ )
         int length = ship.getSize();
         
-        for (int x = point.getX(); x < (point.getX() + length); x++ ) {
+        for (int x = point.getX(); x <(point.getX() + length); x++ ) {
             if (!Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY()))) {
                 return false;
             }
@@ -51,7 +51,7 @@ public final class Ruleset {
         for (int i = 0; i < N_CRUISERS; i++) {
             fleet.addShip(new AbstractShip.Cruiser());
         }
-        
+
         for (int i = 0; i < N_BATTLESHIPS; i++) {
             fleet.addShip(new AbstractShip.Battleship());
         }
