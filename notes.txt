@@ -1,0 +1,101 @@
+
+TO REVIEW CLASSES :
+Square
+SquareImpl
+Point2d --> fare un'interfaccia
+Boundary --> fare un'interfaccia
+ShipSquareState   }
+FieldSquareState  } fare un enum unico o no?
+
+
+
+
+AbstractShip -> modificare valore campo <placed>
+			Alla chiamata del costruttore dovrà essere false (a meno che non sia data una posizione 
+			giusta)
+			Nel caso sia chiamato invece un costruttore base, senza posizioni, sarà necessario
+			l'uso del metodo move(pos1, pos2) / move(pos1, direction) per poter settare placed=true
+			move in questo caso potrà lanciare un'eccezione checked
+			
+Rendere protected o di visione di package tutte quelle classi che non dovrebbero esser viste da fuori
+E che non garantiscono nessun senso per chi vede fuori
+Point2d potrebbe esser una classe pubblica
+Square potrebbe esser una classe pubblica
+AircraftCarrier no, perché non ha senso per l'utente
+La flotta esporrà solo i metodi di interfaccia. Altri metodi saranno resi protetti o privati
+
+
+--------------
+Gestione dei turni:
+
+Può esser scandita direttamente dal controller
+
+-----------------
+Player
+
+	getPhase : placement / hit
+	
+
+-----------
+Responsabilità della rappresentazione :
+	Flotta e mappa rappresentano qualcosa di simile
+	
+	Come deve esser rappresentata l'informazione? La flotta deve contenere informazioni sul suo stato?
+	Teoricamente sì, dovrebbe, ma c'è ridondanza dell'informazione.
+	La mappa ripeterà le informazioni della flotta
+	
+	La mappa si ottiene con intersezione Flotta e Spari
+	
+La flotta ha senso di esistere senza il significato di Mappa?
+	La flotta può esser tutta affondata per esempio, ma la semantica che ottiene è dipendente dagli spari
+	e dalla mappa, o almeno dai confini entro cui si trova
+	
+La flotta può esser per esempio creata, tutte le navi non hanno ancora posizioni scelte
+Se non esiste il mondo entro cui la flotta si deve trovare, le coordinate perdono il significato 
+La mappa contiene solo caselle che indicano { HIT, SUNK, FOG, MISSED } per il nemico
+{ HIT, SUNK, FOG, MISSED, PRESENT} per il proprietario della flotta
+
+Il discorso si collega anche al discorso delle celle e della semantica in base a chi dovrebbe vederle 
+es : il nemico vedrà meno stati del proprietario della propria flotta
+
+Lo sparo può esser di vario tipo. L'implementazione potrebbe cambiare quel che colpisce.
+Oltre al tipo, esistono le coordinate.
+
+Le coordinate indicano in che punto della mappa colpire.
+
+Tutto coincide se le coordinate dello sparo sono dentro il mondo della flotta e dentro il mondo 
+della mappa.
+
+--------
+
+Boundary e Point2d --> Boundary nel costruttore o nei metodi che cercheranno di ottenere x e y? 
+Point2d creare interfaccia e fare getHash e equals
+
+
+
+------
+
+Fare un wrapper o decorator di Position/Point2d. Fare in modo che la classe più basilare sia con x e y
+Mentre esiste una classe decorator che prende anche il concetto di indice 
+
+
+-----------
+
+
+PROTOTYPE : usare il pattern per restituire la lista delle celle, quindi qualcosa tipo clone
+
+Singleton : Da usare per controller
+
+Flyweight : pattern per fare cache di valori usati spesso. Può esser usato nel caso di stato
+della cella
+
+Builder per costruire una nave -> nel caso abbia tanti costruttori o tante cose settabili ?
+	forse non usabile
+	
+AbstractFactory --> utile per creare Ship
+
+
+----------------
+
+
+RIDEFINIRE ToString per ogni classe
