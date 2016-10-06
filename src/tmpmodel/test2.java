@@ -76,14 +76,14 @@ public class test2 {
         i = 0;
         j = 0;
         // ERRORE POSSIBILE SU OPTIONAL
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
-        field1.placeShip(fleet1.getNextNonPlacedShip().get(), (new Point2dImpl(++i, ++j)));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
+        field1.placeShip(fleet1.getNextNonPlacedShip().get(), new Point2dImpl(++i, ++j));
 
         System.out.println();
         stampaField(field1);

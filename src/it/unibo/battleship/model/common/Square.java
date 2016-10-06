@@ -6,7 +6,7 @@ package it.unibo.battleship.model.common;
  * @author fabio
  * interface of a Square
  */
-public interface Square { // NOPMD by fabio on 15/11/15 1.17
+public interface Square { 
 
     /***
      *
