@@ -1,7 +1,10 @@
 package tmpmodel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 /*
  * come mantenere size final e che abbia quel valore alla scelta del sottotipo?
@@ -9,40 +12,34 @@ import java.util.List;
  * 
  * 
  */
-public abstract class AbstractShip {
+public abstract class AbstractShip implements Serializable {
     // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
     private ShipDirection shipDirection;
     private Point2d pos; // final - OPTIONAL? 
-    private int size; // final
-    private boolean sunk;
     private boolean placed;
     private final List<Point2d> hitPoints; // array delle posizioni colpite
 
-    public AbstractShip(final Point2d start, final int size) {
-        this(size);
+    protected AbstractShip(final Point2d start) {
+        this();
         this.pos = start;
         this.placed = true;
     }
-
-    public AbstractShip(final int size) {
-        this();
-        this.size = size;
-    }
     
     private AbstractShip() {
-        this.sunk = false; 
         this.placed = false;
         this.shipDirection = ShipDirection.East;
         hitPoints = new ArrayList<Point2d>();
     }
 
     public boolean isSunk() {
-        return this.sunk;
+		if (hitPoints.size() == this.getSize() ) {
+//		    System.out.println(toString() + ": nave affondata!!");
+		    return true;
+		}
+		return false;
     }
 
-    public int getSize() {
-        return this.size;
-    }
+    public abstract int getSize();
     
     // METODO OPTIONAL - può ritornare null
     public Point2d getPos() {
@@ -54,7 +51,7 @@ public abstract class AbstractShip {
     // OPTIONAL!!!!
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < this.getSize() ; i++) {
             tmp.add(new Point2dImpl(pos.getX() + i, pos.getY()));
         }
 
@@ -66,7 +63,7 @@ public abstract class AbstractShip {
         // DIREZIONE EST (x++)
         List<Point2d> points = new ArrayList<>();
         
-        for (int x = point.getX(); x < (point.getX() + this.size); x++) {
+        for (int x = point.getX(); x < (point.getX() + this.getSize() ); x++) {
             points.add(new Point2dImpl(x, point.getY()));
         }
         
@@ -103,7 +100,7 @@ public abstract class AbstractShip {
         return this.placed;
     }
 
-    public boolean shoot (Shot shot) {
+    public boolean shoot (final Shot shot) {
         // Controllo : già colpita?
         // shot non valido? 
         // Metodo valido al momento solo per una casella
@@ -111,9 +108,8 @@ public abstract class AbstractShip {
         if (containsPosition(shot.getPoint())) {
             hitPoints.add(shot.getPoint());
             // AFFONDATA? 
-            if (hitPoints.size() == this.size) {
-                System.out.println(getType() + ": nave affondata!!");
-                this.sunk = true;
+            if (isSunk() ){
+            	System.out.println(toString() + " affondato!");
             }
             return true;
         }
@@ -129,42 +125,118 @@ public abstract class AbstractShip {
         pos = null; // USARE OPTIONAL?
     }
     
-    public String getType() {
-        return this.getClass().getSimpleName();
-    }
+    public abstract String toString(); 
 
-    // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
-    public static class Submarine extends AbstractShip {
+    /*
+     * FACTORY METHODS
+     */
+    
+    /**
+     * Creates a ship 
+     * @param size size of the ship. The value must be 
+     * between 0 and {@see GlobalProperties.MAX_SIZE}
+     * @return
+     */
+    public static AbstractShip createShip(final int size) {
+    	// TODO: MAGIC NUMBER 
+    	if (size < 0 || size > GlobalProperties.MAX_SIZE ) {
+    		throw new IllegalArgumentException("Valore non valido");
+    	}
 
-        public Submarine(Point2d start) {
-            super(start, Ruleset.getSubmarineSize());
-        }
-
-        public Submarine() {
-            super(Ruleset.getSubmarineSize());
-        }
-
+    	switch(size) {
+    	case GlobalProperties.SUBMARINE_SIZE: return new Submarine();
+    	case GlobalProperties.CRUISER_SIZE : return new Cruiser();
+    	case GlobalProperties.BATTLESHIP_SIZE : return new Battleship();
+    	case GlobalProperties.AIR_CARRIER_SIZE : return new AirCarrier();
+    	default : throw new IllegalArgumentException("Valore non valido");
+    	}
     }
     
-    public static class Cruiser extends AbstractShip {
+    // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
+    private static class Submarine extends AbstractShip {
+
+        Submarine(Point2d start) {
+            super(start);
+        }
+
+        Submarine() {
+            super();
+        }
+
+		@Override
+		public int getSize() {
+			return GlobalProperties.EnumNave.SUBMARINE.getSize();
+		}
+
+		@Override
+		public String toString() {
+			return GlobalProperties.EnumNave.SUBMARINE.toString();
+		}
+
+    }
+
+    private static class Cruiser extends AbstractShip {
 
         public Cruiser(Point2d start) {
-            super(start, Ruleset.getCruiserSize());
+            super(start);
         }
 
         public Cruiser() {
-            super(Ruleset.getCruiserSize());
+            super();
         }
+
+		@Override
+		public int getSize() {
+			return GlobalProperties.EnumNave.CRUISER.getSize();
+		}
+
+		@Override
+		public String toString() {
+			return GlobalProperties.EnumNave.CRUISER.toString();
+		}
     }
-    
-    public static class Battleship extends AbstractShip {
+
+    private static class Battleship extends AbstractShip {
         
         public Battleship(Point2d start) {
-            super(start, Ruleset.getBattleshipSize());
+            super(start);
         }
         
         public Battleship() {
-            super(Ruleset.getBattleshipSize());
+            super();
         }
+
+		@Override
+		public int getSize() {
+			return GlobalProperties.EnumNave.BATTLESHIP.getSize();
+		}
+
+		@Override
+		public String toString() {
+			return GlobalProperties.EnumNave.BATTLESHIP.toString();
+		}
+    }
+
+    private static class AirCarrier extends AbstractShip {
+
+    	AirCarrier(Point2d start) {
+    		super(start);
+    	}
+    	
+    	AirCarrier() {
+    		super();
+    	}
+    	
+		@Override
+		public int getSize() {
+			return GlobalProperties.AIR_CARRIER_SIZE;
+		}
+
+		@Override
+		public String toString() {
+			return GlobalProperties.EnumNave.AIR_CARRIER.toString();
+		}
+    	
     }
 }
+

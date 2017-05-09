@@ -2,6 +2,8 @@ package tmpmodel;
 
 import java.util.Optional;
 
+import tmpmodel.GlobalProperties.EnumNave;
+
 public class test {
 
     public static void main(String[] args) {
@@ -47,11 +49,11 @@ public class test {
             System.out.println(s.getClass().getSimpleName());
         }
         
-        for (AbstractShip s : fleet1.getShipsByType(AbstractShip.Submarine.class)) {
+        for (AbstractShip s : fleet1.getShipsByType(EnumNave.SUBMARINE)) {
             System.out.println(s.getClass().getSimpleName());
         }
         
-        for (AbstractShip s : fleet1.getShipsByType(AbstractShip.Cruiser.class)) {
+        for (AbstractShip s : fleet1.getShipsByType(EnumNave.CRUISER)) {
             System.out.println(s.getClass().getSimpleName());
         }
         
@@ -59,7 +61,7 @@ public class test {
         while (!fleet1.isReady()) {
             AbstractShip s;
             System.out.println("OK");
-            Optional<AbstractShip> tmp = fleet1.getNextShipByType(AbstractShip.Submarine.class);
+            Optional<AbstractShip> tmp = fleet1.getNextShipByType(EnumNave.SUBMARINE);
             if (tmp.isPresent()) {
                 s = tmp.get();
                 System.out.println(s.getClass().getSimpleName());
@@ -112,21 +114,21 @@ public class test {
     private static void creaFlottaEPosiziona(final Fleet fleet) {
         int i = 0, j = 0;
         for (; i < Ruleset.getSubmarinesNumber(); i++, j++) {
-            fleet.addShip(new AbstractShip.Submarine(new Point2dImpl(j, i)));
+//            fleet.addShip(new AbstractShip.Submarine(new Point2dImpl(j, i)));
         }
 
         for (; i < Ruleset.getSubmarinesNumber() + Ruleset.getCruisersNumber(); i++, j++) {
-            fleet.addShip(new AbstractShip.Cruiser(new Point2dImpl(j, i)));
+//            fleet.addShip(new AbstractShip.Cruiser(new Point2dImpl(j, i)));
         }
     }
     
     private static void creaFlotta(final Fleet fleet) {
         for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
-            fleet.addShip(new AbstractShip.Submarine());
+//            fleet.addShip(new AbstractShip.Submarine());
         }
 
         for (int j = 0; j < Ruleset.getCruisersNumber(); j++) {
-            fleet.addShip(new AbstractShip.Cruiser());
+//            fleet.addShip(new AbstractShip.Cruiser());
         }
     }
 }

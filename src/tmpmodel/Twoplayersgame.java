@@ -16,7 +16,7 @@ public class Twoplayersgame {
         
         for (int i = 0; i < 10; i++ ) {
             for (int j = 0; j < 10; j++ )
-                field1.updateStateWithShot(new Shot(new Point2dImpl(j,i)));
+                field1.updateStateWithShot(Shot.createShot(new Point2dImpl(j,i)));
                 if (fleet1.isSunk()) {
                     System.out.println("AFFONDATA");
                     break;
@@ -28,8 +28,9 @@ public class Twoplayersgame {
         int i = 0, j = 0;
 
         // PIAZZAMENTO FLOTTA
+        AbstractShip ship;
         while (!fleet1.isReady()) {
-            AbstractShip ship;
+
             if (fleet1.getNextNonPlacedShip().isPresent()) {
                ship = fleet1.getNextNonPlacedShip().get();
                field1.placeShip(ship, new Point2dImpl(i++, j++));

@@ -14,9 +14,7 @@ public final class Ruleset {
     private static final int ROWS = 10;
     private static final int COLUMNS = 10;
 
-    private static final int SUBMARINE_SIZE = 2;
-    private static final int CRUISER_SIZE = 3;
-    private static final int BATTLESHIP_SIZE = 4;
+
 
 //    public static boolean isPointWithinLimits(final Point2d p) {
 //        return (p.getY() >= NORTHERN_LIMIT && p.getY() <= SOUTHERN_LIMIT) &&
@@ -45,15 +43,15 @@ public final class Ruleset {
 
         // Creazione di 10 navi, aggiunte alla flotta
         for (int i = 0; i < N_SUBMARINES; i++) {
-            fleet.addShip(new AbstractShip.Submarine());
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
         }
 
         for (int i = 0; i < N_CRUISERS; i++) {
-            fleet.addShip(new AbstractShip.Cruiser());
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
         }
 
         for (int i = 0; i < N_BATTLESHIPS; i++) {
-            fleet.addShip(new AbstractShip.Battleship());
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
         }
         return fleet;
     }
@@ -74,19 +72,6 @@ public final class Ruleset {
     
     public static int getColumns() {
         return Ruleset.COLUMNS;
-    }
-    
-    // GET - SIZE
-    public static int getSubmarineSize() {
-        return Ruleset.SUBMARINE_SIZE;
-    }
-
-    public static int getCruiserSize() {
-        return Ruleset.CRUISER_SIZE;
-    }
-    
-    public static int getBattleshipSize() {
-        return Ruleset.BATTLESHIP_SIZE;
     }
     
     // GET - NUMBER OF

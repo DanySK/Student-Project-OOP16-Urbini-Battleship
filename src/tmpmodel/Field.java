@@ -18,7 +18,7 @@ public class Field {
 
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                matrix[i][j] = new FieldCell();
+                matrix[i][j] = new FieldCellImpl();
             }
         }
     }

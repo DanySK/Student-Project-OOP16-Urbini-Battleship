@@ -33,7 +33,7 @@ public class gameTest {
         while (!fleet1.isSunk()) {
             for (i = 0; i < Ruleset.getRows() && !fleet1.isSunk(); i++) {
                 for (j = 0; j < Ruleset.getColumns() && !fleet1.isSunk(); j++) {
-                    Shot shot = new Shot(new Point2dImpl(j, i));
+                    Shot shot = Shot.createShot(new Point2dImpl(j, i));
                     System.out.println("Sparo in posizione : " + i + ";" + j);
                     field1.updateStateWithShot(shot);
 

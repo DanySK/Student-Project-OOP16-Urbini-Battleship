@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import tmpmodel.GlobalProperties.EnumNave;
+
 public class Fleet {
     private final List<AbstractShip> ships;
     private boolean sunk;
@@ -37,11 +39,11 @@ public class Fleet {
     }
     
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    public List<AbstractShip> getShipsByType(Class c) {
+    public List<AbstractShip> getShipsByType(EnumNave tipoNave) {
         List<AbstractShip> as = new ArrayList<AbstractShip>();
         
         for (AbstractShip ship : this.ships) {
-            if ( c.getSimpleName().equals(ship.getClass().getSimpleName())) {
+            if ( ship.toString().equals(tipoNave.toString()) ) {
                 if ( !ship.isPlaced()) {
                     as.add(ship);
                 }
@@ -52,11 +54,11 @@ public class Fleet {
     }
 
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    public Optional<AbstractShip> getNextShipByType(Class c) {
+    public Optional<AbstractShip> getNextShipByType(EnumNave tipoNave) {
         Optional<AbstractShip> s = Optional.empty();
         
-        if (!getShipsByType(c).isEmpty()) {
-            s = Optional.of(getShipsByType(c).get(0)); // PRESO IL PRIMO ELEMENTO
+        if (!getShipsByType(tipoNave).isEmpty()) {
+            s = Optional.of(getShipsByType(tipoNave).get(0)); // PRESO IL PRIMO ELEMENTO
         }
         
         return s;

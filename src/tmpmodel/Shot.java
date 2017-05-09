@@ -11,14 +11,18 @@ public class Shot {
    */
     private final Point2d point;
 
-    public Shot (Point2d p) {
-        if (Ruleset.isPointWithinLimits(p)) {
-            this.point = p;
-        } else this.point = null;
-        // else throw ECCEZIONE
+    private Shot (final Point2d p) {
+        this.point = p;
     }
-
+    
     public Point2d getPoint() {
         return this.point;
+    }
+    // FACTORY METHODS
+    
+    public static Shot createShot(final Point2d p) {
+        if (Ruleset.isPointWithinLimits(p)) {
+            return new Shot(p);
+        } else throw new IllegalArgumentException("Punto dato non entro i limiti");
     }
 }

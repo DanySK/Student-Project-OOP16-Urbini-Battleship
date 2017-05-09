@@ -97,7 +97,7 @@ public class test2 {
             if (ship.isPlaced()) {
                 tmp = ship.getPos().getX() + ";" + ship.getPos().getY();
             }
-            System.out.println("-" + ship.getType() + " : " + tmp);
+            System.out.println("-" + ship.toString() + " : " + tmp);
         }
     }
 
