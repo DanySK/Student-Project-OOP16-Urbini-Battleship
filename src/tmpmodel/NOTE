@@ -1,3 +1,9 @@
+TODO: togliere la dipendenza da MAX_SIZE ( in global properties)
+TODO: Per creare un nuovo tipo di nave, sono da andar a modificare tre file (Ruleset, Global Properties e AbstractShip)
+- DI BASE VIENE USATA DIREZIONE EAST
+TODO: Field -> vista del nemico e vista del giocatore
+TODO: Field -> controllo dello sparo (x,y entro i limiti)
+
 
 X = COLONNE
 Y = RIGHE

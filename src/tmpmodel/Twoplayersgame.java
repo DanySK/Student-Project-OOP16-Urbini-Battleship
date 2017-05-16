@@ -3,8 +3,6 @@ package tmpmodel;
 public class Twoplayersgame {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
         Field field1 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         Field field2 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         

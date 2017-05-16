@@ -49,11 +49,11 @@ public class test {
             System.out.println(s.getClass().getSimpleName());
         }
         
-        for (AbstractShip s : fleet1.getShipsByType(EnumNave.SUBMARINE)) {
+        for (AbstractShip s : fleet1.getAllShipsByType(EnumNave.SUBMARINE)) {
             System.out.println(s.getClass().getSimpleName());
         }
         
-        for (AbstractShip s : fleet1.getShipsByType(EnumNave.CRUISER)) {
+        for (AbstractShip s : fleet1.getAllShipsByType(EnumNave.CRUISER)) {
             System.out.println(s.getClass().getSimpleName());
         }
         
@@ -102,7 +102,7 @@ public class test {
         System.out.println("Stampa flotta:");
 
         for ( final AbstractShip s : f.getAllShips()) {
-            System.out.println(s.getClass().getSimpleName() + "; Pos : " + s.getPos().getX() +" : " + s.getPos().getY());
+            System.out.println(s.getClass().getSimpleName() + "; Pos : " + s.getPosition().get().getX() +" : " + s.getPosition().get().getY());
             
             for ( final Point2d p : s.getAllPositions()) {
                 System.out.println(p.getX() + " : " + p.getY() );

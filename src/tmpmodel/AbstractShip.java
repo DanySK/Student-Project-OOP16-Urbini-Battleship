@@ -3,6 +3,7 @@ package tmpmodel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
@@ -15,22 +16,23 @@ import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 public abstract class AbstractShip implements Serializable {
     // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
     private ShipDirection shipDirection;
-    private Point2d pos; // final - OPTIONAL? 
+    private Optional<Point2d> pos; // final - OPTIONAL? 
     private boolean placed;
     private final List<Point2d> hitPoints; // array delle posizioni colpite
 
     protected AbstractShip(final Point2d start) {
         this();
-        this.pos = start;
+        this.pos = Optional.of(start);
         this.placed = true;
     }
     
     private AbstractShip() {
+    	this.pos = Optional.empty();
         this.placed = false;
         this.shipDirection = ShipDirection.East;
         hitPoints = new ArrayList<Point2d>();
     }
-
+    
     public boolean isSunk() {
 		if (hitPoints.size() == this.getSize() ) {
 //		    System.out.println(toString() + ": nave affondata!!");
@@ -42,7 +44,7 @@ public abstract class AbstractShip implements Serializable {
     public abstract int getSize();
     
     // METODO OPTIONAL - può ritornare null
-    public Point2d getPos() {
+    public Optional<Point2d> getPosition() {
         return this.pos;
     }
 
@@ -52,7 +54,7 @@ public abstract class AbstractShip implements Serializable {
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
         for (int i = 0; i < this.getSize() ; i++) {
-            tmp.add(new Point2dImpl(pos.getX() + i, pos.getY()));
+            tmp.add(new Point2dImpl(pos.get().getX() + i, pos.get().getY()));
         }
 
         return tmp;
@@ -89,10 +91,10 @@ public abstract class AbstractShip implements Serializable {
         //  DIREZIONE DATA IN MODO STANDARD
         // Fare un controllo sulle navi già presenti da qui? 
         if (!placed) {
-            this.pos = start;
+            this.pos = Optional.of(start);
             placed = true;
         } else {
-            this.pos = start;
+            this.pos = Optional.of(start);
         }
     }
 
@@ -120,7 +122,7 @@ public abstract class AbstractShip implements Serializable {
     // Può esser chiamato quando la flotta è pronta? 
     // Errore progettuale o dell'utente?
     // public o protected?
-    public void reset() {
+    public void resetPlacement() {
         this.placed = false;
         pos = null; // USARE OPTIONAL?
     }
@@ -155,7 +157,12 @@ public abstract class AbstractShip implements Serializable {
     // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
     private static class Submarine extends AbstractShip {
 
-        Submarine(Point2d start) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -2784639518931814680L;
+
+		Submarine(Point2d start) {
             super(start);
         }
 
@@ -177,7 +184,12 @@ public abstract class AbstractShip implements Serializable {
 
     private static class Cruiser extends AbstractShip {
 
-        public Cruiser(Point2d start) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -5532557604937632667L;
+
+		public Cruiser(Point2d start) {
             super(start);
         }
 
@@ -198,7 +210,12 @@ public abstract class AbstractShip implements Serializable {
 
     private static class Battleship extends AbstractShip {
         
-        public Battleship(Point2d start) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 8043537272411631772L;
+
+		public Battleship(Point2d start) {
             super(start);
         }
         
@@ -219,7 +236,12 @@ public abstract class AbstractShip implements Serializable {
 
     private static class AirCarrier extends AbstractShip {
 
-    	AirCarrier(Point2d start) {
+    	/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8323321815851042898L;
+
+		AirCarrier(Point2d start) {
     		super(start);
     	}
     	

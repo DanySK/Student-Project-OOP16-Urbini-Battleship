@@ -7,10 +7,8 @@ public final class Ruleset {
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
 
-    private static final int NORTHERN_LIMIT = 0;
     private static final int SOUTHERN_LIMIT = 9;
     private static final int EASTERN_LIMIT = 9;
-    private static final int WESTERN_LIMIT = 0;
     private static final int ROWS = 10;
     private static final int COLUMNS = 10;
 
@@ -38,6 +36,7 @@ public final class Ruleset {
         return true;
     }
 
+    // NON DEVE STARE QUI
     public static Fleet getNewFleet(){
         Fleet fleet = new Fleet();
 

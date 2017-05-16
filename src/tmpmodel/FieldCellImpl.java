@@ -38,6 +38,9 @@ public class FieldCellImpl implements FieldCell {
         }
     }
     
+    public Optional<AbstractShip> getShip() {
+    	return this.ship;
+    }
     /* (non-Javadoc)
 	 * @see tmpmodel.FieldCell#isMissed()
 	 */

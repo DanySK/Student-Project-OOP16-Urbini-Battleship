@@ -45,43 +45,33 @@ public class Field {
 
         // ship non è ancora stata piazzata.
 
-        // CONTROLLO SUL CAMPO -> non deve andar fuori
-        // tutte le celle devono essere libere
+        validateShipPlacement(ship, point);
         
-        // CONTROLLO 1 : PUNTO DENTRO LA MAPPA
-        if ( !Ruleset.isPointWithinLimits(point) ) {
-            System.out.println("Punto scelto non dentro la mappa");
-            return; // ECCEZIONE
-        }
-        
-        //  CONTROLLO 3 : CELLE LIBERE
-        
-        if ( !isShipPlaceable(ship, point)) {
-            System.out.println("Celle selezionate non libere");
-            return; // CELLE SELEZIONATE NON LIBERE - ECCEZIONE
-        }
-        
-//        FieldCell fieldCell = this.matrix[point.getX()][point.getY()];
-//        if ( !fieldCell.isEmpty() ) {
-//            System.out.println("Cella selezionata non libera");
-//            return; // CELLA GIA' OCCUPATA
-//        }
-        
-        // CONTROLLO 3 : NAVE DENTRO LA MAPPA
-        if ( !Ruleset.isShipWithinLimits(ship, point)) {
-            System.out.println("Nave fuori dalla mappa");
-            return; // ECCEZIONE - nave fuori dalla mappa
-        }
-        
-
         ship.place(point);
         for (Point2d p : ship.getAllPositions()) {
             this.matrix[p.getY()][p.getX()].placeShip(ship);
         }
-
-        // foreach con le celle coinvolte e linkare alla nave
-
     }
+
+private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
+	// CONTROLLO SUL CAMPO -> non deve andar fuori
+	// tutte le celle devono essere libere
+	
+	// CONTROLLO 1 : PUNTO DENTRO LA MAPPA
+	if ( !Ruleset.isPointWithinLimits(point) ) {
+	    throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
+	}
+	
+	//  CONTROLLO 3 : CELLE LIBERE
+	if ( !isShipPlaceable(ship, point)) {
+	    throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
+	}
+	
+	// CONTROLLO 3 : NAVE DENTRO LA MAPPA
+	if ( !Ruleset.isShipWithinLimits(ship, point)) {
+	    throw new IllegalArgumentException(GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
+	}
+}
 
     public char[][] getMatrix() {
         char[][] chars = new char[rows][columns];

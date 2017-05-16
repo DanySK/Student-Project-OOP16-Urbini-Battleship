@@ -64,7 +64,7 @@ public class test2 {
         // FINE PIAZZAMENTO
         stampaFlotta(fleet1);
 
-        fleet1.reset();
+        fleet1.resetFleetPlacement();
         System.out.println("\n\n\n\nReset flotta\n\n\n\n");
 
         // STAMPA FLOTTA
@@ -95,7 +95,7 @@ public class test2 {
         for (AbstractShip ship : fleet.getAllShips()) {
             String tmp = "";
             if (ship.isPlaced()) {
-                tmp = ship.getPos().getX() + ";" + ship.getPos().getY();
+                tmp = ship.getPosition().get().getX() + ";" + ship.getPosition().get().getY();
             }
             System.out.println("-" + ship.toString() + " : " + tmp);
         }

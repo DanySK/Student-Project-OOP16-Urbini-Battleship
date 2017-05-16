@@ -1,6 +1,7 @@
 package tmpmodel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,82 +9,79 @@ import tmpmodel.GlobalProperties.EnumNave;
 
 public class Fleet {
     private final List<AbstractShip> ships;
-    private boolean sunk;
-    private boolean ready;
 
     // COSTRUTTORE PROTETTO PER IL MOMENTO? -> LA FLOTTA VIENE CREATA SOLO CON RULESET
     public Fleet() {
         this.ships = new ArrayList<>();
-        sunk = false;
-        ready = false;
     }
 
     public List<AbstractShip> getAllShips() {
         // MODIFICARE
         // Usare la copia non modificabile, andare a rivedere 
-        return this.ships;
+        //return this.ships;
+    	return Collections.unmodifiableList(this.ships);
     }
 
     public List<AbstractShip> getAllNonPlacedShips() {
         // Metodo da rivedere per il momento
-        List<AbstractShip> npShips = new ArrayList<>();
+        List<AbstractShip> nonPlacedShips = new ArrayList<>();
         
         // ogni nave non piazzata viene aggiunta alla lista
-        for (final AbstractShip s : this.getAllShips()) {
-            if (!s.isPlaced()) {
-                npShips.add(s);
+        for (final AbstractShip ship : this.getAllShips()) {
+            if (!ship.isPlaced()) {
+                nonPlacedShips.add(ship);
             }
         }
 
-        return npShips;
+        return Collections.unmodifiableList(nonPlacedShips);
     }
     
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    public List<AbstractShip> getShipsByType(EnumNave tipoNave) {
-        List<AbstractShip> as = new ArrayList<AbstractShip>();
+    public List<AbstractShip> getAllShipsByType(EnumNave tipoNave) {
+        List<AbstractShip> ships = new ArrayList<AbstractShip>();
         
         for (AbstractShip ship : this.ships) {
             if ( ship.toString().equals(tipoNave.toString()) ) {
                 if ( !ship.isPlaced()) {
-                    as.add(ship);
+                    ships.add(ship);
                 }
             }
         }
         
-        return as;
+        return Collections.unmodifiableList(ships);
     }
 
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
+    // TODO : ricontrollare
     public Optional<AbstractShip> getNextShipByType(EnumNave tipoNave) {
-        Optional<AbstractShip> s = Optional.empty();
+        Optional<AbstractShip> ship = Optional.empty();
         
-        if (!getShipsByType(tipoNave).isEmpty()) {
-            s = Optional.of(getShipsByType(tipoNave).get(0)); // PRESO IL PRIMO ELEMENTO
+        if (!getAllShipsByType(tipoNave).isEmpty()) {
+            ship = Optional.of(getAllShipsByType(tipoNave).get(0)); // PRESO IL PRIMO ELEMENTO
         }
         
-        return s;
+        return ship;
     }
     
     // RESTITUISCE la prossima nave NON PIAZZATA. Non la toglie dalla collezione
     public Optional<AbstractShip> getNextNonPlacedShip() {
-        Optional<AbstractShip> s = Optional.empty();
+        Optional<AbstractShip> ship = Optional.empty();
         
         if (!getAllNonPlacedShips().isEmpty()) {
-            s = Optional.of(getAllNonPlacedShips().get(0)); // PRESO IL PRIMO ELEMENTO
+            ship = Optional.of(getAllNonPlacedShips().get(0)); // PRESO IL PRIMO ELEMENTO
         }
         
-        return s;
+        return ship;
     }
 
     public void addShip(AbstractShip s) {
         this.ships.add(s);
     }
 
-    public void reset () {
+    public void resetFleetPlacement () {
         for (AbstractShip ship : this.getAllShips()) {
-            ship.reset();
+            ship.resetPlacement();
         }
-        this.ready = false;
     }
     
     public boolean isSunk() {
@@ -99,8 +97,6 @@ public class Fleet {
     }
 
     public boolean isReady() {
-        //return this.ready;
-
         for (final AbstractShip s : this.ships ) {
             if (!s.isPlaced()) {
                 return false;
