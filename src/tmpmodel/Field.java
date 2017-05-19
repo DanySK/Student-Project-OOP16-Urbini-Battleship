@@ -6,6 +6,11 @@ package tmpmodel;
  * @author fabio
  *
  */
+/**
+ * Represents the field
+ * @author fabio
+ *
+ */
 public class Field {
     private final FieldCell[][] matrix;
     private final int rows;
@@ -29,7 +34,7 @@ public class Field {
         int y = p.getY();
 
         // I VALORI DEVONO ESSER ENTRO I LIMITI!!!!
-        // LANCIARE ECCEZIONE? 
+        // LANCIARE ECCEZIONE?
         this.matrix[y][x].tryShoot(shot);
     }
 
@@ -46,7 +51,7 @@ public class Field {
         // ship non è ancora stata piazzata.
 
         validateShipPlacement(ship, point);
-        
+
         ship.place(point);
         for (Point2d p : ship.getAllPositions()) {
             this.matrix[p.getY()][p.getX()].placeShip(ship);
@@ -56,17 +61,17 @@ public class Field {
 private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
 	// CONTROLLO SUL CAMPO -> non deve andar fuori
 	// tutte le celle devono essere libere
-	
+
 	// CONTROLLO 1 : PUNTO DENTRO LA MAPPA
 	if ( !Ruleset.isPointWithinLimits(point) ) {
 	    throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
 	}
-	
+
 	//  CONTROLLO 3 : CELLE LIBERE
 	if ( !isShipPlaceable(ship, point)) {
 	    throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
 	}
-	
+
 	// CONTROLLO 3 : NAVE DENTRO LA MAPPA
 	if ( !Ruleset.isShipWithinLimits(ship, point)) {
 	    throw new IllegalArgumentException(GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
@@ -90,15 +95,15 @@ private void validateShipPlacement(final AbstractShip ship, final Point2d point)
                 }
             }
         }
-        
+
         return chars;
     }
-    
+
     public boolean isShipSunk(final AbstractShip s) {
         // Il controllo potrebbe esser fatto su Field
         return s.isSunk();
     }
-    
+
     private boolean isShipPlaceable(final AbstractShip ship, final Point2d point) {
         // TUTTI I PUNTI SONO LIBERI?
         for (Point2d p : ship.getProjectionPoints(point)) {

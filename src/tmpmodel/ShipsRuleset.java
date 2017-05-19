@@ -1,19 +1,25 @@
 package tmpmodel;
 
 public enum ShipsRuleset {
-	SUBMARINE(2, 3),
-	CRUISER(3, 2),
-	BATTLESHIP(4, 2),
-	AIR_CARRIER(5, 1);
+	SUBMARINE("Submarine", 2, 3),
+	CRUISER("Cruiser", 3, 2),
+	BATTLESHIP("Battleship", 4, 2),
+	AIR_CARRIER("Air Carrier", 5, 1);
 
+	private final String name;
 	private final int size;
 	private final int instancesNumber;
-	
-	private ShipsRuleset(final int size, final int instancesNumber) {
+
+	private ShipsRuleset(final String name, final int size,
+			final int instancesNumber) {
+		this.name = name;
 		this.size = size;
 		this.instancesNumber = instancesNumber;
 	}
-	
+
+	public final String getName() {
+		return this.name;
+	}
 	public int getSize() {
 		return this.size;
 	}

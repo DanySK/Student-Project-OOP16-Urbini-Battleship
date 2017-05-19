@@ -7,6 +7,12 @@ import java.util.Optional;
 
 import tmpmodel.GlobalProperties.EnumNave;
 
+/**
+ * Represents a fleet in the battlefield.
+ * A fleet is composed of a number of ships.
+ * @author fabio
+ *
+ */
 public class Fleet {
     private final List<AbstractShip> ships;
 
@@ -17,7 +23,7 @@ public class Fleet {
 
     public List<AbstractShip> getAllShips() {
         // MODIFICARE
-        // Usare la copia non modificabile, andare a rivedere 
+        // Usare la copia non modificabile, andare a rivedere
         //return this.ships;
     	return Collections.unmodifiableList(this.ships);
     }
@@ -25,7 +31,7 @@ public class Fleet {
     public List<AbstractShip> getAllNonPlacedShips() {
         // Metodo da rivedere per il momento
         List<AbstractShip> nonPlacedShips = new ArrayList<>();
-        
+
         // ogni nave non piazzata viene aggiunta alla lista
         for (final AbstractShip ship : this.getAllShips()) {
             if (!ship.isPlaced()) {
@@ -35,11 +41,11 @@ public class Fleet {
 
         return Collections.unmodifiableList(nonPlacedShips);
     }
-    
+
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
     public List<AbstractShip> getAllShipsByType(EnumNave tipoNave) {
         List<AbstractShip> ships = new ArrayList<AbstractShip>();
-        
+
         for (AbstractShip ship : this.ships) {
             if ( ship.toString().equals(tipoNave.toString()) ) {
                 if ( !ship.isPlaced()) {
@@ -47,7 +53,7 @@ public class Fleet {
                 }
             }
         }
-        
+
         return Collections.unmodifiableList(ships);
     }
 
@@ -55,22 +61,22 @@ public class Fleet {
     // TODO : ricontrollare
     public Optional<AbstractShip> getNextShipByType(EnumNave tipoNave) {
         Optional<AbstractShip> ship = Optional.empty();
-        
+
         if (!getAllShipsByType(tipoNave).isEmpty()) {
             ship = Optional.of(getAllShipsByType(tipoNave).get(0)); // PRESO IL PRIMO ELEMENTO
         }
-        
+
         return ship;
     }
-    
+
     // RESTITUISCE la prossima nave NON PIAZZATA. Non la toglie dalla collezione
     public Optional<AbstractShip> getNextNonPlacedShip() {
         Optional<AbstractShip> ship = Optional.empty();
-        
+
         if (!getAllNonPlacedShips().isEmpty()) {
             ship = Optional.of(getAllNonPlacedShips().get(0)); // PRESO IL PRIMO ELEMENTO
         }
-        
+
         return ship;
     }
 
@@ -83,9 +89,9 @@ public class Fleet {
             ship.resetPlacement();
         }
     }
-    
+
     public boolean isSunk() {
-        // EVENTO --> SUNK! 
+        // EVENTO --> SUNK!
         //
         //return this.sunk;
         for (AbstractShip ship : this.ships) {
