@@ -5,4 +5,4 @@
  * @author fabio
  *
  */
-package tmpmodel;
+package samples;

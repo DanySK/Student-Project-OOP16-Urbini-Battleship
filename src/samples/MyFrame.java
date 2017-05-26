@@ -1,4 +1,4 @@
-package tmpmodel;
+package samples;
 
 import java.awt.LayoutManager;
 import java.util.ArrayList;

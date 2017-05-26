@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.common;
 
 public class Point2dImpl implements Point2d {
 

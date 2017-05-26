@@ -1,4 +1,10 @@
-package tmpmodel;
+package it.unibo.battleship.map;
+
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Ruleset;
+import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.ships.AbstractShip;
 
 /**
  * TO DO :

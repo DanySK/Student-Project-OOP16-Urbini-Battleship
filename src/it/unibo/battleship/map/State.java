@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.map;
 
 /**
  * Represents the State of a {@link FieldCell}

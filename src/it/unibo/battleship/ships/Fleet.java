@@ -1,11 +1,12 @@
-package tmpmodel;
+package it.unibo.battleship.ships;
+
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.GlobalProperties.EnumNave;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import tmpmodel.GlobalProperties.EnumNave;
 
 /**
  * Represents a fleet in the battlefield.

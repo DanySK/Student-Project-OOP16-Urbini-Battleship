@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.common;
 
 public final class Shot {
     /* lo sparo può esser formato da più punti

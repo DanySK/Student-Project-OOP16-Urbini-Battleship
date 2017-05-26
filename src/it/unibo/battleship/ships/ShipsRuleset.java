@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.ships;
 
 public enum ShipsRuleset {
 	SUBMARINE("Submarine", 2, 3),

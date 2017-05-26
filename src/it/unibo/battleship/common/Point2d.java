@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.common;
 
 public interface Point2d {
 

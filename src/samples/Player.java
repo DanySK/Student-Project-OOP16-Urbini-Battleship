@@ -1,4 +1,4 @@
-package tmpmodel;
+package samples;
 
 /**
  * Represents a Player.

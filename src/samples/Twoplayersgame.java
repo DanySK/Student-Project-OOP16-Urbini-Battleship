@@ -1,4 +1,11 @@
-package tmpmodel;
+package samples;
+
+import it.unibo.battleship.common.Point2dImpl;
+import it.unibo.battleship.common.Ruleset;
+import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.map.Field;
+import it.unibo.battleship.ships.AbstractShip;
+import it.unibo.battleship.ships.Fleet;
 
 public class Twoplayersgame {
 

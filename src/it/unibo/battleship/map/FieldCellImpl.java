@@ -1,4 +1,7 @@
-package tmpmodel;
+package it.unibo.battleship.map;
+
+import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.ships.AbstractShip;
 
 import java.util.Optional;
 

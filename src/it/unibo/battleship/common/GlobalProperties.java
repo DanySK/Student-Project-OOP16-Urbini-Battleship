@@ -1,4 +1,4 @@
-package tmpmodel;
+package it.unibo.battleship.common;
 
 public final class GlobalProperties {
 	public static final int MAX_SIZE = 5;

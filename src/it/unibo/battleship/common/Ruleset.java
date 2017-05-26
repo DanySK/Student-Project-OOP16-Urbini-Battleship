@@ -1,4 +1,7 @@
-package tmpmodel;
+package it.unibo.battleship.common;
+
+import it.unibo.battleship.ships.AbstractShip;
+import it.unibo.battleship.ships.Fleet;
 
 public final class Ruleset {
     // PATTERN COMMAND PER FARE METODI IN BASE ALLE NAVI ESISTENTI?

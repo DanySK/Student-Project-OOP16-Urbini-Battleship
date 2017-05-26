@@ -1,4 +1,10 @@
-package tmpmodel;
+package it.unibo.battleship.ships;
+
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Point2dImpl;
+import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.GlobalProperties.EnumNave;
 
 import java.io.Serializable;
 import java.util.ArrayList;
