@@ -1,5 +1,11 @@
 package it.unibo.battleship.common;
 
+/**
+ * Implementation of a 2 dimension point
+ * {@see Point2d}
+ * @author fabio
+ *
+ */
 public class Point2dImpl implements Point2d {
 
     private final int x;

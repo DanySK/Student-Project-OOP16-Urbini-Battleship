@@ -21,7 +21,7 @@ public class test2 {
         int j = 0;
 
         Field field1 = new Field(rows, columns);
-        Fleet fleet1 = Ruleset.getNewFleet();
+        Fleet fleet1 = Fleet.getNewFleet();
 
         System.out.println("fleet size: " + fleet1.getAllNonPlacedShips().size());
         fleet1.getNextNonPlacedShip().get().place(new Point2dImpl(i,j));
@@ -94,8 +94,8 @@ public class test2 {
 
         System.out.println();
         stampaField(field1);
-        
-        
+
+
     }
 
     private static void stampaFlotta (final Fleet fleet) {

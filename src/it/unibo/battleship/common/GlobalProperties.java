@@ -15,7 +15,7 @@ public final class GlobalProperties {
 	
 	private GlobalProperties() {} 
 	
-	public static enum EnumNave {
+	public static enum ShipRules {
 		SUBMARINE("Submarine", SUBMARINE_SIZE),
 		CRUISER("Cruiser", CRUISER_SIZE),
 		BATTLESHIP("Battleship", BATTLESHIP_SIZE),
@@ -25,7 +25,7 @@ public final class GlobalProperties {
 		private final String name;
 		private final int size;
 		
-		EnumNave(final String name, final int size) {
+		ShipRules(final String name, final int size) {
 			this.name = name;
 			this.size = size;
 		}

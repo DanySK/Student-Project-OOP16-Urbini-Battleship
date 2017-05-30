@@ -1,7 +1,8 @@
 package it.unibo.battleship.ships;
 
 import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.GlobalProperties.EnumNave;
+import it.unibo.battleship.common.GlobalProperties.ShipRules;
+import it.unibo.battleship.common.Ruleset;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +45,7 @@ public class Fleet {
     }
 
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    public List<AbstractShip> getAllShipsByType(EnumNave tipoNave) {
+    public List<AbstractShip> getAllShipsByType(ShipRules tipoNave) {
         List<AbstractShip> ships = new ArrayList<AbstractShip>();
 
         for (AbstractShip ship : this.ships) {
@@ -60,7 +61,7 @@ public class Fleet {
 
     // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
     // TODO : ricontrollare
-    public Optional<AbstractShip> getNextShipByType(EnumNave tipoNave) {
+    public Optional<AbstractShip> getNextShipByType(ShipRules tipoNave) {
         Optional<AbstractShip> ship = Optional.empty();
 
         if (!getAllShipsByType(tipoNave).isEmpty()) {
@@ -92,9 +93,6 @@ public class Fleet {
     }
 
     public boolean isSunk() {
-        // EVENTO --> SUNK!
-        //
-        //return this.sunk;
         for (AbstractShip ship : this.ships) {
             if (!ship.isSunk()) {
                 return false;
@@ -109,7 +107,27 @@ public class Fleet {
                 return false;
             }
         }
-
         return true;
+    }
+    
+    public static Fleet getNewFleet(){
+        Fleet fleet = new Fleet();
+        
+        for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
+        }
+
+        for (int i = 0; i < Ruleset.getCruisersNumber() ; i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
+        }
+
+        for (int i = 0; i < Ruleset.getBattleshipsNumber() ; i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
+        }
+        return fleet;
+    }
+    
+    private static void createShips(final Fleet fleet, final int ShipsNumber) {
+    	
     }
 }

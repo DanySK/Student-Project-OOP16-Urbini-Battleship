@@ -23,8 +23,10 @@ public final class Ruleset {
 //    }
     
     public static boolean isPointWithinLimits(final Point2d p) {
-        return (p.getY() >= 0 && p.getY() < Ruleset.ROWS) &&
-                (p.getX() >= 0 && p.getX() <= Ruleset.COLUMNS );
+        return ( p.getY() >= 0 && 
+        		p.getY() < Ruleset.ROWS) &&
+                ( p.getX() >= 0 
+                && p.getX() <= Ruleset.COLUMNS );
     }
     
     public static boolean isShipWithinLimits(final AbstractShip ship, final Point2d point) {
@@ -40,23 +42,7 @@ public final class Ruleset {
     }
 
     // NON DEVE STARE QUI
-    public static Fleet getNewFleet(){
-        Fleet fleet = new Fleet();
 
-        // Creazione di 10 navi, aggiunte alla flotta
-        for (int i = 0; i < N_SUBMARINES; i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
-        }
-
-        for (int i = 0; i < N_CRUISERS; i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
-        }
-
-        for (int i = 0; i < N_BATTLESHIPS; i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
-        }
-        return fleet;
-    }
 
     // GET BORDER LIMITS
     

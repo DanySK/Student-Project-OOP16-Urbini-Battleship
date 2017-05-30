@@ -13,8 +13,8 @@ public class Twoplayersgame {
         Field field1 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         Field field2 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         
-        Fleet fleet1 = Ruleset.getNewFleet();
-        Fleet fleet2 = Ruleset.getNewFleet();
+        Fleet fleet1 = Fleet.getNewFleet();
+        Fleet fleet2 = Fleet.getNewFleet();
         
         creaFlotta(field1, fleet1);
         creaFlotta(field2, fleet2);

@@ -4,7 +4,7 @@ import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Shot;
-import it.unibo.battleship.common.GlobalProperties.EnumNave;
+import it.unibo.battleship.common.GlobalProperties.ShipRules;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -178,12 +178,12 @@ public abstract class AbstractShip implements Serializable {
 
 		@Override
 		public int getSize() {
-			return GlobalProperties.EnumNave.SUBMARINE.getSize();
+			return GlobalProperties.ShipRules.SUBMARINE.getSize();
 		}
 
 		@Override
 		public String toString() {
-			return GlobalProperties.EnumNave.SUBMARINE.toString();
+			return GlobalProperties.ShipRules.SUBMARINE.toString();
 		}
 
     }
@@ -205,12 +205,12 @@ public abstract class AbstractShip implements Serializable {
 
 		@Override
 		public int getSize() {
-			return GlobalProperties.EnumNave.CRUISER.getSize();
+			return GlobalProperties.ShipRules.CRUISER.getSize();
 		}
 
 		@Override
 		public String toString() {
-			return GlobalProperties.EnumNave.CRUISER.toString();
+			return GlobalProperties.ShipRules.CRUISER.toString();
 		}
     }
 
@@ -231,12 +231,12 @@ public abstract class AbstractShip implements Serializable {
 
 		@Override
 		public int getSize() {
-			return GlobalProperties.EnumNave.BATTLESHIP.getSize();
+			return GlobalProperties.ShipRules.BATTLESHIP.getSize();
 		}
 
 		@Override
 		public String toString() {
-			return GlobalProperties.EnumNave.BATTLESHIP.toString();
+			return GlobalProperties.ShipRules.BATTLESHIP.toString();
 		}
     }
 
@@ -262,7 +262,7 @@ public abstract class AbstractShip implements Serializable {
 
 		@Override
 		public String toString() {
-			return GlobalProperties.EnumNave.AIR_CARRIER.toString();
+			return GlobalProperties.ShipRules.AIR_CARRIER.toString();
 		}
     	
     }
