@@ -1,4 +1,4 @@
-package samples;
+package it.unibo.battleship.samples;
 
 /**
  * Represents a Player.

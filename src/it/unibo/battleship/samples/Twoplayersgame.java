@@ -1,4 +1,4 @@
-package samples;
+package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
@@ -12,13 +12,13 @@ public class Twoplayersgame {
     public static void main(String[] args) {
         Field field1 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         Field field2 = new Field(Ruleset.getRows(), Ruleset.getColumns());
-        
+
         Fleet fleet1 = Fleet.getNewFleet();
         Fleet fleet2 = Fleet.getNewFleet();
-        
+
         creaFlotta(field1, fleet1);
         creaFlotta(field2, fleet2);
-        
+
         for (int i = 0; i < 10; i++ ) {
             for (int j = 0; j < 10; j++ )
                 field1.updateStateWithShot(Shot.createShot(new Point2dImpl(j,i)));
@@ -28,7 +28,7 @@ public class Twoplayersgame {
                 }
         }
     }
-    
+
     private static void creaFlotta(Field field1, Fleet fleet1) {
         int i = 0, j = 0;
 
@@ -42,11 +42,11 @@ public class Twoplayersgame {
 
             }
         }
-        
+
         stampaField(field1);
         System.out.println("\n\n\n");
     }
-    
+
     private static void stampaField (final Field field) {
         for (char[] chars : field.getMatrix() ) {
             for (char car : chars ) {

@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-package samples;
+package it.unibo.battleship.samples;
 
 import static org.junit.Assert.*;
 

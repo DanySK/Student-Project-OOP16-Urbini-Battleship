@@ -1,4 +1,4 @@
-package samples;
+package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Ruleset;
 
@@ -15,7 +15,7 @@ public class MyFrame extends JFrame {
     private final int WIDTH = 400;
     private final int HEIGHT = 400;
     private final List<FieldButton> fieldList;
-    
+
     public MyFrame(final String title, final LayoutManager lm) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +36,7 @@ public class MyFrame extends JFrame {
     public JPanel getMainPanel() {
         return (JPanel)this.getContentPane().getComponent(0);
     }
-    
+
     private void initialize() {
 
     }

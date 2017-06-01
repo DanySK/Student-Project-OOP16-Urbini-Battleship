@@ -1,4 +1,4 @@
-package samples;
+package it.unibo.battleship.samples;
 
 import javax.swing.JButton;
 

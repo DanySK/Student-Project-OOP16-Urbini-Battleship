@@ -1,8 +1,8 @@
 /**
- * 
+ *
  */
 /**
  * @author fabio
  *
  */
-package samples;
+package it.unibo.battleship.samples;
