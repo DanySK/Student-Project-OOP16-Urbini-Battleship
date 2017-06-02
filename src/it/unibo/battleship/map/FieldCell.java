@@ -21,8 +21,8 @@ public interface FieldCell {
 	boolean isEmpty();
 
 	/**
-	 * Returns {@code true} if a {@link Ship} is present, false otherwise.
-	 * @return {@code true} if a {@link Ship} is present
+	 * Returns {@code true} if a {@link AbstractShip} is present, false otherwise.
+	 * @return {@code true} if a {@link AbstractShip} is present
 	 */
 	boolean isPresent();
 

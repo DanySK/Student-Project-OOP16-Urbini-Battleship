@@ -1,6 +1,6 @@
 package it.unibo.battleship.ships;
 
-public enum ShipDirection { 
-	East,
-	South 
+public enum ShipDirection {
+	EAST,
+	SOUTH
 }

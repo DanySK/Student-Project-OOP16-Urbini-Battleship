@@ -1,5 +1,6 @@
 package it.unibo.battleship.ships;
 
+import com.google.common.base.Objects;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.GlobalProperties.ShipRules;
 import it.unibo.battleship.common.Ruleset;
@@ -129,5 +130,20 @@ public class Fleet {
     
     private static void createShips(final Fleet fleet, final int ShipsNumber) {
     	
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Fleet that = (Fleet) o;
+
+        return Objects.equal(this.ships, that.ships);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(ships);
     }
 }

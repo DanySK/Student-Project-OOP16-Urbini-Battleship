@@ -1,5 +1,7 @@
 package it.unibo.battleship.map;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import it.unibo.battleship.common.Shot;
 import it.unibo.battleship.ships.AbstractShip;
 
@@ -22,7 +24,6 @@ public class FieldCellImpl implements FieldCell {
         this.ship = Optional.empty();
     }
 
-    // tryPlaceShip -> restituire eccezione
     @Override
 	public void placeShip(final AbstractShip s) {
         this.ship = Optional.of(s);
@@ -57,5 +58,29 @@ public class FieldCellImpl implements FieldCell {
     @Override
 	public boolean isPresent() {
         return this.currentState == State.PRESENT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FieldCellImpl that = (FieldCellImpl) o;
+
+        return Objects.equal(this.currentState, that.currentState) &&
+                Objects.equal(this.ship, that.ship);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(currentState, ship);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("currentState", currentState)
+                .add("ship", ship)
+                .toString();
     }
 }

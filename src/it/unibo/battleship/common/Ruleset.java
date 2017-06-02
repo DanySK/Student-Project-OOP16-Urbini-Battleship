@@ -10,23 +10,18 @@ public final class Ruleset {
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
 
+    private static final Boundary boundary = new BoundaryImpl(9, 9);
     private static final int SOUTHERN_LIMIT = 9;
     private static final int EASTERN_LIMIT = 9;
     private static final int ROWS = 10;
     private static final int COLUMNS = 10;
 
 
+    private Ruleset() {}
 
-//    public static boolean isPointWithinLimits(final Point2d p) {
-//        return (p.getY() >= NORTHERN_LIMIT && p.getY() <= SOUTHERN_LIMIT) &&
-//                (p.getX() >= WESTERN_LIMIT && p.getX() <= EASTERN_LIMIT );
-//    }
-    
     public static boolean isPointWithinLimits(final Point2d p) {
-        return ( p.getY() >= 0 && 
-        		p.getY() < Ruleset.ROWS) &&
-                ( p.getX() >= 0 
-                && p.getX() <= Ruleset.COLUMNS );
+        return ( p.getY() >= 0 && p.getY() < Ruleset.ROWS) &&
+                ( p.getX() >= 0 && p.getX() <= Ruleset.COLUMNS );
     }
     
     public static boolean isShipWithinLimits(final AbstractShip ship, final Point2d point) {
@@ -41,19 +36,6 @@ public final class Ruleset {
         return true;
     }
 
-    // NON DEVE STARE QUI
-
-
-    // GET BORDER LIMITS
-    
-    public static int getSouthernLimit() {
-        return Ruleset.SOUTHERN_LIMIT;
-    }
-    
-    public static int getEasternLimit() {
-        return Ruleset.EASTERN_LIMIT;
-    }
-    
     public static int getRows() {
         return Ruleset.ROWS;
     }
@@ -61,8 +43,6 @@ public final class Ruleset {
     public static int getColumns() {
         return Ruleset.COLUMNS;
     }
-    
-    // GET - NUMBER OF
     
     public static int getSubmarinesNumber() {
         return Ruleset.N_SUBMARINES;

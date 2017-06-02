@@ -8,16 +8,5 @@ package it.unibo.battleship.map;
 public enum State {
 	WATER,
 	MISSED,
-	PRESENT;
-
-	public State getStateSeenByOwner() {
-		return this;
-	}
-
-	public State getStateSeenByEnemy() {
-		if (this == PRESENT) {
-			return WATER;
-		}
-		return this;
-	}
+	PRESENT
 }

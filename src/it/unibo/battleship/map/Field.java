@@ -17,7 +17,7 @@ import it.unibo.battleship.ships.AbstractShip;
  * @author fabio
  *
  */
-public class Field {
+public final class Field {
     private final FieldCell[][] matrix;
     private final int rows;
     private final int columns;
@@ -44,17 +44,11 @@ public class Field {
         this.matrix[y][x].tryShoot(shot);
     }
 
-//    public void placeFleet(final Fleet fleet) {
-//        for (final AbstractShip s : fleet.getAllShips()) {
-//            this.placeShip(s);
-//        }
-//    }
-
     public void placeShip(final AbstractShip ship, final Point2d point) {
         // Per il momento viene solo messo lo stato delle celle a presente
         // TO DO : controllo sulla presenza di navi
 
-        // ship non è ancora stata piazzata.
+        // ship non ï¿½ ancora stata piazzata.
 
         validateShipPlacement(ship, point);
 
@@ -65,9 +59,6 @@ public class Field {
     }
 
 private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
-	// CONTROLLO SUL CAMPO -> non deve andar fuori
-	// tutte le celle devono essere libere
-
 	// CONTROLLO 1 : PUNTO DENTRO LA MAPPA
 	if ( !Ruleset.isPointWithinLimits(point) ) {
 	    throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);

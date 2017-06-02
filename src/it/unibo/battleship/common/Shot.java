@@ -1,5 +1,7 @@
 package it.unibo.battleship.common;
 
+import com.google.common.base.Objects;
+
 public final class Shot {
     /* lo sparo può esser formato da più punti
        oppure uno sparo di un certo tipo è formato da più spari
@@ -24,5 +26,25 @@ public final class Shot {
         if (Ruleset.isPointWithinLimits(p)) {
             return new Shot(p);
         } else throw new IllegalArgumentException("Punto dato non entro i limiti");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Shot that = (Shot) o;
+
+        return Objects.equal(this.point, that.point);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(point);
+    }
+
+    @Override
+    public String toString() {
+        return this.point.toString();
     }
 }

@@ -1,17 +1,15 @@
 package it.unibo.battleship.ships;
 
+import com.google.common.base.Objects;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Shot;
-import it.unibo.battleship.common.GlobalProperties.ShipRules;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 /*
  * come mantenere size final e che abbia quel valore alla scelta del sottotipo?
@@ -35,7 +33,7 @@ public abstract class AbstractShip implements Serializable {
     private AbstractShip() {
     	this.pos = Optional.empty();
         this.placed = false;
-        this.shipDirection = ShipDirection.East;
+        this.shipDirection = ShipDirection.EAST;
         hitPoints = new ArrayList<Point2d>();
     }
     
@@ -49,7 +47,7 @@ public abstract class AbstractShip implements Serializable {
 
     public abstract int getSize();
     
-    // METODO OPTIONAL - può ritornare null
+    // METODO OPTIONAL - puï¿½ ritornare null
     public Optional<Point2d> getPosition() {
         return this.pos;
     }
@@ -77,9 +75,6 @@ public abstract class AbstractShip implements Serializable {
         
         return points;
     }
-//    public boolean containsPosition(final Point2d point) {
-//        return getAllPositions().contains(point);
-//    }
 
     public boolean containsPosition(final Point2d point) {
         for (Point2d p : this.getAllPositions()) {
@@ -95,7 +90,7 @@ public abstract class AbstractShip implements Serializable {
 
     public void place(final Point2d start) {
         //  DIREZIONE DATA IN MODO STANDARD
-        // Fare un controllo sulle navi già presenti da qui? 
+        // Fare un controllo sulle navi giï¿½ presenti da qui? 
         if (!placed) {
             this.pos = Optional.of(start);
             placed = true;
@@ -109,7 +104,7 @@ public abstract class AbstractShip implements Serializable {
     }
 
     public boolean shoot (final Shot shot) {
-        // Controllo : già colpita?
+        // Controllo : giï¿½ colpita?
         // shot non valido? 
         // Metodo valido al momento solo per una casella
         
@@ -125,7 +120,7 @@ public abstract class AbstractShip implements Serializable {
         return false;
     }
     
-    // Può esser chiamato quando la flotta è pronta? 
+    // Puï¿½ esser chiamato quando la flotta ï¿½ pronta? 
     // Errore progettuale o dell'utente?
     // public o protected?
     public void resetPlacement() {
@@ -159,8 +154,25 @@ public abstract class AbstractShip implements Serializable {
     	default : throw new IllegalArgumentException("Valore non valido");
     	}
     }
-    
-    // CLASSI INNESTATE ***** DIPENDENZA DA RULESET *****
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractShip that = (AbstractShip) o;
+
+        return Objects.equal(this.shipDirection, that.shipDirection) &&
+                Objects.equal(this.pos, that.pos) &&
+                Objects.equal(this.placed, that.placed) &&
+                Objects.equal(this.hitPoints, that.hitPoints);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(shipDirection, pos, placed, hitPoints);
+    }
+
     private static class Submarine extends AbstractShip {
 
         /**
