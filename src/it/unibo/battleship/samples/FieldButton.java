@@ -21,6 +21,9 @@ public class FieldButton {
 	public int getY() {
 		return this.y;
 	}
-	
+
+	public JButton getButton() {
+		return this.btn;
+	}
 	
 }

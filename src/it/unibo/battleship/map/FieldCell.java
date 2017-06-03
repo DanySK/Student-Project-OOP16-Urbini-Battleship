@@ -11,7 +11,6 @@ import it.unibo.battleship.ships.AbstractShip;
  */
 public interface FieldCell {
 
-	// TODO: tryPlaceShip -> restituire eccezione
 	void placeShip(AbstractShip s);
 
 	void tryShoot(Shot s);

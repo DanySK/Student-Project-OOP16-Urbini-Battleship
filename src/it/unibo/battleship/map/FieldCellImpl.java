@@ -16,9 +16,6 @@ public class FieldCellImpl implements FieldCell {
     private State currentState;
     private Optional<AbstractShip> ship;
 
-    // DOPO tryShoot potrebbe esser restituito lo stato della cella
-    // Questo però renderebbe visibile la struttura della classe
-
     public FieldCellImpl() {
         this.currentState = State.WATER;
         this.ship = Optional.empty();

@@ -25,7 +25,7 @@ public final class Ruleset {
     }
     
     public static boolean isShipWithinLimits(final AbstractShip ship, final Point2d point) {
-        // DIREZIONE EST ( x++ )
+        // Standard direction : east
         int length = ship.getSize();
         
         for (int x = point.getX(); x <(point.getX() + length); x++ ) {

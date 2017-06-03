@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Represents a fleet in the battlefield.
@@ -19,38 +20,27 @@ import java.util.Optional;
 public class Fleet {
     private final List<AbstractShip> ships;
 
-    // COSTRUTTORE PROTETTO PER IL MOMENTO? -> LA FLOTTA VIENE CREATA SOLO CON RULESET
     public Fleet() {
         this.ships = new ArrayList<>();
     }
 
     public List<AbstractShip> getAllShips() {
-        // MODIFICARE
-        // Usare la copia non modificabile, andare a rivedere
-        //return this.ships;
     	return Collections.unmodifiableList(this.ships);
     }
 
     public List<AbstractShip> getAllNonPlacedShips() {
-        // Metodo da rivedere per il momento
-        List<AbstractShip> nonPlacedShips = new ArrayList<>();
-
-        // ogni nave non piazzata viene aggiunta alla lista
-        for (final AbstractShip ship : this.getAllShips()) {
-            if (!ship.isPlaced()) {
-                nonPlacedShips.add(ship);
-            }
-        }
+        List<AbstractShip> nonPlacedShips = this.getAllShips()
+                .stream()
+                .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
         return Collections.unmodifiableList(nonPlacedShips);
     }
 
-    // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    public List<AbstractShip> getAllShipsByType(ShipRules tipoNave) {
+    public List<AbstractShip> getAllShipsByType(ShipRules shipType) {
         List<AbstractShip> ships = new ArrayList<AbstractShip>();
 
         for (AbstractShip ship : this.ships) {
-            if ( ship.toString().equals(tipoNave.toString()) ) {
+            if ( ship.toString().equals(shipType.toString()) ) {
                 if ( !ship.isPlaced()) {
                     ships.add(ship);
                 }
@@ -60,24 +50,21 @@ public class Fleet {
         return Collections.unmodifiableList(ships);
     }
 
-    // Ricevere una CLASSE potrebbe NON essere il modo corretto, RIGUARDARE
-    // TODO : ricontrollare
-    public Optional<AbstractShip> getNextShipByType(ShipRules tipoNave) {
+    public Optional<AbstractShip> getNextShipByType(ShipRules shipType) {
         Optional<AbstractShip> ship = Optional.empty();
 
-        if (!getAllShipsByType(tipoNave).isEmpty()) {
-            ship = Optional.of(getAllShipsByType(tipoNave).get(0)); // PRESO IL PRIMO ELEMENTO
+        if (!getAllShipsByType(shipType).isEmpty()) {
+            ship = Optional.of(getAllShipsByType(shipType).get(0));
         }
 
         return ship;
     }
 
-    // RESTITUISCE la prossima nave NON PIAZZATA. Non la toglie dalla collezione
     public Optional<AbstractShip> getNextNonPlacedShip() {
         Optional<AbstractShip> ship = Optional.empty();
 
         if (!getAllNonPlacedShips().isEmpty()) {
-            ship = Optional.of(getAllNonPlacedShips().get(0)); // PRESO IL PRIMO ELEMENTO
+            ship = Optional.of(getAllNonPlacedShips().get(0));
         }
 
         return ship;
@@ -88,9 +75,7 @@ public class Fleet {
     }
 
     public void resetFleetPlacement () {
-        for (AbstractShip ship : this.getAllShips()) {
-            ship.resetPlacement();
-        }
+        this.getAllShips().forEach(AbstractShip::resetPlacement);
     }
 
     public boolean isSunk() {

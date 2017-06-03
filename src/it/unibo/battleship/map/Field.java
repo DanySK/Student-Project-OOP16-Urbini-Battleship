@@ -6,12 +6,7 @@ import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.common.Shot;
 import it.unibo.battleship.ships.AbstractShip;
 
-/**
- * TO DO :
- * ----- VISTA DEL NEMICO / VISTA DEL GIOCATORE ---------
- * @author fabio
- *
- */
+// TODO: javadoc
 /**
  * Represents the field
  * @author fabio
@@ -39,17 +34,10 @@ public final class Field {
         int x = p.getX();
         int y = p.getY();
 
-        // I VALORI DEVONO ESSER ENTRO I LIMITI!!!!
-        // LANCIARE ECCEZIONE?
         this.matrix[y][x].tryShoot(shot);
     }
 
     public void placeShip(final AbstractShip ship, final Point2d point) {
-        // Per il momento viene solo messo lo stato delle celle a presente
-        // TO DO : controllo sulla presenza di navi
-
-        // ship non � ancora stata piazzata.
-
         validateShipPlacement(ship, point);
 
         ship.place(point);
@@ -59,17 +47,14 @@ public final class Field {
     }
 
 private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
-	// CONTROLLO 1 : PUNTO DENTRO LA MAPPA
 	if ( !Ruleset.isPointWithinLimits(point) ) {
 	    throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
 	}
 
-	//  CONTROLLO 3 : CELLE LIBERE
 	if ( !isShipPlaceable(ship, point)) {
 	    throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
 	}
 
-	// CONTROLLO 3 : NAVE DENTRO LA MAPPA
 	if ( !Ruleset.isShipWithinLimits(ship, point)) {
 	    throw new IllegalArgumentException(GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
 	}
@@ -97,12 +82,10 @@ private void validateShipPlacement(final AbstractShip ship, final Point2d point)
     }
 
     public boolean isShipSunk(final AbstractShip s) {
-        // Il controllo potrebbe esser fatto su Field
         return s.isSunk();
     }
 
     private boolean isShipPlaceable(final AbstractShip ship, final Point2d point) {
-        // TUTTI I PUNTI SONO LIBERI?
         for (Point2d p : ship.getProjectionPoints(point)) {
             if ( !this.matrix[p.getX()][p.getY()].isEmpty()) {
                 return false;
