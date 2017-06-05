@@ -13,8 +13,8 @@ import it.unibo.battleship.shots.ShotImpl;
 public class Twoplayersgame {
 
     public static void main(String[] args) {
-        Field field1 = new FieldImpl(Ruleset.getRows(), Ruleset.getColumns());
-        Field field2 = new FieldImpl(Ruleset.getRows(), Ruleset.getColumns());
+        Field field1 = FieldImpl.createField(Ruleset.getRows(), Ruleset.getColumns());
+        Field field2 = FieldImpl.createField(Ruleset.getRows(), Ruleset.getColumns());
 
         Fleet fleet1 = FleetImpl.getNewFleet();
         Fleet fleet2 = FleetImpl.getNewFleet();

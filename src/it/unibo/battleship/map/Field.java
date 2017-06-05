@@ -17,6 +17,4 @@ public interface Field {
 
 	// TODO: move to an utility class
 	char[][] getMatrix();
-
-	boolean isShipSunk(Ship s);
 }

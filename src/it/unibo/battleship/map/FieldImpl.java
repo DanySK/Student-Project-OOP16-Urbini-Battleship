@@ -11,7 +11,7 @@ public final class FieldImpl implements Field {
     private final int rows;
     private final int columns;
 
-    public FieldImpl(final int rows, final int columns) {
+    private FieldImpl(final int rows, final int columns) {
         this.rows = rows;
         this.columns = columns;
         matrix = new FieldCell[rows][columns];
@@ -21,6 +21,14 @@ public final class FieldImpl implements Field {
                 matrix[i][j] = new FieldCellImpl();
             }
         }
+    }
+
+    public static FieldImpl createField(final Boundary boundary) {
+        if (boundary.getHorizontalBound() < 0 || boundary.getVerticalBound() < 0) {
+            throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
+        }
+
+        return new FieldImpl(boundary.getVerticalBound(), boundary.getHorizontalBound());
     }
 
     @Override
@@ -56,6 +64,7 @@ public final class FieldImpl implements Field {
       }
     }
 
+    // TODO: remove getMatrix and use Strategy or something similar
     @Override
     public char[][] getMatrix() {
         char[][] chars = new char[rows][columns];
@@ -78,17 +87,9 @@ public final class FieldImpl implements Field {
         return chars;
     }
 
-    @Override
-    public boolean isShipSunk(final Ship s) {
-        return s.isSunk();
-    }
-
     private boolean isShipPlaceable(final Ship ship, final Point2d point) {
-        for (Point2d p : ship.getProjectionPoints(point)) {
-            if ( !this.matrix[p.getX()][p.getY()].isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return ship.getProjectionPoints(point)
+                .stream()
+                .allMatch(p -> this.matrix[p.getX()][p.getY()].isEmpty());
     }
 }
