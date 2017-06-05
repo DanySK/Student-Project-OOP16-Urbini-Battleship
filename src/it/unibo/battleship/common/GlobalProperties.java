@@ -14,6 +14,10 @@ public final class GlobalProperties {
 			"Si sta cercando di posizionare una nave fuori dalla mappa";
 	public static final String BOUNDARY_VALUE_IS_NEGATIVE =
 			"Boundary values should be positive (greater than 0)";
+	public static final String INVALID_SHOT_TYPE =
+					"Invalid shot type";
+
+
 	private GlobalProperties() {} 
 	
 	public enum ShipRules {

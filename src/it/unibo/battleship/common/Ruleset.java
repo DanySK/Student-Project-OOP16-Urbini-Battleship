@@ -1,6 +1,6 @@
 package it.unibo.battleship.common;
 
-import it.unibo.battleship.ships.AbstractShip;
+import it.unibo.battleship.ships.Ship;
 
 public final class Ruleset {
     private static final int N_SUBMARINES = 3;
@@ -18,7 +18,7 @@ public final class Ruleset {
                 ( p.getX() >= 0 && p.getX() <= Ruleset.COLUMNS );
     }
     
-    public static boolean isShipWithinLimits(final AbstractShip ship, final Point2d point) {
+    public static boolean isShipWithinLimits(final Ship ship, final Point2d point) {
         // Standard direction : east
         int length = ship.getSize();
         

@@ -1,30 +1,28 @@
-package it.unibo.battleship.common;
+package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Ruleset;
 
-/*
-TODO: estrarre interfaccia, creare metodo AI
- */
 /**
- * Represents a single shot which can be
- * thrown on the battlefield.
- * @author fabio.urbini
+ * Implementation of a Shot
  */
-public final class ShotImpl {
+public final class ShotImpl implements Shot {
     private final Point2d point;
 
     private ShotImpl(final Point2d p) {
         this.point = p;
     }
 
-    public Point2d getPoint() {
-        return this.point;
-    }
-
-    public static ShotImpl createShot(final Point2d p) {
+    public static ShotImpl createShot(Point2d p) {
         if (Ruleset.isPointWithinLimits(p)) {
             return new ShotImpl(p);
         } else throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
+    }
+    @Override
+    public Point2d getPoint() {
+        return this.point;
     }
 
     @Override

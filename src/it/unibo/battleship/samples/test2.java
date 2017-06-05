@@ -4,8 +4,9 @@ import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.map.Field;
-import it.unibo.battleship.ships.AbstractShip;
-import it.unibo.battleship.ships.FleetImpl;
+import it.unibo.battleship.map.FieldImpl;
+import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.Ship;
 
 import java.util.Optional;
 
@@ -20,8 +21,8 @@ public class test2 {
         int i = 0;
         int j = 0;
 
-        Field field1 = new Field(rows, columns);
-        FleetImpl fleet1 = FleetImpl.getNewFleet();
+        Field field1 = new FieldImpl(rows, columns);
+        Fleet fleet1 = Fleet.getNewFleet();
 
         System.out.println("fleet size: " + fleet1.getAllNonPlacedShips().size());
         fleet1.getNextNonPlacedShip().get().place(new Point2dImpl(i,j));
@@ -55,11 +56,11 @@ public class test2 {
         System.out.println("Flotta pronta : " + fleet1.isReady());
 
         while (!fleet1.isReady()) {
-            Optional<AbstractShip> ship = fleet1.getNextNonPlacedShip();
+            Optional<Ship> ship = fleet1.getNextNonPlacedShip();
 
             // Se c'� una nave piazzabile, viene piazzata
             if (ship.isPresent()) {
-                AbstractShip tmp = ship.get();
+                Ship tmp = ship.get();
                 tmp.place(new Point2dImpl(++i, ++j));
 
                 // Controllo sulla flotta
@@ -98,8 +99,8 @@ public class test2 {
 
     }
 
-    private static void stampaFlotta (final FleetImpl fleet) {
-        for (AbstractShip ship : fleet.getAllShips()) {
+    private static void stampaFlotta (final Fleet fleet) {
+        for (Ship ship : fleet.getAllShips()) {
             String tmp = "";
             if (ship.isPlaced()) {
                 tmp = ship.getPosition().get().getX() + ";" + ship.getPosition().get().getY();

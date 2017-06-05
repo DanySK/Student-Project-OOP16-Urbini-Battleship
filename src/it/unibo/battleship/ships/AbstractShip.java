@@ -1,12 +1,9 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.common.Point2dImpl;
-import it.unibo.battleship.common.ShotImpl;
+import it.unibo.battleship.common.*;
+import it.unibo.battleship.shots.Shot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +14,7 @@ import java.util.Optional;
  * 
  * 
  */
-public abstract class AbstractShip implements Serializable {
+public abstract class AbstractShip implements Ship {
     // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
     private ShipDirection shipDirection;
     private Optional<Point2d> pos; // final - OPTIONAL? 
@@ -37,6 +34,7 @@ public abstract class AbstractShip implements Serializable {
         hitPoints = new ArrayList<Point2d>();
     }
     
+    @Override
     public boolean isSunk() {
 		if (hitPoints.size() == this.getSize() ) {
 //		    System.out.println(toString() + ": nave affondata!!");
@@ -45,9 +43,8 @@ public abstract class AbstractShip implements Serializable {
 		return false;
     }
 
-    public abstract int getSize();
-    
-    // METODO OPTIONAL - pu� ritornare null
+	// METODO OPTIONAL - pu� ritornare null
+    @Override
     public Optional<Point2d> getPosition() {
         return this.pos;
     }
@@ -55,6 +52,7 @@ public abstract class AbstractShip implements Serializable {
     // Fare metodo cached 
     // RESTITUISCE I PUNTI OCCUPATI DALLA NAVE
     // OPTIONAL!!!!
+    @Override
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
         for (int i = 0; i < this.getSize() ; i++) {
@@ -65,7 +63,8 @@ public abstract class AbstractShip implements Serializable {
     }
     
     // restituisce tutti i punti occupati virtualmente
-    public List<Point2d> getProjectionPoints (final Point2d point) {
+    @Override
+    public List<Point2d> getProjectionPoints(final Point2d point) {
         // DIREZIONE EST (x++)
         List<Point2d> points = new ArrayList<>();
         
@@ -76,6 +75,7 @@ public abstract class AbstractShip implements Serializable {
         return points;
     }
 
+    @Override
     public boolean containsPosition(final Point2d point) {
         for (Point2d p : this.getAllPositions()) {
             // SERVE metodo EQUALS
@@ -86,6 +86,7 @@ public abstract class AbstractShip implements Serializable {
         return false;
     }
 
+    @Override
     public void place(final Point2d start) {
         //  DIREZIONE DATA IN MODO STANDARD
         // Fare un controllo sulle navi gi� presenti da qui? 
@@ -97,11 +98,13 @@ public abstract class AbstractShip implements Serializable {
         }
     }
 
-    public boolean isPlaced () {
+    @Override
+    public boolean isPlaced() {
         return this.placed;
     }
 
-    public boolean shoot (final ShotImpl shot) {
+    @Override
+    public boolean shoot(final Shot shot) {
         // Controllo : gi� colpita?
         // shot non valido? 
         // Metodo valido al momento solo per una casella
@@ -118,6 +121,7 @@ public abstract class AbstractShip implements Serializable {
         return false;
     }
 
+    @Override
     public void resetPlacement() {
         this.placed = false;
         pos = null; // USARE OPTIONAL?
@@ -135,7 +139,7 @@ public abstract class AbstractShip implements Serializable {
      * between 0 and {@see GlobalProperties.MAX_SIZE}
      * @return
      */
-    public static AbstractShip createShip(final int size) {
+    public static Ship createShip(final int size) {
     	// TODO: MAGIC NUMBER 
     	if (size < 0 || size > GlobalProperties.MAX_SIZE ) {
     		throw new IllegalArgumentException("Valore non valido");

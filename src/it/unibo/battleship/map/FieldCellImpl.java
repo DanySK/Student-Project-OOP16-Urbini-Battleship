@@ -2,8 +2,8 @@ package it.unibo.battleship.map;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import it.unibo.battleship.common.ShotImpl;
-import it.unibo.battleship.ships.AbstractShip;
+import it.unibo.battleship.shots.Shot;
+import it.unibo.battleship.ships.Ship;
 
 import java.util.Optional;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public class FieldCellImpl implements FieldCell {
     private State currentState;
-    private Optional<AbstractShip> ship;
+    private Optional<Ship> ship;
 
     public FieldCellImpl() {
         this.currentState = State.WATER;
@@ -22,13 +22,13 @@ public class FieldCellImpl implements FieldCell {
     }
 
     @Override
-	public void placeShip(final AbstractShip s) {
+	public void placeShip(final Ship s) {
         this.ship = Optional.of(s);
         this.currentState = State.PRESENT;
     }
 
     @Override
-	public void tryShoot(final ShotImpl s ) {
+	public void tryShoot(final Shot s ) {
         switch (currentState) {
             case WATER: this.currentState = State.MISSED; break;
             case MISSED : break; // ECCEZIONE
@@ -38,7 +38,7 @@ public class FieldCellImpl implements FieldCell {
         }
     }
 
-    public Optional<AbstractShip> getShip() {
+    public Optional<Ship> getShip() {
     	return this.ship;
     }
 

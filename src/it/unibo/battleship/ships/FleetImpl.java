@@ -1,9 +1,7 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.GlobalProperties.ShipRules;
-import it.unibo.battleship.common.Ruleset;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,33 +15,37 @@ import java.util.stream.Collectors;
  * @author fabio.urbini
  *
  */
-public class FleetImpl {
-    private final List<AbstractShip> ships;
+public class FleetImpl implements Fleet {
+    private final List<Ship> ships;
 
     public FleetImpl() {
         this.ships = new ArrayList<>();
     }
 
-    public List<AbstractShip> getAllShips() {
+    @Override
+    public List<Ship> getAllShips() {
     	return Collections.unmodifiableList(this.ships);
     }
 
-    public List<AbstractShip> getAllNonPlacedShips() {
-        List<AbstractShip> nonPlacedShips = this.getAllShips()
+    @Override
+    public List<Ship> getAllNonPlacedShips() {
+        List<Ship> nonPlacedShips = this.getAllShips()
                 .stream()
                 .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
         return Collections.unmodifiableList(nonPlacedShips);
     }
 
-    public List<AbstractShip> getAllShipsByType(ShipRules shipType) {
-        List<AbstractShip> ships = this.ships.stream().filter(ship -> ship.toString().equals(shipType.toString())).filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
+    @Override
+    public List<Ship> getAllShipsByType(ShipRules shipType) {
+        List<Ship> ships = this.ships.stream().filter(ship -> ship.toString().equals(shipType.toString())).filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
         return Collections.unmodifiableList(ships);
     }
 
-    public Optional<AbstractShip> getNextShipByType(ShipRules shipType) {
-        Optional<AbstractShip> ship = Optional.empty();
+    @Override
+    public Optional<Ship> getNextShipByType(ShipRules shipType) {
+        Optional<Ship> ship = Optional.empty();
 
         if (!getAllShipsByType(shipType).isEmpty()) {
             ship = Optional.of(getAllShipsByType(shipType).get(0));
@@ -52,8 +54,9 @@ public class FleetImpl {
         return ship;
     }
 
-    public Optional<AbstractShip> getNextNonPlacedShip() {
-        Optional<AbstractShip> ship = Optional.empty();
+    @Override
+    public Optional<Ship> getNextNonPlacedShip() {
+        Optional<Ship> ship = Optional.empty();
 
         if (!getAllNonPlacedShips().isEmpty()) {
             ship = Optional.of(getAllNonPlacedShips().get(0));
@@ -62,16 +65,19 @@ public class FleetImpl {
         return ship;
     }
 
-    public void addShip(AbstractShip s) {
+    @Override
+    public void addShip(Ship s) {
         this.ships.add(s);
     }
 
-    public void resetFleetPlacement () {
-        this.getAllShips().forEach(AbstractShip::resetPlacement);
+    @Override
+    public void resetFleetPlacement() {
+        this.getAllShips().forEach(Ship::resetPlacement);
     }
 
+    @Override
     public boolean isSunk() {
-        for (AbstractShip ship : this.ships) {
+        for (Ship ship : this.ships) {
             if (!ship.isSunk()) {
                 return false;
             }
@@ -79,32 +85,16 @@ public class FleetImpl {
         return true;
     }
 
+    @Override
     public boolean isReady() {
-        for (final AbstractShip s : this.ships ) {
+        for (final Ship s : this.ships ) {
             if (!s.isPlaced()) {
                 return false;
             }
         }
         return true;
     }
-    
-    public static FleetImpl getNewFleet(){
-        FleetImpl fleet = new FleetImpl();
-        
-        for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
-        }
 
-        for (int i = 0; i < Ruleset.getCruisersNumber() ; i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
-        }
-
-        for (int i = 0; i < Ruleset.getBattleshipsNumber() ; i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
-        }
-        return fleet;
-    }
-    
     private static void createShips(final FleetImpl fleet, final int ShipsNumber) {
     	
     }

@@ -1,7 +1,7 @@
 package it.unibo.battleship.map;
 
-import it.unibo.battleship.common.ShotImpl;
-import it.unibo.battleship.ships.AbstractShip;
+import it.unibo.battleship.shots.Shot;
+import it.unibo.battleship.ships.Ship;
 
 /**
  * Represents a field cell which can have
@@ -11,17 +11,17 @@ import it.unibo.battleship.ships.AbstractShip;
  */
 public interface FieldCell {
 
-	void placeShip(AbstractShip s);
+	void placeShip(Ship s);
 
-	void tryShoot(ShotImpl s);
+	void tryShoot(Shot s);
 
 	boolean isMissed();
 
 	boolean isEmpty();
 
 	/**
-	 * Returns {@code true} if a {@link AbstractShip} is present, false otherwise.
-	 * @return {@code true} if a {@link AbstractShip} is present
+	 * Returns {@code true} if a {@link Ship} is present, false otherwise.
+	 * @return {@code true} if a {@link Ship} is present
 	 */
 	boolean isPresent();
 
