@@ -85,8 +85,6 @@ public abstract class AbstractShip implements Serializable {
         }
         return false;
     }
-    
-    // Metodo da ridefinire : metodo che restituisce tutte le posizioni occupate
 
     public void place(final Point2d start) {
         //  DIREZIONE DATA IN MODO STANDARD
@@ -119,10 +117,7 @@ public abstract class AbstractShip implements Serializable {
         
         return false;
     }
-    
-    // Pu� esser chiamato quando la flotta � pronta? 
-    // Errore progettuale o dell'utente?
-    // public o protected?
+
     public void resetPlacement() {
         this.placed = false;
         pos = null; // USARE OPTIONAL?

@@ -46,20 +46,21 @@ public final class Field {
         }
     }
 
-private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
-	if ( !Ruleset.isPointWithinLimits(point) ) {
-	    throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
-	}
+    private void validateShipPlacement(final AbstractShip ship, final Point2d point) {
+      if ( !Ruleset.isPointWithinLimits(point) ) {
+          throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
+      }
 
-	if ( !isShipPlaceable(ship, point)) {
-	    throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
-	}
+      if ( !isShipPlaceable(ship, point)) {
+          throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
+      }
 
-	if ( !Ruleset.isShipWithinLimits(ship, point)) {
-	    throw new IllegalArgumentException(GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
-	}
-}
+      if ( !Ruleset.isShipWithinLimits(ship, point)) {
+          throw new IllegalArgumentException(GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
+      }
+    }
 
+    // TODO: move to an utility class
     public char[][] getMatrix() {
         char[][] chars = new char[rows][columns];
 
