@@ -23,7 +23,7 @@ public class FleetImpl implements Fleet {
     public FleetImpl() {
         this.ships = new ArrayList<>();
     }
-    public static FleetImpl getNewFleet(){
+    public static Fleet getNewFleet(){
         Fleet fleet = new FleetImpl();
 
         for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {

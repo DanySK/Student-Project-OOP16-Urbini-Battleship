@@ -1,6 +1,7 @@
 package it.unibo.battleship.samples;
 
 import javax.swing.JButton;
+import java.awt.*;
 
 public class FieldButton {
 
@@ -10,8 +11,9 @@ public class FieldButton {
 	
 	public FieldButton(final int x, final int y) {
 		btn = new JButton(x + ":" + y);
+		btn.setSize(new Dimension(10,10));
 		this.x = x;
-		this.y= y;
+		this.y = y;
 	}
 	
 	public int getX() {

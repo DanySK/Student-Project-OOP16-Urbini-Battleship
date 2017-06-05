@@ -21,7 +21,7 @@ public abstract class ShotCollection {
 			default: throw new IllegalArgumentException(GlobalProperties.INVALID_SHOT_TYPE);
 		}
 	}
-	
+
 	public enum Type {
 		X(5),
 		T(5),
