@@ -16,7 +16,8 @@ public final class GlobalProperties {
 			"Boundary values should be positive (greater than 0)";
 	public static final String INVALID_SHOT_TYPE =
 					"Invalid shot type";
-
+	public static final String INVALID_AI_LEVEL =
+					"Invalid artificial intelligence level";
 
 	private GlobalProperties() {} 
 	

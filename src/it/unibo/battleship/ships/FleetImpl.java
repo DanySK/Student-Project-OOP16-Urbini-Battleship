@@ -1,7 +1,9 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
+import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.GlobalProperties.ShipRules;
+import it.unibo.battleship.common.Ruleset;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +23,22 @@ public class FleetImpl implements Fleet {
     public FleetImpl() {
         this.ships = new ArrayList<>();
     }
+    public static FleetImpl getNewFleet(){
+        Fleet fleet = new FleetImpl();
 
+        for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
+        }
+
+        for (int i = 0; i < Ruleset.getCruisersNumber() ; i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
+        }
+
+        for (int i = 0; i < Ruleset.getBattleshipsNumber() ; i++) {
+            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
+        }
+        return fleet;
+    }
     @Override
     public List<Ship> getAllShips() {
     	return Collections.unmodifiableList(this.ships);

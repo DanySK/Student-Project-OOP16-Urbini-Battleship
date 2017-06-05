@@ -13,7 +13,7 @@ public abstract class ShotCollection {
 
 	public abstract List<Shot> getShotCollection(final Point2d point2d);
 
-	public static ShotCollection getShotCollectionByType(final ShotType shotType) {
+	public final static ShotCollection getShotCollectionByType(final Type shotType) {
 		switch(shotType) {
 			case X: return new XShot();
 			case T: return new TShot();
@@ -21,7 +21,8 @@ public abstract class ShotCollection {
 			default: throw new IllegalArgumentException(GlobalProperties.INVALID_SHOT_TYPE);
 		}
 	}
-	public enum ShotType {
+	
+	public enum Type {
 		X(5),
 		T(5),
 		I(3),
@@ -29,8 +30,12 @@ public abstract class ShotCollection {
 
 		private final int totalSize;
 
-		ShotType(final int totalSize) {
+		Type(final int totalSize) {
 			this.totalSize = totalSize;
+		}
+
+		public int getTotalSize() {
+			return this.totalSize;
 		}
 	}
 

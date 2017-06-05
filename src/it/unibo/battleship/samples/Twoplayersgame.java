@@ -2,6 +2,7 @@ package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
+import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldImpl;
@@ -15,8 +16,8 @@ public class Twoplayersgame {
         Field field1 = new FieldImpl(Ruleset.getRows(), Ruleset.getColumns());
         Field field2 = new FieldImpl(Ruleset.getRows(), Ruleset.getColumns());
 
-        Fleet fleet1 = Fleet.getNewFleet();
-        Fleet fleet2 = Fleet.getNewFleet();
+        Fleet fleet1 = FleetImpl.getNewFleet();
+        Fleet fleet2 = FleetImpl.getNewFleet();
 
         creaFlotta(field1, fleet1);
         creaFlotta(field2, fleet2);

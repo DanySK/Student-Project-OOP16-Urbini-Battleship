@@ -1,14 +1,20 @@
 package it.unibo.battleship.extra;
 
+import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.shots.Shot;
 
 /**
- * Created by FABIO on 04/06/2017.
+ * Represents an Artificial Intelligence which
+ * can be used for creating a new Fleet or for
+ * creating new shots.
+ * The strategy is decided by implementations.
+ * @author fabio.urbini
  */
 public interface ArtificialIntelligence {
 
-    Fleet getNewFleet();
-    Shot getNewShot();
+    Fleet createFleet();
+    Shot createShot(Field field);
     // other stuff
 
 }

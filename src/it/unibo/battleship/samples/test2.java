@@ -6,6 +6,7 @@ import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.ships.Ship;
 
 import java.util.Optional;
@@ -22,7 +23,7 @@ public class test2 {
         int j = 0;
 
         Field field1 = new FieldImpl(rows, columns);
-        Fleet fleet1 = Fleet.getNewFleet();
+        Fleet fleet1 = FleetImpl.getNewFleet();
 
         System.out.println("fleet size: " + fleet1.getAllNonPlacedShips().size());
         fleet1.getNextNonPlacedShip().get().place(new Point2dImpl(i,j));
