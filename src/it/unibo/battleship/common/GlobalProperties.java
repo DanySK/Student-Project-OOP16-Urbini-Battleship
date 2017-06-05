@@ -12,10 +12,11 @@ public final class GlobalProperties {
 			"Celle della mappa già utilizzate";
 	public static final String SHIP_NOT_WITHIN_LIMITS =
 			"Si sta cercando di posizionare una nave fuori dalla mappa";
-	
+	public static final String BOUNDARY_VALUE_IS_NEGATIVE =
+			"Boundary values should be positive (greater than 0)";
 	private GlobalProperties() {} 
 	
-	public static enum ShipRules {
+	public enum ShipRules {
 		SUBMARINE("Submarine", SUBMARINE_SIZE),
 		CRUISER("Cruiser", CRUISER_SIZE),
 		BATTLESHIP("Battleship", BATTLESHIP_SIZE),

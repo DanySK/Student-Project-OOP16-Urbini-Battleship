@@ -5,7 +5,7 @@ import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.AbstractShip;
-import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.FleetImpl;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ public class test2 {
         int j = 0;
 
         Field field1 = new Field(rows, columns);
-        Fleet fleet1 = Fleet.getNewFleet();
+        FleetImpl fleet1 = FleetImpl.getNewFleet();
 
         System.out.println("fleet size: " + fleet1.getAllNonPlacedShips().size());
         fleet1.getNextNonPlacedShip().get().place(new Point2dImpl(i,j));
@@ -57,7 +57,7 @@ public class test2 {
         while (!fleet1.isReady()) {
             Optional<AbstractShip> ship = fleet1.getNextNonPlacedShip();
 
-            // Se c'è una nave piazzabile, viene piazzata
+            // Se c'ï¿½ una nave piazzabile, viene piazzata
             if (ship.isPresent()) {
                 AbstractShip tmp = ship.get();
                 tmp.place(new Point2dImpl(++i, ++j));
@@ -98,7 +98,7 @@ public class test2 {
 
     }
 
-    private static void stampaFlotta (final Fleet fleet) {
+    private static void stampaFlotta (final FleetImpl fleet) {
         for (AbstractShip ship : fleet.getAllShips()) {
             String tmp = "";
             if (ship.isPlaced()) {

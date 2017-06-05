@@ -5,7 +5,7 @@ import com.google.common.base.Objects;
 /**
  * Implementation of a 2 dimension point
  * {@see Point2d}
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public class Point2dImpl implements Point2d {

@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public class GameTest {

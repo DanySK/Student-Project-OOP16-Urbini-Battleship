@@ -2,18 +2,18 @@ package it.unibo.battleship.common;
 
 import com.google.common.base.Objects;
 
-public final class Shot {
-    /* lo sparo può esser formato da più punti
-       oppure uno sparo di un certo tipo è formato da più spari
-       ciò potrebbe portar al problema nel caso una casella sia già stata colpita
-       es : WWHHHWW   (water, hit)
-       se voglio colpire la prima H con uno sparo da 1, errore
-       se voglio colpire WWH con uno sparo da 3, non deve esserci eccezione
-
-   */
+/*
+TODO: estrarre interfaccia, creare metodo AI
+ */
+/**
+ * Represents a single shot which can be
+ * thrown on the battlefield.
+ * @author fabio.urbini
+ */
+public final class ShotImpl {
     private final Point2d point;
 
-    private Shot (final Point2d p) {
+    private ShotImpl(final Point2d p) {
         this.point = p;
     }
 
@@ -21,11 +21,10 @@ public final class Shot {
         return this.point;
     }
 
-    // FACTORY METHODS
-    public static Shot createShot(final Point2d p) {
+    public static ShotImpl createShot(final Point2d p) {
         if (Ruleset.isPointWithinLimits(p)) {
-            return new Shot(p);
-        } else throw new IllegalArgumentException("Punto dato non entro i limiti");
+            return new ShotImpl(p);
+        } else throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
     }
 
     @Override
@@ -33,7 +32,7 @@ public final class Shot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Shot that = (Shot) o;
+        ShotImpl that = (ShotImpl) o;
 
         return Objects.equal(this.point, that.point);
     }

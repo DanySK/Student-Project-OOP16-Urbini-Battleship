@@ -1,21 +1,15 @@
 package it.unibo.battleship.common;
 
 import it.unibo.battleship.ships.AbstractShip;
-import it.unibo.battleship.ships.Fleet;
 
 public final class Ruleset {
-    // PATTERN COMMAND PER FARE METODI IN BASE ALLE NAVI ESISTENTI?
-
     private static final int N_SUBMARINES = 3;
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
 
-    private static final Boundary boundary = new BoundaryImpl(9, 9);
-    private static final int SOUTHERN_LIMIT = 9;
-    private static final int EASTERN_LIMIT = 9;
-    private static final int ROWS = 10;
-    private static final int COLUMNS = 10;
-
+    private static final Boundary boundary = BoundaryImpl.createBoundary(9, 9);
+    private static final int ROWS = boundary.getVerticalBound();
+    private static final int COLUMNS = boundary.getHorizontalBound();
 
     private Ruleset() {}
 

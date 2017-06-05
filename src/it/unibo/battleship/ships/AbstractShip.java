@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
-import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.ShotImpl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public abstract class AbstractShip implements Serializable {
         return this.placed;
     }
 
-    public boolean shoot (final Shot shot) {
+    public boolean shoot (final ShotImpl shot) {
         // Controllo : gi� colpita?
         // shot non valido? 
         // Metodo valido al momento solo per una casella

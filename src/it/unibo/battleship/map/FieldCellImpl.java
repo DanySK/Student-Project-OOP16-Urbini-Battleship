@@ -2,14 +2,14 @@ package it.unibo.battleship.map;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.ShotImpl;
 import it.unibo.battleship.ships.AbstractShip;
 
 import java.util.Optional;
 
 /**
  * An implementation of a {@link FieldCell}
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public class FieldCellImpl implements FieldCell {
@@ -28,7 +28,7 @@ public class FieldCellImpl implements FieldCell {
     }
 
     @Override
-	public void tryShoot(final Shot s ) {
+	public void tryShoot(final ShotImpl s ) {
         switch (currentState) {
             case WATER: this.currentState = State.MISSED; break;
             case MISSED : break; // ECCEZIONE

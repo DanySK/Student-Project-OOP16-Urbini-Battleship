@@ -6,7 +6,7 @@ package it.unibo.battleship.junit;
 import static org.junit.Assert.*;
 
 /**
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public class Test {

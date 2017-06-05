@@ -6,7 +6,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 
 /**
- * Created by FABIO on 03/06/2017.
+ * @author fabio.urbini
  */
 public class BattleshipGUI {
 

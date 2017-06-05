@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 
 /**
  * Represents a fleet in the battlefield.
- * A fleet is composed of a number of ships.
- * @author fabio
+ * A fleet is composed of a defined number of ships.
+ * @author fabio.urbini
  *
  */
-public class Fleet {
+public class FleetImpl {
     private final List<AbstractShip> ships;
 
-    public Fleet() {
+    public FleetImpl() {
         this.ships = new ArrayList<>();
     }
 
@@ -37,15 +37,7 @@ public class Fleet {
     }
 
     public List<AbstractShip> getAllShipsByType(ShipRules shipType) {
-        List<AbstractShip> ships = new ArrayList<AbstractShip>();
-
-        for (AbstractShip ship : this.ships) {
-            if ( ship.toString().equals(shipType.toString()) ) {
-                if ( !ship.isPlaced()) {
-                    ships.add(ship);
-                }
-            }
-        }
+        List<AbstractShip> ships = this.ships.stream().filter(ship -> ship.toString().equals(shipType.toString())).filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
         return Collections.unmodifiableList(ships);
     }
@@ -96,8 +88,8 @@ public class Fleet {
         return true;
     }
     
-    public static Fleet getNewFleet(){
-        Fleet fleet = new Fleet();
+    public static FleetImpl getNewFleet(){
+        FleetImpl fleet = new FleetImpl();
         
         for (int i = 0; i < Ruleset.getSubmarinesNumber(); i++) {
             fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
@@ -113,7 +105,7 @@ public class Fleet {
         return fleet;
     }
     
-    private static void createShips(final Fleet fleet, final int ShipsNumber) {
+    private static void createShips(final FleetImpl fleet, final int ShipsNumber) {
     	
     }
 
@@ -122,7 +114,7 @@ public class Fleet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Fleet that = (Fleet) o;
+        FleetImpl that = (FleetImpl) o;
 
         return Objects.equal(this.ships, that.ships);
     }

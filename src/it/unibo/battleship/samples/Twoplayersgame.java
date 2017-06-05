@@ -2,10 +2,10 @@ package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
-import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.ShotImpl;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.AbstractShip;
-import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.FleetImpl;
 
 public class Twoplayersgame {
 
@@ -13,15 +13,15 @@ public class Twoplayersgame {
         Field field1 = new Field(Ruleset.getRows(), Ruleset.getColumns());
         Field field2 = new Field(Ruleset.getRows(), Ruleset.getColumns());
 
-        Fleet fleet1 = Fleet.getNewFleet();
-        Fleet fleet2 = Fleet.getNewFleet();
+        FleetImpl fleet1 = FleetImpl.getNewFleet();
+        FleetImpl fleet2 = FleetImpl.getNewFleet();
 
         creaFlotta(field1, fleet1);
         creaFlotta(field2, fleet2);
 
         for (int i = 0; i < 10; i++ ) {
             for (int j = 0; j < 10; j++ )
-                field1.updateStateWithShot(Shot.createShot(new Point2dImpl(j,i)));
+                field1.updateStateWithShot(ShotImpl.createShot(new Point2dImpl(j,i)));
                 if (fleet1.isSunk()) {
                     System.out.println("AFFONDATA");
                     break;
@@ -29,7 +29,7 @@ public class Twoplayersgame {
         }
     }
 
-    private static void creaFlotta(Field field1, Fleet fleet1) {
+    private static void creaFlotta(Field field1, FleetImpl fleet1) {
         int i = 0, j = 0;
 
         // PIAZZAMENTO FLOTTA

@@ -1,8 +1,8 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.extra;
 
 /**
  * Represents a Player.
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public class Player {

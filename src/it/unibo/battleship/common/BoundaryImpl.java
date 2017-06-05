@@ -14,9 +14,16 @@ public class BoundaryImpl implements Boundary {
      * @param horizontalBound Horizontal bound
      * @param verticalBound Vertical bound
      */
-    public BoundaryImpl(final int horizontalBound, final int verticalBound) {
+    private BoundaryImpl(final int horizontalBound, final int verticalBound) {
         this.horizontalBound = horizontalBound;
         this.verticalBound = verticalBound;
+    }
+
+    public static BoundaryImpl createBoundary(final int horizontalBound, final int verticalBound) {
+        if (horizontalBound < 0 || verticalBound < 0) {
+            throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
+        }
+        return new BoundaryImpl(horizontalBound, verticalBound);
     }
     
     @Override

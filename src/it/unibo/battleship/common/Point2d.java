@@ -2,7 +2,7 @@ package it.unibo.battleship.common;
 
 /**
  * Represents a 2 dimension point
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public interface Point2d {

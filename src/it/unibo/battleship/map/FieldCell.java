@@ -1,19 +1,19 @@
 package it.unibo.battleship.map;
 
-import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.ShotImpl;
 import it.unibo.battleship.ships.AbstractShip;
 
 /**
  * Represents a field cell which can have
  * different states.
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public interface FieldCell {
 
 	void placeShip(AbstractShip s);
 
-	void tryShoot(Shot s);
+	void tryShoot(ShotImpl s);
 
 	boolean isMissed();
 

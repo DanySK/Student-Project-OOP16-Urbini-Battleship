@@ -3,13 +3,13 @@ package it.unibo.battleship.map;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Ruleset;
-import it.unibo.battleship.common.Shot;
+import it.unibo.battleship.common.ShotImpl;
 import it.unibo.battleship.ships.AbstractShip;
 
 // TODO: javadoc
 /**
  * Represents the field
- * @author fabio
+ * @author fabio.urbini
  *
  */
 public final class Field {
@@ -29,7 +29,7 @@ public final class Field {
         }
     }
 
-    public void updateStateWithShot(final Shot shot) {
+    public void updateStateWithShot(final ShotImpl shot) {
         Point2d p = shot.getPoint();
         int x = p.getX();
         int y = p.getY();

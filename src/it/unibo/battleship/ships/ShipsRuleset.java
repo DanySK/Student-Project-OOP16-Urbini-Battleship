@@ -1,5 +1,7 @@
 package it.unibo.battleship.ships;
 
+// TODO: rimuovere questa classe o inglobarla in quella in Global Properties
+// Preferibile togliere in global properties, metterla qui
 public enum ShipsRuleset {
 	SUBMARINE("Submarine", 2, 3),
 	CRUISER("Cruiser", 3, 2),
