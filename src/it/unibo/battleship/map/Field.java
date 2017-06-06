@@ -26,7 +26,15 @@ public interface Field {
 	 */
 	void placeShip(Ship ship, Point2d point);
 
+	/**
+	 * Returns a copy of the field cells
+	 * @return a copy of the field cells
+	 */
 	FieldCell[][] getFieldCells();
 
+	/**
+	 * Returns a copy of the boundary
+	 * @return a copy of the boundary
+	 */
 	Boundary getBoundary();
 }

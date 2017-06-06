@@ -82,7 +82,7 @@ public class SinglePlayerGame {
 	}
 
 	private static String header(final Boundary boundary) {
-		final int n = boundary.getHorizontalBound();
+		final int n = boundary.getColumnsCount();
 		StringBuilder sb = new StringBuilder("");
 		sb.append("   ");
 		String values = "0123456789ABCDEFGH";

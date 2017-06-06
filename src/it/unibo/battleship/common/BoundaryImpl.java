@@ -7,33 +7,33 @@ import com.google.common.base.Objects;
  * {@see Boundary}
  */
 public class BoundaryImpl implements Boundary {
-    private final int horizontalBound;
-    private final int verticalBound;
+    private final int columnsCount;
+    private final int rowsCount;
 
-    private BoundaryImpl(final int horizontalBound, final int verticalBound) {
-        this.horizontalBound = horizontalBound;
-        this.verticalBound = verticalBound;
+    private BoundaryImpl(final int columnsCount, final int verticalBound) {
+        this.columnsCount = columnsCount;
+        this.rowsCount = verticalBound;
     }
 
     /**
-     * @param horizontalBound Horizontal bound
-     * @param verticalBound Vertical bound
+     * @param columnsCount Horizontal bound
+     * @param rowsCount Vertical bound
      */
-    public static BoundaryImpl createBoundary(final int horizontalBound, final int verticalBound) {
-        if (horizontalBound < 0 || verticalBound < 0) {
+    public static BoundaryImpl createBoundary(final int columnsCount, final int rowsCount) {
+        if (columnsCount < 0 || rowsCount < 0) {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
         }
-        return new BoundaryImpl(horizontalBound, verticalBound);
+        return new BoundaryImpl(columnsCount, rowsCount);
     }
     
     @Override
-    public final int getHorizontalBound() {
-        return this.horizontalBound;
+    public final int getColumnsCount() {
+        return this.columnsCount;
     }
 
     @Override
-    public final int getVerticalBound() {
-        return this.verticalBound;
+    public final int getRowsCount() {
+        return this.rowsCount;
     }
 
     @Override
@@ -43,17 +43,17 @@ public class BoundaryImpl implements Boundary {
 
         BoundaryImpl that = (BoundaryImpl) o;
 
-        return Objects.equal(this.horizontalBound, that.horizontalBound) &&
-                Objects.equal(this.verticalBound, that.verticalBound);
+        return Objects.equal(this.columnsCount, that.columnsCount) &&
+                Objects.equal(this.rowsCount, that.rowsCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(horizontalBound, verticalBound);
+        return Objects.hashCode(columnsCount, rowsCount);
     }
 
     @Override
     public String toString() {
-        return " x : " + this.horizontalBound + " y : " + verticalBound;
+        return " x : " + this.columnsCount + " y : " + rowsCount;
     }
 }

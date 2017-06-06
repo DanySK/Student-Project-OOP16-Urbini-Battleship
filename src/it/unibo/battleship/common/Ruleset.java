@@ -2,20 +2,21 @@ package it.unibo.battleship.common;
 
 import it.unibo.battleship.ships.Ship;
 
+/**
+ * Represents the ruleset of the battlefield game.
+ * Some rules can be changed manually.
+ */
 public final class Ruleset {
     private static final int N_SUBMARINES = 3;
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
-
-    private static final Boundary boundary = BoundaryImpl.createBoundary(15, 10);
-    private static final int ROWS = boundary.getVerticalBound();
-    private static final int COLUMNS = boundary.getHorizontalBound();
+    private static final Boundary boundary = BoundaryImpl.createBoundary(9, 9);
 
     private Ruleset() {}
 
     public static boolean isPointWithinLimits(final Point2d p) {
-        return ( p.getY() >= 0 && p.getY() < Ruleset.ROWS) &&
-                ( p.getX() >= 0 && p.getX() < Ruleset.COLUMNS );
+        return ( p.getY() >= 0 && p.getY() < boundary.getRowsCount()) &&
+                ( p.getX() >= 0 && p.getX() < boundary.getColumnsCount() );
     }
     
     public static boolean isShipWithinLimits(final Ship ship, final Point2d point) {
@@ -33,14 +34,7 @@ public final class Ruleset {
     public static Boundary getBoundary() {
         return boundary; // boundary is immutable
     }
-    public static int getRows() {
-        return Ruleset.ROWS;
-    }
-    
-    public static int getColumns() {
-        return Ruleset.COLUMNS;
-    }
-    
+
     public static int getSubmarinesNumber() {
         return Ruleset.N_SUBMARINES;
     }

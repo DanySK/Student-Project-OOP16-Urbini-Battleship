@@ -26,11 +26,11 @@ public final class FieldImpl implements Field {
     }
 
     public static FieldImpl createField(final Boundary boundary) {
-        if (boundary.getHorizontalBound() < 0 || boundary.getVerticalBound() < 0) {
+        if (boundary.getColumnsCount() < 0 || boundary.getRowsCount() < 0) {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
         }
 
-        return new FieldImpl(boundary.getHorizontalBound(), boundary.getVerticalBound());
+        return new FieldImpl(boundary.getColumnsCount(), boundary.getRowsCount());
     }
 
     @Override

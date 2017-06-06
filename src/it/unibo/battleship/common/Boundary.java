@@ -11,10 +11,10 @@ public interface Boundary {
      *
      * @return the Horizontal bound (x)
      */
-    int getHorizontalBound();
+    int getColumnsCount();
 
     /**
      * @return the Vertical bound (y)
      */
-    int getVerticalBound();
+    int getRowsCount();
 }

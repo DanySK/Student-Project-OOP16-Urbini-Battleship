@@ -27,8 +27,8 @@ public final class FieldHelper {
 
 	private static char[][] getViewByPlayerState(final Field field,
 	                                             final PlayerState playerState) {
-		final int rows = field.getBoundary().getVerticalBound();
-		final int columns = field.getBoundary().getHorizontalBound();
+		final int rows = field.getBoundary().getRowsCount();
+		final int columns = field.getBoundary().getColumnsCount();
 		char[][] view = new char[rows][columns];
 		for (int i = 0; i < rows; i++ ) {
 			for (int j = 0; j < columns; j++ ) {

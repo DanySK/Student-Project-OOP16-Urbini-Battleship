@@ -1,7 +1,6 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Boundary;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -49,7 +48,7 @@ public class MyFrame extends JFrame {
         this.setSize(WIDTH, HEIGHT);
         this.setVisible(true);
 
-        for(int i = 0; i < boundary.getHorizontalBound(); i++)  {
+        for(int i = 0; i < boundary.getColumnsCount(); i++)  {
             final FieldButton fb = new FieldButton(i, 0);
             this.fieldList.add(fb);
             this.addButton(fb);

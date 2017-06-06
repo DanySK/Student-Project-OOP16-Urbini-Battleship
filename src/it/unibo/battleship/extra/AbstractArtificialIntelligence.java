@@ -61,8 +61,8 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		private Point2d generateRandomPoint2d(final Boundary boundary) {
 			Random random = new Random(Instant.now().getNano());
 
-			final int x = random.nextInt(boundary.getHorizontalBound());
-			final int y = random.nextInt(boundary.getVerticalBound());
+			final int x = random.nextInt(boundary.getColumnsCount());
+			final int y = random.nextInt(boundary.getRowsCount());
 
 			return new Point2dImpl(x, y);
 		}
