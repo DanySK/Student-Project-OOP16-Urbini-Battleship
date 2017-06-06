@@ -2,7 +2,6 @@ package it.unibo.battleship.shots;
 
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public abstract class ShotCollection {
 
-	private ShotCollection() {}
+	private ShotCollection() { }
 
 	public abstract List<Shot> getShotCollection(final Point2d point2d);
 
@@ -31,8 +30,7 @@ public abstract class ShotCollection {
 	public enum Type {
 		X(5),
 		T(5),
-		I(3),
-		;
+		I(3);
 
 		private final int totalSize;
 
@@ -49,7 +47,7 @@ public abstract class ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new NotImplementedException();
+			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -57,7 +55,7 @@ public abstract class ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new NotImplementedException();
+			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -65,7 +63,7 @@ public abstract class ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new NotImplementedException();
+			throw new UnsupportedOperationException();
 		}
 	}
 }

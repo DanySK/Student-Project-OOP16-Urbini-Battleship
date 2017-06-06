@@ -3,10 +3,10 @@ package it.unibo.battleship.common;
 import com.google.common.base.Objects;
 
 /**
- * Implementation of Boundary 
+ * Implementation of Boundary
  * {@see Boundary}
  */
-public class BoundaryImpl implements Boundary {
+public final class BoundaryImpl implements Boundary {
     private final int columnsCount;
     private final int rowsCount;
 
@@ -25,7 +25,7 @@ public class BoundaryImpl implements Boundary {
         }
         return new BoundaryImpl(columnsCount, rowsCount);
     }
-    
+
     @Override
     public final int getColumnsCount() {
         return this.columnsCount;

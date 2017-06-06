@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 
 public class MyFrame extends JFrame {
 
-    private static final int WIDTH = 600;
+	private static final long serialVersionUID = -4540296256743795166L;
+	private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
     private final List<FieldButton> fieldList;
     private final Boundary boundary;
@@ -27,7 +28,7 @@ public class MyFrame extends JFrame {
         initialize();
     }
 
-    private void addButton(FieldButton btn) {
+    private void addButton(final FieldButton btn) {
         this.getContentPane().add(btn.getButton());
     }
     private List<JButton> getGridOfButtons() {

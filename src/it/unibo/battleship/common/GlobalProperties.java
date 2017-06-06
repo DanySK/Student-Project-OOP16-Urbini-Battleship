@@ -26,31 +26,36 @@ public final class GlobalProperties {
 	public static final String INVALID_SHIP_SIZE =
 			"Invalid ship size";
 
-	private GlobalProperties() {} 
-	
+	private GlobalProperties() {}
+
 	public enum ShipRules {
-		SUBMARINE("Submarine", SUBMARINE_SIZE),
-		CRUISER("Cruiser", CRUISER_SIZE),
-		BATTLESHIP("Battleship", BATTLESHIP_SIZE),
-		AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE),
+		SUBMARINE("Submarine", SUBMARINE_SIZE, 3),
+		CRUISER("Cruiser", CRUISER_SIZE, 2),
+		BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
+		AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
 		// new ships here
-		;
-		
+
 		private final String name;
 		private final int size;
-		
-		ShipRules(final String name, final int size) {
+		private final int instancesNumber;
+
+		ShipRules(final String name, final int size, final int instancesNumber) {
 			this.name = name;
 			this.size = size;
+			this.instancesNumber = instancesNumber;
 		}
-		
+
 		@Override
 		public String toString() {
 			return this.name;
 		}
-		
+
 		public int getSize() {
 			return this.size;
+		}
+
+		public int getInstancesNumber() {
+			return this.instancesNumber;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
+
 import it.unibo.battleship.common.*;
 import it.unibo.battleship.shots.Shot;
 
@@ -11,29 +12,30 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public abstract class AbstractShip implements Ship {
-    // Standard direction = EAST (default)
+
+	private static final long serialVersionUID = 4917741645660917676L;
+	// Standard direction = EAST (default)
     private ShipDirection shipDirection;
-    private Optional<Point2d> pos; // final - OPTIONAL? 
+    private Optional<Point2d> pos; // final - OPTIONAL?
     private boolean placed;
-    private final List<Point2d> hitPoints; // array delle posizioni colpite
+    private final List<Point2d> hitPoints;
 
     private AbstractShip(final Point2d start) {
         this();
         this.pos = Optional.of(start);
         this.placed = true;
     }
-    
+
     private AbstractShip() {
     	this.pos = Optional.empty();
         this.placed = false;
         this.shipDirection = ShipDirection.EAST;
         hitPoints = new ArrayList<Point2d>();
     }
-    
+
     @Override
     public boolean isSunk() {
 		if (hitPoints.size() == this.getSize() ) {
-//		    System.out.println(toString() + ": nave affondata!!");
 		    return true;
 		}
 		return false;
@@ -102,15 +104,15 @@ public abstract class AbstractShip implements Ship {
     @Override
     public void resetPlacement() {
         this.placed = false;
-        pos = null; // USARE OPTIONAL?
+        pos = null;
     }
 
     @Override
-    public abstract String toString(); 
+    public abstract String toString();
 
     /**
-     * Creates a ship 
-     * @param size size of the ship. The value must be 
+     * Creates a ship
+     * @param size size of the ship. The value must be
      * between 0 and {@see GlobalProperties.MAX_SIZE}
      * @return
      */
@@ -148,12 +150,10 @@ public abstract class AbstractShip implements Ship {
 
     private static class Submarine extends AbstractShip {
 
-        /**
-		 * 
-		 */
 		private static final long serialVersionUID = -2784639518931814680L;
 
-		Submarine(Point2d start) {
+		@SuppressWarnings("unused")
+		Submarine(final Point2d start) {
             super(start);
         }
 
@@ -175,12 +175,10 @@ public abstract class AbstractShip implements Ship {
 
     private static class Cruiser extends AbstractShip {
 
-        /**
-		 * 
-		 */
 		private static final long serialVersionUID = -5532557604937632667L;
 
-		public Cruiser(Point2d start) {
+		@SuppressWarnings("unused")
+		public Cruiser(final Point2d start) {
             super(start);
         }
 
@@ -200,16 +198,14 @@ public abstract class AbstractShip implements Ship {
     }
 
     private static class Battleship extends AbstractShip {
-        
-        /**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 8043537272411631772L;
 
-		public Battleship(Point2d start) {
+		@SuppressWarnings("unused")
+		public Battleship(final Point2d start) {
             super(start);
         }
-        
+
         public Battleship() {
             super();
         }
@@ -227,19 +223,17 @@ public abstract class AbstractShip implements Ship {
 
     private static class AirCarrier extends AbstractShip {
 
-    	/**
-		 * 
-		 */
 		private static final long serialVersionUID = -8323321815851042898L;
 
-		AirCarrier(Point2d start) {
+		@SuppressWarnings("unused")
+		AirCarrier(final Point2d start) {
     		super(start);
     	}
-    	
+
     	AirCarrier() {
     		super();
     	}
-    	
+
 		@Override
 		public int getSize() {
 			return GlobalProperties.AIR_CARRIER_SIZE;
@@ -249,7 +243,7 @@ public abstract class AbstractShip implements Ship {
 		public String toString() {
 			return GlobalProperties.ShipRules.AIR_CARRIER.toString();
 		}
-    	
+
     }
 }
 

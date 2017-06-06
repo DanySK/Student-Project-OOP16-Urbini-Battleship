@@ -27,7 +27,7 @@ public final class ShotImpl implements Shot {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) return false;
 
         ShotImpl that = (ShotImpl) o;

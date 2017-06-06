@@ -8,7 +8,6 @@ import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.Instant;
 import java.util.Random;
@@ -25,11 +24,11 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	public final static ArtificialIntelligence createArtificialIntelligence(final Level level) {
 		switch(level) {
 			case FREE_WIN: return new FreeWinAI();
-			case SUPER_EASY: throw new NotImplementedException();
-			case EASY: throw new NotImplementedException();
-			case AVERAGE: throw new NotImplementedException();
-			case HARD: throw new NotImplementedException();
-			case SUPER_HARD: throw new NotImplementedException();
+			case SUPER_EASY: throw new UnsupportedOperationException();
+			case EASY: throw new UnsupportedOperationException();
+			case AVERAGE: throw new UnsupportedOperationException();
+			case HARD: throw new UnsupportedOperationException();
+			case SUPER_HARD: throw new UnsupportedOperationException();
 			default : throw new IllegalArgumentException(GlobalProperties.INVALID_AI_LEVEL);
 		}
 	}
@@ -49,7 +48,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		@Override
 		public Fleet createFleet() {
 			// Creates a new random fleet without any order
-			throw new NotImplementedException();
+			throw new UnsupportedOperationException();
 		}
 
 		@Override
