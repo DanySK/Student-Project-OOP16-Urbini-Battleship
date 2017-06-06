@@ -18,7 +18,7 @@ public final class ShotImpl implements Shot {
     public static ShotImpl createShot(Point2d p) {
         if (Ruleset.isPointWithinLimits(p)) {
             return new ShotImpl(p);
-        } else throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
+        } else throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
     }
     @Override
     public Point2d getPoint() {

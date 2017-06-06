@@ -26,23 +26,7 @@ public interface Field {
 	 */
 	void placeShip(Ship ship, Point2d point);
 
-	// TODO: move to an utility class
-	char[][] getMatrix();
-
-	/**
-	 * Returns a representation of the field
-	 * viewied by the owner of the field
-	 * @return
-	 */
-	char[][] getViewByOwner();
-
-	/**
-	 * Returns a representation of the field
-	 * viewied by the enemy
-	 * @return a representation of the field
-	 * seen by the enemy
-	 */
-	char[][] getViewByEnemy();
+	FieldCell[][] getFieldCells();
 
 	Boundary getBoundary();
 }

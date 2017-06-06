@@ -14,7 +14,6 @@ import java.util.Optional;
  */
 public class FieldCellImpl implements FieldCell {
     private State currentState;
-    private boolean isHit;
     private Optional<Ship> ship; // TODO: remove optional?
 
     public FieldCellImpl() {
@@ -26,7 +25,6 @@ public class FieldCellImpl implements FieldCell {
 	public void placeShip(final Ship s) {
         this.ship = Optional.of(s);
         this.currentState = State.PRESENT;
-        this.isHit = false;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class FieldCellImpl implements FieldCell {
             case PRESENT :
                 this.currentState = State.HIT;
                 this.ship.get().shoot(s);
-                break; // POSSIBILE ERRORE OPTIONAL?
+                break;
             case HIT : break; // Exception?
             default : throw new IllegalArgumentException("Invalid state value");
 

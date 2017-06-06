@@ -7,21 +7,17 @@ import it.unibo.battleship.shots.Shot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-/*
- * come mantenere size final e che abbia quel valore alla scelta del sottotipo?
- * 
- * 
- * 
- */
 public abstract class AbstractShip implements Ship {
-    // DIREZIONE DELLA NAVE AL MOMENTO A DESTRA, di default
+    // Standard direction = EAST (default)
     private ShipDirection shipDirection;
     private Optional<Point2d> pos; // final - OPTIONAL? 
     private boolean placed;
     private final List<Point2d> hitPoints; // array delle posizioni colpite
 
-    protected AbstractShip(final Point2d start) {
+    private AbstractShip(final Point2d start) {
         this();
         this.pos = Optional.of(start);
         this.placed = true;
@@ -50,41 +46,33 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public List<Point2d> getAllPositions() {
-        List<Point2d> tmp = new ArrayList<>();
-        for (int i = 0; i < this.getSize() ; i++) {
-            tmp.add(new Point2dImpl(pos.get().getX() + i, pos.get().getY()));
-        }
+	    List<Point2d> tmp = IntStream
+			    .range(0, this.getSize())
+			    .mapToObj(i -> new Point2dImpl(pos.get().getX() + i, pos.get().getY()))
+			    .collect(Collectors.toList());
 
-        return tmp;
+	    return tmp;
     }
 
     @Override
     public List<Point2d> getProjectionPoints(final Point2d point) {
-        // DIREZIONE EST (x++)
-        List<Point2d> points = new ArrayList<>();
-        
-        for (int x = point.getX(); x < (point.getX() + this.getSize() ); x++) {
-            points.add(new Point2dImpl(x, point.getY()));
-        }
-        
-        return points;
+	    List<Point2d> points = IntStream
+			    .range(point.getX(), (point.getX() + this.getSize()))
+			    .mapToObj(x -> new Point2dImpl(x, point.getY()))
+			    .collect(Collectors.toList());
+
+	    return points;
     }
 
     @Override
     public boolean containsPosition(final Point2d point) {
-        for (Point2d p : this.getAllPositions()) {
-            // SERVE metodo EQUALS
-            if ((p.getX() == point.getX() && p.getY() == point.getY())) {
-                return true;
-            }
-        }
-        return false;
+	    return this.getAllPositions()
+			    .stream()
+			    .anyMatch(p -> (p.getX() == point.getX() && p.getY() == point.getY()));
     }
 
     @Override
     public void place(final Point2d start) {
-        //  DIREZIONE DATA IN MODO STANDARD
-        // Fare un controllo sulle navi gi� presenti da qui? 
         if (!placed) {
             this.pos = Optional.of(start);
             placed = true;
@@ -100,19 +88,14 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public boolean shoot(final Shot shot) {
-        // Controllo : gi� colpita?
-        // shot non valido? 
-        // Metodo valido al momento solo per una casella
-        
         if (containsPosition(shot.getPoint())) {
             hitPoints.add(shot.getPoint());
-            // AFFONDATA? 
+
             if (isSunk() ){
             	System.out.println(toString() + " affondato!");
             }
             return true;
         }
-        
         return false;
     }
 
@@ -121,13 +104,10 @@ public abstract class AbstractShip implements Ship {
         this.placed = false;
         pos = null; // USARE OPTIONAL?
     }
-    
+
+    @Override
     public abstract String toString(); 
 
-    /*
-     * FACTORY METHODS
-     */
-    
     /**
      * Creates a ship 
      * @param size size of the ship. The value must be 

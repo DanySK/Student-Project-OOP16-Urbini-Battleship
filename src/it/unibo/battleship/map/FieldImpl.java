@@ -4,21 +4,23 @@ import it.unibo.battleship.common.*;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
+import java.util.Arrays;
+
 // TODO: javadoc
 
 public final class FieldImpl implements Field {
-    private final FieldCell[][] matrix;
+    private final FieldCell[][] fieldCells;
     private final int rows;
     private final int columns;
 
     private FieldImpl(final int rows, final int columns) {
         this.rows = rows;
         this.columns = columns;
-        matrix = new FieldCell[rows][columns];
+        fieldCells = new FieldCell[rows][columns];
 
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                matrix[i][j] = new FieldCellImpl();
+                fieldCells[i][j] = new FieldCellImpl();
             }
         }
     }
@@ -34,7 +36,7 @@ public final class FieldImpl implements Field {
     @Override
     public void updateStateWithShot(final Shot shot) {
         if (!Ruleset.isPointWithinLimits(shot.getPoint())) {
-            throw new IllegalArgumentException("Not valid point");
+            throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
 
         }
 
@@ -42,7 +44,7 @@ public final class FieldImpl implements Field {
         int x = p.getX();
         int y = p.getY();
 
-        this.matrix[y][x].shoot(shot);
+        this.fieldCells[y][x].shoot(shot);
     }
 
     @Override
@@ -51,7 +53,7 @@ public final class FieldImpl implements Field {
 
         ship.place(point);
         for (Point2d p : ship.getAllPositions()) {
-            this.matrix[p.getY()][p.getX()].placeShip(ship);
+            this.fieldCells[p.getY()][p.getX()].placeShip(ship);
         }
     }
 
@@ -60,9 +62,13 @@ public final class FieldImpl implements Field {
         return BoundaryImpl.createBoundary(rows, columns);
     }
 
+    public FieldCell[][] getFieldCells() {
+        return Arrays.copyOf(this.fieldCells, this.fieldCells.length);
+    }
+
     private void validateShipPlacement(final Ship ship, final Point2d point) {
       if ( !Ruleset.isPointWithinLimits(point) ) {
-          throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS_EX);
+          throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
       }
 
       if ( !isShipPlaceable(ship, point)) {
@@ -74,85 +80,9 @@ public final class FieldImpl implements Field {
       }
     }
 
-    // TODO: remove getMatrix and use Strategy or something similar
-    @Override
-    public char[][] getMatrix() {
-        char[][] chars = new char[rows][columns];
-
-        for (int i = 0; i < rows; i++ ) {
-            for (int j = 0; j < columns; j++ ) {
-
-                if (matrix[i][j].isEmpty()) {
-                    chars[i][j] = 'E';
-                }
-                if (matrix[i][j].isPresent()) {
-                    chars[i][j] = '*';
-                }
-                if (matrix[i][j].isMissed()) {
-                    chars[i][j] = 'M';
-                }
-            }
-        }
-
-        return chars;
-    }
-
-    public char[][] getViewByOwner() {
-        char[][] viewByOwner = new char[rows][columns];
-        for (int i = 0; i < rows; i++ ) {
-            for (int j = 0; j < columns; j++ ) {
-                viewByOwner[i][j] = getValueByPlayerState(
-                        PlayerState.OWNER,
-                        this.matrix[i][j]
-                );
-            }
-        }
-        return viewByOwner;
-    }
-
-    public char[][] getViewByEnemy() {
-        char[][] viewByOwner = new char[rows][columns];
-        for (int i = 0; i < rows; i++ ) {
-            for (int j = 0; j < columns; j++ ) {
-                viewByOwner[i][j] = getValueByPlayerState(
-                        PlayerState.ENEMY,
-                        this.matrix[i][j]
-                );
-            }
-        }
-        return viewByOwner;
-    }
-
-    private char getValueByPlayerState(final PlayerState playerState,
-                                       final FieldCell cell) {
-        if (cell.isEmpty()) {
-            return 'E';
-        }
-        if (cell.isMissed()) {
-            return 'M';
-        }
-
-        if (cell.isHit()) {
-            return '*';
-        }
-
-        if (cell.isPresent()) {
-            switch(playerState) {
-                case OWNER: return '@';
-                case ENEMY: return 'E';
-            }
-        }
-        throw new IllegalStateException(); // TODO: Exception?
-    }
-
     private boolean isShipPlaceable(final Ship ship, final Point2d point) {
         return ship.getProjectionPoints(point)
                 .stream()
-                .allMatch(p -> this.matrix[p.getX()][p.getY()].isEmpty());
-    }
-
-    private enum PlayerState {
-        OWNER,
-        ENEMY
+                .allMatch(p -> this.fieldCells[p.getX()][p.getY()].isEmpty());
     }
 }

@@ -11,12 +11,12 @@ public final class GlobalProperties {
 	public static final int CRUISER_SIZE = 2;
 	public static final int BATTLESHIP_SIZE = 3;
 	public static final int AIR_CARRIER_SIZE = 4;
-	public static final String POINT_NOT_WITHIN_LIMITS_EX =
+	public static final String POINT_NOT_WITHIN_LIMITS =
 			"Punto non definito entro i limiti della mappa";
 	public static final String FIELD_CELLS_NOT_EMPTY =
 			"Celle della mappa già utilizzate";
 	public static final String SHIP_NOT_WITHIN_LIMITS =
-			"Si sta cercando di posizionare una nave fuori dalla mappa";
+			"Ship points are not within the boundary of the field";
 	public static final String BOUNDARY_VALUE_IS_NEGATIVE =
 			"Boundary values should be positive (greater than 0)";
 	public static final String INVALID_SHOT_TYPE =

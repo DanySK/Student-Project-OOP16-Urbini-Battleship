@@ -39,7 +39,7 @@ public abstract class ShotCollection {
 		}
 	}
 
-	public static final class XShot extends ShotCollection {
+	private static final class XShot extends ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
@@ -47,7 +47,7 @@ public abstract class ShotCollection {
 		}
 	}
 
-	public static final class TShot extends ShotCollection {
+	private static final class TShot extends ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
@@ -55,7 +55,7 @@ public abstract class ShotCollection {
 		}
 	}
 
-	public static final class IShot extends ShotCollection {
+	private static final class IShot extends ShotCollection {
 
 		@Override
 		public List<Shot> getShotCollection(final Point2d point2d) {
