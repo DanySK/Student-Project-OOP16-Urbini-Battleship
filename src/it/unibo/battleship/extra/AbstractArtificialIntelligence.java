@@ -39,8 +39,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		EASY,
 		AVERAGE,
 		HARD,
-		SUPER_HARD,
-		;
+		SUPER_HARD;
 	}
 
 	private static final class FreeWinAI implements ArtificialIntelligence {
@@ -60,10 +59,10 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		private Point2d generateRandomPoint2d(final Boundary boundary) {
 			Random random = new Random(Instant.now().getNano());
 
-			final int x = random.nextInt(boundary.getColumnsCount());
-			final int y = random.nextInt(boundary.getRowsCount());
+			final int column = random.nextInt(boundary.getColumnsCount());
+			final int row = random.nextInt(boundary.getRowsCount());
 
-			return new Point2dImpl(x, y);
+			return new Point2dImpl(column, row);
 		}
 	}
 }

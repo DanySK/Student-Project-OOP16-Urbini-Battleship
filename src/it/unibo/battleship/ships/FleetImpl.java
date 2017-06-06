@@ -93,7 +93,7 @@ public class FleetImpl implements Fleet {
 
     @Override
     public boolean isSunk() {
-        for (Ship ship : this.ships) {
+        for (final Ship ship : this.ships) {
             if (!ship.isSunk()) {
                 return false;
             }

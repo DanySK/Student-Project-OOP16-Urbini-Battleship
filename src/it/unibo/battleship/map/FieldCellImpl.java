@@ -68,8 +68,8 @@ public class FieldCellImpl implements FieldCell {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
 
         FieldCellImpl that = (FieldCellImpl) o;
 

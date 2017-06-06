@@ -9,7 +9,12 @@ public final class FieldHelper {
 	/**
 	 * Returns a representation of the field
 	 * viewied by the owner of the field
-	 * @return
+	 * E stands for Empty
+	 * M stands for Missed
+	 * @ stands for ship present
+	 * * stands for ship hit
+	 * @return  a representation of the field
+	 * viewed by the owner of the field
 	 */
 	public static char[][] getViewByOwner(Field field) {
 		return getViewByPlayerState(field, PlayerState.OWNER);
@@ -17,7 +22,11 @@ public final class FieldHelper {
 
 	/**
 	 * Returns a representation of the field
-	 * viewied by the enemy
+	 * viewed by the enemy.
+	 * E stands for Empty
+	 * M stands for Missed
+	 * @ stands for ship present
+	 * * stands for ship hit
 	 * @return a representation of the field
 	 * seen by the enemy
 	 */
@@ -29,6 +38,7 @@ public final class FieldHelper {
 	                                             final PlayerState playerState) {
 		final int rows = field.getBoundary().getRowsCount();
 		final int columns = field.getBoundary().getColumnsCount();
+
 		char[][] view = new char[rows][columns];
 		for (int i = 0; i < rows; i++ ) {
 			for (int j = 0; j < columns; j++ ) {
@@ -58,6 +68,7 @@ public final class FieldHelper {
 			switch(playerState) {
 				case OWNER: return '@';
 				case ENEMY: return 'E';
+				default: throw new IllegalStateException();
 			}
 		}
 		throw new IllegalStateException(); // TODO: Exception?

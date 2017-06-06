@@ -12,7 +12,7 @@ public interface Point2d {
 	 * @return the x coordinate (column)
 	 */
     int getX();
-    
+
     /**
      * Returns the y coordinate (row)
      * @return the y coordinate (row)
