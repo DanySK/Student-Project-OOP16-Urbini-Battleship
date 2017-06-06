@@ -30,7 +30,7 @@ public class FieldCellImpl implements FieldCell {
     }
 
     @Override
-	public void tryShoot(final Shot s ) {
+	public void shoot(final Shot s ) {
         switch (currentState) {
             case WATER: this.currentState = State.MISSED; break;
             case MISSED : break; // Exception?
@@ -38,6 +38,7 @@ public class FieldCellImpl implements FieldCell {
                 this.currentState = State.HIT;
                 this.ship.get().shoot(s);
                 break; // POSSIBILE ERRORE OPTIONAL?
+            case HIT : break; // Exception?
             default : throw new IllegalArgumentException("Invalid state value");
 
         }

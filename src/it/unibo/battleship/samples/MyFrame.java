@@ -1,7 +1,6 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.Ruleset;
 
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;

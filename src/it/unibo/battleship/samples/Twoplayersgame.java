@@ -3,7 +3,6 @@ package it.unibo.battleship.samples;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.ships.FleetImpl;
-import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
@@ -19,8 +18,8 @@ public class Twoplayersgame {
         Fleet fleet1 = FleetImpl.getNewFleet();
         Fleet fleet2 = FleetImpl.getNewFleet();
 
-        creaFlotta(field1, fleet1);
-        creaFlotta(field2, fleet2);
+        placeFleet(field1, fleet1);
+        placeFleet(field2, fleet2);
 
         for (int i = 0; i < 10; i++ ) {
             for (int j = 0; j < 10; j++ )
@@ -32,7 +31,8 @@ public class Twoplayersgame {
         }
     }
 
-    private static void creaFlotta(Field field1, Fleet fleet1) {
+    private static void placeFleet(final Field field1,
+                                   final Fleet fleet1) {
         int i = 0, j = 0;
 
         // PIAZZAMENTO FLOTTA

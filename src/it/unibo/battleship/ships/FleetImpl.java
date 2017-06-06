@@ -112,10 +112,6 @@ public class FleetImpl implements Fleet {
         return true;
     }
 
-    private static void createShips(final FleetImpl fleet, final int ShipsNumber) {
-    	
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

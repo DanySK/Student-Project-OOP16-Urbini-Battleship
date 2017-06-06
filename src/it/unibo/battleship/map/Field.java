@@ -1,8 +1,9 @@
 package it.unibo.battleship.map;
 
+import it.unibo.battleship.common.Boundary;
 import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.shots.Shot;
 
 /**
  * Represents the field of the battleship game.
@@ -21,4 +22,6 @@ public interface Field {
 	char[][] getViewByOwner();
 
 	char[][] getViewByEnemy();
+
+	Boundary getBoundary();
 }

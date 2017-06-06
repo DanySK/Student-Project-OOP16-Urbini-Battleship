@@ -33,11 +33,16 @@ public final class FieldImpl implements Field {
 
     @Override
     public void updateStateWithShot(final Shot shot) {
-        Point2d p = shot.getPoint();
+        if (!Ruleset.isPointWithinLimits(shot.getPoint())) {
+            throw new IllegalArgumentException("Not valid point");
+
+        }
+
+        final Point2d p = shot.getPoint();
         int x = p.getX();
         int y = p.getY();
 
-        this.matrix[y][x].tryShoot(shot);
+        this.matrix[y][x].shoot(shot);
     }
 
     @Override
@@ -48,6 +53,11 @@ public final class FieldImpl implements Field {
         for (Point2d p : ship.getAllPositions()) {
             this.matrix[p.getY()][p.getX()].placeShip(ship);
         }
+    }
+
+    @Override
+    public Boundary getBoundary() {
+        return BoundaryImpl.createBoundary(rows, columns);
     }
 
     private void validateShipPlacement(final Ship ship, final Point2d point) {

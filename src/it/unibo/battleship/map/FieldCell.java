@@ -15,7 +15,7 @@ public interface FieldCell {
 
 	void placeShip(Ship s);
 
-	void tryShoot(Shot s);
+	void shoot(Shot s);
 
 	boolean isMissed();
 
