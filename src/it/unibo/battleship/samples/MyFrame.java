@@ -1,6 +1,7 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.common.Boundary;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,8 @@ public class MyFrame extends JFrame {
     private final List<FieldButton> fieldList;
     private final Boundary boundary;
 
-    public MyFrame(final String title, final LayoutManager lm, Boundary boundary) {
+    // The constructor is private until everything works
+    private MyFrame(final String title, final LayoutManager lm, Boundary boundary) {
         super(title);
         this.getContentPane().add(new JPanel(lm));
         this.fieldList = new ArrayList<>();
@@ -53,9 +55,7 @@ public class MyFrame extends JFrame {
             this.addButton(fb);
 
             fb.getButton().addActionListener((ActionEvent e) ->
-            {
-                System.out.println("prova : " + fb.getX());
-            });
+                    System.out.println("x : " + fb.getX()));
         }
     }
 }

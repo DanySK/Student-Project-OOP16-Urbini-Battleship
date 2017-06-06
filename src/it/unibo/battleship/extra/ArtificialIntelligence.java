@@ -15,6 +15,5 @@ public interface ArtificialIntelligence {
 
     Fleet createFleet();
     Shot createShot(Field field);
-    // other stuff
 
 }

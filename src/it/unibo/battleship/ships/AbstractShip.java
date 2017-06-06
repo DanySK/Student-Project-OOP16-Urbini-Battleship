@@ -135,9 +135,8 @@ public abstract class AbstractShip implements Ship {
      * @return
      */
     public static Ship createShip(final int size) {
-    	// TODO: MAGIC NUMBER 
     	if (size < 0 || size > GlobalProperties.MAX_SIZE ) {
-    		throw new IllegalArgumentException("Valore non valido");
+    		throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
     	}
 
     	switch(size) {

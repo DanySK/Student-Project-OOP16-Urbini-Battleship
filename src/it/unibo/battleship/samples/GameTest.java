@@ -3,11 +3,13 @@
  */
 package it.unibo.battleship.samples;
 
-import static org.junit.Assert.*;
-
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.BoundaryImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.fail;
 
 /**
  * @author fabio.urbini
@@ -32,6 +34,18 @@ public class GameTest {
 	@Test
 	public void test() {
 		fail("Not yet implemented");
+		Boundary boundary = BoundaryImpl.createBoundary(10,10);
+
+		// Try creating random shots
+		/*
+
+
+
+
+		 */
+
+
+
 	}
 
 }

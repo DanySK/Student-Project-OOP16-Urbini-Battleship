@@ -11,12 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Represents a fleet in the battlefield.
- * A fleet is composed of a defined number of ships.
- * @author fabio.urbini
- *
- */
 public class FleetImpl implements Fleet {
     private final List<Ship> ships;
 

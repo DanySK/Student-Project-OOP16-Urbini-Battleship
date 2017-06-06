@@ -1,5 +1,10 @@
 package it.unibo.battleship.common;
 
+/**
+ * Contains the global properties of the battleship game,
+ * including each ship size.
+ * @author fabio.urbini
+ */
 public final class GlobalProperties {
 	public static final int MAX_SIZE = 5;
 	public static final int SUBMARINE_SIZE = 1;
@@ -15,9 +20,11 @@ public final class GlobalProperties {
 	public static final String BOUNDARY_VALUE_IS_NEGATIVE =
 			"Boundary values should be positive (greater than 0)";
 	public static final String INVALID_SHOT_TYPE =
-					"Invalid shot type";
+			"Invalid shot type";
 	public static final String INVALID_AI_LEVEL =
-					"Invalid artificial intelligence level";
+			"Invalid artificial intelligence level";
+	public static final String INVALID_SHIP_SIZE =
+			"Invalid ship size";
 
 	private GlobalProperties() {} 
 	
@@ -26,6 +33,7 @@ public final class GlobalProperties {
 		CRUISER("Cruiser", CRUISER_SIZE),
 		BATTLESHIP("Battleship", BATTLESHIP_SIZE),
 		AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE),
+		// new ships here
 		;
 		
 		private final String name;

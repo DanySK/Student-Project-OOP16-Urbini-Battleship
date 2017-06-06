@@ -1,8 +1,6 @@
 package it.unibo.battleship.samples;
 
-import it.unibo.battleship.common.BoundaryImpl;
-
-import java.awt.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @author fabio.urbini
@@ -10,7 +8,8 @@ import java.awt.*;
 public class BattleshipGUI {
 
     public static void main(String[] args) {
-        MyFrame myFrame = new MyFrame("Battleship", new GridLayout(10,10), BoundaryImpl.createBoundary(10, 10));
-        myFrame.getMainPanel().validate();
+//        MyFrame myFrame = new MyFrame("Battleship", new GridLayout(10,10), BoundaryImpl.createBoundary(10, 10));
+//        myFrame.getMainPanel().validate();
+        throw new NotImplementedException();
     }
 }

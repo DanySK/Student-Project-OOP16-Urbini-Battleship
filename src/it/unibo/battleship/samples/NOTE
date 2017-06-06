@@ -9,7 +9,6 @@ MUOVERE LE CLASSI NEI PACKAGE GIUSTI
 EXCEPTIONS MUOVERE INSIEME A POINTS, SHOT, ECC...
 {
 
-	
 	Eccezioni da usare principalmente : IllegalState  /  IllegalArgument
 	Possibili eccezioni :
 	

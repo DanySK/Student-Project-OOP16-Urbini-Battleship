@@ -10,15 +10,15 @@ public class BoundaryImpl implements Boundary {
     private final int horizontalBound;
     private final int verticalBound;
 
-    /**
-     * @param horizontalBound Horizontal bound
-     * @param verticalBound Vertical bound
-     */
     private BoundaryImpl(final int horizontalBound, final int verticalBound) {
         this.horizontalBound = horizontalBound;
         this.verticalBound = verticalBound;
     }
 
+    /**
+     * @param horizontalBound Horizontal bound
+     * @param verticalBound Vertical bound
+     */
     public static BoundaryImpl createBoundary(final int horizontalBound, final int verticalBound) {
         if (horizontalBound < 0 || verticalBound < 0) {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
