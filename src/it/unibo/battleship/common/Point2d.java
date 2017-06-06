@@ -8,14 +8,14 @@ package it.unibo.battleship.common;
 public interface Point2d {
 
 	/**
-	 * Returns the X coordinate
-	 * @return the x coordinate
+	 * Returns the X coordinate (column)
+	 * @return the x coordinate (column)
 	 */
     int getX();
     
     /**
-     * Returns the y coordinate
-     * @return the y coordinate
+     * Returns the y coordinate (row)
+     * @return the y coordinate (row)
      */
     int getY();
 }

@@ -30,21 +30,20 @@ public final class FieldImpl implements Field {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
         }
 
-        return new FieldImpl(boundary.getVerticalBound(), boundary.getHorizontalBound());
+        return new FieldImpl(boundary.getHorizontalBound(), boundary.getVerticalBound());
     }
 
     @Override
     public void updateStateWithShot(final Shot shot) {
         if (!Ruleset.isPointWithinLimits(shot.getPoint())) {
             throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
-
         }
 
         final Point2d p = shot.getPoint();
-        int x = p.getX();
-        int y = p.getY();
+        final int column = p.getX();
+        final int row = p.getY();
 
-        this.fieldCells[y][x].shoot(shot);
+        this.fieldCells[column][row].shoot(shot);
     }
 
     @Override
@@ -52,7 +51,7 @@ public final class FieldImpl implements Field {
         validateShipPlacement(ship, point);
 
         ship.place(point);
-        for (Point2d p : ship.getAllPositions()) {
+        for (final Point2d p : ship.getAllPositions()) {
             this.fieldCells[p.getY()][p.getX()].placeShip(ship);
         }
     }
@@ -83,6 +82,6 @@ public final class FieldImpl implements Field {
     private boolean isShipPlaceable(final Ship ship, final Point2d point) {
         return ship.getProjectionPoints(point)
                 .stream()
-                .allMatch(p -> this.fieldCells[p.getX()][p.getY()].isEmpty());
+                .allMatch(p -> this.fieldCells[p.getY()][p.getX()].isEmpty());
     }
 }

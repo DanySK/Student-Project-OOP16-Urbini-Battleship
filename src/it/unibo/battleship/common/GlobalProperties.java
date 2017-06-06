@@ -12,9 +12,9 @@ public final class GlobalProperties {
 	public static final int BATTLESHIP_SIZE = 3;
 	public static final int AIR_CARRIER_SIZE = 4;
 	public static final String POINT_NOT_WITHIN_LIMITS =
-			"Punto non definito entro i limiti della mappa";
+			"Point not defined within the map limit";
 	public static final String FIELD_CELLS_NOT_EMPTY =
-			"Celle della mappa già utilizzate";
+			"Field cell are not empty";
 	public static final String SHIP_NOT_WITHIN_LIMITS =
 			"Ship points are not within the boundary of the field";
 	public static final String BOUNDARY_VALUE_IS_NEGATIVE =

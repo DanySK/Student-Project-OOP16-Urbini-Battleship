@@ -12,18 +12,7 @@ public final class FieldHelper {
 	 * @return
 	 */
 	public static char[][] getViewByOwner(Field field) {
-		final int rows = field.getBoundary().getVerticalBound();
-		final int columns = field.getBoundary().getHorizontalBound();
-		char[][] viewByOwner = new char[rows][columns];
-		for (int i = 0; i < rows; i++ ) {
-			for (int j = 0; j < columns; j++ ) {
-				viewByOwner[i][j] = getValueByPlayerState(
-						PlayerState.OWNER,
-						field.getFieldCells()[i][j]
-				);
-			}
-		}
-		return viewByOwner;
+		return getViewByPlayerState(field, PlayerState.OWNER);
 	}
 
 	/**
@@ -33,18 +22,23 @@ public final class FieldHelper {
 	 * seen by the enemy
 	 */
 	public static char[][] getViewByEnemy(final Field field) {
+		return getViewByPlayerState(field, PlayerState.ENEMY);
+	}
+
+	private static char[][] getViewByPlayerState(final Field field,
+	                                             final PlayerState playerState) {
 		final int rows = field.getBoundary().getVerticalBound();
 		final int columns = field.getBoundary().getHorizontalBound();
-		char[][] viewByOwner = new char[rows][columns];
+		char[][] view = new char[rows][columns];
 		for (int i = 0; i < rows; i++ ) {
 			for (int j = 0; j < columns; j++ ) {
-				viewByOwner[i][j] = getValueByPlayerState(
-						PlayerState.ENEMY,
-						field.getFieldCells()[i][j]
+				view[i][j] = getValueByPlayerState(
+						playerState,
+						field.getFieldCells()[j][i]
 				);
 			}
 		}
-		return viewByOwner;
+		return view;
 	}
 
 	private static char getValueByPlayerState(final PlayerState playerState,

@@ -11,6 +11,10 @@ import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * Simple console game
  * @author fabio.urbini
@@ -51,7 +55,6 @@ public final class ConsoleGame {
 	                               final Fleet fleet) {
 		int i = 0, j = 0;
 
-		// PIAZZAMENTO FLOTTA
 		Ship ship;
 		while (!fleet.isReady()) {
 
@@ -69,10 +72,11 @@ public final class ConsoleGame {
 	private static void stampaField (final Field field) {
 		for (char[] chars : FieldHelper.getViewByEnemy(field) ) {
 			for (char car : chars ) {
-				System.out.print(car);
+				System.out.print(" " + car + ' ');
 			}
 			System.out.println();
 		}
 		System.out.println("\n\n\n");
 	}
+
 }

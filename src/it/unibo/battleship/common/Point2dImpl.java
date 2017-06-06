@@ -13,6 +13,10 @@ public class Point2dImpl implements Point2d {
     private final int x;
     private final int y;
 
+    /**
+     * @param x column
+     * @param y row
+     */
     public Point2dImpl (final int x, final int y) {
         this.x = x;
         this.y = y;
