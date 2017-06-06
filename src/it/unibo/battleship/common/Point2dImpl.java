@@ -35,7 +35,7 @@ public class Point2dImpl implements Point2d {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
 
-        Point2dImpl that = (Point2dImpl) o;
+        final Point2dImpl that = (Point2dImpl) o;
 
         return Objects.equal(this.x, that.x) &&
                 Objects.equal(this.y, that.y);

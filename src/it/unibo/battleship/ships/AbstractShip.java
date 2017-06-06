@@ -132,10 +132,10 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
 
-        AbstractShip that = (AbstractShip) o;
+        final AbstractShip that = (AbstractShip) o;
 
         return Objects.equal(this.shipDirection, that.shipDirection) &&
                 Objects.equal(this.pos, that.pos) &&

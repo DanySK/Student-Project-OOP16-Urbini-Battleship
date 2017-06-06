@@ -38,10 +38,10 @@ public final class BoundaryImpl implements Boundary {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
 
-        BoundaryImpl that = (BoundaryImpl) o;
+        final BoundaryImpl that = (BoundaryImpl) o;
 
         return Objects.equal(this.columnsCount, that.columnsCount) &&
                 Objects.equal(this.rowsCount, that.rowsCount);

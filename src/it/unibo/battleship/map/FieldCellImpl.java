@@ -71,7 +71,7 @@ public class FieldCellImpl implements FieldCell {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
 
-        FieldCellImpl that = (FieldCellImpl) o;
+        final FieldCellImpl that = (FieldCellImpl) o;
 
         return Objects.equal(this.currentState, that.currentState) &&
                 Objects.equal(this.ship, that.ship);

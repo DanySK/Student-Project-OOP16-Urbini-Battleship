@@ -7,6 +7,7 @@ import it.unibo.battleship.shots.Shot;
 import java.util.Arrays;
 
 // TODO: javadoc
+// TODO: hashCode, equals, toString
 
 public final class FieldImpl implements Field {
     private final FieldCell[][] fieldCells;

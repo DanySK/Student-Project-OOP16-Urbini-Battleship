@@ -30,7 +30,7 @@ public final class ShotImpl implements Shot {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) return false;
 
-        ShotImpl that = (ShotImpl) o;
+        final ShotImpl that = (ShotImpl) o;
 
         return Objects.equal(this.point, that.point);
     }

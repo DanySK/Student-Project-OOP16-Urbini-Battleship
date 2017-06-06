@@ -116,7 +116,7 @@ public class FleetImpl implements Fleet {
         if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
 
-        FleetImpl that = (FleetImpl) o;
+        final FleetImpl that = (FleetImpl) o;
 
         return Objects.equal(this.ships, that.ships);
     }
