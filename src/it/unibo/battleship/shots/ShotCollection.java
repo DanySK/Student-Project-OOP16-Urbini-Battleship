@@ -7,9 +7,15 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 /**
- * Created by fabio.urbini on 05/06/2017.
+ * Represents a collection of shots.
+ * It can be extended by subclasses by defining
+ * getShotCollection.
+ *
+ * @author fabio.urbini
  */
 public abstract class ShotCollection {
+
+	private ShotCollection() {}
 
 	public abstract List<Shot> getShotCollection(final Point2d point2d);
 
