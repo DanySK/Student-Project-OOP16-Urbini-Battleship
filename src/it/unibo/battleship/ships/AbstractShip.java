@@ -43,15 +43,11 @@ public abstract class AbstractShip implements Ship {
 		return false;
     }
 
-	// METODO OPTIONAL - pu� ritornare null
     @Override
     public Optional<Point2d> getPosition() {
         return this.pos;
     }
 
-    // Fare metodo cached 
-    // RESTITUISCE I PUNTI OCCUPATI DALLA NAVE
-    // OPTIONAL!!!!
     @Override
     public List<Point2d> getAllPositions() {
         List<Point2d> tmp = new ArrayList<>();
@@ -61,8 +57,7 @@ public abstract class AbstractShip implements Ship {
 
         return tmp;
     }
-    
-    // restituisce tutti i punti occupati virtualmente
+
     @Override
     public List<Point2d> getProjectionPoints(final Point2d point) {
         // DIREZIONE EST (x++)

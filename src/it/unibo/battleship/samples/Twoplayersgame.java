@@ -13,8 +13,8 @@ import it.unibo.battleship.shots.ShotImpl;
 public class Twoplayersgame {
 
     public static void main(String[] args) {
-        Field field1 = FieldImpl.createField(Ruleset.getRows(), Ruleset.getColumns());
-        Field field2 = FieldImpl.createField(Ruleset.getRows(), Ruleset.getColumns());
+        Field field1 = FieldImpl.createField(Ruleset.getBoundary());
+        Field field2 = FieldImpl.createField(Ruleset.getBoundary());
 
         Fleet fleet1 = FleetImpl.getNewFleet();
         Fleet fleet2 = FleetImpl.getNewFleet();
@@ -51,7 +51,7 @@ public class Twoplayersgame {
     }
 
     private static void stampaField (final Field field) {
-        for (char[] chars : field.getMatrix() ) {
+        for (char[] chars : field.getViewByOwner() ) {
             for (char car : chars ) {
                 System.out.print(car);
             }

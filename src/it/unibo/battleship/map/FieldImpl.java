@@ -69,8 +69,8 @@ public final class FieldImpl implements Field {
     public char[][] getMatrix() {
         char[][] chars = new char[rows][columns];
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows; i++ ) {
+            for (int j = 0; j < columns; j++ ) {
 
                 if (matrix[i][j].isEmpty()) {
                     chars[i][j] = 'E';
@@ -87,9 +87,62 @@ public final class FieldImpl implements Field {
         return chars;
     }
 
+    public char[][] getViewByOwner() {
+        char[][] viewByOwner = new char[rows][columns];
+        for (int i = 0; i < rows; i++ ) {
+            for (int j = 0; j < columns; j++ ) {
+                viewByOwner[i][j] = getValueByPlayerState(
+                        PlayerState.OWNER,
+                        this.matrix[i][j]
+                );
+            }
+        }
+        return viewByOwner;
+    }
+
+    public char[][] getViewByEnemy() {
+        char[][] viewByOwner = new char[rows][columns];
+        for (int i = 0; i < rows; i++ ) {
+            for (int j = 0; j < columns; j++ ) {
+                viewByOwner[i][j] = getValueByPlayerState(
+                        PlayerState.ENEMY,
+                        this.matrix[i][j]
+                );
+            }
+        }
+        return viewByOwner;
+    }
+
+    private char getValueByPlayerState(final PlayerState playerState,
+                                       final FieldCell cell) {
+        if (cell.isEmpty()) {
+            return 'E';
+        }
+        if (cell.isMissed()) {
+            return 'M';
+        }
+
+        if (cell.isHit()) {
+            return '*';
+        }
+
+        if (cell.isPresent()) {
+            switch(playerState) {
+                case OWNER: return '@';
+                case ENEMY: return 'E';
+            }
+        }
+        throw new IllegalStateException(); // TODO: Exception?
+    }
+
     private boolean isShipPlaceable(final Ship ship, final Point2d point) {
         return ship.getProjectionPoints(point)
                 .stream()
                 .allMatch(p -> this.matrix[p.getX()][p.getY()].isEmpty());
+    }
+
+    private enum PlayerState {
+        OWNER,
+        ENEMY
     }
 }

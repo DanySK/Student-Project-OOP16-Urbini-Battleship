@@ -15,15 +15,10 @@ public interface Ship extends Serializable {
 
 	int getSize();
 
-	// METODO OPTIONAL - pu? ritornare null
 	Optional<Point2d> getPosition();
 
-	// Fare metodo cached
-	// RESTITUISCE I PUNTI OCCUPATI DALLA NAVE
-	// OPTIONAL!!!!
 	List<Point2d> getAllPositions();
 
-	// restituisce tutti i punti occupati virtualmente
 	List<Point2d> getProjectionPoints (Point2d point);
 
 	boolean containsPosition(Point2d point);
@@ -32,7 +27,7 @@ public interface Ship extends Serializable {
 
 	boolean isPlaced();
 
-	boolean shoot (Shot shot);
+	boolean shoot(Shot shot);
 
 	void resetPlacement();
 }

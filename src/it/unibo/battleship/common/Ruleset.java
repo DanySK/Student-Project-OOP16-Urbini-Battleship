@@ -7,7 +7,7 @@ public final class Ruleset {
     private static final int N_CRUISERS = 2;
     private static final int N_BATTLESHIPS = 2;
 
-    private static final Boundary boundary = BoundaryImpl.createBoundary(9, 9);
+    private static final Boundary boundary = BoundaryImpl.createBoundary(10, 10);
     private static final int ROWS = boundary.getVerticalBound();
     private static final int COLUMNS = boundary.getHorizontalBound();
 
@@ -30,6 +30,9 @@ public final class Ruleset {
         return true;
     }
 
+    public static Boundary getBoundary() {
+        return boundary; // boundary is immutable
+    }
     public static int getRows() {
         return Ruleset.ROWS;
     }

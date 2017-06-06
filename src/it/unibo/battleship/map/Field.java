@@ -17,4 +17,8 @@ public interface Field {
 
 	// TODO: move to an utility class
 	char[][] getMatrix();
+
+	char[][] getViewByOwner();
+
+	char[][] getViewByEnemy();
 }
