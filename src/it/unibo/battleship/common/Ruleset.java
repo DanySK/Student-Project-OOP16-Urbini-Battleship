@@ -7,7 +7,7 @@ import it.unibo.battleship.ships.Ship;
  * Some rules can be changed manually.
  */
 public final class Ruleset {
-    private static final Boundary BOUNDARY = BoundaryImpl.createBoundary(9, 9);
+    private static final Boundary BOUNDARY = BoundaryImpl.createBoundary(10, 10);
     private static final boolean SHOOT_AGAIN_AFTER_HIT = false;
 
     private Ruleset() {}

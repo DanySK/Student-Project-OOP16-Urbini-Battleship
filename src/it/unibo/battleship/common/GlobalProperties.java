@@ -25,6 +25,8 @@ public final class GlobalProperties {
 			"Invalid artificial intelligence level";
 	public static final String INVALID_SHIP_SIZE =
 			"Invalid ship size";
+	public static final String INVALID_GENERATED_SHOTS_STATE =
+			"Shots generated were more than the actual map size";
 
 	private GlobalProperties() {}
 

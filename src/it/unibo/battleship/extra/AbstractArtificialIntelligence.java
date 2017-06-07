@@ -1,9 +1,6 @@
 package it.unibo.battleship.extra;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.common.Point2dImpl;
+import it.unibo.battleship.common.*;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.shots.Shot;
@@ -11,6 +8,7 @@ import it.unibo.battleship.shots.ShotImpl;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +16,7 @@ import java.util.Random;
  * Created by fabio.urbini on 05/06/2017.
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
-	final Boundary boundary;
+	private final Boundary boundary;
 
 	private AbstractArtificialIntelligence(final Boundary boundary) {
 		this.boundary = boundary;
@@ -30,7 +28,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		switch(level) {
 			case FREE_WIN: return new FreeWinAI(boundary);
 			case SUPER_EASY: throw new UnsupportedOperationException();
-			case EASY: throw new UnsupportedOperationException();
+			case EASY: return new EasyAI(boundary);
 			case AVERAGE: throw new UnsupportedOperationException();
 			case HARD: throw new UnsupportedOperationException();
 			case SUPER_HARD: throw new UnsupportedOperationException();
@@ -45,6 +43,13 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		AVERAGE,
 		HARD,
 		SUPER_HARD;
+	}
+
+	public final Boundary getBoundary() {
+		return BoundaryImpl.createBoundary(
+				this.boundary.getColumnsCount(),
+				this.boundary.getRowsCount()
+		);
 	}
 
 	private static final class FreeWinAI extends AbstractArtificialIntelligence {
@@ -76,11 +81,14 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 	}
 
 	private static final class EasyAI extends AbstractArtificialIntelligence {
-		List<Integer> indexesGenerated;
+		final List<Integer> values;
+		final int max;
 
 		private EasyAI(final Boundary boundary) {
 			super(boundary);
-			this.indexesGenerated = new ArrayList<>();
+			max = boundary.getColumnsCount() * boundary.getRowsCount();
+			this.values = new ArrayList<>(max);
+			setUp();
 		}
 
 		@Override
@@ -90,9 +98,38 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
 		@Override
 		public Shot createShot(final Field field) {
-			return null;
+			if (hasNextInt()) {
+				return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(getRandomInt(), field.getBoundary()));
+			}
+			// There is no way the fleet couldn't be sunk by this time
+			// Because all shots were generated.
+			throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
 		}
 
+		private void setUp() {
+			for (int i = 0; i < max; i++) {
+				values.add(i);
+			}
+			Collections.shuffle(values);
+		}
 
+		private int getRandomInt() {
+			if (!hasNextInt()) {
+				throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
+			}
+
+			final int index = new Random()
+					.ints(0, values.size())
+					.limit(1)
+					.iterator()
+					.nextInt();
+			final int val = values.get(index);
+			values.remove(index);
+			return val;
+		}
+
+		private boolean hasNextInt() {
+			return !values.isEmpty();
+		}
 	}
 }

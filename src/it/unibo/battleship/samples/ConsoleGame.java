@@ -3,6 +3,7 @@ package it.unibo.battleship.samples;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
+import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldHelper;
 import it.unibo.battleship.map.FieldImpl;
@@ -31,21 +32,21 @@ public final class ConsoleGame {
 
 		// Placing the fleet in the field
 		placeFleet(field1, fleet);
-
-		do {
-			shots++;
-			Shot s = AbstractArtificialIntelligence
-					.createArtificialIntelligence(
-							AbstractArtificialIntelligence.Level.FREE_WIN,
-							field1.getBoundary()
-					).createShot(field1);
+		ArtificialIntelligence ai = AbstractArtificialIntelligence
+				.createArtificialIntelligence(
+						AbstractArtificialIntelligence.Level.EASY,
+						field1.getBoundary()
+				);
+		while (!fleet.isSunk() && shots < 100) {
+			Shot s = ai.createShot(field1);
 			field1.updateStateWithShot(s);
 			stampaField(field1);
-		} while (!fleet.isSunk());
-
-		if (shots > 1000) {
-			System.out.println("There is no way you can lose to the AI");
+			System.out.println(s);
+			System.out.println(++shots);
 		}
+
+		// TODO: fleet wasn't sunk. WHY?
+		System.out.println(fleet.isSunk());
 		System.out.println("The end!");
 		System.out.println(shots);
 	}

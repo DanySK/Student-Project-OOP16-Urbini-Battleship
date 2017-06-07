@@ -3,7 +3,6 @@ package it.unibo.battleship.ships;
 import com.google.common.base.Objects;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.GlobalProperties.ShipRules;
-import it.unibo.battleship.common.Ruleset;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,12 +92,7 @@ public class FleetImpl implements Fleet {
 
     @Override
     public boolean isSunk() {
-        for (final Ship ship : this.ships) {
-            if (!ship.isSunk()) {
-                return false;
-            }
-        }
-        return true;
+        return this.ships.stream().allMatch(Ship::isSunk);
     }
 
     @Override
