@@ -10,20 +10,25 @@ import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by fabio.urbini on 05/06/2017.
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
+	final Boundary boundary;
 
-	private AbstractArtificialIntelligence() {
-
+	private AbstractArtificialIntelligence(final Boundary boundary) {
+		this.boundary = boundary;
 	}
 
-	public final static ArtificialIntelligence createArtificialIntelligence(final Level level) {
+	public final static ArtificialIntelligence createArtificialIntelligence(
+			final Level level, final Boundary boundary) {
+
 		switch(level) {
-			case FREE_WIN: return new FreeWinAI();
+			case FREE_WIN: return new FreeWinAI(boundary);
 			case SUPER_EASY: throw new UnsupportedOperationException();
 			case EASY: throw new UnsupportedOperationException();
 			case AVERAGE: throw new UnsupportedOperationException();
@@ -42,7 +47,11 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		SUPER_HARD;
 	}
 
-	private static final class FreeWinAI implements ArtificialIntelligence {
+	private static final class FreeWinAI extends AbstractArtificialIntelligence {
+
+		private FreeWinAI(final Boundary boundary) {
+			super(boundary);
+		}
 
 		@Override
 		public Fleet createFleet() {
@@ -64,5 +73,26 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
 			return new Point2dImpl(column, row);
 		}
+	}
+
+	private static final class EasyAI extends AbstractArtificialIntelligence {
+		List<Integer> indexesGenerated;
+
+		private EasyAI(final Boundary boundary) {
+			super(boundary);
+			this.indexesGenerated = new ArrayList<>();
+		}
+
+		@Override
+		public Fleet createFleet() {
+			return null;
+		}
+
+		@Override
+		public Shot createShot(final Field field) {
+			return null;
+		}
+
+
 	}
 }

@@ -1,3 +1,15 @@
+TODO: Console game:
+
+Place a fleet (player)
+Place a random fleet (AI)
+-Shoot once
+-Let the AI shoot
+Fleet.Sunk -> end of the game
+
+1)row, column must be in the boundary
+2)row, column must not overlap (when placing ships)
+3)
+
 TODO: togliere la dipendenza da MAX_SIZE ( in global properties)
 TODO: Per creare un nuovo tipo di nave, sono da andar a modificare tre file (Ruleset, Global Properties e AbstractShip)
 - DI BASE VIENE USATA DIREZIONE EAST

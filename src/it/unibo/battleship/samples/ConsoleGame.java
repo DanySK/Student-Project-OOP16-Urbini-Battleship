@@ -36,9 +36,8 @@ public final class ConsoleGame {
 			shots++;
 			Shot s = AbstractArtificialIntelligence
 					.createArtificialIntelligence(
-							AbstractArtificialIntelligence
-							.Level
-							.FREE_WIN
+							AbstractArtificialIntelligence.Level.FREE_WIN,
+							field1.getBoundary()
 					).createShot(field1);
 			field1.updateStateWithShot(s);
 			stampaField(field1);
