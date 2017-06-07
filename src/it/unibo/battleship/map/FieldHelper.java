@@ -1,81 +1,84 @@
 package it.unibo.battleship.map;
 
 /**
- * Created by fabio.urbini on 06/06/2017.
+ * Helper class for the Field.
+ * @author fabio.urbini
  */
+// TODO: move out magic numbers and magic chars?
 public final class FieldHelper {
-	private FieldHelper() {}
+    private enum PlayerState { OWNER, ENEMY }
 
-	/**
-	 * Returns a representation of the field
-	 * viewied by the owner of the field
-	 * E stands for Empty
-	 * M stands for Missed
-	 * @ stands for ship present
-	 * * stands for ship hit
-	 * @return  a representation of the field
-	 * viewed by the owner of the field
-	 */
-	public static char[][] getViewByOwner(Field field) {
-		return getViewByPlayerState(field, PlayerState.OWNER);
-	}
+    private FieldHelper() {}
 
-	/**
-	 * Returns a representation of the field
-	 * viewed by the enemy.
-	 * E stands for Empty
-	 * M stands for Missed
-	 * @ stands for ship present
-	 * * stands for ship hit
-	 * @return a representation of the field
-	 * seen by the enemy
-	 */
-	public static char[][] getViewByEnemy(final Field field) {
-		return getViewByPlayerState(field, PlayerState.ENEMY);
-	}
+    private static char getValueByPlayerState(final PlayerState playerState, final FieldCell cell) {
+        if (cell.isEmpty()) {
+            return 'E';
+        }
 
-	private static char[][] getViewByPlayerState(final Field field,
-	                                             final PlayerState playerState) {
-		final int rows = field.getBoundary().getRowsCount();
-		final int columns = field.getBoundary().getColumnsCount();
+        if (cell.isMissed()) {
+            return 'M';
+        }
 
-		char[][] view = new char[rows][columns];
-		for (int i = 0; i < rows; i++ ) {
-			for (int j = 0; j < columns; j++ ) {
-				view[i][j] = getValueByPlayerState(
-						playerState,
-						field.getFieldCells()[j][i]
-				);
-			}
-		}
-		return view;
-	}
+        if (cell.isHit()) {
+            return '*';
+        }
 
-	private static char getValueByPlayerState(final PlayerState playerState,
-	                                   final FieldCell cell) {
-		if (cell.isEmpty()) {
-			return 'E';
-		}
-		if (cell.isMissed()) {
-			return 'M';
-		}
+        if (cell.isPresent()) {
+            switch (playerState) {
+            case OWNER :
+                return '@';
 
-		if (cell.isHit()) {
-			return '*';
-		}
+            case ENEMY :
+                return 'E';
 
-		if (cell.isPresent()) {
-			switch(playerState) {
-				case OWNER: return '@';
-				case ENEMY: return 'E';
-				default: throw new IllegalStateException();
-			}
-		}
-		throw new IllegalStateException(); // TODO: Exception?
-	}
+            default :
+                throw new IllegalStateException();
+            }
+        }
 
-	private enum PlayerState {
-		OWNER,
-		ENEMY
-	}
+        throw new IllegalStateException();    // TODO: Exception?
+    }
+
+    /**
+     * Returns a representation of the field
+     * viewed by the enemy.
+     * E stands for Empty
+     * M stands for Missed
+     * @ stands for ship present
+     * * stands for ship hit
+     * @return a representation of the field
+     * seen by the enemy
+     */
+    public static char[][] getViewByEnemy(final Field field) {
+        return getViewByPlayerState(field, PlayerState.ENEMY);
+    }
+
+    /**
+     * Returns a representation of the field
+     * viewied by the owner of the field
+     * E stands for Empty
+     * M stands for Missed
+     * @ stands for ship present
+     * * stands for ship hit
+     * @return  a representation of the field
+     * viewed by the owner of the field
+     */
+    public static char[][] getViewByOwner(Field field) {
+        return getViewByPlayerState(field, PlayerState.OWNER);
+    }
+
+    private static char[][] getViewByPlayerState(final Field field, final PlayerState playerState) {
+        final int rows    = field.getBoundary().getRowsCount();
+        final int columns = field.getBoundary().getColumnsCount();
+        char[][]  view    = new char[rows][columns];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                view[i][j] = getValueByPlayerState(playerState, field.getFieldCells()[j][i]);
+            }
+        }
+
+        return view;
+    }
 }
+

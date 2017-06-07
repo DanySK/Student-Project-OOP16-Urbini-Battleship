@@ -13,28 +13,29 @@ import it.unibo.battleship.shots.Shot;
  */
 public interface Field {
 
-	/**
-	 * Updates the field with a shot
-	 * @param shot any kind of shot {@link Shot}
-	 */
-	void updateStateWithShot(Shot shot);
+    /**
+     * Places a ship in the field
+     * @param ship ship to place
+     * @param point position where to place the ship
+     */
+    void placeShip(Ship ship, Point2d point);
 
-	/**
-	 * Places a ship in the field
-	 * @param ship ship to place
-	 * @param point position where to place the ship
-	 */
-	void placeShip(Ship ship, Point2d point);
+    /**
+     * Updates the field with a shot
+     * @param shot any kind of shot {@link Shot}
+     */
+    void updateStateWithShot(Shot shot);
 
-	/**
-	 * Returns a copy of the field cells
-	 * @return a copy of the field cells
-	 */
-	FieldCell[][] getFieldCells();
+    /**
+     * Returns a copy of the boundary
+     * @return a copy of the boundary
+     */
+    Boundary getBoundary();
 
-	/**
-	 * Returns a copy of the boundary
-	 * @return a copy of the boundary
-	 */
-	Boundary getBoundary();
+    /**
+     * Returns a copy of the field cells
+     * @return a copy of the field cells
+     */
+    FieldCell[][] getFieldCells();
 }
+

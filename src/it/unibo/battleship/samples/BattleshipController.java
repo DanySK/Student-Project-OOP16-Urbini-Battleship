@@ -21,34 +21,35 @@ public enum BattleshipController {
     private Fleet aiFleet;
     private Field aiField;
 
+    public boolean checkToContinue() {
+        return !aiFleet.isSunk();
+    }
+
     public void initialize() {
         aiFleet = FleetImpl.getNewFleet();
         aiField = FieldImpl.createField(Ruleset.getBoundary());
         placeFleet(aiField, aiFleet);
-
     }
 
-    public void shoot(final int row, final int column) {
-        Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
-        aiField.updateStateWithShot(shot);
-    }
-
-    public boolean checkToContinue() {
-       return !aiFleet.isSunk();
-    }
-
-    private static void placeFleet(final Field field,
-                                   final Fleet fleet) {
-        int i = 0, j = 0;
-
+    private static void placeFleet(final Field field, final Fleet fleet) {
+        int  i = 0,
+             j = 0;
         Ship ship;
+
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
                 ship = fleet.getNextNonPlacedShip().get();
                 field.placeShip(ship, new Point2dImpl(i++, j++));
+
                 // Placing the ships diagonally
             }
         }
+    }
+
+    public void shoot(final int row, final int column) {
+        Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
+
+        aiField.updateStateWithShot(shot);
     }
 
     public char[][] getCharMap() {
@@ -59,3 +60,4 @@ public enum BattleshipController {
         return aiField.getBoundary().getColumnsCount();
     }
 }
+

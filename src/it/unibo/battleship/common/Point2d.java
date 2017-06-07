@@ -7,10 +7,10 @@ package it.unibo.battleship.common;
  */
 public interface Point2d {
 
-	/**
-	 * Returns the X coordinate (column)
-	 * @return the x coordinate (column)
-	 */
+    /**
+     * Returns the X coordinate (column)
+     * @return the x coordinate (column)
+     */
     int getX();
 
     /**
@@ -19,3 +19,4 @@ public interface Point2d {
      */
     int getY();
 }
+

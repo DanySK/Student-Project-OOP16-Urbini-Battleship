@@ -7,7 +7,5 @@ package it.unibo.battleship.ships;
  * @author fabio.urbini
  *
  */
-public enum ShipDirection {
-	EAST,
-	SOUTH
-}
+public enum ShipDirection { EAST, SOUTH }
+

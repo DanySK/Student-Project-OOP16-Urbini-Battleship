@@ -13,57 +13,61 @@ import java.util.List;
  * @author fabio.urbini
  */
 public abstract class ShotCollection {
+    private ShotCollection() {}
 
-	private ShotCollection() { }
+    public enum Type {
+        X(5), T(5), I(3);
 
-	public abstract List<Shot> getShotCollection(final Point2d point2d);
+        private final int totalSize;
 
-	public final static ShotCollection getShotCollectionByType(final Type shotType) {
-		switch(shotType) {
-			case X: return new XShot();
-			case T: return new TShot();
-			case I: return new IShot();
-			default: throw new IllegalArgumentException(GlobalProperties.INVALID_SHOT_TYPE);
-		}
-	}
+        Type(final int totalSize) {
+            this.totalSize = totalSize;
+        }
 
-	public enum Type {
-		X(5),
-		T(5),
-		I(3);
+        public int getTotalSize() {
+            return this.totalSize;
+        }
+    }
 
-		private final int totalSize;
+    public abstract List<Shot> getShotCollection(final Point2d point2d);
 
-		Type(final int totalSize) {
-			this.totalSize = totalSize;
-		}
+    public final static ShotCollection getShotCollectionByType(final Type shotType) {
+        switch (shotType) {
+        case X :
+            return new XShot();
 
-		public int getTotalSize() {
-			return this.totalSize;
-		}
-	}
+        case T :
+            return new TShot();
 
-	private static final class XShot extends ShotCollection {
+        case I :
+            return new IShot();
 
-		@Override
-		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new UnsupportedOperationException();
-		}
-	}
+        default :
+            throw new IllegalArgumentException(GlobalProperties.INVALID_SHOT_TYPE);
+        }
+    }
 
-	private static final class TShot extends ShotCollection {
+    private static final class IShot extends ShotCollection {
+        @Override
+        public List<Shot> getShotCollection(final Point2d point2d) {
+            throw new UnsupportedOperationException();
+        }
+    }
 
-		@Override
-		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new UnsupportedOperationException();
-		}
-	}
 
-	private static final class IShot extends ShotCollection {
+    private static final class TShot extends ShotCollection {
+        @Override
+        public List<Shot> getShotCollection(final Point2d point2d) {
+            throw new UnsupportedOperationException();
+        }
+    }
 
-		@Override
-		public List<Shot> getShotCollection(final Point2d point2d) {
-			throw new UnsupportedOperationException();
-		}
-	}
+
+    private static final class XShot extends ShotCollection {
+        @Override
+        public List<Shot> getShotCollection(final Point2d point2d) {
+            throw new UnsupportedOperationException();
+        }
+    }
 }
+

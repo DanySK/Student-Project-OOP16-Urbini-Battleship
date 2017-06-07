@@ -12,40 +12,40 @@ import java.util.Optional;
  *
  */
 public interface Fleet {
+    void addShip(Ship s);
 
-	List<Ship> getAllShips();
+    void resetFleetPlacement();
 
-	/**
-	 * Returns all non placed ships
-	 * @return all non placed ships
-	 */
-	List<Ship> getAllNonPlacedShips();
+    /**
+     * Returns all non placed ships
+     * @return all non placed ships
+     */
+    List<Ship> getAllNonPlacedShips();
 
-	/**
-	 * Returns all ships of a type
-	 * @param shipType {@see GlobalProperties.ShipRules}
-	 * @return all ships of a type
-	 */
-	List<Ship> getAllShipsByType(GlobalProperties.ShipRules shipType);
+    List<Ship> getAllShips();
 
-	/**
-	 * Returns the next ship of a type
-	 * @param shipType {@see GlobalProperties.ShipRules}
-	 * @return the next ship of a type
-	 */
-	Optional<Ship> getNextShipByType(GlobalProperties.ShipRules shipType);
+    /**
+     * Returns all ships of a type
+     * @param shipType {@see GlobalProperties.ShipRules}
+     * @return all ships of a type
+     */
+    List<Ship> getAllShipsByType(GlobalProperties.ShipRules shipType);
 
-	/**
-	 * Returns the next non placed ship
-	 * @return the next non placed ship
-	 */
-	Optional<Ship> getNextNonPlacedShip();
+    /**
+     * Returns the next non placed ship
+     * @return the next non placed ship
+     */
+    Optional<Ship> getNextNonPlacedShip();
 
-	void addShip(Ship s);
+    /**
+     * Returns the next ship of a type
+     * @param shipType {@see GlobalProperties.ShipRules}
+     * @return the next ship of a type
+     */
+    Optional<Ship> getNextShipByType(GlobalProperties.ShipRules shipType);
 
-	void resetFleetPlacement();
+    boolean isReady();
 
-	boolean isSunk();
-
-	boolean isReady();
+    boolean isSunk();
 }
+

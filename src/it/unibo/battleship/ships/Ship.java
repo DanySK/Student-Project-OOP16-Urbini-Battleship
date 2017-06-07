@@ -11,23 +11,24 @@ import java.util.Optional;
  * Created by fabio.urbini on 05/06/2017.
  */
 public interface Ship extends Serializable {
-	boolean isSunk();
+    boolean containsPosition(Point2d point);
 
-	int getSize();
+    void place(Point2d start);
 
-	Optional<Point2d> getPosition();
+    void resetPlacement();
 
-	List<Point2d> getAllPositions();
+    boolean shoot(Shot shot);
 
-	List<Point2d> getProjectionPoints (Point2d point);
+    List<Point2d> getAllPositions();
 
-	boolean containsPosition(Point2d point);
+    boolean isPlaced();
 
-	void place(Point2d start);
+    Optional<Point2d> getPosition();
 
-	boolean isPlaced();
+    List<Point2d> getProjectionPoints(Point2d point);
 
-	boolean shoot(Shot shot);
+    int getSize();
 
-	void resetPlacement();
+    boolean isSunk();
 }
+

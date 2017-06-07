@@ -1,6 +1,7 @@
 package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
+
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Ruleset;
@@ -18,17 +19,20 @@ public final class ShotImpl implements Shot {
     public static ShotImpl createShot(Point2d p) {
         if (Ruleset.isPointWithinLimits(p)) {
             return new ShotImpl(p);
-        } else throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
-    }
-    @Override
-    public Point2d getPoint() {
-        return this.point;
+        } else {
+            throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
+        }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
+        }
 
         final ShotImpl that = (ShotImpl) o;
 
@@ -44,4 +48,10 @@ public final class ShotImpl implements Shot {
     public String toString() {
         return this.point.toString();
     }
+
+    @Override
+    public Point2d getPoint() {
+        return this.point;
+    }
 }
+

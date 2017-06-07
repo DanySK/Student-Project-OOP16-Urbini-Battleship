@@ -12,7 +12,7 @@ public final class BoundaryImpl implements Boundary {
 
     private BoundaryImpl(final int columnsCount, final int verticalBound) {
         this.columnsCount = columnsCount;
-        this.rowsCount = verticalBound;
+        this.rowsCount    = verticalBound;
     }
 
     /**
@@ -20,31 +20,26 @@ public final class BoundaryImpl implements Boundary {
      * @param rowsCount Vertical bound
      */
     public static BoundaryImpl createBoundary(final int columnsCount, final int rowsCount) {
-        if (columnsCount < 0 || rowsCount < 0) {
+        if ((columnsCount < 0) || (rowsCount < 0)) {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
         }
+
         return new BoundaryImpl(columnsCount, rowsCount);
     }
 
     @Override
-    public final int getColumnsCount() {
-        return this.columnsCount;
-    }
-
-    @Override
-    public final int getRowsCount() {
-        return this.rowsCount;
-    }
-
-    @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
+        }
 
         final BoundaryImpl that = (BoundaryImpl) o;
 
-        return Objects.equal(this.columnsCount, that.columnsCount) &&
-                Objects.equal(this.rowsCount, that.rowsCount);
+        return Objects.equal(this.columnsCount, that.columnsCount) && Objects.equal(this.rowsCount, that.rowsCount);
     }
 
     @Override
@@ -56,4 +51,15 @@ public final class BoundaryImpl implements Boundary {
     public String toString() {
         return " x : " + this.columnsCount + " y : " + rowsCount;
     }
+
+    @Override
+    public final int getColumnsCount() {
+        return this.columnsCount;
+    }
+
+    @Override
+    public final int getRowsCount() {
+        return this.rowsCount;
+    }
 }
+

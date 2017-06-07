@@ -18,3 +18,4 @@ public interface Boundary {
      */
     int getRowsCount();
 }
+

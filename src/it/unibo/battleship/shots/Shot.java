@@ -8,6 +8,6 @@ import it.unibo.battleship.common.Point2d;
  * @author fabio.urbini
  */
 public interface Shot {
-
-	Point2d getPoint();
+    Point2d getPoint();
 }
+

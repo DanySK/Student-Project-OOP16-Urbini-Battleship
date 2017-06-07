@@ -12,8 +12,8 @@ import it.unibo.battleship.shots.Shot;
  * @author fabio.urbini
  */
 public interface ArtificialIntelligence {
-
     Fleet createFleet();
-    Shot createShot(Field field);
 
+    Shot createShot(Field field);
 }
+

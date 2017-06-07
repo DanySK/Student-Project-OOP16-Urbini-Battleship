@@ -13,9 +13,5 @@ package it.unibo.battleship.map;
  * @author fabio.urbini
  *
  */
-public enum State {
-	WATER,
-	HIT,
-	MISSED,
-	PRESENT
-}
+public enum State { WATER, HIT, MISSED, PRESENT }
+

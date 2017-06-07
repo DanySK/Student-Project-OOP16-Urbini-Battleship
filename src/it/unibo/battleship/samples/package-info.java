@@ -1,3 +1,4 @@
+
 /**
  * This package contains all the sample classes
  * to play a battleship game.
@@ -5,3 +6,4 @@
  *
  */
 package it.unibo.battleship.samples;
+
