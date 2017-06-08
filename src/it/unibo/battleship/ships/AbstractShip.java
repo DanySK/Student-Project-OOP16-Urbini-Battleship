@@ -11,7 +11,18 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.common.*;
 import it.unibo.battleship.shots.Shot;
 
+/**
+ * This abstract class is to represent a Ship.
+ * @author fabio.urbini
+ *
+ */
 public abstract class AbstractShip implements Ship {
+	/*
+	 * This class hasn't got any abstract method yet except for
+	 * toString. It was made abstract for future purposes.
+	 * ie: a ship implementation can take more/less damage than
+	 * other ships.
+	 */
     private static final long serialVersionUID = 4917741645660917676L;
 
     // Standard direction = EAST (default)
@@ -105,7 +116,7 @@ public abstract class AbstractShip implements Ship {
     @Override
     public void resetPlacement() {
         this.placed = false;
-        pos         = null;
+        pos         = Optional.empty();
     }
 
     @Override
@@ -114,6 +125,7 @@ public abstract class AbstractShip implements Ship {
             hitPoints.add(shot.getPoint());
 
             if (isSunk()) {
+            	// TODO: remove
                 System.out.println(toString() + " affondato!");
             }
 
@@ -156,7 +168,7 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public boolean isSunk() {
-        if (hitPoints.size() == this.getSize()) {
+        if (this.hitPoints.size() >= this.getSize()) {
             return true;
         }
 
@@ -206,7 +218,8 @@ public abstract class AbstractShip implements Ship {
 
         @Override
         public int getSize() {
-            return GlobalProperties.ShipRules.BATTLESHIP.getSize();
+            //return GlobalProperties.ShipRules.BATTLESHIP.getSize();
+        	return GlobalProperties.BATTLESHIP_SIZE;
         }
     }
 
@@ -230,7 +243,8 @@ public abstract class AbstractShip implements Ship {
 
         @Override
         public int getSize() {
-            return GlobalProperties.ShipRules.CRUISER.getSize();
+            //return GlobalProperties.ShipRules.CRUISER.getSize();
+        	return GlobalProperties.CRUISER_SIZE;
         }
     }
 
@@ -254,7 +268,8 @@ public abstract class AbstractShip implements Ship {
 
         @Override
         public int getSize() {
-            return GlobalProperties.ShipRules.SUBMARINE.getSize();
+            //return GlobalProperties.ShipRules.SUBMARINE.getSize();
+        	return GlobalProperties.SUBMARINE_SIZE;
         }
     }
 }

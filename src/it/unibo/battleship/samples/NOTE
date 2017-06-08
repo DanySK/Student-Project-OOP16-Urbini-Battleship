@@ -1,3 +1,6 @@
+TODO: isSunk non funziona più per qualche motivo
+JAVADOC di classi tipo Ship, AbstractShip
+
 TODO: Console game:
 
 Place a fleet (player)
@@ -23,7 +26,7 @@ EXCEPTIONS MUOVERE INSIEME A POINTS, SHOT, ECC...
 
 	Eccezioni da usare principalmente : IllegalState  /  IllegalArgument
 	Possibili eccezioni :
-	
+
 	Nave affondata : si cerca di posizionare    ( illegal state )
 	Flotta affondata : si continua a sparare/giocare?   ( illegal state )
 	Posizione fuori dal bordo ( illegal argument --> posizionamento nave o sparo )
@@ -40,16 +43,16 @@ Click per piazzare una nave :
 	- viene salvata temporaneamente la posizione ( x, y )
 	- la cella è libera?
 	- la nave è entro il bordo della mappa? ( dimensione + x, y)
-	- la nave non tocca altre navi? 
+	- la nave non tocca altre navi?
 	- OK, nave piazzata
-	
+
 	- la nave può esser ripiazzata in qualche modo
 		- nave entro il bordo?
 		- la nave non tocca altre navi?
-		
+
 	------ traduzione in passaggi ------
-	
-	
+
+
 
 
 
@@ -60,10 +63,10 @@ Click per piazzare una nave :
 
 Fleet -> getAllNonPlacedShips -> serve per piazzare le navi
 		-> getAllNonPlacedShipsByType (Class ... )
-		
+
 		POSSIBILI PROBLEMI : prendere la prossima nave da piazzare
 		(Può esser chiesta in modo concorrente da più istanze e causare problemi...?)
-		
+
 
 
 ***** PROBLEMA : La flotta conosce le dimensioni del campo?
@@ -85,14 +88,14 @@ TODO :
 
 
 Fare tutti i controlli sulla mappa e sull'aggiunta di navi
-	
+
 		Ruleset controlla che i punti siano dentro la mappa
-		
-			STANDARD : SEMPRE A DESTRA 
+
+			STANDARD : SEMPRE A DESTRA
 			Posizione { Punto, direzione }
 		oppure...
 			Posizione { Punto, direzione, lunghezza }
-			
+
 
 FACTORY e BUILDER per creare nuove flotte in modo semplice senza tanti problemi
 Iniziare a pensare di fare navi solo di diversa grandezza e non di diversa forma

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by fabio.urbini on 05/06/2017.
+ * TODO: javadoc
+ * @author fabio.urbini
  */
 public interface Ship extends Serializable {
     boolean containsPosition(Point2d point);

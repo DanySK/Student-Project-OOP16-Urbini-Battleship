@@ -55,11 +55,10 @@ public final class ConsoleGame {
     private static void placeFleet(final Field field, final Fleet fleet) {
         int  i = 0,
              j = 0;
-        Ship ship;
 
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
-                ship = fleet.getNextNonPlacedShip().get();
+            	final Ship ship = fleet.getNextNonPlacedShip().get();
                 field.placeShip(ship, new Point2dImpl(i++, j++));
             }
         }
