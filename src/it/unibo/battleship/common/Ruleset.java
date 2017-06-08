@@ -2,6 +2,8 @@ package it.unibo.battleship.common;
 
 import it.unibo.battleship.ships.Ship;
 
+import java.util.stream.IntStream;
+
 /**
  * Represents the ruleset of the battlefield game.
  * Some rules can be changed manually.
@@ -31,13 +33,9 @@ public final class Ruleset {
         // Standard direction : east
         int length = ship.getSize();
 
-        for (int x = point.getX(); x < (point.getX() + length); x++) {
-            if (!Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY()))) {
-                return false;
-            }
-        }
-
-        return true;
+        return IntStream
+                .range(point.getX(), (point.getX() + length))
+                .allMatch(x -> Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY())));
     }
 }
 

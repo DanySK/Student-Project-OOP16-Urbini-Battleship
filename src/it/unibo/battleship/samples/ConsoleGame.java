@@ -40,16 +40,11 @@ public final class ConsoleGame {
             AbstractArtificialIntelligence.createArtificialIntelligence(AbstractArtificialIntelligence.Level.EASY,
                                                                         field1.getBoundary());
 
-        for (Ship s : fleet.getAllShips()) {
-            System.out.println(s.getAllPositions());
-        }
-        int i = 0;
         while (!fleet.isSunk() && (shots < 100)) {
-//            Shot s = ai.createShot(field1);
-            Shot s = ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(i++, field1.getBoundary()));
+            Shot s = ai.createShot(field1); // RIMETTERE
             field1.updateStateWithShot(s);
             stampaField(field1);
-            System.out.println(s);
+            System.out.println("shot : " + s);
             System.out.println(++shots);
         }
 

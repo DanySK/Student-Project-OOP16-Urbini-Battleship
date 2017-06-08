@@ -46,19 +46,9 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public boolean containsPosition(final Point2d point) {
-//        return this.getAllPositions()
-//                   .stream()
-//                   .anyMatch(p -> ((p.getX() == point.getX()) && (p.getY() == point.getY())));
-
-
-        for (Point2d p : this.getAllPositions()) {
-            if (((p.getX() == point.getX()) && (p.getY() == point.getY()))) {
-                System.out.println("ciao");
-                return true;
-            }
-        }
-        return false;
-//        return this.getAllPositions().contains(point);
+        return this.getAllPositions()
+                   .stream()
+                   .anyMatch(p -> ((p.getX() == point.getX()) && (p.getY() == point.getY())));
     }
 
     /**
@@ -131,23 +121,10 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public boolean shoot(final Shot shot) {
-        if (this instanceof  Submarine) {
-            //
-        }
         if (containsPosition(shot.getPoint())) {
             hitPoints.add(shot.getPoint());
-
-            if(hitPoints.size() > 1) {
-                System.out.println("shots on this ship > 1 ");
-            }
-            if (isSunk()) {
-            	// TODO: remove
-                System.out.println(toString() + " affondato!");
-            }
-            System.out.println("Shot at " + shot.getPoint());
             return true;
         }
-
         return false;
     }
 

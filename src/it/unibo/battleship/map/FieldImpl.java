@@ -50,7 +50,7 @@ public final class FieldImpl implements Field {
         }
 
         final Point2d p      = shot.getPoint();
-        this.fieldCells[p.getX()][p.getY()].shoot(shot);
+        this.fieldCells[p.getY()][p.getX()].shoot(shot);
     }
 
     private void validateShipPlacement(final Ship ship, final Point2d point) {
