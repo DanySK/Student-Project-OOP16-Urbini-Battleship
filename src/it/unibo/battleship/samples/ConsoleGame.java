@@ -1,10 +1,5 @@
 package it.unibo.battleship.samples;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import it.unibo.battleship.common.Point2dHelper;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
@@ -12,12 +7,10 @@ import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldHelper;
 import it.unibo.battleship.map.FieldImpl;
-import it.unibo.battleship.ships.AbstractShip;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
-import it.unibo.battleship.shots.ShotImpl;
 
 /**
  * Simple console game

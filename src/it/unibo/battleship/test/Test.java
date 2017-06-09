@@ -2,7 +2,7 @@
 /**
  *
  */
-package it.unibo.battleship.junit;
+package it.unibo.battleship.test;
 
 import static org.junit.Assert.*;
 
