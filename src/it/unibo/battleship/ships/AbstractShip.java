@@ -25,18 +25,16 @@ public abstract class AbstractShip implements Ship {
 	 * other ships.
 	 */
     private static final long serialVersionUID = 4917741645660917676L;
-
-    // Standard direction = EAST (default)
-    private ShipDirection       shipDirection;
-    private Optional<Point2d>   pos;    // final - OPTIONAL?
+    private ShipDirection direction;
+    private Optional<Point2d>   pos;    // TODO: remove optional in the future
     private boolean             placed;
     private final List<Point2d> hitPoints;
 
     private AbstractShip() {
         this.pos           = Optional.empty();
         this.placed        = false;
-        this.shipDirection = ShipDirection.EAST;
-        hitPoints          = new ArrayList<Point2d>();
+        this.direction = ShipDirection.EAST;
+        hitPoints          = new ArrayList<>();
     }
 
     private AbstractShip(final Point2d start) {
@@ -56,7 +54,7 @@ public abstract class AbstractShip implements Ship {
      * Creates a ship
      * @param size size of the ship. The value must be
      * between 0 and {@see GlobalProperties.MAX_SIZE}
-     * @return
+     * @return the ship created
      */
     public static Ship createShip(final int size) {
         if ((size < 0) || (size > GlobalProperties.MAX_SIZE)) {
@@ -93,7 +91,7 @@ public abstract class AbstractShip implements Ship {
 
         final AbstractShip that = (AbstractShip) o;
 
-        return Objects.equal(this.shipDirection, that.shipDirection)
+        return Objects.equal(this.direction, that.direction)
                && Objects.equal(this.pos, that.pos)
                && Objects.equal(this.placed, that.placed)
                && Objects.equal(this.hitPoints, that.hitPoints);
@@ -101,17 +99,18 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(shipDirection, pos, placed, hitPoints);
+        return Objects.hashCode(direction, pos, placed, hitPoints);
     }
 
     @Override
-    public void place(final Point2d start) {
+    public void place(final Point2d start, final ShipDirection direction) {
         if (!placed) {
             this.pos = Optional.of(start);
             placed   = true;
         } else {
             this.pos = Optional.of(start);
         }
+        this.direction = direction;
     }
 
     @Override
@@ -134,11 +133,11 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public List<Point2d> getAllPositions() {
-        final List<Point2d> tmp = IntStream.range(0, this.getSize())
+        // TODO: direction currently not used (EAST direction as default).
+
+        return IntStream.range(0, this.getSize())
                                      .mapToObj(i -> new Point2dImpl(pos.get().getX() + i, pos.get().getY()))
                                      .collect(Collectors.toList());
-
-        return tmp;
     }
 
     @Override
@@ -147,30 +146,26 @@ public abstract class AbstractShip implements Ship {
     }
 
     @Override
-    public Optional<Point2d> getPosition() {
+    public Optional<Point2d> getStartingPosition() {
         return this.pos;
     }
 
     @Override
     public List<Point2d> getProjectionPoints(final Point2d point) {
-        List<Point2d> points = IntStream.range(point.getX(), (point.getX() + this.getSize()))
+        // TODO: direction currently not used (EAST direction as default).
+
+        return IntStream.range(point.getX(), (point.getX() + this.getSize()))
                                         .mapToObj(x -> new Point2dImpl(x, point.getY()))
                                         .collect(Collectors.toList());
-
-        return points;
     }
 
     @Override
     public boolean isSunk() {
-        if (this.hitPoints.size() >= this.getSize()) {
-            return true;
-        }
+        return this.hitPoints.size() >= this.getSize();
 
-        return false;
     }
 
-
-    private static class AirCarrier extends AbstractShip {
+    private static final class AirCarrier extends AbstractShip {
         private static final long serialVersionUID = -8323321815851042898L;
 
         AirCarrier() {
@@ -194,15 +189,15 @@ public abstract class AbstractShip implements Ship {
     }
 
 
-    private static class Battleship extends AbstractShip {
+    private static final class Battleship extends AbstractShip {
         private static final long serialVersionUID = 8043537272411631772L;
 
-        public Battleship() {
+        private Battleship() {
             super();
         }
 
         @SuppressWarnings("unused")
-        public Battleship(final Point2d start) {
+        private Battleship(final Point2d start) {
             super(start);
         }
 
@@ -219,15 +214,15 @@ public abstract class AbstractShip implements Ship {
     }
 
 
-    private static class Cruiser extends AbstractShip {
+    private static final class Cruiser extends AbstractShip {
         private static final long serialVersionUID = -5532557604937632667L;
 
-        public Cruiser() {
+        private Cruiser() {
             super();
         }
 
         @SuppressWarnings("unused")
-        public Cruiser(final Point2d start) {
+        private Cruiser(final Point2d start) {
             super(start);
         }
 
@@ -244,7 +239,7 @@ public abstract class AbstractShip implements Ship {
     }
 
 
-    private static class Submarine extends AbstractShip {
+    private static final class Submarine extends AbstractShip {
         private static final long serialVersionUID = -2784639518931814680L;
 
         Submarine() {

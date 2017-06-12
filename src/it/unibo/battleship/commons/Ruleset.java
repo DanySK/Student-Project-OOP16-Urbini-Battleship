@@ -14,7 +14,6 @@ public final class Ruleset {
 
     private Ruleset() {}
 
-    @SuppressWarnings("unused")
     public static boolean canShootAgainAfterHit() {
         return SHOOT_AGAIN_AFTER_HIT;
     }
@@ -24,8 +23,8 @@ public final class Ruleset {
     }
 
     public static boolean isPointWithinLimits(final Point2d p) {
-        return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsCount()))
-               && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnsCount()));
+        return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsNumber()))
+               && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnsNumber()));
     }
 
     public static boolean isShipWithinLimits(final Ship ship, final Point2d point) {

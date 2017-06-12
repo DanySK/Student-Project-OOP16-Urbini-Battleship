@@ -20,7 +20,7 @@ public final class Point2dHelper {
 
         // TODO: point must be within the boundary limit
         // boundary(10,10) -> max point 9,9
-        return boundary.getColumnsCount() * point.getY() + point.getX();
+        return boundary.getColumnsNumber() * point.getY() + point.getX();
     }
 
     /**
@@ -33,8 +33,8 @@ public final class Point2dHelper {
 
         // TODO: index must be within the boundary limit
         // boundary(10,10) -> max index = 10*10 - 1
-        final int y = zeroBasedIndex / boundary.getColumnsCount();
-        final int x = zeroBasedIndex % boundary.getColumnsCount();
+        final int y = zeroBasedIndex / boundary.getColumnsNumber();
+        final int x = zeroBasedIndex % boundary.getColumnsNumber();
 
         return new Point2dImpl(x, y);
     }

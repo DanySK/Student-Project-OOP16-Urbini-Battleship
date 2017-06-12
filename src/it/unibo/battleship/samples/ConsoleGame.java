@@ -10,6 +10,7 @@ import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 
 /**
@@ -17,6 +18,9 @@ import it.unibo.battleship.shots.Shot;
  * @author fabio.urbini
  */
 public final class ConsoleGame {
+    private ConsoleGame() {
+    }
+
     public static void main(String[] args) {
         int shots = 0;
 
@@ -54,7 +58,7 @@ public final class ConsoleGame {
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
             	final Ship ship = fleet.getNextNonPlacedShip().get();
-                field.placeShip(ship, new Point2dImpl(i++, j++));
+                field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
             }
         }
 

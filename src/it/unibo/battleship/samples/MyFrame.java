@@ -6,9 +6,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import it.unibo.battleship.commons.Boundary;
 
@@ -33,11 +31,11 @@ public class MyFrame extends JFrame {
     }
 
     private void initialize() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(WIDTH, HEIGHT);
         this.setVisible(true);
 
-        for (int i = 0; i < boundary.getColumnsCount(); i++) {
+        for (int i = 0; i < boundary.getColumnsNumber(); i++) {
             final FieldButton fb = new FieldButton(i, 0);
 
             this.fieldList.add(fb);

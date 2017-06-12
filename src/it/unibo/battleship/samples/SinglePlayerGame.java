@@ -4,16 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import it.unibo.battleship.commons.BoundaryImpl;
-import it.unibo.battleship.commons.Point2dHelper;
-import it.unibo.battleship.commons.Point2dImpl;
-
 import static it.unibo.battleship.samples.BattleshipController.CONTROLLER;
 
 /**
  * @author fabio.urbini
  */
-public class SinglePlayerGame {
+public final class SinglePlayerGame {
+    private SinglePlayerGame() {
+    }
+
     private static String header(final int columnsCount) {
         StringBuilder sb = new StringBuilder("");
 
@@ -22,32 +21,13 @@ public class SinglePlayerGame {
         String values = "0123456789ABCDEFGH";    // raw method to show header
 
         for (int i = 0; i < columnsCount; i++) {
-            sb.append(" " + values.charAt(i) + ' ');
+            sb.append(" ").append(values.charAt(i)).append(' ');
         }
 
         return sb.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(0, 0), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(0, 9), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(0, 10),
-                                                           BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(8, 7), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(6, 7), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(4, 4), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(5, 5), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(6, 6), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(3, 3), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getIndexByPoint2d(new Point2dImpl(0, 9), BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(0, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(90, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(100, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(78, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(44, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(55, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(66, BoundaryImpl.createBoundary(10, 10)));
-        System.out.println(Point2dHelper.getPoint2dByIndex(33, BoundaryImpl.createBoundary(10, 10)));
         System.out.println("Battleship game start");
         System.out.println("Type 1 or 2 for the following modes: ");
         System.out.println("-1 single player vs. the AI, hit its fleet");
@@ -91,7 +71,7 @@ public class SinglePlayerGame {
         int i = 0;
 
         for (char[] chars : CONTROLLER.getCharMap()) {
-            System.out.print(" " + i++ + " ");
+            System.out.print(" " + i++ + ' ');
 
             for (char car : chars) {
                 System.out.print(" " + car + ' ');

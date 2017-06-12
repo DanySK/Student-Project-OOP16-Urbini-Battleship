@@ -51,14 +51,14 @@ public interface Fleet {
     /**
      * Returns {@code true} if all the ships of the current fleet
      * were placed and the game can start. {@code false} otherwise
-     * @return
+     * @return {@code true} if the fleet is ready
      */
     boolean isReady();
 
     /**
-     * Returns true if the fleet is sunk. So
+     * Returns {@code true} if the fleet was sunk. So
      * all the ships it contains were sunk.
-     * @return
+     * @return {@code true} if the fleet was sunk
      */
     boolean isSunk();
 }

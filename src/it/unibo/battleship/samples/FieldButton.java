@@ -1,10 +1,9 @@
 package it.unibo.battleship.samples;
 
+import javax.swing.*;
 import java.awt.*;
 
-import javax.swing.JButton;
-
-public class FieldButton {
+public final class FieldButton {
     private final JButton btn;
     private final int     x;
     private final int     y;

@@ -15,7 +15,7 @@ import it.unibo.battleship.shots.Shot;
  */
 public class FieldCellImpl implements FieldCell {
     private State          currentState;
-    private Optional<Ship> ship;    // TODO: remove optional?
+    private Optional<Ship> ship;    // TODO: remove optional in the future
 
     public FieldCellImpl() {
         this.currentState = State.WATER;
@@ -53,16 +53,16 @@ public class FieldCellImpl implements FieldCell {
         switch (currentState) {
         case WATER :
             this.currentState = State.MISSED;
-
             break;
 
         case MISSED :
             break;    // Exception?
 
         case PRESENT :
-            this.currentState = State.HIT;
-            this.ship.get().shoot(shot);
-
+            ship.ifPresent(ship -> {
+                this.currentState = State.HIT;
+                ship.shoot(shot);
+            });
             break;
 
         case HIT :
@@ -102,8 +102,10 @@ public class FieldCellImpl implements FieldCell {
         return this.currentState == State.PRESENT;
     }
 
+    @Override
     public Optional<Ship> getShip() {
         return this.ship;
     }
+
 }
 

@@ -13,13 +13,15 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by fabio.urbini on 05/06/2017.
+ * Represents an Artificial Intelligence which can
+ * create fleets or create shots.
+ * @author fabio.urbini
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
     private final Boundary boundary;
 
     public enum Level {
-        FREE_WIN, SUPER_EASY, EASY, AVERAGE, HARD, SUPER_HARD;
+        FREE_WIN, SUPER_EASY, EASY, AVERAGE, HARD, SUPER_HARD
     }
 
     private AbstractArtificialIntelligence(final Boundary boundary) {
@@ -53,7 +55,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
     }
 
     public final Boundary getBoundary() {
-        return BoundaryImpl.createBoundary(this.boundary.getColumnsCount(), this.boundary.getRowsCount());
+        return BoundaryImpl.createBoundary(this.boundary.getColumnsNumber(), this.boundary.getRowsNumber());
     }
 
     private static final class EasyAI extends AbstractArtificialIntelligence {
@@ -62,14 +64,14 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
         private EasyAI(final Boundary boundary) {
             super(boundary);
-            max         = boundary.getColumnsCount() * boundary.getRowsCount();
+            max         = boundary.getColumnsNumber() * boundary.getRowsNumber();
             this.values = new ArrayList<>(max);
             setUp();
         }
 
         @Override
         public Fleet createFleet() {
-            return null;
+            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -117,22 +119,20 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
         @Override
         public Fleet createFleet() {
-
             // Creates a new random fleet without any order
             throw new UnsupportedOperationException();
         }
 
         @Override
         public Shot createShot(final Field field) {
-
             // Creates a new random shot without even looking at the field
             return ShotImpl.createShot(generateRandomPoint2d(field.getBoundary()));
         }
 
         private Point2d generateRandomPoint2d(final Boundary boundary) {
             Random    random = new Random(Instant.now().getNano());
-            final int column = random.nextInt(boundary.getColumnsCount());
-            final int row    = random.nextInt(boundary.getRowsCount());
+            final int column = random.nextInt(boundary.getColumnsNumber());
+            final int row    = random.nextInt(boundary.getRowsNumber());
 
             return new Point2dImpl(column, row);
         }

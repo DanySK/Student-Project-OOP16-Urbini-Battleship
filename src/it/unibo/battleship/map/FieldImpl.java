@@ -5,10 +5,15 @@ import java.util.Arrays;
 import com.google.common.base.Objects;
 import it.unibo.battleship.commons.*;
 import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 
 //TODO: javadoc
 public final class FieldImpl implements Field {
+    /*
+     * The field cell matrix is like the first quadrant
+     * of the cartesian plane, seen upside down.
+     */
     private final FieldCell[][] fieldCells;
     private final int           rows;
     private final int           columns;
@@ -26,17 +31,19 @@ public final class FieldImpl implements Field {
     }
 
     public static FieldImpl createField(final Boundary boundary) {
-        if ((boundary.getColumnsCount() < 0) || (boundary.getRowsCount() < 0)) {
+        if ((boundary.getColumnsNumber() < 0) || (boundary.getRowsNumber() < 0)) {
             throw new IllegalArgumentException(GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
         }
 
-        return new FieldImpl(boundary.getColumnsCount(), boundary.getRowsCount());
+        return new FieldImpl(boundary.getColumnsNumber(), boundary.getRowsNumber());
     }
 
     @Override
-    public void placeShip(final Ship ship, final Point2d point) {
+    public void placeShip(final Ship ship,
+                          final Point2d point,
+                          final ShipDirection direction) {
         validateShipPlacement(ship, point);
-        ship.place(point);
+        ship.place(point, direction);
 
         for (final Point2d p : ship.getAllPositions()) {
             this.fieldCells[p.getY()][p.getX()].placeShip(ship);

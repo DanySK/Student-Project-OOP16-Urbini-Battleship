@@ -1,17 +1,12 @@
-
-/**
- *
- */
 package it.unibo.battleship.samples;
 
+import it.unibo.battleship.commons.Boundary;
+import it.unibo.battleship.commons.BoundaryImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
-
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.BoundaryImpl;
 
 /**
  * @author fabio.urbini

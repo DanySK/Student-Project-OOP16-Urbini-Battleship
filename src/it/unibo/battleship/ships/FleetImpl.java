@@ -11,10 +11,10 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.GlobalProperties.ShipRules;
 
-public class FleetImpl implements Fleet {
+public final class FleetImpl implements Fleet {
     private final List<Ship> ships;
 
-    public FleetImpl() {
+    private FleetImpl() {
         this.ships = new ArrayList<>();
     }
 

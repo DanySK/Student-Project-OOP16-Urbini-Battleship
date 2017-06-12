@@ -32,8 +32,8 @@ public interface FieldCell {
     boolean isEmpty();
 
     /**
-     * Returns {@code true} if a {@link Ship} is hit.
-     * @return
+     * Returns {@code true} if a {@link Ship} is hit
+     * @return {@code true} if a {@link Ship} is hit
      */
     boolean isHit();
 

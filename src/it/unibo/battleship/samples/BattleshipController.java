@@ -8,6 +8,7 @@ import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetImpl;
 import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
 
@@ -39,7 +40,7 @@ public enum BattleshipController {
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
                 ship = fleet.getNextNonPlacedShip().get();
-                field.placeShip(ship, new Point2dImpl(i++, j++));
+                field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
 
                 // Placing the ships diagonally
             }
@@ -57,7 +58,7 @@ public enum BattleshipController {
     }
 
     public int getColumnsCount() {
-        return aiField.getBoundary().getColumnsCount();
+        return aiField.getBoundary().getColumnsNumber();
     }
 }
 
