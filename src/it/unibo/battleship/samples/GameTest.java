@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.BoundaryImpl;
+import it.unibo.battleship.commons.Boundary;
+import it.unibo.battleship.commons.BoundaryImpl;
 
 /**
  * @author fabio.urbini

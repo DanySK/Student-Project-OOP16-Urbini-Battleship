@@ -1,4 +1,4 @@
-package it.unibo.battleship.common;
+package it.unibo.battleship.commons;
 
 import com.google.common.base.Objects;
 

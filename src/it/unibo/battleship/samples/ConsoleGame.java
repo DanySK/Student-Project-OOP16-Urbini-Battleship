@@ -1,7 +1,7 @@
 package it.unibo.battleship.samples;
 
-import it.unibo.battleship.common.Point2dImpl;
-import it.unibo.battleship.common.Ruleset;
+import it.unibo.battleship.commons.Point2dImpl;
+import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
 import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.map.Field;

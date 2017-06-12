@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 import com.google.common.base.Objects;
 
-import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.GlobalProperties.ShipRules;
+import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.GlobalProperties.ShipRules;
 
 public class FleetImpl implements Fleet {
     private final List<Ship> ships;

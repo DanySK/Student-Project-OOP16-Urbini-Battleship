@@ -1,6 +1,6 @@
 package it.unibo.battleship.shots;
 
-import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.commons.Point2d;
 
 /**
  * Represents a single shot which can be

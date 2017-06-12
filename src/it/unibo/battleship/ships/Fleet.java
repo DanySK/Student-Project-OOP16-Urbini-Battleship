@@ -1,6 +1,6 @@
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.commons.GlobalProperties;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +22,10 @@ public interface Fleet {
      */
     List<Ship> getAllNonPlacedShips();
 
+    /**
+     * Returns a list of all ships
+     * @return a list of all ships
+     */
     List<Ship> getAllShips();
 
     /**
@@ -44,8 +48,18 @@ public interface Fleet {
      */
     Optional<Ship> getNextShipByType(GlobalProperties.ShipRules shipType);
 
+    /**
+     * Returns {@code true} if all the ships of the current fleet
+     * were placed and the game can start. {@code false} otherwise
+     * @return
+     */
     boolean isReady();
 
+    /**
+     * Returns true if the fleet is sunk. So
+     * all the ships it contains were sunk.
+     * @return
+     */
     boolean isSunk();
 }
 

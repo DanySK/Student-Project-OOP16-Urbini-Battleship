@@ -1,15 +1,16 @@
 package it.unibo.battleship.ships;
 
+import com.google.common.base.Objects;
+import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.commons.Point2dImpl;
+import it.unibo.battleship.shots.Shot;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import com.google.common.base.Objects;
-
-import it.unibo.battleship.common.*;
-import it.unibo.battleship.shots.Shot;
 
 /**
  * This abstract class is to represent a Ship.
@@ -76,7 +77,7 @@ public abstract class AbstractShip implements Ship {
             return new AirCarrier();
 
         default :
-            throw new IllegalArgumentException("Valore non valido");
+            throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
         }
     }
 
@@ -167,6 +168,7 @@ public abstract class AbstractShip implements Ship {
 
         return false;
     }
+
 
     private static class AirCarrier extends AbstractShip {
         private static final long serialVersionUID = -8323321815851042898L;

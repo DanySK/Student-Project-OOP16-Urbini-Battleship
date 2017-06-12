@@ -1,7 +1,7 @@
 package it.unibo.battleship.shots;
 
-import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.Point2d;
 
 import java.util.List;
 

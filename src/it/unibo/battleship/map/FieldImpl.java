@@ -2,12 +2,12 @@ package it.unibo.battleship.map;
 
 import java.util.Arrays;
 
-import it.unibo.battleship.common.*;
+import com.google.common.base.Objects;
+import it.unibo.battleship.commons.*;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
 //TODO: javadoc
-//TODO: hashCode, equals, toString
 public final class FieldImpl implements Field {
     private final FieldCell[][] fieldCells;
     private final int           rows;
@@ -80,6 +80,30 @@ public final class FieldImpl implements Field {
         return ship.getProjectionPoints(point)
                 .stream()
                 .allMatch(p -> this.fieldCells[p.getY()][p.getX()].isEmpty());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final FieldImpl that = (FieldImpl) o;
+
+        return Objects.equal(this.fieldCells, that.fieldCells) &&
+                Objects.equal(this.rows, that.rows) &&
+                Objects.equal(this.columns, that.columns);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(fieldCells, rows, columns);
+    }
+
+    @Override
+    public String toString() {
+        return "Field { " + this.rows
+                + " rows }; { "
+                + this.columns + " columns } ";
     }
 }
 

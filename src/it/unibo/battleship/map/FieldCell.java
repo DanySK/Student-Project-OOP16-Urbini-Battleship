@@ -12,10 +12,23 @@ import java.util.Optional;
  *
  */
 public interface FieldCell {
-    void placeShip(Ship s);
 
-    void shoot(Shot s);
+    /**
+     * Places a ship in the field cell
+     * @param ship {@link Ship}
+     */
+    void placeShip(Ship ship);
 
+    /**
+     * Tries to shoot this field cell
+     * @param shot {@link Shot}
+     */
+    void shoot(Shot shot);
+
+    /**
+     * Returns {@code true} if this field cell is empty
+     * @return {@code true} if this field cell is empty
+     */
     boolean isEmpty();
 
     /**

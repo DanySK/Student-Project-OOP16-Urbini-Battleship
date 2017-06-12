@@ -2,9 +2,9 @@ package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
 
-import it.unibo.battleship.common.GlobalProperties;
-import it.unibo.battleship.common.Point2d;
-import it.unibo.battleship.common.Ruleset;
+import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.commons.Ruleset;
 
 /**
  * Implementation of a Shot

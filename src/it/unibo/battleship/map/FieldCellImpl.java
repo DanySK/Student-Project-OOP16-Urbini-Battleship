@@ -43,13 +43,13 @@ public class FieldCellImpl implements FieldCell {
     }
 
     @Override
-    public void placeShip(final Ship s) {
-        this.ship         = Optional.of(s);
+    public void placeShip(final Ship ship) {
+        this.ship         = Optional.of(ship);
         this.currentState = State.PRESENT;
     }
 
     @Override
-    public void shoot(final Shot s) {
+    public void shoot(final Shot shot) {
         switch (currentState) {
         case WATER :
             this.currentState = State.MISSED;
@@ -61,7 +61,7 @@ public class FieldCellImpl implements FieldCell {
 
         case PRESENT :
             this.currentState = State.HIT;
-            this.ship.get().shoot(s);
+            this.ship.get().shoot(shot);
 
             break;
 

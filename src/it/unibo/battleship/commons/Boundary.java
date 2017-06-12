@@ -1,4 +1,4 @@
-package it.unibo.battleship.common;
+package it.unibo.battleship.commons;
 
 /**
  * Represents the boundary of a field

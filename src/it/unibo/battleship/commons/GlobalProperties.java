@@ -1,4 +1,4 @@
-package it.unibo.battleship.common;
+package it.unibo.battleship.commons;
 
 /**
  * Contains the global properties of the battleship game,
@@ -27,7 +27,6 @@ public final class GlobalProperties {
         CRUISER("Cruiser", CRUISER_SIZE, 2),
         BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
         AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
-
         // new ships here
 
         private final String name;

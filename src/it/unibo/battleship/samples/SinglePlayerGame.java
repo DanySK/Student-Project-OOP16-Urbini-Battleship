@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import it.unibo.battleship.common.BoundaryImpl;
-import it.unibo.battleship.common.Point2dHelper;
-import it.unibo.battleship.common.Point2dImpl;
+import it.unibo.battleship.commons.BoundaryImpl;
+import it.unibo.battleship.commons.Point2dHelper;
+import it.unibo.battleship.commons.Point2dImpl;
 
 import static it.unibo.battleship.samples.BattleshipController.CONTROLLER;
 

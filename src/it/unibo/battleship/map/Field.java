@@ -1,7 +1,7 @@
 package it.unibo.battleship.map;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.commons.Boundary;
+import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
@@ -27,14 +27,14 @@ public interface Field {
     void updateStateWithShot(Shot shot);
 
     /**
-     * Returns a copy of the boundary
-     * @return a copy of the boundary
+     * Returns the boundary of the field
+     * @return the boundary of the field
      */
     Boundary getBoundary();
 
     /**
-     * Returns a copy of the field cells
-     * @return a copy of the field cells
+     * Returns the field cells matrix
+     * @return the field cells matrix
      */
     FieldCell[][] getFieldCells();
 }

@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.commons.Boundary;
 
 public class MyFrame extends JFrame {
     private static final long       serialVersionUID = -4540296256743795166L;

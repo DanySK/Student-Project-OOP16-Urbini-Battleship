@@ -1,6 +1,6 @@
 package it.unibo.battleship.extra;
 
-import it.unibo.battleship.common.*;
+import it.unibo.battleship.commons.*;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.shots.Shot;

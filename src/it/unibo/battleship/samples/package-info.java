@@ -1,6 +1,6 @@
 
 /**
- * This package contains all the sample classes
+ * Contains all the sample classes
  * to play a battleship game.
  * @author fabio.urbini
  *
