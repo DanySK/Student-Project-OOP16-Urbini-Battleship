@@ -12,7 +12,8 @@ import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.GlobalProperties.ShipRules;
 
 public final class FleetImpl implements Fleet {
-    private final List<Ship> ships;
+
+	private final List<Ship> ships;
 
     private FleetImpl() {
         this.ships = new ArrayList<>();
@@ -21,26 +22,6 @@ public final class FleetImpl implements Fleet {
     @Override
     public void addShip(Ship s) {
         this.ships.add(s);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if ((o == null) || (getClass() != o.getClass())) {
-            return false;
-        }
-
-        final FleetImpl that = (FleetImpl) o;
-
-        return Objects.equal(this.ships, that.ships);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(ships);
     }
 
     @Override
@@ -77,15 +58,15 @@ public final class FleetImpl implements Fleet {
         Fleet fleet = new FleetImpl();
 
         for (int i = 0; i < GlobalProperties.ShipRules.SUBMARINE.getInstancesNumber(); i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.SUBMARINE_SIZE));
+            fleet.addShip(fleet.getFactory().createShip(GlobalProperties.SUBMARINE_SIZE));
         }
 
         for (int i = 0; i < GlobalProperties.ShipRules.CRUISER.getInstancesNumber(); i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.CRUISER_SIZE));
+            fleet.addShip(fleet.getFactory().createShip(GlobalProperties.CRUISER_SIZE));
         }
 
         for (int i = 0; i < GlobalProperties.ShipRules.BATTLESHIP.getInstancesNumber(); i++) {
-            fleet.addShip(AbstractShip.createShip(GlobalProperties.BATTLESHIP_SIZE));
+            fleet.addShip(fleet.getFactory().createShip(GlobalProperties.BATTLESHIP_SIZE));
         }
 
         return fleet;
@@ -128,5 +109,36 @@ public final class FleetImpl implements Fleet {
     public boolean isSunk() {
         return this.ships.stream().allMatch(Ship::isSunk);
     }
+
+    @Override
+    public ShipFactory getFactory() {
+    	return ShipFactorySingleton.SINGLETON.getFactory();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
+        }
+
+        final FleetImpl that = (FleetImpl) o;
+
+        return Objects.equal(this.ships, that.ships);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(ships);
+    }
+
+    @Override
+	public String toString() {
+		return "FleetImpl [isReady()=" + isReady() + ", isSunk()=" + isSunk()
+				+ "]";
+	}
 }
 

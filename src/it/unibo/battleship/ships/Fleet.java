@@ -12,37 +12,45 @@ import java.util.Optional;
  *
  */
 public interface Fleet {
-    void addShip(Ship s);
 
+	/**
+	 * Adds a ship to the fleet.
+	 * @param ship ship to add
+	 */
+    void addShip(Ship ship);
+
+    /**
+     * Resets the fleet placement.
+     */
     void resetFleetPlacement();
 
     /**
-     * Returns all non placed ships
+     * Returns all non placed ships.
      * @return all non placed ships
      */
     List<Ship> getAllNonPlacedShips();
 
     /**
-     * Returns a list of all ships
+     * Returns a list of all ships.
      * @return a list of all ships
      */
     List<Ship> getAllShips();
 
     /**
-     * Returns all ships of a type
+     * Returns all ships of a type.
      * @param shipType {@see GlobalProperties.ShipRules}
      * @return all ships of a type
      */
     List<Ship> getAllShipsByType(GlobalProperties.ShipRules shipType);
 
     /**
-     * Returns the next non placed ship
+     * Returns the next non placed ship.
      * @return the next non placed ship
      */
     Optional<Ship> getNextNonPlacedShip();
 
     /**
-     * Returns the next ship of a type
+     * Returns the next ship of a type.
      * @param shipType {@see GlobalProperties.ShipRules}
      * @return the next ship of a type
      */
@@ -61,5 +69,11 @@ public interface Fleet {
      * @return {@code true} if the fleet was sunk
      */
     boolean isSunk();
+
+    /**
+     * Returns a ship factory.
+     * @return a {@link ShipFactory}
+     */
+    ShipFactory getFactory();
 }
 

@@ -1,7 +1,6 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.shots.Shot;
@@ -30,14 +29,14 @@ public abstract class AbstractShip implements Ship {
     private boolean             placed;
     private final List<Point2d> hitPoints;
 
-    private AbstractShip() {
+    protected AbstractShip() {
         this.pos           = Optional.empty();
         this.placed        = false;
         this.direction = ShipDirection.EAST;
         hitPoints          = new ArrayList<>();
     }
 
-    private AbstractShip(final Point2d start) {
+    protected AbstractShip(final Point2d start) {
         this();
         this.pos    = Optional.of(start);
         this.placed = true;
@@ -48,58 +47,6 @@ public abstract class AbstractShip implements Ship {
         return this.getAllPositions()
                    .stream()
                    .anyMatch(p -> ((p.getX() == point.getX()) && (p.getY() == point.getY())));
-    }
-
-    /**
-     * Creates a ship
-     * @param size size of the ship. The value must be
-     * between 0 and {@see GlobalProperties.MAX_SIZE}
-     * @return the ship created
-     */
-    public static Ship createShip(final int size) {
-        if ((size < 0) || (size > GlobalProperties.MAX_SIZE)) {
-            throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
-        }
-
-        switch (size) {
-        case GlobalProperties.SUBMARINE_SIZE :
-            return new Submarine();
-
-        case GlobalProperties.CRUISER_SIZE :
-            return new Cruiser();
-
-        case GlobalProperties.BATTLESHIP_SIZE :
-            return new Battleship();
-
-        case GlobalProperties.AIR_CARRIER_SIZE :
-            return new AirCarrier();
-
-        default :
-            throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
-        }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if ((o == null) || (getClass() != o.getClass())) {
-            return false;
-        }
-
-        final AbstractShip that = (AbstractShip) o;
-
-        return Objects.equal(this.direction, that.direction)
-               && Objects.equal(this.pos, that.pos)
-               && Objects.equal(this.placed, that.placed)
-               && Objects.equal(this.hitPoints, that.hitPoints);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(direction, pos, placed, hitPoints);
     }
 
     @Override
@@ -127,9 +74,6 @@ public abstract class AbstractShip implements Ship {
         }
         return false;
     }
-
-    @Override
-    public abstract String toString();
 
     @Override
     public List<Point2d> getAllPositions() {
@@ -165,102 +109,31 @@ public abstract class AbstractShip implements Ship {
 
     }
 
-    private static final class AirCarrier extends AbstractShip {
-        private static final long serialVersionUID = -8323321815851042898L;
-
-        AirCarrier() {
-            super();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
 
-        @SuppressWarnings("unused")
-        AirCarrier(final Point2d start) {
-            super(start);
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
         }
 
-        @Override
-        public String toString() {
-            return GlobalProperties.ShipRules.AIR_CARRIER.toString();
-        }
+        final AbstractShip that = (AbstractShip) o;
 
-        @Override
-        public int getSize() {
-            return GlobalProperties.AIR_CARRIER_SIZE;
-        }
+        return Objects.equal(this.direction, that.direction)
+               && Objects.equal(this.pos, that.pos)
+               && Objects.equal(this.placed, that.placed)
+               && Objects.equal(this.hitPoints, that.hitPoints);
     }
 
-
-    private static final class Battleship extends AbstractShip {
-        private static final long serialVersionUID = 8043537272411631772L;
-
-        private Battleship() {
-            super();
-        }
-
-        @SuppressWarnings("unused")
-        private Battleship(final Point2d start) {
-            super(start);
-        }
-
-        @Override
-        public String toString() {
-            return GlobalProperties.ShipRules.BATTLESHIP.toString();
-        }
-
-        @Override
-        public int getSize() {
-            //return GlobalProperties.ShipRules.BATTLESHIP.getSize();
-        	return GlobalProperties.BATTLESHIP_SIZE;
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(direction, pos, placed, hitPoints);
     }
 
+    @Override
+    public abstract String toString();
 
-    private static final class Cruiser extends AbstractShip {
-        private static final long serialVersionUID = -5532557604937632667L;
-
-        private Cruiser() {
-            super();
-        }
-
-        @SuppressWarnings("unused")
-        private Cruiser(final Point2d start) {
-            super(start);
-        }
-
-        @Override
-        public String toString() {
-            return GlobalProperties.ShipRules.CRUISER.toString();
-        }
-
-        @Override
-        public int getSize() {
-            //return GlobalProperties.ShipRules.CRUISER.getSize();
-        	return GlobalProperties.CRUISER_SIZE;
-        }
-    }
-
-
-    private static final class Submarine extends AbstractShip {
-        private static final long serialVersionUID = -2784639518931814680L;
-
-        Submarine() {
-            super();
-        }
-
-        @SuppressWarnings("unused")
-        Submarine(final Point2d start) {
-            super(start);
-        }
-
-        @Override
-        public String toString() {
-            return GlobalProperties.ShipRules.SUBMARINE.toString();
-        }
-
-        @Override
-        public int getSize() {
-            //return GlobalProperties.ShipRules.SUBMARINE.getSize();
-        	return GlobalProperties.SUBMARINE_SIZE;
-        }
-    }
 }
 
