@@ -4,16 +4,21 @@ import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 
 /**
- * Implementation of a {@link ShipFactory}.
+ * Implementation of a {@link ShipFactory}. 
+ * There can be only one Ship Factory at once.
  * @author fabio.urbini
  *
  */
 public class ShipFactoryImpl implements ShipFactory {
-
+	/*
+	 * Ship factory singleton. There's no need to have
+	 * other instances around. The singleton is created
+	 * with the thread-safe lazy initialization.
+	 */
 	private static ShipFactoryImpl instance;
-	
+
 	private ShipFactoryImpl() { }
-	
+
 	public static synchronized ShipFactoryImpl getInstance() {
 		if (instance == null) {
 			instance = new ShipFactoryImpl();
