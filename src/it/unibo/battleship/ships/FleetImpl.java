@@ -112,7 +112,7 @@ public final class FleetImpl implements Fleet {
 
     @Override
     public ShipFactory getFactory() {
-    	return ShipFactorySingleton.SINGLETON.getFactory();
+    	return ShipFactoryImpl.getInstance();
     }
 
     @Override

@@ -10,6 +10,16 @@ import it.unibo.battleship.commons.Point2d;
  */
 public class ShipFactoryImpl implements ShipFactory {
 
+	private static ShipFactoryImpl instance;
+	
+	private ShipFactoryImpl() { }
+	
+	public static synchronized ShipFactoryImpl getInstance() {
+		if (instance == null) {
+			instance = new ShipFactoryImpl();
+		}
+		return instance;
+	}
     /**
      * Creates a ship.
      * @param size size of the ship. The value must be
