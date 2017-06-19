@@ -1,6 +1,6 @@
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.Ruleset;
 
 import java.io.Serializable;
 import java.util.List;
@@ -46,7 +46,7 @@ public interface Fleet extends Serializable {
     * @param shipType {@see GlobalProperties.ShipRules}
     * @return all ships of a type
     */
-   List<Ship> getAllShipsByType(GlobalProperties.ShipRules shipType);
+   List<Ship> getAllShipsByType(Ruleset.ShipRules shipType);
 
    /**
     * Returns the next non placed ship.
@@ -61,7 +61,7 @@ public interface Fleet extends Serializable {
     * @param shipType {@see GlobalProperties.ShipRules}
     * @return the next ship of a type
     */
-   Optional<Ship> getNextShipByType(GlobalProperties.ShipRules shipType);
+   Optional<Ship> getNextShipByType(Ruleset.ShipRules shipType);
 
    /**
     * Returns {@code true} if all the ships of the current fleet

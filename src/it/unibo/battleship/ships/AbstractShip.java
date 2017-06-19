@@ -39,7 +39,7 @@ public abstract class AbstractShip implements Ship {
    protected AbstractShip(final Point2d startingPosition) {
       // TODO: static factory method?
       this();
-      checkStartingPositionNullity(startingPosition);
+      this.checkStartingPositionNullity(startingPosition);
       this.pos = startingPosition;
       this.placed = true;
    }
@@ -53,7 +53,7 @@ public abstract class AbstractShip implements Ship {
 
    @Override
    public void place(final Point2d startingPosition, final ShipDirection direction) {
-      checkStartingPositionNullity(startingPosition);
+      this.checkStartingPositionNullity(startingPosition);
       if (!this.placed) {
          this.placed = true;
       }
@@ -80,11 +80,9 @@ public abstract class AbstractShip implements Ship {
    @Override
    public List<Point2d> getAllPositions() {
       // TODO: Use ship direction. Currently using ShipDirection.EAST
-      checkStartingPositionNullity(this.pos);
+      this.checkStartingPositionNullity(this.pos);
       return IntStream.range(0, this.getSize())
-           .mapToObj(i -> {
-              return new Point2dImpl(this.pos.getX() + i, this.pos.getY());
-           })
+           .mapToObj(i -> new Point2dImpl(this.pos.getX() + i, this.pos.getY()))
            .collect(Collectors.toList());
    }
 
@@ -103,9 +101,7 @@ public abstract class AbstractShip implements Ship {
       // TODO: Use ship direction. Currently using ShipDirection.EAST
 
       return IntStream.range(point.getX(), (point.getX() + this.getSize()))
-           .mapToObj(x -> {
-              return new Point2dImpl(x, point.getY());
-           })
+           .mapToObj(x -> new Point2dImpl(x, point.getY()))
            .collect(Collectors.toList());
    }
 

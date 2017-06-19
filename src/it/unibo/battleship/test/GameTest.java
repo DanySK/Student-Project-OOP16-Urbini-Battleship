@@ -1,4 +1,4 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.test;
 
 import it.unibo.battleship.commons.Boundary;
 import it.unibo.battleship.commons.BoundaryImpl;
@@ -6,8 +6,6 @@ import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -16,13 +14,10 @@ import static org.junit.Assert.assertTrue;
  * @author fabio.urbini
  */
 public final class GameTest {
-
-   /**
-    * @throws Exception
+   /*
+   This test is designed to check if a game works properly
+   It won't test all classes designed.
     */
-   @After
-   public void tearDown() throws Exception {
-   }
 
    @Test
    public void shotsTest() {
@@ -49,11 +44,5 @@ public final class GameTest {
 
    }
 
-   /**
-    * @throws Exception
-    */
-   @Before
-   public void setUp() throws Exception {
-   }
 }
 

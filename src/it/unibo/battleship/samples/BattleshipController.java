@@ -6,7 +6,7 @@ import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldHelper;
 import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
-import it.unibo.battleship.ships.FleetImpl;
+import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
@@ -28,7 +28,7 @@ public enum BattleshipController {
    }
 
    public void initialize() {
-      this.aiFleet = FleetImpl.getNewFleet();
+      this.aiFleet = FleetFactoryImpl.getInstance().createFleet();
       this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
       placeFleet(this.aiField, this.aiFleet);
    }

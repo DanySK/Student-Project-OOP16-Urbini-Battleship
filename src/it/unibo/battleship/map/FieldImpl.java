@@ -15,7 +15,7 @@ public final class FieldImpl implements Field {
       * The field cell matrix is like the first quadrant
       * of the cartesian plane, seen upside down.
       */
-   private final FieldCell[][] fieldCells;
+   private final FieldCell[][] fieldCells; // todo: use List<List<>>
    private final int rows;
    private final int columns;
 
@@ -87,9 +87,7 @@ public final class FieldImpl implements Field {
    private boolean isShipPlaceable(final Ship ship, final Point2d point) {
       return ship.getProjectionPoints(point)
            .stream()
-           .allMatch(p -> {
-              return this.fieldCells[p.getY()][p.getX()].isEmpty();
-           });
+           .allMatch(p -> this.fieldCells[p.getY()][p.getX()].isEmpty());
    }
 
    @Override

@@ -25,38 +25,5 @@ public final class GlobalProperties {
 
    private GlobalProperties() {
    }
-
-   public enum ShipRules {
-      SUBMARINE("Submarine", SUBMARINE_SIZE, 3),
-      CRUISER("Cruiser", CRUISER_SIZE, 2),
-      BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
-      AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
-
-      // TODO: extract this enum and make a class (?)
-      private final String name;
-      private final int size;
-      private final int instancesNumber;
-
-      ShipRules(final String name,
-                final int size,
-                final int instancesNumber) {
-         this.name = name;
-         this.size = size;
-         this.instancesNumber = instancesNumber;
-      }
-
-      @Override
-      public String toString() {
-         return this.name;
-      }
-
-      public int getInstancesNumber() {
-         return this.instancesNumber;
-      }
-
-      public int getSize() {
-         return this.size;
-      }
-   }
 }
 

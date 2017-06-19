@@ -4,6 +4,8 @@ import it.unibo.battleship.ships.Ship;
 
 import java.util.stream.IntStream;
 
+import static it.unibo.battleship.commons.GlobalProperties.*;
+
 /**
  * Represents the ruleset of the battlefield game.
  * Some rules can be changed manually.
@@ -45,9 +47,42 @@ public final class Ruleset {
 
       return IntStream
            .range(point.getX(), (point.getX() + length))
-           .allMatch(x -> {
-              return Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY()));
-           });
+           .allMatch(x -> Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY())));
    }
+
+   public enum ShipRules {
+      SUBMARINE("Submarine", SUBMARINE_SIZE, 3),
+      CRUISER("Cruiser", CRUISER_SIZE, 2),
+      BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
+      AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
+
+      // TODO: extract this enum and make a class (?)
+      private final String name;
+      private final int size;
+      private final int instancesNumber;
+
+      ShipRules(final String name,
+                final int size,
+                final int instancesNumber) {
+         this.name = name;
+         this.size = size;
+         this.instancesNumber = instancesNumber;
+      }
+
+      @Override
+      public String toString() {
+         return this.name;
+      }
+
+      public int getInstancesNumber() {
+         return this.instancesNumber;
+      }
+
+      public int getSize() {
+         return this.size;
+      }
+   }
+
+
 }
 

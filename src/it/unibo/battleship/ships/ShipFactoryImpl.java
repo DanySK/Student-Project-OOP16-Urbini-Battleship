@@ -2,6 +2,7 @@ package it.unibo.battleship.ships;
 
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.commons.Ruleset.ShipRules;
 
 /**
  * Implementation of a {@link ShipFactory}.
@@ -76,7 +77,7 @@ public final class ShipFactoryImpl implements ShipFactory {
 
       @Override
       public String toString() {
-         return GlobalProperties.ShipRules.AIR_CARRIER.toString();
+         return ShipRules.AIR_CARRIER.toString();
       }
 
       @Override
@@ -100,7 +101,7 @@ public final class ShipFactoryImpl implements ShipFactory {
 
       @Override
       public String toString() {
-         return GlobalProperties.ShipRules.BATTLESHIP.toString();
+         return ShipRules.BATTLESHIP.toString();
       }
 
       @Override
@@ -125,7 +126,7 @@ public final class ShipFactoryImpl implements ShipFactory {
 
       @Override
       public String toString() {
-         return GlobalProperties.ShipRules.CRUISER.toString();
+         return ShipRules.CRUISER.toString();
       }
 
       @Override
@@ -150,7 +151,7 @@ public final class ShipFactoryImpl implements ShipFactory {
 
       @Override
       public String toString() {
-         return GlobalProperties.ShipRules.SUBMARINE.toString();
+         return ShipRules.SUBMARINE.toString();
       }
 
       @Override

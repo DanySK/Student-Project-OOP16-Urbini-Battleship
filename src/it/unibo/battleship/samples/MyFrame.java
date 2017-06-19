@@ -37,9 +37,7 @@ public class MyFrame extends JFrame {
          final FieldButton fb = new FieldButton(i, 0);
          this.fieldList.add(fb);
          this.addButton(fb);
-         fb.getButton().addActionListener((ActionEvent e) -> {
-            System.out.println("x : " + fb.getX());
-         });
+         fb.getButton().addActionListener((ActionEvent e) -> System.out.println("x : " + fb.getX()));
       }
    }
 

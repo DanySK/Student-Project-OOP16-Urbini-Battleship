@@ -66,9 +66,9 @@ public final class FieldCellImpl implements FieldCell {
             break;    // Exception?
 
          case PRESENT:
-            if (ship != null) {
+            if (this.ship != null) {
                this.currentState = State.HIT;
-               ship.shoot(shot);
+               this.ship.shoot(shot);
             }
             break;
 

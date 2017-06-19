@@ -8,7 +8,7 @@ import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldHelper;
 import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
-import it.unibo.battleship.ships.FleetImpl;
+import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
@@ -28,7 +28,7 @@ public final class ConsoleGame {
       final Field field1 = FieldImpl.createField(Ruleset.BOUNDARY);
 
       // Creating a new fleet
-      final Fleet fleet = FleetImpl.getNewFleet();
+      final Fleet fleet = FleetFactoryImpl.getInstance().createFleet();
 
       // Placing the fleet in the field
       placeFleet(field1, fleet);

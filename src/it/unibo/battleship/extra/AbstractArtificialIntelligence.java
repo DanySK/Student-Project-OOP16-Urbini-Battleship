@@ -3,6 +3,8 @@ package it.unibo.battleship.extra;
 import it.unibo.battleship.commons.*;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.FleetFactory;
+import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
 
@@ -126,8 +128,8 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
       @Override
       public Fleet createFleet() {
-         // Creates a new random fleet without any order
-         throw new UnsupportedOperationException();
+         final FleetFactory f = FleetFactoryImpl.getInstance();
+         return f.createFleet();
       }
 
       @Override
