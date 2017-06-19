@@ -17,145 +17,143 @@ import java.util.stream.Collectors;
  */
 public final class FleetFactoryImpl implements FleetFactory {
 
-   private static FleetFactoryImpl instance;
+  private static final long serialVersionUID = -3012942531548787956L;
+  private static FleetFactoryImpl instance;
 
-   private FleetFactoryImpl() {
-   }
+  private FleetFactoryImpl() {
+  }
 
-   public static synchronized FleetFactoryImpl getInstance() {
-      if (instance == null) {
-         instance = new FleetFactoryImpl();
-      }
-      return instance;
-   }
+  public static synchronized FleetFactoryImpl getInstance() {
+    if (instance == null) {
+      instance = new FleetFactoryImpl();
+    }
+    return instance;
+  }
 
-   @Override
-   public Fleet createFleet() {
-      final Fleet fleet = new FleetImpl();
+  @Override
+  public Fleet createFleet() {
+    final Fleet fleet = new FleetImpl();
 
-      for (int i = 0; i < Ruleset.ShipRules.SUBMARINE.getInstancesNumber(); i++) {
-         fleet.addShip(fleet.getFactory().createShip(GlobalProperties.SUBMARINE_SIZE));
-      }
+    for (int i = 0; i < Ruleset.ShipRules.SUBMARINE.getInstancesNumber(); i++) {
+      fleet.addShip(fleet.getFactory().createShip(
+          GlobalProperties.SUBMARINE_SIZE));
+    }
 
-      for (int i = 0; i < Ruleset.ShipRules.CRUISER.getInstancesNumber(); i++) {
-         fleet.addShip(fleet.getFactory().createShip(GlobalProperties.CRUISER_SIZE));
-      }
+    for (int i = 0; i < Ruleset.ShipRules.CRUISER.getInstancesNumber(); i++) {
+      fleet.addShip(fleet.getFactory()
+          .createShip(GlobalProperties.CRUISER_SIZE));
+    }
 
-      for (int i = 0; i < Ruleset.ShipRules.BATTLESHIP.getInstancesNumber(); i++) {
-         fleet.addShip(fleet.getFactory().createShip(GlobalProperties.BATTLESHIP_SIZE));
-      }
+    for (int i = 0; i < Ruleset.ShipRules.BATTLESHIP.getInstancesNumber(); i++) {
+      fleet.addShip(fleet.getFactory().createShip(
+          GlobalProperties.BATTLESHIP_SIZE));
+    }
 
-      return fleet;
-   }
+    return fleet;
+  }
 
-   private static final class FleetImpl implements Fleet {
+  private static final class FleetImpl implements Fleet {
 
-      private static final long serialVersionUID = -5734887827627519552L;
-      private final List<Ship> ships;
+    private static final long serialVersionUID = -5734887827627519552L;
+    private final List<Ship> ships;
 
-      private FleetImpl() {
-         this.ships = new ArrayList<>();
-      }
+    private FleetImpl() {
+      this.ships = new ArrayList<>();
+    }
 
-      @Override
-      public void addShip(final Ship s) {
-         this.ships.add(s);
-      }
+    @Override
+    public void addShip(final Ship s) {
+      this.ships.add(s);
+    }
 
-      @Override
-      public void resetFleetPlacement() {
-         this.getAllShips()
-              .forEach(Ship::resetPlacement);
-      }
+    @Override
+    public void resetFleetPlacement() {
+      this.getAllShips().forEach(Ship::resetPlacement);
+    }
 
-      @Override
-      public List<Ship> getAllNonPlacedShips() {
-         final List<Ship> nonPlacedShips = this.getAllShips()
-              .stream()
-              .filter(ship -> !ship.isPlaced())
-              .collect(Collectors.toList());
+    @Override
+    public List<Ship> getAllNonPlacedShips() {
+      final List<Ship> nonPlacedShips = this.getAllShips().stream()
+          .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
-         return Collections.unmodifiableList(nonPlacedShips);
-      }
+      return Collections.unmodifiableList(nonPlacedShips);
+    }
 
-      @Override
-      public List<Ship> getAllShips() {
-         return Collections.unmodifiableList(this.ships);
-      }
+    @Override
+    public List<Ship> getAllShips() {
+      return Collections.unmodifiableList(this.ships);
+    }
 
-      @Override
-      public List<Ship> getAllShipsByType(final Ruleset.ShipRules shipType) {
-         final List<Ship> ships = this.ships.stream()
-              .filter(ship -> ship.toString().equals(shipType.toString()))
-              .filter(ship -> !ship.isPlaced())
-              .collect(Collectors.toList());
+    @Override
+    public List<Ship> getAllShipsByType(final Ruleset.ShipRules shipType) {
+      final List<Ship> ships = this.ships.stream()
+          .filter(ship -> ship.toString().equals(shipType.toString()))
+          .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
-         return Collections.unmodifiableList(ships);
-      }
+      return Collections.unmodifiableList(ships);
+    }
 
-      @Override
-      public Optional<Ship> getNextNonPlacedShip() {
-         Optional<Ship> ship = Optional.empty();
+    @Override
+    public Optional<Ship> getNextNonPlacedShip() {
+      Optional<Ship> ship = Optional.empty();
 
-         if (!this.getAllNonPlacedShips().isEmpty()) {
-            ship = Optional.of(this.getAllNonPlacedShips().get(0));
-         }
-
-         return ship;
+      if (!this.getAllNonPlacedShips().isEmpty()) {
+        ship = Optional.of(this.getAllNonPlacedShips().get(0));
       }
 
-      @Override
-      public Optional<Ship> getNextShipByType(final Ruleset.ShipRules shipType) {
-         Optional<Ship> ship = Optional.empty();
+      return ship;
+    }
 
-         if (!this.getAllShipsByType(shipType).isEmpty()) {
-            ship = Optional.of(this.getAllShipsByType(shipType).get(0));
-         }
+    @Override
+    public Optional<Ship> getNextShipByType(final Ruleset.ShipRules shipType) {
+      Optional<Ship> ship = Optional.empty();
 
-         return ship;
+      if (!this.getAllShipsByType(shipType).isEmpty()) {
+        ship = Optional.of(this.getAllShipsByType(shipType).get(0));
       }
 
-      @Override
-      public boolean isReady() {
-         return this.ships.stream()
-              .allMatch(Ship::isPlaced);
+      return ship;
+    }
+
+    @Override
+    public boolean isReady() {
+      return this.ships.stream().allMatch(Ship::isPlaced);
+    }
+
+    @Override
+    public boolean isSunk() {
+      return this.ships.stream().allMatch(Ship::isSunk);
+    }
+
+    @Override
+    public ShipFactory getFactory() {
+      return ShipFactoryImpl.getInstance();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+      if (this == o) {
+        return true;
       }
 
-      @Override
-      public boolean isSunk() {
-         return this.ships.stream()
-              .allMatch(Ship::isSunk);
+      if ((o == null) || (this.getClass() != o.getClass())) {
+        return false;
       }
 
-      @Override
-      public ShipFactory getFactory() {
-         return ShipFactoryImpl.getInstance();
-      }
+      final FleetImpl that = (FleetImpl) o;
 
-      @Override
-      public boolean equals(final Object o) {
-         if (this == o) {
-            return true;
-         }
+      return Objects.equal(this.ships, that.ships);
+    }
 
-         if ((o == null) || (this.getClass() != o.getClass())) {
-            return false;
-         }
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(this.ships);
+    }
 
-         final FleetImpl that = (FleetImpl) o;
-
-         return Objects.equal(this.ships, that.ships);
-      }
-
-      @Override
-      public int hashCode() {
-         return Objects.hashCode(this.ships);
-      }
-
-      @Override
-      public String toString() {
-         return "FleetImpl [isReady()=" + this.isReady() + ", isSunk()=" + this.isSunk()
-              + ']';
-      }
-   }
+    @Override
+    public String toString() {
+      return "FleetImpl [isReady()=" + this.isReady() + ", isSunk()="
+          + this.isSunk() + ']';
+    }
+  }
 }

@@ -6,14 +6,13 @@ package it.unibo.battleship.extra;
  * @author fabio.urbini
  */
 public class Player {
-   private final String name;
+  private final String name;
 
-   public Player(final String name) {
-      this.name = name;
-   }
+  public Player(final String name) {
+    this.name = name;
+  }
 
-   public String getName() {
-      return this.name;
-   }
+  public String getName() {
+    return this.name;
+  }
 }
-

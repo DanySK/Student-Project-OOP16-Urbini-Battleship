@@ -1,9 +1,8 @@
 package it.unibo.battleship.map;
 
 /**
- * Represents the State of a {@link FieldCell}.
- * A field cell can either have the state
- * Water, Missed, Hit or Present.
+ * Represents the State of a {@link FieldCell}. A field cell can either have the
+ * state Water, Missed, Hit or Present.
  * <ul>
  * <li>Water represents an empty field cell.</li>
  * <li>Present represents a field cell occupied by a ship.</li>
@@ -14,6 +13,8 @@ package it.unibo.battleship.map;
  * @author fabio.urbini
  */
 public enum State {
-   WATER, HIT, MISSED, PRESENT
+  WATER,
+  HIT,
+  MISSED,
+  PRESENT
 }
-
