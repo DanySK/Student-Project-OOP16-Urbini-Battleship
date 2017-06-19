@@ -2,7 +2,7 @@ package it.unibo.battleship.commons;
 
 /**
  * Contains the global properties of the battleship game,
- * including each ship size.
+ * including ship rules.
  * @author fabio.urbini
  */
 public final class GlobalProperties {
@@ -28,6 +28,7 @@ public final class GlobalProperties {
         BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
         AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
 
+        // TODO: extract this enum and make a class (?)
         private final String name;
         private final int    size;
         private final int    instancesNumber;

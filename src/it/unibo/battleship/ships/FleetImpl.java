@@ -21,20 +21,22 @@ public final class FleetImpl implements Fleet {
     }
 
     @Override
-    public void addShip(Ship s) {
+    public void addShip(final Ship s) {
         this.ships.add(s);
     }
 
     @Override
     public void resetFleetPlacement() {
-        this.getAllShips().forEach(Ship::resetPlacement);
+        this.getAllShips().forEach(ship -> ship.resetPlacement());
     }
 
     @Override
     public List<Ship> getAllNonPlacedShips() {
-        List<Ship> nonPlacedShips = this.getAllShips()
+        final List<Ship> nonPlacedShips = this.getAllShips()
                                         .stream()
-                                        .filter(ship -> !ship.isPlaced())
+                                        .filter(ship -> {
+                                            return !ship.isPlaced();
+                                        })
                                         .collect(Collectors.toList());
 
         return Collections.unmodifiableList(nonPlacedShips);
@@ -46,17 +48,21 @@ public final class FleetImpl implements Fleet {
     }
 
     @Override
-    public List<Ship> getAllShipsByType(ShipRules shipType) {
-        List<Ship> ships = this.ships.stream()
-                                     .filter(ship -> ship.toString().equals(shipType.toString()))
-                                     .filter(ship -> !ship.isPlaced())
+    public List<Ship> getAllShipsByType(final ShipRules shipType) {
+        final List<Ship> ships = this.ships.stream()
+                                     .filter(ship -> {
+                                         return ship.toString().equals(shipType.toString());
+                                     })
+                                     .filter(ship -> {
+                                         return !ship.isPlaced();
+                                     })
                                      .collect(Collectors.toList());
 
         return Collections.unmodifiableList(ships);
     }
 
     public static Fleet getNewFleet() {
-        Fleet fleet = new FleetImpl();
+        final Fleet fleet = new FleetImpl();
 
         for (int i = 0; i < GlobalProperties.ShipRules.SUBMARINE.getInstancesNumber(); i++) {
             fleet.addShip(fleet.getFactory().createShip(GlobalProperties.SUBMARINE_SIZE));
@@ -77,19 +83,19 @@ public final class FleetImpl implements Fleet {
     public Optional<Ship> getNextNonPlacedShip() {
         Optional<Ship> ship = Optional.empty();
 
-        if (!getAllNonPlacedShips().isEmpty()) {
-            ship = Optional.of(getAllNonPlacedShips().get(0));
+        if (!this.getAllNonPlacedShips().isEmpty()) {
+            ship = Optional.of(this.getAllNonPlacedShips().get(0));
         }
 
         return ship;
     }
 
     @Override
-    public Optional<Ship> getNextShipByType(ShipRules shipType) {
+    public Optional<Ship> getNextShipByType(final ShipRules shipType) {
         Optional<Ship> ship = Optional.empty();
 
-        if (!getAllShipsByType(shipType).isEmpty()) {
-            ship = Optional.of(getAllShipsByType(shipType).get(0));
+        if (!this.getAllShipsByType(shipType).isEmpty()) {
+            ship = Optional.of(this.getAllShipsByType(shipType).get(0));
         }
 
         return ship;
@@ -108,7 +114,7 @@ public final class FleetImpl implements Fleet {
 
     @Override
     public boolean isSunk() {
-        return this.ships.stream().allMatch(Ship::isSunk);
+        return this.ships.stream().allMatch(ship -> ship.isSunk());
     }
 
     @Override
@@ -122,7 +128,7 @@ public final class FleetImpl implements Fleet {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -133,12 +139,12 @@ public final class FleetImpl implements Fleet {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(ships);
+        return Objects.hashCode(this.ships);
     }
 
     @Override
 	public String toString() {
-		return "FleetImpl [isReady()=" + isReady() + ", isSunk()=" + isSunk()
+		return "FleetImpl [isReady()=" + this.isReady() + ", isSunk()=" + this.isSunk()
 				+ ']';
 	}
 }

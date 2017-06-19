@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public final class GameTest {
 
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @After
     public void tearDown() throws Exception {}
@@ -28,10 +28,10 @@ public final class GameTest {
     @Test
     public void shotsTest() {
 //        fail("Not yet implemented");
-        Boundary bounds = BoundaryImpl.createBoundary(10, 10);
+        final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
         final int maxIndex = bounds.getColumnsNumber() * bounds.getRowsNumber();
         for (int i = 0; i < maxIndex; i++) {
-        	Shot s = ShotImpl.createShot(Point2dHelper
+        	final Shot s = ShotImpl.createShot(Point2dHelper
         			.getPoint2dByIndex(i, bounds));
         	assertTrue(Ruleset.isPointWithinLimits(s.getPoint()));
         }
@@ -51,7 +51,7 @@ public final class GameTest {
     }
 
     /**
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @Before
     public void setUp() throws Exception {}

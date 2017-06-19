@@ -31,7 +31,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
         this.boundary = boundary;
     }
 
-    public final static ArtificialIntelligence createArtificialIntelligence(final Level level,
+    public static final ArtificialIntelligence createArtificialIntelligence(final Level level,
                                                                             final Boundary boundary) {
     	// Static factory method
         switch (level) {
@@ -69,9 +69,9 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
         private EasyAI(final Boundary boundary) {
             super(boundary);
-            max         = boundary.getColumnsNumber() * boundary.getRowsNumber();
-            this.values = new ArrayList<>(max);
-            setUp();
+            this.max = boundary.getColumnsNumber() * boundary.getRowsNumber();
+            this.values = new ArrayList<>(this.max);
+            this.setUp();
         }
 
         @Override
@@ -81,8 +81,8 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
         @Override
         public Shot createShot(final Field field) {
-            if (hasNextInt()) {
-                return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(getRandomInt(), field.getBoundary()));
+            if (this.hasNextInt()) {
+                return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(this.getRandomInt(), field.getBoundary()));
             }
 
             // There is no way the fleet couldn't be sunk at this time
@@ -91,28 +91,28 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
         }
 
         private boolean hasNextInt() {
-            return !values.isEmpty();
+            return !this.values.isEmpty();
         }
 
         private int getRandomInt() {
-            if (!hasNextInt()) {
+            if (!this.hasNextInt()) {
                 throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
             }
 
-            final int index = new Random().ints(0, values.size()).limit(1).iterator().nextInt();
-            final int val   = values.get(index);
+            final int index = new Random().ints(0, this.values.size()).limit(1).iterator().nextInt();
+            final int val   = this.values.get(index);
 
-            values.remove(index);
+            this.values.remove(index);
 
             return val;
         }
 
         private void setUp() {
-            for (int i = 0; i < max; i++) {
-                values.add(i);
+            for (int i = 0; i < this.max; i++) {
+                this.values.add(i);
             }
 
-            Collections.shuffle(values);
+            Collections.shuffle(this.values);
         }
     }
 
@@ -132,11 +132,11 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
         @Override
         public Shot createShot(final Field field) {
             // Creates a new random shot without even looking at the field
-            return ShotImpl.createShot(generateRandomPoint2d(field.getBoundary()));
+            return ShotImpl.createShot(this.generateRandomPoint2d(field.getBoundary()));
         }
 
         private Point2d generateRandomPoint2d(final Boundary boundary) {
-            Random    random = new Random(Instant.now().getNano());
+            final Random    random = new Random(Instant.now().getNano());
             final int column = random.nextInt(boundary.getColumnsNumber());
             final int row    = random.nextInt(boundary.getRowsNumber());
 
@@ -161,7 +161,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 		}
 
 		@Override
-		public Shot createShot(Field field) {
+		public Shot createShot(final Field field) {
 			throw new UnsupportedOperationException();
 		}
 

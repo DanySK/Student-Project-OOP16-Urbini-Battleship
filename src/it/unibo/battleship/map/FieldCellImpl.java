@@ -25,12 +25,12 @@ public final class FieldCellImpl implements FieldCell {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -41,7 +41,7 @@ public final class FieldCellImpl implements FieldCell {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(currentState, ship);
+        return Objects.hashCode(this.currentState, this.ship);
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class FieldCellImpl implements FieldCell {
 
     @Override
     public void shoot(final Shot shot) {
-        switch (currentState) {
+        switch (this.currentState) {
         case WATER :
             this.currentState = State.MISSED;
             break;
@@ -61,7 +61,7 @@ public final class FieldCellImpl implements FieldCell {
             break;    // Exception?
 
         case PRESENT :
-            ship.ifPresent(ship -> {
+            this.ship.ifPresent(ship -> {
                 this.currentState = State.HIT;
                 ship.shoot(shot);
             });
@@ -79,8 +79,8 @@ public final class FieldCellImpl implements FieldCell {
     public String toString() {
         return MoreObjects
                 .toStringHelper(this)
-                .add("currentState", currentState)
-                .add("ship", ship)
+                .add("currentState", this.currentState)
+                .add("ship", this.ship)
                 .toString();
     }
 

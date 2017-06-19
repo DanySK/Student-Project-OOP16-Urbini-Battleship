@@ -9,7 +9,7 @@ public final class FieldButton {
     private final int     y;
 
     public FieldButton(final int x, final int y) {
-        btn = new JButton("" + x + ':' + y);
+        this.btn = new JButton("" + x + ':' + y);
         this.x = x;
         this.y = y;
     }

@@ -18,12 +18,12 @@ public class MyFrame extends JFrame {
     private final Boundary          boundary;
 
     // The constructor is private until everything works
-    private MyFrame(final String title, final LayoutManager lm, Boundary boundary) {
+    private MyFrame(final String title, final LayoutManager lm, final Boundary boundary) {
         super(title);
         this.getContentPane().add(new JPanel(lm));
         this.fieldList = new ArrayList<>();
         this.boundary  = boundary;
-        initialize();
+        this.initialize();
     }
 
     private void addButton(final FieldButton btn) {
@@ -35,11 +35,13 @@ public class MyFrame extends JFrame {
         this.setSize(WIDTH, HEIGHT);
         this.setVisible(true);
 
-        for (int i = 0; i < boundary.getColumnsNumber(); i++) {
+        for (int i = 0; i < this.boundary.getColumnsNumber(); i++) {
             final FieldButton fb = new FieldButton(i, 0);
             this.fieldList.add(fb);
             this.addButton(fb);
-            fb.getButton().addActionListener((ActionEvent e) -> System.out.println("x : " + fb.getX()));
+            fb.getButton().addActionListener((ActionEvent e) -> {
+                System.out.println("x : " + fb.getX());
+            });
         }
     }
 

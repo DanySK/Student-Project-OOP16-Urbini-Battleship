@@ -63,14 +63,14 @@ public final class FieldHelper {
      * @return  a representation of the field
      * viewed by the owner of the field
      */
-    public static char[][] getViewByOwner(Field field) {
+    public static char[][] getViewByOwner(final Field field) {
         return getViewByPlayerState(field, PlayerState.OWNER);
     }
 
     private static char[][] getViewByPlayerState(final Field field, final PlayerState playerState) {
         final int rows    = field.getBoundary().getRowsNumber();
         final int columns = field.getBoundary().getColumnsNumber();
-        char[][]  view    = new char[rows][columns];
+        final char[][]  view    = new char[rows][columns];
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {

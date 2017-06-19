@@ -21,24 +21,24 @@ public final class ConsoleGame {
     private ConsoleGame() {
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         // Creating a new field
-        Field field1 = FieldImpl.createField(Ruleset.BOUNDARY);
+        final Field field1 = FieldImpl.createField(Ruleset.BOUNDARY);
 
         // Creating a new fleet
-        Fleet fleet = FleetImpl.getNewFleet();
+        final Fleet fleet = FleetImpl.getNewFleet();
 
         // Placing the fleet in the field
         placeFleet(field1, fleet);
 
-        ArtificialIntelligence ai =
+        final ArtificialIntelligence ai =
             AbstractArtificialIntelligence.createArtificialIntelligence(AbstractArtificialIntelligence.Level.EASY,
                                                                         field1.getBoundary());
 
         int shots = 0;
         while (!fleet.isSunk() && (shots < 100)) {
-            Shot s = ai.createShot(field1); // RIMETTERE
+            final Shot s = ai.createShot(field1); // RIMETTERE
             field1.updateStateWithShot(s);
             stampaField(field1);
             System.out.println("shot : " + s);
@@ -66,8 +66,8 @@ public final class ConsoleGame {
     }
 
     private static void stampaField(final Field field) {
-        for (char[] chars : FieldHelper.getViewByEnemy(field)) {
-            for (char car : chars) {
+        for (final char[] chars : FieldHelper.getViewByEnemy(field)) {
+            for (final char car : chars) {
                 System.out.print(" " + car + ' ');
             }
 

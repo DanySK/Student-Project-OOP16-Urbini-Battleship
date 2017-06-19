@@ -22,11 +22,11 @@ public final class FieldImpl implements Field {
     private FieldImpl(final int rows, final int columns) {
         this.rows    = rows;
         this.columns = columns;
-        fieldCells   = new FieldCell[rows][columns];
+        this.fieldCells = new FieldCell[rows][columns];
 
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                fieldCells[i][j] = new FieldCellImpl();
+                this.fieldCells[i][j] = new FieldCellImpl();
             }
         }
     }
@@ -43,7 +43,7 @@ public final class FieldImpl implements Field {
     public void placeShip(final Ship ship,
                           final Point2d point,
                           final ShipDirection direction) {
-        validateShipPlacement(ship, point);
+        this.validateShipPlacement(ship, point);
         ship.place(point, direction);
 
         for (final Point2d p : ship.getAllPositions()) {
@@ -66,7 +66,7 @@ public final class FieldImpl implements Field {
             throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
         }
 
-        if (!isShipPlaceable(ship, point)) {
+        if (!this.isShipPlaceable(ship, point)) {
             throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
         }
 
@@ -77,7 +77,7 @@ public final class FieldImpl implements Field {
 
     @Override
     public Boundary getBoundary() {
-        return BoundaryImpl.createBoundary(rows, columns);
+        return BoundaryImpl.createBoundary(this.rows, this.columns);
     }
 
     public FieldCell[][] getFieldCells() {
@@ -87,13 +87,15 @@ public final class FieldImpl implements Field {
     private boolean isShipPlaceable(final Ship ship, final Point2d point) {
         return ship.getProjectionPoints(point)
                 .stream()
-                .allMatch(p -> this.fieldCells[p.getY()][p.getX()].isEmpty());
+                .allMatch(p -> {
+                    return this.fieldCells[p.getY()][p.getX()].isEmpty();
+                });
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
 
         final FieldImpl that = (FieldImpl) o;
 
@@ -104,7 +106,7 @@ public final class FieldImpl implements Field {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(fieldCells, rows, columns);
+        return Objects.hashCode(this.fieldCells, this.rows, this.columns);
     }
 
     @Override

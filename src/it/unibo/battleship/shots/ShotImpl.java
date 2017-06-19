@@ -17,7 +17,7 @@ public final class ShotImpl implements Shot {
         this.point = p;
     }
 
-    public static ShotImpl createShot(Point2d p) {
+    public static ShotImpl createShot(final Point2d p) {
     	// Static factory method to avoid the use of the constructor
         if (Ruleset.isPointWithinLimits(p)) {
             return new ShotImpl(p);
@@ -32,7 +32,7 @@ public final class ShotImpl implements Shot {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -43,7 +43,7 @@ public final class ShotImpl implements Shot {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(point);
+        return Objects.hashCode(this.point);
     }
 
     @Override

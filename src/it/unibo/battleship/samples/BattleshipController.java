@@ -23,13 +23,13 @@ public enum BattleshipController {
     private Field aiField;
 
     public boolean checkToContinue() {
-        return !aiFleet.isSunk();
+        return !this.aiFleet.isSunk();
     }
 
     public void initialize() {
-        aiFleet = FleetImpl.getNewFleet();
-        aiField = FieldImpl.createField(Ruleset.BOUNDARY);
-        placeFleet(aiField, aiFleet);
+        this.aiFleet = FleetImpl.getNewFleet();
+        this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
+        placeFleet(this.aiField, this.aiFleet);
     }
 
     private static void placeFleet(final Field field, final Fleet fleet) {
@@ -38,7 +38,7 @@ public enum BattleshipController {
 
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
-                Ship ship = fleet.getNextNonPlacedShip().get();
+                final Ship ship = fleet.getNextNonPlacedShip().get();
                 field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
 
                 // Placing the ships diagonally
@@ -47,17 +47,16 @@ public enum BattleshipController {
     }
 
     public void shoot(final int row, final int column) {
-        Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
-
-        aiField.updateStateWithShot(shot);
+        final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
+        this.aiField.updateStateWithShot(shot);
     }
 
     public char[][] getCharMap() {
-        return FieldHelper.getViewByEnemy(aiField);
+        return FieldHelper.getViewByEnemy(this.aiField);
     }
 
     public int getColumnsCount() {
-        return aiField.getBoundary().getColumnsNumber();
+        return this.aiField.getBoundary().getColumnsNumber();
     }
 }
 

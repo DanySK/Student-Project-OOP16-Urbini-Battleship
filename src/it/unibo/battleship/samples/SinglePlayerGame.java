@@ -14,11 +14,11 @@ public final class SinglePlayerGame {
     }
 
     private static String header(final int columnsCount) {
-        StringBuilder sb = new StringBuilder("");
+        final StringBuilder sb = new StringBuilder("");
 
         sb.append("   ");
 
-        String values = "0123456789ABCDEFGH";    // raw method to show header
+        final String values = "0123456789ABCDEFGH";    // raw method to show header
 
         for (int i = 0; i < columnsCount; i++) {
             sb.append(' ').append(values.charAt(i)).append(' ');
@@ -27,22 +27,22 @@ public final class SinglePlayerGame {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         System.out.println("Battleship game start");
         System.out.println("Type 1 or 2 for the following modes: ");
         System.out.println("-1 single player vs. the AI, hit its fleet");
         System.out.println("-2 single player vs. the AI, place your fleet");
         CONTROLLER.initialize();
 
-        int columnsCount = CONTROLLER.getColumnsCount();
+        final int columnsCount = CONTROLLER.getColumnsCount();
 
         stampaField(columnsCount);
 
         do {
             System.out.println("Create a new shot and point at the enemy fleet!");
 
-            int row    = readInt("Enter row ");
-            int column = readInt("Enter column ");
+            final int row    = readInt("Enter row ");
+            final int column = readInt("Enter column ");
 
             CONTROLLER.shoot(row, column);
             stampaField(columnsCount);
@@ -50,15 +50,15 @@ public final class SinglePlayerGame {
     }
 
     private static int readInt(final String message) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.print(message);
 
         try {
             return Integer.parseInt(br.readLine());
-        } catch (NumberFormatException nfe) {
+        } catch (final NumberFormatException nfe) {
             System.err.println("Invalid Format!");
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
@@ -70,10 +70,10 @@ public final class SinglePlayerGame {
 
         int i = 0;
 
-        for (char[] chars : CONTROLLER.getCharMap()) {
+        for (final char[] chars : CONTROLLER.getCharMap()) {
             System.out.print(" " + i++ + ' ');
 
-            for (char car : chars) {
+            for (final char car : chars) {
                 System.out.print(" " + car + ' ');
             }
 

@@ -14,19 +14,37 @@ public final class Ruleset {
 
     private Ruleset() {}
 
+    /**
+     * Returns {@code true} if the point is within the limits
+     * of the boundary, {@code false} otherwise.
+     * @param p a {@link Point2d}
+     * @return {@code true} if the point is within the limits
+     */
     public static boolean isPointWithinLimits(final Point2d p) {
         return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsNumber()))
                && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnsNumber()));
     }
 
+    /**
+     * Returns {@code true} if the ship is within the limits
+     * of the boundary, {@code false} otherwise.
+     * @param ship {@link Ship}
+     * @param point the starting position of the ship
+     * @return {@code true} if the ship is within the limits
+     * of the boundary
+     */
     public static boolean isShipWithinLimits(final Ship ship, final Point2d point) {
-
         // Standard direction : east
-        int length = ship.getSize();
+        /* todo: refactor in the future to permit using other directions
+        Use Point2dHelper for the purpose
+        */
+        final int length = ship.getSize();
 
         return IntStream
                 .range(point.getX(), (point.getX() + length))
-                .allMatch(x -> Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY())));
+                .allMatch(x -> {
+                    return Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY()));
+                });
     }
 }
 

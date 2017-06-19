@@ -17,8 +17,8 @@ public final class BoundaryImpl implements Boundary {
     }
 
     /**
-     * @param columnsCount Horizontal bound
-     * @param rowsCount Vertical bound
+     * @param columnsCount Columns count
+     * @param rowsCount Rows count
      */
     public static BoundaryImpl createBoundary(final int columnsCount, final int rowsCount) {
         if ((columnsCount < 0) || (rowsCount < 0)) {
@@ -29,12 +29,12 @@ public final class BoundaryImpl implements Boundary {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -45,12 +45,12 @@ public final class BoundaryImpl implements Boundary {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(columnsCount, rowsCount);
+        return Objects.hashCode(this.columnsCount, this.rowsCount);
     }
 
     @Override
     public String toString() {
-        return " x : " + this.columnsCount + " y : " + rowsCount;
+        return " x : " + this.columnsCount + " y : " + this.rowsCount;
     }
 
     @Override

@@ -34,7 +34,7 @@ public abstract class AbstractShip implements Ship {
         this.pos           = Optional.empty();
         this.placed        = false;
         this.direction = ShipDirection.EAST;
-        hitPoints          = new ArrayList<>();
+        this.hitPoints = new ArrayList<>();
     }
 
     protected AbstractShip(final Point2d start) {
@@ -52,9 +52,9 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public void place(final Point2d start, final ShipDirection direction) {
-        if (!placed) {
+        if (!this.placed) {
             this.pos = Optional.of(start);
-            placed   = true;
+            this.placed = true;
         } else {
             this.pos = Optional.of(start);
         }
@@ -64,13 +64,13 @@ public abstract class AbstractShip implements Ship {
     @Override
     public void resetPlacement() {
         this.placed = false;
-        pos         = Optional.empty();
+        this.pos = Optional.empty();
     }
 
     @Override
     public boolean shoot(final Shot shot) {
-        if (containsPosition(shot.getPoint())) {
-            hitPoints.add(shot.getPoint());
+        if (this.containsPosition(shot.getPoint())) {
+            this.hitPoints.add(shot.getPoint());
             return true;
         }
         return false;
@@ -79,11 +79,13 @@ public abstract class AbstractShip implements Ship {
     @Override
     public List<Point2d> getAllPositions() {
         // TODO: direction currently not used (EAST direction as default).
-        if (!pos.isPresent()) {
+        if (!this.pos.isPresent()) {
             throw new IllegalStateException(GlobalProperties.STARTING_POSITION_NOT_DEFINED);
         }
         return IntStream.range(0, this.getSize())
-                                     .mapToObj(i -> new Point2dImpl(pos.get().getX() + i, pos.get().getY()))
+                                     .mapToObj(i -> {
+                                         return new Point2dImpl(this.pos.get().getX() + i, this.pos.get().getY());
+                                     })
                                      .collect(Collectors.toList());
     }
 
@@ -102,7 +104,9 @@ public abstract class AbstractShip implements Ship {
         // TODO: direction currently not used (EAST direction as default).
 
         return IntStream.range(point.getX(), (point.getX() + this.getSize()))
-                                        .mapToObj(x -> new Point2dImpl(x, point.getY()))
+                                        .mapToObj(x -> {
+                                            return new Point2dImpl(x, point.getY());
+                                        })
                                         .collect(Collectors.toList());
     }
 
@@ -118,7 +122,7 @@ public abstract class AbstractShip implements Ship {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -132,7 +136,7 @@ public abstract class AbstractShip implements Ship {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(direction, pos, placed, hitPoints);
+        return Objects.hashCode(this.direction, this.pos, this.placed, this.hitPoints);
     }
 
     @Override

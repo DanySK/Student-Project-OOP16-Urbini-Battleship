@@ -28,7 +28,7 @@ public final class Point2dImpl implements Point2d {
             return true;
         }
 
-        if ((o == null) || (getClass() != o.getClass())) {
+        if ((o == null) || (this.getClass() != o.getClass())) {
             return false;
         }
 
@@ -39,20 +39,20 @@ public final class Point2dImpl implements Point2d {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(x, y);
+        return Objects.hashCode(this.x, this.y);
     }
 
     @Override
     public String toString() {
-        return " x = " + x + ", y = " + y;
+        return " x = " + this.x + ", y = " + this.y;
     }
 
     public final int getX() {
-        return x;
+        return this.x;
     }
 
     public final int getY() {
-        return y;
+        return this.y;
     }
 }
 
