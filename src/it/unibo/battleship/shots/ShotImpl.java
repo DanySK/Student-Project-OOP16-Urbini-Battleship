@@ -1,7 +1,6 @@
 package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
-
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Ruleset;
@@ -10,50 +9,50 @@ import it.unibo.battleship.commons.Ruleset;
  * Implementation of a Shot
  */
 public final class ShotImpl implements Shot {
-    private static final long serialVersionUID = 7357162445793535579L;
-    private final Point2d point;
+   private static final long serialVersionUID = 7357162445793535579L;
+   private final Point2d point;
 
-    private ShotImpl(final Point2d p) {
-        this.point = p;
-    }
+   private ShotImpl(final Point2d p) {
+      this.point = p;
+   }
 
-    public static ShotImpl createShot(final Point2d p) {
-    	// Static factory method to avoid the use of the constructor
-        if (Ruleset.isPointWithinLimits(p)) {
-            return new ShotImpl(p);
-        } else {
-            throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
-        }
-    }
+   public static ShotImpl createShot(final Point2d p) {
+      // Static factory method to avoid the use of the constructor
+      if (Ruleset.isPointWithinLimits(p)) {
+         return new ShotImpl(p);
+      } else {
+         throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
+      }
+   }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
+   @Override
+   public boolean equals(final Object o) {
+      if (this == o) {
+         return true;
+      }
 
-        if ((o == null) || (this.getClass() != o.getClass())) {
-            return false;
-        }
+      if ((o == null) || (this.getClass() != o.getClass())) {
+         return false;
+      }
 
-        final ShotImpl that = (ShotImpl) o;
+      final ShotImpl that = (ShotImpl) o;
 
-        return Objects.equal(this.point, that.point);
-    }
+      return Objects.equal(this.point, that.point);
+   }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.point);
-    }
+   @Override
+   public int hashCode() {
+      return Objects.hashCode(this.point);
+   }
 
-    @Override
-    public String toString() {
-        return this.point.toString();
-    }
+   @Override
+   public String toString() {
+      return this.point.toString();
+   }
 
-    @Override
-    public Point2d getPoint() {
-        return this.point;
-    }
+   @Override
+   public Point2d getPoint() {
+      return this.point;
+   }
 }
 

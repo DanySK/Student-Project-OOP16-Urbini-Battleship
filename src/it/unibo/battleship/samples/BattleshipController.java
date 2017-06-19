@@ -14,49 +14,50 @@ import it.unibo.battleship.shots.ShotImpl;
 
 /**
  * Singleton of a Controller of the battleship game.
+ *
  * @author fabio.urbini
  */
 public enum BattleshipController {
-    CONTROLLER;
+   CONTROLLER;
 
-    private Fleet aiFleet;
-    private Field aiField;
+   private Fleet aiFleet;
+   private Field aiField;
 
-    public boolean checkToContinue() {
-        return !this.aiFleet.isSunk();
-    }
+   public boolean checkToContinue() {
+      return !this.aiFleet.isSunk();
+   }
 
-    public void initialize() {
-        this.aiFleet = FleetImpl.getNewFleet();
-        this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
-        placeFleet(this.aiField, this.aiFleet);
-    }
+   public void initialize() {
+      this.aiFleet = FleetImpl.getNewFleet();
+      this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
+      placeFleet(this.aiField, this.aiFleet);
+   }
 
-    private static void placeFleet(final Field field, final Fleet fleet) {
-        int  i = 0,
-             j = 0;
+   private static void placeFleet(final Field field, final Fleet fleet) {
+      int i = 0,
+           j = 0;
 
-        while (!fleet.isReady()) {
-            if (fleet.getNextNonPlacedShip().isPresent()) {
-                final Ship ship = fleet.getNextNonPlacedShip().get();
-                field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
+      while (!fleet.isReady()) {
+         if (fleet.getNextNonPlacedShip().isPresent()) {
+            final Ship ship = fleet.getNextNonPlacedShip().get();
+            field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
 
-                // Placing the ships diagonally
-            }
-        }
-    }
+            // Placing the ships diagonally
+         }
+      }
+   }
 
-    public void shoot(final int row, final int column) {
-        final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
-        this.aiField.updateStateWithShot(shot);
-    }
+   public void shoot(final int row, final int column) {
+      final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
+      this.aiField.updateStateWithShot(shot);
+   }
 
-    public char[][] getCharMap() {
-        return FieldHelper.getViewByEnemy(this.aiField);
-    }
+   public char[][] getCharMap() {
+      return FieldHelper.getViewByEnemy(this.aiField);
+   }
 
-    public int getColumnsCount() {
-        return this.aiField.getBoundary().getColumnsNumber();
-    }
+   public int getColumnsCount() {
+      return this.aiField.getBoundary().getColumnsNumber();
+   }
 }
 

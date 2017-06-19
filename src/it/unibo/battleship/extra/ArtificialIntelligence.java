@@ -11,11 +11,12 @@ import java.io.Serializable;
  * can be used for creating a new Fleet or for
  * creating new shots.
  * The strategy is decided by implementations.
+ *
  * @author fabio.urbini
  */
 public interface ArtificialIntelligence extends Serializable {
-    Fleet createFleet();
+   Fleet createFleet();
 
-    Shot createShot(Field field);
+   Shot createShot(Field field);
 }
 

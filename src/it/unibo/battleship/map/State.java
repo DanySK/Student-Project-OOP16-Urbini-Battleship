@@ -10,8 +10,10 @@ package it.unibo.battleship.map;
  * <li>Hit represents a field ship which was hit.</li>
  * <li>Missed represents a shot which didn't hit anything.</li>
  * </ul>
- * @author fabio.urbini
  *
+ * @author fabio.urbini
  */
-public enum State { WATER, HIT, MISSED, PRESENT }
+public enum State {
+   WATER, HIT, MISSED, PRESENT
+}
 

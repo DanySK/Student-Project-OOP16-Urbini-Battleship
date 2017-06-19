@@ -14,133 +14,137 @@ import java.util.stream.IntStream;
 
 /**
  * This abstract class is to represent a Ship.
- * @author fabio.urbini
  *
+ * @author fabio.urbini
  */
 public abstract class AbstractShip implements Ship {
-	/*
-	 * This class hasn't got any abstract method yet except for
-	 * toString. It was made abstract for future purposes.
-	 * ie: a ship implementation can take more/less damage than
-	 * other ships.
-	 */
-    private static final long serialVersionUID = 4917741645660917676L;
-    private ShipDirection direction;
-    private Optional<Point2d>   pos;    // TODO: remove optional in the future
-    private boolean             placed;
-    private final List<Point2d> hitPoints;
+   /*
+    * This class hasn't got any abstract method yet except for
+    * toString. It was made abstract for future purposes.
+    * ie: a ship implementation can take more/less damage than
+    * other ships.
+    */
+   private static final long serialVersionUID = 4917741645660917676L;
+   private ShipDirection direction;
+   private Point2d pos;
+   private boolean placed;
+   private final List<Point2d> hitPoints;
 
-    protected AbstractShip() {
-        this.pos           = Optional.empty();
-        this.placed        = false;
-        this.direction = ShipDirection.EAST;
-        this.hitPoints = new ArrayList<>();
-    }
+   protected AbstractShip() {
+      this.placed = false;
+      this.direction = ShipDirection.EAST;
+      this.hitPoints = new ArrayList<>();
+   }
 
-    protected AbstractShip(final Point2d start) {
-        this();
-        this.pos    = Optional.of(start);
-        this.placed = true;
-    }
+   protected AbstractShip(final Point2d startingPosition) {
+      // TODO: static factory method?
+      this();
+      checkStartingPositionNullity(startingPosition);
+      this.pos = startingPosition;
+      this.placed = true;
+   }
 
-    @Override
-    public boolean containsPosition(final Point2d point) {
-        return this.getAllPositions()
-                   .stream()
-                   .anyMatch(p -> ((p.getX() == point.getX()) && (p.getY() == point.getY())));
-    }
+   @Override
+   public boolean containsPosition(final Point2d point) {
+      return this.getAllPositions()
+           .stream()
+           .anyMatch(p -> ((p.getX() == point.getX()) && (p.getY() == point.getY())));
+   }
 
-    @Override
-    public void place(final Point2d start, final ShipDirection direction) {
-        if (!this.placed) {
-            this.pos = Optional.of(start);
-            this.placed = true;
-        } else {
-            this.pos = Optional.of(start);
-        }
-        this.direction = direction;
-    }
+   @Override
+   public void place(final Point2d startingPosition, final ShipDirection direction) {
+      checkStartingPositionNullity(startingPosition);
+      if (!this.placed) {
+         this.placed = true;
+      }
+      this.pos = startingPosition;
+      this.direction = direction;
+   }
 
-    @Override
-    public void resetPlacement() {
-        this.placed = false;
-        this.pos = Optional.empty();
-    }
+   @Override
+   public void resetPlacement() {
+      this.placed = false;
+      this.pos = null;
+      // TODO: use another Optional Library which is serializable
+   }
 
-    @Override
-    public boolean shoot(final Shot shot) {
-        if (this.containsPosition(shot.getPoint())) {
-            this.hitPoints.add(shot.getPoint());
-            return true;
-        }
-        return false;
-    }
+   @Override
+   public boolean shoot(final Shot shot) {
+      if (this.containsPosition(shot.getPoint())) {
+         this.hitPoints.add(shot.getPoint());
+         return true;
+      }
+      return false;
+   }
 
-    @Override
-    public List<Point2d> getAllPositions() {
-        // TODO: direction currently not used (EAST direction as default).
-        if (!this.pos.isPresent()) {
-            throw new IllegalStateException(GlobalProperties.STARTING_POSITION_NOT_DEFINED);
-        }
-        return IntStream.range(0, this.getSize())
-                                     .mapToObj(i -> {
-                                         return new Point2dImpl(this.pos.get().getX() + i, this.pos.get().getY());
-                                     })
-                                     .collect(Collectors.toList());
-    }
+   @Override
+   public List<Point2d> getAllPositions() {
+      // TODO: Use ship direction. Currently using ShipDirection.EAST
+      checkStartingPositionNullity(this.pos);
+      return IntStream.range(0, this.getSize())
+           .mapToObj(i -> {
+              return new Point2dImpl(this.pos.getX() + i, this.pos.getY());
+           })
+           .collect(Collectors.toList());
+   }
 
-    @Override
-    public boolean isPlaced() {
-        return this.placed;
-    }
+   @Override
+   public boolean isPlaced() {
+      return this.placed;
+   }
 
-    @Override
-    public Optional<Point2d> getStartingPosition() {
-        return this.pos;
-    }
+   @Override
+   public Optional<Point2d> getStartingPosition() {
+      return Optional.ofNullable(this.pos);
+   }
 
-    @Override
-    public List<Point2d> getProjectionPoints(final Point2d point) {
-        // TODO: direction currently not used (EAST direction as default).
+   @Override
+   public List<Point2d> getProjectionPoints(final Point2d point) {
+      // TODO: Use ship direction. Currently using ShipDirection.EAST
 
-        return IntStream.range(point.getX(), (point.getX() + this.getSize()))
-                                        .mapToObj(x -> {
-                                            return new Point2dImpl(x, point.getY());
-                                        })
-                                        .collect(Collectors.toList());
-    }
+      return IntStream.range(point.getX(), (point.getX() + this.getSize()))
+           .mapToObj(x -> {
+              return new Point2dImpl(x, point.getY());
+           })
+           .collect(Collectors.toList());
+   }
 
-    @Override
-    public boolean isSunk() {
-        return this.hitPoints.size() >= this.getSize();
+   @Override
+   public boolean isSunk() {
+      return this.hitPoints.size() >= this.getSize();
 
-    }
+   }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
+   @Override
+   public boolean equals(final Object o) {
+      if (this == o) {
+         return true;
+      }
 
-        if ((o == null) || (this.getClass() != o.getClass())) {
-            return false;
-        }
+      if ((o == null) || (this.getClass() != o.getClass())) {
+         return false;
+      }
 
-        final AbstractShip that = (AbstractShip) o;
+      final AbstractShip that = (AbstractShip) o;
 
-        return Objects.equal(this.direction, that.direction)
-               && Objects.equal(this.pos, that.pos)
-               && Objects.equal(this.placed, that.placed)
-               && Objects.equal(this.hitPoints, that.hitPoints);
-    }
+      return Objects.equal(this.direction, that.direction)
+           && Objects.equal(this.pos, that.pos)
+           && Objects.equal(this.placed, that.placed)
+           && Objects.equal(this.hitPoints, that.hitPoints);
+   }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.direction, this.pos, this.placed, this.hitPoints);
-    }
+   @Override
+   public int hashCode() {
+      return Objects.hashCode(this.direction, this.pos, this.placed, this.hitPoints);
+   }
 
-    @Override
-    public abstract String toString();
+   @Override
+   public abstract String toString();
 
+   private void checkStartingPositionNullity(final Point2d startingPosition) {
+      if (startingPosition == null) {
+         throw new IllegalArgumentException(GlobalProperties.STARTING_POSITION_NOT_DEFINED);
+      }
+   }
 }
 

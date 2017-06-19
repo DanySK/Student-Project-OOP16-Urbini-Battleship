@@ -17,154 +17,155 @@ import java.util.Random;
  * create fleets or create shots.
  * http://www.datagenetics.com/blog/december32011/ for advanced
  * algorithms
+ *
  * @author fabio.urbini
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
-    private static final long serialVersionUID = -7273836582211632939L;
-    private final Boundary boundary;
+   private static final long serialVersionUID = -7273836582211632939L;
+   private final Boundary boundary;
 
-    public enum Level {
-        FREE_WIN, SUPER_EASY, EASY, AVERAGE, HARD, SUPER_HARD
-    }
+   public enum Level {
+      FREE_WIN, SUPER_EASY, EASY, AVERAGE, HARD, SUPER_HARD
+   }
 
-    private AbstractArtificialIntelligence(final Boundary boundary) {
-        this.boundary = boundary;
-    }
+   private AbstractArtificialIntelligence(final Boundary boundary) {
+      this.boundary = boundary;
+   }
 
-    public static final ArtificialIntelligence createArtificialIntelligence(final Level level,
-                                                                            final Boundary boundary) {
-    	// Static factory method
-        switch (level) {
-        case FREE_WIN :
+   public static final ArtificialIntelligence createArtificialIntelligence(final Level level,
+                                                                           final Boundary boundary) {
+      // Static factory method
+      switch (level) {
+         case FREE_WIN:
             return new FreeWinAI(boundary);
 
-        case SUPER_EASY :
+         case SUPER_EASY:
             throw new UnsupportedOperationException();
 
-        case EASY :
+         case EASY:
             return new EasyAI(boundary);
 
-        case AVERAGE :
+         case AVERAGE:
             throw new UnsupportedOperationException();
 
-        case HARD :
+         case HARD:
             throw new UnsupportedOperationException();
 
-        case SUPER_HARD :
+         case SUPER_HARD:
             throw new UnsupportedOperationException();
 
-        default :
+         default:
             throw new IllegalArgumentException(GlobalProperties.INVALID_AI_LEVEL);
-        }
-    }
+      }
+   }
 
-    public final Boundary getBoundary() {
-        return BoundaryImpl.createBoundary(this.boundary.getColumnsNumber(), this.boundary.getRowsNumber());
-    }
+   public final Boundary getBoundary() {
+      return BoundaryImpl.createBoundary(this.boundary.getColumnsNumber(), this.boundary.getRowsNumber());
+   }
 
-    private static final class EasyAI extends AbstractArtificialIntelligence {
-        private static final long serialVersionUID = -7273836582211632939L;
-        final List<Integer> values;
-        final int           max;
+   private static final class EasyAI extends AbstractArtificialIntelligence {
+      private static final long serialVersionUID = -7273836582211632939L;
+      final List<Integer> values;
+      final int max;
 
-        private EasyAI(final Boundary boundary) {
-            super(boundary);
-            this.max = boundary.getColumnsNumber() * boundary.getRowsNumber();
-            this.values = new ArrayList<>(this.max);
-            this.setUp();
-        }
+      private EasyAI(final Boundary boundary) {
+         super(boundary);
+         this.max = boundary.getColumnsNumber() * boundary.getRowsNumber();
+         this.values = new ArrayList<>(this.max);
+         this.setUp();
+      }
 
-        @Override
-        public Fleet createFleet() {
-            throw new UnsupportedOperationException();
-        }
+      @Override
+      public Fleet createFleet() {
+         throw new UnsupportedOperationException();
+      }
 
-        @Override
-        public Shot createShot(final Field field) {
-            if (this.hasNextInt()) {
-                return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(this.getRandomInt(), field.getBoundary()));
-            }
+      @Override
+      public Shot createShot(final Field field) {
+         if (this.hasNextInt()) {
+            return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(this.getRandomInt(), field.getBoundary()));
+         }
 
-            // There is no way the fleet couldn't be sunk at this time
-            // Because all shots were generated.
+         // There is no way the fleet couldn't be sunk at this time
+         // Because all shots were generated.
+         throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
+      }
+
+      private boolean hasNextInt() {
+         return !this.values.isEmpty();
+      }
+
+      private int getRandomInt() {
+         if (!this.hasNextInt()) {
             throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
-        }
+         }
 
-        private boolean hasNextInt() {
-            return !this.values.isEmpty();
-        }
+         final int index = new Random().ints(0, this.values.size()).limit(1).iterator().nextInt();
+         final int val = this.values.get(index);
 
-        private int getRandomInt() {
-            if (!this.hasNextInt()) {
-                throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
-            }
+         this.values.remove(index);
 
-            final int index = new Random().ints(0, this.values.size()).limit(1).iterator().nextInt();
-            final int val   = this.values.get(index);
+         return val;
+      }
 
-            this.values.remove(index);
+      private void setUp() {
+         for (int i = 0; i < this.max; i++) {
+            this.values.add(i);
+         }
 
-            return val;
-        }
+         Collections.shuffle(this.values);
+      }
+   }
 
-        private void setUp() {
-            for (int i = 0; i < this.max; i++) {
-                this.values.add(i);
-            }
+   private static final class FreeWinAI extends AbstractArtificialIntelligence {
+      private static final long serialVersionUID = -7970147935843938741L;
 
-            Collections.shuffle(this.values);
-        }
-    }
+      private FreeWinAI(final Boundary boundary) {
+         super(boundary);
+      }
 
-    private static final class FreeWinAI extends AbstractArtificialIntelligence {
-        private static final long serialVersionUID = -7970147935843938741L;
+      @Override
+      public Fleet createFleet() {
+         // Creates a new random fleet without any order
+         throw new UnsupportedOperationException();
+      }
 
-        private FreeWinAI(final Boundary boundary) {
-            super(boundary);
-        }
+      @Override
+      public Shot createShot(final Field field) {
+         // Creates a new random shot without even looking at the field
+         return ShotImpl.createShot(this.generateRandomPoint2d(field.getBoundary()));
+      }
 
-        @Override
-        public Fleet createFleet() {
-            // Creates a new random fleet without any order
-            throw new UnsupportedOperationException();
-        }
+      private Point2d generateRandomPoint2d(final Boundary boundary) {
+         final Random random = new Random(Instant.now().getNano());
+         final int column = random.nextInt(boundary.getColumnsNumber());
+         final int row = random.nextInt(boundary.getRowsNumber());
 
-        @Override
-        public Shot createShot(final Field field) {
-            // Creates a new random shot without even looking at the field
-            return ShotImpl.createShot(this.generateRandomPoint2d(field.getBoundary()));
-        }
+         return new Point2dImpl(column, row);
+      }
+   }
 
-        private Point2d generateRandomPoint2d(final Boundary boundary) {
-            final Random    random = new Random(Instant.now().getNano());
-            final int column = random.nextInt(boundary.getColumnsNumber());
-            final int row    = random.nextInt(boundary.getRowsNumber());
+   private static final class SuperHardAi extends AbstractArtificialIntelligence {
+      private static final long serialVersionUID = 3990811369592412792L;
 
-            return new Point2dImpl(column, row);
-        }
-    }
+      /*
+           * http://www.datagenetics.com/blog/december32011/
+           * Use New Algorithm here
+           */
+      private SuperHardAi(final Boundary boundary) {
+         super(boundary);
+      }
 
-    private static final class SuperHardAi extends AbstractArtificialIntelligence {
-        private static final long serialVersionUID = 3990811369592412792L;
+      @Override
+      public Fleet createFleet() {
+         throw new UnsupportedOperationException();
+      }
 
-        /*
-				 * http://www.datagenetics.com/blog/december32011/
-				 * Use New Algorithm here
-				 */
-    	private SuperHardAi(final Boundary boundary) {
-    		super(boundary);
-    	}
+      @Override
+      public Shot createShot(final Field field) {
+         throw new UnsupportedOperationException();
+      }
 
-		@Override
-		public Fleet createFleet() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public Shot createShot(final Field field) {
-			throw new UnsupportedOperationException();
-		}
-
-    }
+   }
 }
 
