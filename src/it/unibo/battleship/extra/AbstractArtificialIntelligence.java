@@ -15,6 +15,8 @@ import java.util.Random;
 /**
  * Represents an Artificial Intelligence which can
  * create fleets or create shots.
+ * @see http://www.datagenetics.com/blog/december32011/ for advanced
+ * algorithms
  * @author fabio.urbini
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
@@ -30,6 +32,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
     public final static ArtificialIntelligence createArtificialIntelligence(final Level level,
                                                                             final Boundary boundary) {
+    	// Static factory method
         switch (level) {
         case FREE_WIN :
             return new FreeWinAI(boundary);
@@ -136,6 +139,27 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
 
             return new Point2dImpl(column, row);
         }
+    }
+
+    private static final class SuperHardAi extends AbstractArtificialIntelligence {
+    	/* 
+    	 * http://www.datagenetics.com/blog/december32011/
+    	 * Use New Algorithm here
+    	 */
+    	private SuperHardAi(final Boundary boundary) {
+    		super(boundary);
+    	}
+
+		@Override
+		public Fleet createFleet() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Shot createShot(Field field) {
+			throw new UnsupportedOperationException();
+		}
+
     }
 }
 

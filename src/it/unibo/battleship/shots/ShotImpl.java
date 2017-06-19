@@ -17,6 +17,7 @@ public final class ShotImpl implements Shot {
     }
 
     public static ShotImpl createShot(Point2d p) {
+    	// Static factory method to avoid the use of the constructor
         if (Ruleset.isPointWithinLimits(p)) {
             return new ShotImpl(p);
         } else {
