@@ -1,10 +1,9 @@
 package it.unibo.battleship.map;
 
 import java.util.Optional;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-
+import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
@@ -16,12 +15,10 @@ import it.unibo.battleship.shots.Shot;
 public final class FieldCellImpl implements FieldCell {
     private static final long serialVersionUID = 188175020723853008L;
     private State          currentState;
-    private transient Optional<Ship> ship;
-    // TODO: remove optional in the future
+    private Ship ship;
 
     public FieldCellImpl() {
         this.currentState = State.WATER;
-        this.ship         = Optional.empty();
     }
 
     @Override
@@ -46,12 +43,19 @@ public final class FieldCellImpl implements FieldCell {
 
     @Override
     public void placeShip(final Ship ship) {
-        this.ship         = Optional.of(ship);
+        if (ship == null) {
+            throw new IllegalArgumentException(GlobalProperties.NULL_REFERENCE);
+        }
+        this.ship         = ship;
         this.currentState = State.PRESENT;
     }
 
     @Override
     public void shoot(final Shot shot) {
+        if (shot == null) {
+            throw new IllegalArgumentException(GlobalProperties.NULL_REFERENCE);
+        }
+
         switch (this.currentState) {
         case WATER :
             this.currentState = State.MISSED;
@@ -61,10 +65,10 @@ public final class FieldCellImpl implements FieldCell {
             break;    // Exception?
 
         case PRESENT :
-            this.ship.ifPresent(ship -> {
+            if ( ship != null) {
                 this.currentState = State.HIT;
                 ship.shoot(shot);
-            });
+            }
             break;
 
         case HIT :
@@ -106,7 +110,7 @@ public final class FieldCellImpl implements FieldCell {
 
     @Override
     public Optional<Ship> getShip() {
-        return this.ship;
+        return Optional.ofNullable(this.ship);
     }
 
 }
