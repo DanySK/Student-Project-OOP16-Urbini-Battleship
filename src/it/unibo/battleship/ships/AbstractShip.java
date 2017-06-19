@@ -1,6 +1,7 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
+import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.shots.Shot;
@@ -78,7 +79,9 @@ public abstract class AbstractShip implements Ship {
     @Override
     public List<Point2d> getAllPositions() {
         // TODO: direction currently not used (EAST direction as default).
-
+        if (!pos.isPresent()) {
+            throw new IllegalStateException(GlobalProperties.STARTING_POSITION_NOT_DEFINED);
+        }
         return IntStream.range(0, this.getSize())
                                      .mapToObj(i -> new Point2dImpl(pos.get().getX() + i, pos.get().getY()))
                                      .collect(Collectors.toList());

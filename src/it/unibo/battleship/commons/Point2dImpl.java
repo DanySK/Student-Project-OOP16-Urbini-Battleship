@@ -8,7 +8,8 @@ import com.google.common.base.Objects;
  * @author fabio.urbini
  *
  */
-public class Point2dImpl implements Point2d {
+public final class Point2dImpl implements Point2d {
+    private static final long serialVersionUID = -551958507759199801L;
     private final int x;
     private final int y;
 

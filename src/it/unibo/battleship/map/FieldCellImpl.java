@@ -13,9 +13,11 @@ import it.unibo.battleship.shots.Shot;
  * @author fabio.urbini
  *
  */
-public class FieldCellImpl implements FieldCell {
+public final class FieldCellImpl implements FieldCell {
+    private static final long serialVersionUID = 188175020723853008L;
     private State          currentState;
-    private Optional<Ship> ship;    // TODO: remove optional in the future
+    private transient Optional<Ship> ship;
+    // TODO: remove optional in the future
 
     public FieldCellImpl() {
         this.currentState = State.WATER;

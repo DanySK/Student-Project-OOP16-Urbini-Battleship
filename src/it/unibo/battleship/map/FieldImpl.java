@@ -10,10 +10,11 @@ import it.unibo.battleship.shots.Shot;
 
 //TODO: javadoc
 public final class FieldImpl implements Field {
+    private static final long serialVersionUID = 4129869956647585285L;
     /*
-     * The field cell matrix is like the first quadrant
-     * of the cartesian plane, seen upside down.
-     */
+		 * The field cell matrix is like the first quadrant
+		 * of the cartesian plane, seen upside down.
+		 */
     private final FieldCell[][] fieldCells;
     private final int           rows;
     private final int           columns;

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * @author fabio.urbini
  *
  */
-public class GameTest {
+public final class GameTest {
 
     /**
      * @throws java.lang.Exception

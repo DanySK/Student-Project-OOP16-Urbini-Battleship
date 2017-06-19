@@ -21,7 +21,7 @@ public final class SinglePlayerGame {
         String values = "0123456789ABCDEFGH";    // raw method to show header
 
         for (int i = 0; i < columnsCount; i++) {
-            sb.append(" ").append(values.charAt(i)).append(' ');
+            sb.append(' ').append(values.charAt(i)).append(' ');
         }
 
         return sb.toString();

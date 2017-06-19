@@ -22,10 +22,9 @@ public final class ConsoleGame {
     }
 
     public static void main(String[] args) {
-        int shots = 0;
 
         // Creating a new field
-        Field field1 = FieldImpl.createField(Ruleset.getBoundary());
+        Field field1 = FieldImpl.createField(Ruleset.BOUNDARY);
 
         // Creating a new fleet
         Fleet fleet = FleetImpl.getNewFleet();
@@ -37,6 +36,7 @@ public final class ConsoleGame {
             AbstractArtificialIntelligence.createArtificialIntelligence(AbstractArtificialIntelligence.Level.EASY,
                                                                         field1.getBoundary());
 
+        int shots = 0;
         while (!fleet.isSunk() && (shots < 100)) {
             Shot s = ai.createShot(field1); // RIMETTERE
             field1.updateStateWithShot(s);

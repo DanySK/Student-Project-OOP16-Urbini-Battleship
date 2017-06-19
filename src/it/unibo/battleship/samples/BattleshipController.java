@@ -28,18 +28,17 @@ public enum BattleshipController {
 
     public void initialize() {
         aiFleet = FleetImpl.getNewFleet();
-        aiField = FieldImpl.createField(Ruleset.getBoundary());
+        aiField = FieldImpl.createField(Ruleset.BOUNDARY);
         placeFleet(aiField, aiFleet);
     }
 
     private static void placeFleet(final Field field, final Fleet fleet) {
         int  i = 0,
              j = 0;
-        Ship ship;
 
         while (!fleet.isReady()) {
             if (fleet.getNextNonPlacedShip().isPresent()) {
-                ship = fleet.getNextNonPlacedShip().get();
+                Ship ship = fleet.getNextNonPlacedShip().get();
                 field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
 
                 // Placing the ships diagonally

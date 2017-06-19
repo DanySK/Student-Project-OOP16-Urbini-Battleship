@@ -2,6 +2,7 @@ package it.unibo.battleship.ships;
 
 import it.unibo.battleship.commons.GlobalProperties;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
  * @author fabio.urbini
  *
  */
-public interface Fleet {
+public interface Fleet extends Serializable {
 
 	/**
 	 * Adds a ship to the fleet.

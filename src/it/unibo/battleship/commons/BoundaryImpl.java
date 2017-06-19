@@ -7,6 +7,7 @@ import com.google.common.base.Objects;
  * {@see Boundary}
  */
 public final class BoundaryImpl implements Boundary {
+    private static final long serialVersionUID = -5121855953223117935L;
     private final int columnsCount;
     private final int rowsCount;
 

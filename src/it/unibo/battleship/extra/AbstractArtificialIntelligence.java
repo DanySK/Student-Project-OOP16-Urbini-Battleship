@@ -15,11 +15,12 @@ import java.util.Random;
 /**
  * Represents an Artificial Intelligence which can
  * create fleets or create shots.
- * @see http://www.datagenetics.com/blog/december32011/ for advanced
+ * http://www.datagenetics.com/blog/december32011/ for advanced
  * algorithms
  * @author fabio.urbini
  */
 public abstract class AbstractArtificialIntelligence implements ArtificialIntelligence {
+    private static final long serialVersionUID = -7273836582211632939L;
     private final Boundary boundary;
 
     public enum Level {
@@ -62,6 +63,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
     }
 
     private static final class EasyAI extends AbstractArtificialIntelligence {
+        private static final long serialVersionUID = -7273836582211632939L;
         final List<Integer> values;
         final int           max;
 
@@ -83,7 +85,7 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
                 return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(getRandomInt(), field.getBoundary()));
             }
 
-            // There is no way the fleet couldn't be sunk by this time
+            // There is no way the fleet couldn't be sunk at this time
             // Because all shots were generated.
             throw new IllegalStateException(GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
         }
@@ -114,8 +116,9 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
         }
     }
 
-
     private static final class FreeWinAI extends AbstractArtificialIntelligence {
+        private static final long serialVersionUID = -7970147935843938741L;
+
         private FreeWinAI(final Boundary boundary) {
             super(boundary);
         }
@@ -142,10 +145,12 @@ public abstract class AbstractArtificialIntelligence implements ArtificialIntell
     }
 
     private static final class SuperHardAi extends AbstractArtificialIntelligence {
-    	/* 
-    	 * http://www.datagenetics.com/blog/december32011/
-    	 * Use New Algorithm here
-    	 */
+        private static final long serialVersionUID = 3990811369592412792L;
+
+        /*
+				 * http://www.datagenetics.com/blog/december32011/
+				 * Use New Algorithm here
+				 */
     	private SuperHardAi(final Boundary boundary) {
     		super(boundary);
     	}

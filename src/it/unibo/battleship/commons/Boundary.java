@@ -1,10 +1,12 @@
 package it.unibo.battleship.commons;
 
+import java.io.Serializable;
+
 /**
  * Represents the boundary of a field
  * @author fabio.urbini
  */
-public interface Boundary {
+public interface Boundary extends Serializable {
 
     /**
      * Returns the horizontal bound, which is also the number of columns

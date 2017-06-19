@@ -3,6 +3,7 @@ package it.unibo.battleship.map;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Optional;
  * @author fabio.urbini
  *
  */
-public interface FieldCell {
+public interface FieldCell extends Serializable {
 
     /**
      * Places a ship in the field cell

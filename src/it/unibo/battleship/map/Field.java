@@ -6,6 +6,8 @@ import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 
+import java.io.Serializable;
+
 /**
  * Represents the field of the battleship game.
  * You can either place a ship or shoot.
@@ -14,7 +16,7 @@ import it.unibo.battleship.shots.Shot;
  * @author fabio.urbini
  *
  */
-public interface Field {
+public interface Field extends Serializable {
 
     /**
      * Places a ship in the field

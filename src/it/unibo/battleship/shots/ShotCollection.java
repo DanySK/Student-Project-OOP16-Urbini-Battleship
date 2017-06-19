@@ -3,6 +3,7 @@ package it.unibo.battleship.shots;
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,9 @@ import java.util.List;
  *
  * @author fabio.urbini
  */
-public abstract class ShotCollection {
+public abstract class ShotCollection implements Serializable {
+    private static final long serialVersionUID = -8675395549867915077L;
+
     private ShotCollection() {}
 
     public enum Type {
@@ -48,6 +51,8 @@ public abstract class ShotCollection {
     }
 
     private static final class IShot extends ShotCollection {
+        private static final long serialVersionUID = 6019046647320383763L;
+
         @Override
         public List<Shot> getShotCollection(final Point2d point2d) {
             throw new UnsupportedOperationException();
@@ -56,6 +61,8 @@ public abstract class ShotCollection {
 
 
     private static final class TShot extends ShotCollection {
+        private static final long serialVersionUID = -1817573103704728259L;
+
         @Override
         public List<Shot> getShotCollection(final Point2d point2d) {
             throw new UnsupportedOperationException();
@@ -64,6 +71,8 @@ public abstract class ShotCollection {
 
 
     private static final class XShot extends ShotCollection {
+        private static final long serialVersionUID = 8779342634741299600L;
+
         @Override
         public List<Shot> getShotCollection(final Point2d point2d) {
             throw new UnsupportedOperationException();

@@ -1,16 +1,9 @@
 package it.unibo.battleship.samples;
 
-import it.unibo.battleship.commons.BoundaryImpl;
-
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-
-
 /**
  * @author fabio.urbini
  */
-public class BattleshipGUI {
+public final class BattleshipGUI {
     private BattleshipGUI() {
     }
 

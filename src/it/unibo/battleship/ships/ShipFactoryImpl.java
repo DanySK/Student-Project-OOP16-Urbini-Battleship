@@ -9,12 +9,13 @@ import it.unibo.battleship.commons.Point2d;
  * @author fabio.urbini
  *
  */
-public class ShipFactoryImpl implements ShipFactory {
-	/*
-	 * Ship factory singleton. There's no need to have
-	 * other instances around. The singleton is created
-	 * with the thread-safe lazy initialization.
-	 */
+public final class ShipFactoryImpl implements ShipFactory {
+    private static final long serialVersionUID = -1375681121821315440L;
+    /*
+		 * Ship factory singleton. There's no need to have
+		 * other instances around. The singleton is created
+		 * with the thread-safe lazy initialization.
+		 */
 	private static ShipFactoryImpl instance;
 
 	private ShipFactoryImpl() { }

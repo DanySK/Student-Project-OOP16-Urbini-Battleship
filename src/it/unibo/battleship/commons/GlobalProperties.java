@@ -19,7 +19,7 @@ public final class GlobalProperties {
     public static final String INVALID_AI_LEVEL              = "Invalid artificial intelligence level";
     public static final String INVALID_SHIP_SIZE             = "Invalid ship size";
     public static final String INVALID_GENERATED_SHOTS_STATE = "Shots generated were more than the actual map size";
-
+    public static final String STARTING_POSITION_NOT_DEFINED = "Starting position wasn't defined yet";
     private GlobalProperties() {}
 
     public enum ShipRules {

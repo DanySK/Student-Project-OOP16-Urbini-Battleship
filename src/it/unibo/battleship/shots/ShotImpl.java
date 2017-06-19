@@ -10,6 +10,7 @@ import it.unibo.battleship.commons.Ruleset;
  * Implementation of a Shot
  */
 public final class ShotImpl implements Shot {
+    private static final long serialVersionUID = 7357162445793535579L;
     private final Point2d point;
 
     private ShotImpl(final Point2d p) {

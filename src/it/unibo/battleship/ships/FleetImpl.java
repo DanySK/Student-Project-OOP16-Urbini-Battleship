@@ -13,7 +13,8 @@ import it.unibo.battleship.commons.GlobalProperties.ShipRules;
 
 public final class FleetImpl implements Fleet {
 
-	private final List<Ship> ships;
+    private static final long serialVersionUID = -5734887827627519552L;
+    private final List<Ship> ships;
 
     private FleetImpl() {
         this.ships = new ArrayList<>();
@@ -138,7 +139,7 @@ public final class FleetImpl implements Fleet {
     @Override
 	public String toString() {
 		return "FleetImpl [isReady()=" + isReady() + ", isSunk()=" + isSunk()
-				+ "]";
+				+ ']';
 	}
 }
 

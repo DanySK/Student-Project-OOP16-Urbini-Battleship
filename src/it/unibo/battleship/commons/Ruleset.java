@@ -9,18 +9,10 @@ import java.util.stream.IntStream;
  * Some rules can be changed manually.
  */
 public final class Ruleset {
-    private static final Boundary BOUNDARY              = BoundaryImpl.createBoundary(10, 10);
-    private static final boolean  SHOOT_AGAIN_AFTER_HIT = false;
+    public static final Boundary BOUNDARY              = BoundaryImpl.createBoundary(10, 10);
+    public static final boolean  SHOOT_AGAIN_AFTER_HIT = false;
 
     private Ruleset() {}
-
-    public static boolean canShootAgainAfterHit() {
-        return SHOOT_AGAIN_AFTER_HIT;
-    }
-
-    public static Boundary getBoundary() {
-        return BOUNDARY;    // boundary is immutable
-    }
 
     public static boolean isPointWithinLimits(final Point2d p) {
         return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsNumber()))
