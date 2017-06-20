@@ -62,7 +62,7 @@ public abstract class AbstractArtificialIntelligence implements
   }
 
   public final Boundary getBoundary() {
-    return BoundaryImpl.createBoundary(this.boundary.getColumnnCount(),
+    return BoundaryImpl.createBoundary(this.boundary.getColumnnsCount(),
         this.boundary.getRowsCount());
   }
 
@@ -73,7 +73,7 @@ public abstract class AbstractArtificialIntelligence implements
 
     private EasyAI(final Boundary boundary) {
       super(boundary);
-      this.max = boundary.getColumnnCount() * boundary.getRowsCount();
+      this.max = boundary.getColumnnsCount() * boundary.getRowsCount();
       this.values = new ArrayList<>(this.max);
       this.setUp();
     }
@@ -147,7 +147,7 @@ public abstract class AbstractArtificialIntelligence implements
 
     private Point2d generateRandomPoint2d(final Boundary boundary) {
       final Random random = new Random(Instant.now().getNano());
-      final int column = random.nextInt(boundary.getColumnnCount());
+      final int column = random.nextInt(boundary.getColumnnsCount());
       final int row = random.nextInt(boundary.getRowsCount());
 
       return new Point2dImpl(column, row);

@@ -5,7 +5,6 @@ import it.unibo.battleship.commons.*;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
-import jdk.nashorn.internal.objects.Global;
 
 import java.util.Arrays;
 
@@ -20,29 +19,26 @@ public final class FieldImpl implements Field {
    * seen upside down.
    */
   // TODO: use a List of FieldCells instead and use the index
-  private final FieldCell[][] fieldCells; // todo: use List<List<>>
+//  private final FieldCell[][] fieldCells; // todo: use List<List<>>
   private final int rows;
   private final int columns;
+  private final Boundary boundary;
+  private final FieldMatrix fieldMatrix;
 
-  private FieldImpl(final int rows, final int columns) {
-    this.rows = rows;
-    this.columns = columns;
-    this.fieldCells = new FieldCell[rows][columns];
 
-    for (int i = 0; i < this.rows; i++) {
-      for (int j = 0; j < this.columns; j++) {
-        this.fieldCells[i][j] = new FieldCellImpl();
-      }
-    }
+  private FieldImpl(final Boundary boundary) {
+    this.boundary = boundary;
+    this.rows = boundary.getRowsCount();
+    this.columns = boundary.getColumnnsCount();
+    fieldMatrix = new FieldMatrix(boundary);
   }
 
   public static FieldImpl createField(final Boundary boundary) {
-    if ((boundary.getColumnnCount() < 0) || (boundary.getRowsCount() < 0)) {
+    if ((boundary.getColumnnsCount() < 0) || (boundary.getRowsCount() < 0)) {
       throw new IllegalArgumentException(
           GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
     }
-
-    return new FieldImpl(boundary.getColumnnCount(), boundary.getRowsCount());
+    return new FieldImpl(boundary);
   }
 
   @Override
@@ -52,9 +48,7 @@ public final class FieldImpl implements Field {
     ship.place(point, direction);
 
     for (final Point2d p : ship.getAllPositions()) {
-      this.fieldCells[p.getY()][p.getX()].placeShip(ship);
-//      this.fieldCells[p.getX()][p.getY()].placeShip(ship);
-      // TODO: check HERE y = row, x = column
+      this.fieldMatrix.getAt(p).placeShip(ship);
     }
   }
 
@@ -71,7 +65,7 @@ public final class FieldImpl implements Field {
     }
 
     final Point2d p = shot.getPoint();
-    this.fieldCells[p.getY()][p.getX()].shoot(shot);
+    this.fieldMatrix.getAt(p).shoot(shot);
   }
 
   private void validateShipPlacement(final Ship ship, final Point2d point) {
@@ -96,11 +90,11 @@ public final class FieldImpl implements Field {
 
   @Override
   public Boundary getBoundary() {
-    return BoundaryImpl.createBoundary(this.rows, this.columns);
+    return this.boundary;
   }
 
   public FieldCell[][] getFieldCells() {
-    return Arrays.copyOf(this.fieldCells, this.fieldCells.length);
+    return this.fieldMatrix.getMatrix();
   }
 
   private boolean isShipPlaceable(final Ship ship, final Point2d point) {
@@ -112,10 +106,13 @@ public final class FieldImpl implements Field {
                 GlobalProperties.POINT_NOT_WITHIN_LIMITS
             );
           }
-          return this.fieldCells[p.getY()][p.getX()].isEmpty();
+          return this.fieldMatrix.getAt(p).isEmpty();
         });
   }
 
+  /*
+  TODO: equals, and hashCode -> rewrite
+   */
   @Override
   public boolean equals(final Object o) {
     if (this == o)
@@ -125,19 +122,59 @@ public final class FieldImpl implements Field {
 
     final FieldImpl that = (FieldImpl) o;
 
-    return Objects.equal(this.fieldCells, that.fieldCells)
+    return Objects.equal(this.fieldMatrix, that.fieldMatrix)
         && Objects.equal(this.rows, that.rows)
         && Objects.equal(this.columns, that.columns);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(this.fieldCells, this.rows, this.columns);
+    return Objects.hashCode(this.fieldMatrix, this.rows, this.columns);
   }
 
   @Override
   public String toString() {
     return "Field { " + this.rows + " rows }; { " + this.columns
         + " columns } ";
+  }
+
+  private static class FieldMatrix {
+    private final FieldCell[] fieldCells;
+    private final Boundary boundary;
+
+    public FieldMatrix(final Boundary boundary) {
+      this.boundary = boundary;
+      this.fieldCells = new FieldCell[boundary.getSize()];
+      initialize();
+    }
+
+    public FieldCell getAt(final int zeroBasedIndex) {
+      return this.fieldCells[zeroBasedIndex];
+    }
+
+    public FieldCell getAt(final Point2d point) {
+      final int idx = Point2dHelper.getIndex(point, boundary);
+      return getAt(idx);
+    }
+
+    public FieldCell[][] getMatrix() {
+      final int rows = this.boundary.getRowsCount();
+      final int cols = this.boundary.getColumnnsCount();
+      final FieldCell[][] matrix = new FieldCell[rows][cols];
+
+      for (int row = 0; row < rows; row++) {
+        for (int column = 0; column < cols; column++) {
+          final Point2d p = new Point2dImpl(row, column);
+          final int idx = Point2dHelper.getIndex(p, this.boundary);
+          matrix[row][column] = this.fieldCells[idx];
+        }
+      }
+      return matrix;
+    }
+    private void initialize() {
+      for (int i = 0; i < boundary.getSize(); i++) {
+        this.fieldCells[i] = new FieldCellImpl();
+      }
+    }
   }
 }

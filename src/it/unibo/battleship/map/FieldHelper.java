@@ -69,13 +69,13 @@ public final class FieldHelper {
   private static char[][] getViewByPlayerState(final Field field,
       final PlayerState playerState) {
     final int rows = field.getBoundary().getRowsCount();
-    final int columns = field.getBoundary().getColumnnCount();
+    final int columns = field.getBoundary().getColumnnsCount();
     final char[][] view = new char[rows][columns];
 
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < columns; j++) {
-        view[i][j] = getValueByPlayerState(playerState,
-            field.getFieldCells()[j][i]);
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < columns; col++) {
+        view[row][col] = getValueByPlayerState(playerState,
+            field.getFieldCells()[row][col]);
       }
     }
 

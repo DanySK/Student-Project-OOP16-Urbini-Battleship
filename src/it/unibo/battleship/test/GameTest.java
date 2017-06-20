@@ -23,7 +23,7 @@ public final class GameTest {
   public void shotsTest() {
     // fail("Not yet implemented");
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
-    final int maxIndex = bounds.getColumnnCount() * bounds.getRowsCount();
+    final int maxIndex = bounds.getColumnnsCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
       final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i,
           bounds));

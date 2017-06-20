@@ -34,7 +34,7 @@ public class MyFrame extends JFrame {
     this.setSize(WIDTH, HEIGHT);
     this.setVisible(true);
 
-    for (int i = 0; i < this.boundary.getColumnnCount(); i++) {
+    for (int i = 0; i < this.boundary.getColumnnsCount(); i++) {
       final FieldButton fb = new FieldButton(i, 0);
       this.fieldList.add(fb);
       this.addButton(fb);

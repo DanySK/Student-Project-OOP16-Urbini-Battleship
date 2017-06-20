@@ -70,7 +70,7 @@ public enum BattleshipController {
   }
 
   public int getColumnsCount() {
-    return Ruleset.BOUNDARY.getColumnnCount();
+    return Ruleset.BOUNDARY.getColumnnsCount();
   }
 
   public String getNextPlaceableShip() {
