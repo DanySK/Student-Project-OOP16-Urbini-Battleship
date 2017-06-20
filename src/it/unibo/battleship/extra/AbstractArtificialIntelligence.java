@@ -80,13 +80,14 @@ public abstract class AbstractArtificialIntelligence implements
 
     @Override
     public Fleet createFleet() {
-      throw new UnsupportedOperationException();
+      final FleetFactory f = FleetFactoryImpl.getInstance();
+      return f.createFleet();
     }
 
     @Override
     public Shot createShot(final Field field) {
       if (this.hasNextInt()) {
-        return ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(
+        return ShotImpl.createShot(Point2dHelper.createPoint2d(
             this.getRandomInt(), field.getBoundary()));
       }
 

@@ -25,7 +25,7 @@ public final class GameTest {
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
     final int maxIndex = bounds.getColumnnCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
-      final Shot s = ShotImpl.createShot(Point2dHelper.getPoint2dByIndex(i,
+      final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i,
           bounds));
       assertTrue(Ruleset.isPointWithinLimits(s.getPoint()));
     }

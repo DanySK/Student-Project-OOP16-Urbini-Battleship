@@ -1,6 +1,7 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.map.Field;
@@ -85,6 +86,21 @@ public enum BattleshipController {
     Optional<Ship> ship = playerFleet.getNextNonPlacedShip();
     if (ship.isPresent()) {
       playerField.placeShip(ship.get(), startingPosition);
+    }
+
+    for (int i = 0; i < 99; i++) {
+      char c = '0';
+      String fin = i > 9 ? i + "" : c + "" + i;
+      System.out.print(fin + '-');
+    }
+    System.out.println();
+    for (int i = 0; i < 99; i++) {
+      Point2d p = Point2dHelper.createPoint2d(i, Ruleset.BOUNDARY);
+      boolean pres = playerField.getFieldCells()[p.getX()][p.getY()].isPresent();
+      String tmp = "-" + (pres ? '@' : 'x');
+      System.out.print(tmp + '-');
+      // TODO: check the ship is not placed or viewed correctly
+      // cruiser placed at 7,4 -> (7;4), (8;4) instead of (7;4), (7;5)
     }
   }
 

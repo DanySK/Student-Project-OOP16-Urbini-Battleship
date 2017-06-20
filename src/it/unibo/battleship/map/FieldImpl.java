@@ -19,6 +19,7 @@ public final class FieldImpl implements Field {
    * The field cell matrix is like the first quadrant of the cartesian plane,
    * seen upside down.
    */
+  // TODO: use a List of FieldCells instead and use the index
   private final FieldCell[][] fieldCells; // todo: use List<List<>>
   private final int rows;
   private final int columns;
@@ -52,6 +53,7 @@ public final class FieldImpl implements Field {
 
     for (final Point2d p : ship.getAllPositions()) {
       this.fieldCells[p.getY()][p.getX()].placeShip(ship);
+//      this.fieldCells[p.getX()][p.getY()].placeShip(ship);
       // TODO: check HERE y = row, x = column
     }
   }

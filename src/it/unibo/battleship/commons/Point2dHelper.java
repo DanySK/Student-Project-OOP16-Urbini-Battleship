@@ -29,7 +29,7 @@ public final class Point2dHelper {
   }
 
   /**
-   * Gets a Point2d based on the inserted index and the boundary
+   * Gets a Point2d based on the index and the boundary
    *
    * @param zeroBasedIndex
    *          zero based index, starts from 0
@@ -37,8 +37,8 @@ public final class Point2dHelper {
    *          boundary of the field
    * @return a Point2d
    */
-  public static Point2d getPoint2dByIndex(final int zeroBasedIndex,
-      final Boundary boundary) {
+  public static Point2d createPoint2d(final int zeroBasedIndex,
+                                      final Boundary boundary) {
 
     // TODO: index must be within the boundary limit
     // boundary(10,10) -> max index = 10*10 - 1
