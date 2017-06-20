@@ -5,10 +5,14 @@ import it.unibo.battleship.commons.*;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
+import jdk.nashorn.internal.objects.Global;
 
 import java.util.Arrays;
 
-//TODO: javadoc
+/**
+ * Implementation of a Field.
+ * @author fabio.urbini
+ */
 public final class FieldImpl implements Field {
   private static final long serialVersionUID = 4129869956647585285L;
   /*
@@ -48,7 +52,13 @@ public final class FieldImpl implements Field {
 
     for (final Point2d p : ship.getAllPositions()) {
       this.fieldCells[p.getY()][p.getX()].placeShip(ship);
+      // TODO: check HERE y = row, x = column
     }
+  }
+
+  @Override
+  public void placeShip(final Ship ship, final Point2d point) {
+    placeShip(ship, point, ShipDirection.EAST);
   }
 
   @Override
@@ -65,16 +75,20 @@ public final class FieldImpl implements Field {
   private void validateShipPlacement(final Ship ship, final Point2d point) {
     if (!Ruleset.isPointWithinLimits(point)) {
       throw new IllegalArgumentException(
-          GlobalProperties.POINT_NOT_WITHIN_LIMITS);
+          GlobalProperties.POINT_NOT_WITHIN_LIMITS
+      );
     }
 
     if (!this.isShipPlaceable(ship, point)) {
-      throw new IllegalArgumentException(GlobalProperties.FIELD_CELLS_NOT_EMPTY);
+      throw new IllegalArgumentException(
+          GlobalProperties.FIELD_CELLS_NOT_EMPTY
+      );
     }
 
     if (!Ruleset.isShipWithinLimits(ship, point)) {
       throw new IllegalArgumentException(
-          GlobalProperties.SHIP_NOT_WITHIN_LIMITS);
+          GlobalProperties.SHIP_NOT_WITHIN_LIMITS
+      );
     }
   }
 
@@ -88,8 +102,16 @@ public final class FieldImpl implements Field {
   }
 
   private boolean isShipPlaceable(final Ship ship, final Point2d point) {
+    // TODO: throws ArrayIndexOutOfBoundExceptions, solve it by throwing an ex
     return ship.getProjectionPoints(point).stream()
-        .allMatch(p -> this.fieldCells[p.getY()][p.getX()].isEmpty());
+        .allMatch(p -> {
+          if(!Ruleset.isPointWithinLimits(p)) {
+            throw new IllegalArgumentException(
+                GlobalProperties.POINT_NOT_WITHIN_LIMITS
+            );
+          }
+          return this.fieldCells[p.getY()][p.getX()].isEmpty();
+        });
   }
 
   @Override

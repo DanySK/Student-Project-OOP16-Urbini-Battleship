@@ -64,6 +64,11 @@ public abstract class AbstractShip implements Ship {
   }
 
   @Override
+  public void place(final Point2d startingPosition) {
+    this.place(startingPosition, ShipDirection.EAST);
+  }
+
+  @Override
   public void resetPlacement() {
     this.placed = false;
     this.pos = null;
@@ -110,7 +115,6 @@ public abstract class AbstractShip implements Ship {
   @Override
   public boolean isSunk() {
     return this.hitPoints.size() >= this.getSize();
-
   }
 
   @Override

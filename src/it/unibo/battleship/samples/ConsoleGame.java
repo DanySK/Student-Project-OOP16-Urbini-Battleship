@@ -58,7 +58,7 @@ public final class ConsoleGame {
     while (!fleet.isReady()) {
       if (fleet.getNextNonPlacedShip().isPresent()) {
         final Ship ship = fleet.getNextNonPlacedShip().get();
-        field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
+        field.placeShip(ship, new Point2dImpl(i++, j++));
       }
     }
 

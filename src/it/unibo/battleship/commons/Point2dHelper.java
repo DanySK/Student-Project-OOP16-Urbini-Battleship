@@ -47,4 +47,8 @@ public final class Point2dHelper {
 
     return new Point2dImpl(x, y);
   }
+
+  public static boolean isPointWithinLimits(final Point2d point) {
+    return Ruleset.isPointWithinLimits(point);
+  }
 }

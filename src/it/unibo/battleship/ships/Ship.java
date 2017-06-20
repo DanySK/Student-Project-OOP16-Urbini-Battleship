@@ -26,13 +26,29 @@ public interface Ship extends Serializable {
 
   /**
    * Places a ship where specified.
-   *
-   * @param start
+   * It's suggested to let the field do the job.
+   * Calling this method will give the ship a position
+   * without the knowledge of the field.
+   * Any misuse of this method can lead to Exceptions
+   * of the system.
+   * @param startingPosition
    *          {@link Point2d}
    * @param direction
    *          {@link ShipDirection}
    */
-  void place(Point2d start, ShipDirection direction);
+  void place(Point2d startingPosition, ShipDirection direction);
+
+  /**
+   * Places a ship where specified with standard Direction
+   * (EAST). It's suggested to let the field do the job.
+   * Calling this method will give the ship a position
+   * without the knowledge of the field.
+   * Any misuse of this method can lead to Exceptions
+   * of the system.
+   * @param startingPosition
+   *          {@link Point2d}
+   */
+  void place(Point2d startingPosition);
 
   /**
    * Resets the placement of this ship.

@@ -1,5 +1,9 @@
 package it.unibo.battleship.samples;
 
+import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.commons.Point2dHelper;
+import it.unibo.battleship.commons.Point2dImpl;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,8 +39,14 @@ public final class SinglePlayerGame {
     CONTROLLER.initialize();
 
     final int columnsCount = CONTROLLER.getColumnsCount();
+//    stampaField();
 
-    stampaField(columnsCount);
+    System.out.println("Place your fleet");
+    stampaField(false, true);
+    do {
+      place();
+      stampaField(false, true);
+    } while (CONTROLLER.playerFleetNotPlaced());
 
     do {
       System.out.println("Create a new shot and point at the enemy fleet!");
@@ -45,8 +55,10 @@ public final class SinglePlayerGame {
       final int column = readInt("Enter column ");
 
       CONTROLLER.shoot(row, column);
-      stampaField(columnsCount);
+      stampaField(true, false);
     } while (CONTROLLER.checkToContinue());
+
+
   }
 
   private static int readInt(final String message) {
@@ -66,12 +78,12 @@ public final class SinglePlayerGame {
     throw new IllegalArgumentException();
   }
 
-  private static void stampaField(final int columnsCount) {
-    System.out.println(header(columnsCount));
+  private static void stampaField(final boolean isAi, final boolean isOwner) {
+    System.out.println(header(CONTROLLER.getColumnsCount()));
 
     int i = 0;
 
-    for (final char[] chars : CONTROLLER.getCharMap()) {
+    for (final char[] chars : CONTROLLER.getCharMap(isAi, isOwner)) {
       System.out.print(" " + i++ + ' ');
 
       for (final char car : chars) {
@@ -82,5 +94,18 @@ public final class SinglePlayerGame {
     }
 
     System.out.println("\n\n\n");
+  }
+
+  private static void place() {
+    final String shipToPlace = CONTROLLER.getNextPlaceableShip();
+    System.out.println(shipToPlace);
+
+    final int row = readInt("Enter row to place a " + shipToPlace + ' ');
+    final int column = readInt("Enter column to place a " + shipToPlace + ' ');
+
+    Point2d p = new Point2dImpl(row, column);
+    System.out.println(Point2dHelper.isPointWithinLimits(p));
+    // Controllo che non tocchi altre navi
+    CONTROLLER.placeNextPlaceableShip(p);
   }
 }

@@ -2,7 +2,7 @@ package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
-import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.commons.Ruleset.ShipRules;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,17 +34,17 @@ public final class FleetFactoryImpl implements FleetFactory {
   public Fleet createFleet() {
     final Fleet fleet = new FleetImpl();
 
-    for (int i = 0; i < Ruleset.ShipRules.SUBMARINE.getInstancesNumber(); i++) {
+    for (int i = 0; i < ShipRules.SUBMARINE.getInstancesNumber(); i++) {
       fleet.addShip(fleet.getFactory().createShip(
           GlobalProperties.SUBMARINE_SIZE));
     }
 
-    for (int i = 0; i < Ruleset.ShipRules.CRUISER.getInstancesNumber(); i++) {
+    for (int i = 0; i < ShipRules.CRUISER.getInstancesNumber(); i++) {
       fleet.addShip(fleet.getFactory()
           .createShip(GlobalProperties.CRUISER_SIZE));
     }
 
-    for (int i = 0; i < Ruleset.ShipRules.BATTLESHIP.getInstancesNumber(); i++) {
+    for (int i = 0; i < ShipRules.BATTLESHIP.getInstancesNumber(); i++) {
       fleet.addShip(fleet.getFactory().createShip(
           GlobalProperties.BATTLESHIP_SIZE));
     }
@@ -73,8 +73,10 @@ public final class FleetFactoryImpl implements FleetFactory {
 
     @Override
     public List<Ship> getAllNonPlacedShips() {
-      final List<Ship> nonPlacedShips = this.getAllShips().stream()
-          .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
+      final List<Ship> nonPlacedShips = this.getAllShips()
+          .stream()
+          .filter(ship -> !ship.isPlaced())
+          .collect(Collectors.toList());
 
       return Collections.unmodifiableList(nonPlacedShips);
     }
@@ -85,8 +87,9 @@ public final class FleetFactoryImpl implements FleetFactory {
     }
 
     @Override
-    public List<Ship> getAllShipsByType(final Ruleset.ShipRules shipType) {
-      final List<Ship> ships = this.ships.stream()
+    public List<Ship> getAllShipsByType(final ShipRules shipType) {
+      final List<Ship> ships = this.ships
+          .stream()
           .filter(ship -> ship.toString().equals(shipType.toString()))
           .filter(ship -> !ship.isPlaced()).collect(Collectors.toList());
 
@@ -100,18 +103,18 @@ public final class FleetFactoryImpl implements FleetFactory {
       if (!this.getAllNonPlacedShips().isEmpty()) {
         ship = Optional.of(this.getAllNonPlacedShips().get(0));
       }
-
+      // TODO: return a COPY?
       return ship;
     }
 
     @Override
-    public Optional<Ship> getNextShipByType(final Ruleset.ShipRules shipType) {
+    public Optional<Ship> getNextShipByType(final ShipRules shipType) {
       Optional<Ship> ship = Optional.empty();
 
       if (!this.getAllShipsByType(shipType).isEmpty()) {
         ship = Optional.of(this.getAllShipsByType(shipType).get(0));
       }
-
+      // TODO: RETURN A COPY?
       return ship;
     }
 

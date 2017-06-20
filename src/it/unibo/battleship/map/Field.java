@@ -23,11 +23,20 @@ public interface Field extends Serializable {
    * @param ship
    *          ship to place
    * @param point
-   *          position where to place the ship
+   *          position where the ship starts.
    * @param direction
    *          direction of the ship
    */
   void placeShip(Ship ship, Point2d point, ShipDirection direction);
+
+  /**
+   * Places a ship in the field with a standard direction (EAST).
+   *
+   * @param ship ship to place
+   *
+   * @param point position where the ship starts.
+   */
+  void placeShip(Ship ship, Point2d point);
 
   /**
    * Updates the field with a shot.

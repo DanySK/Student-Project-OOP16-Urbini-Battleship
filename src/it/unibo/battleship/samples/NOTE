@@ -1,5 +1,3 @@
-TODO: isSunk non funziona più per qualche motivo
-TODO JAVADOC di classi tipo Ship, AbstractShip
 TODO test JUnit con tutto quel che riguarda piazzare una flotta, sparare
 TODO: Console game:
 
@@ -20,16 +18,7 @@ Fleet.Sunk -> end of the game
 2)row, column must not overlap (when placing ships)
 3)
 
-TODO: togliere la dipendenza da MAX_SIZE ( in global properties)
-TODO: Per creare un nuovo tipo di nave, sono da andar a modificare tre file (Ruleset, Global Properties e AbstractShip)
-- DI BASE VIENE USATA DIREZIONE EAST
-TODO: Field -> vista del nemico e vista del giocatore
-TODO: Field -> controllo dello sparo (x,y entro i limiti)
-
-
 MUOVERE LE CLASSI NEI PACKAGE GIUSTI
-EXCEPTIONS MUOVERE INSIEME A POINTS, SHOT, ECC...
-{
 
 	Eccezioni da usare principalmente : IllegalState  /  IllegalArgument
 	Possibili eccezioni :
@@ -59,21 +48,13 @@ Click per piazzare una nave :
 
 	------ traduzione in passaggi ------
 
-
-
-
-
-
-
 ------
 
 
 Fleet -> getAllNonPlacedShips -> serve per piazzare le navi
-		-> getAllNonPlacedShipsByType (Class ... )
 
 		POSSIBILI PROBLEMI : prendere la prossima nave da piazzare
 		(Può esser chiesta in modo concorrente da più istanze e causare problemi...?)
-
 
 
 ***** PROBLEMA : La flotta conosce le dimensioni del campo?
@@ -104,8 +85,7 @@ Fare tutti i controlli sulla mappa e sull'aggiunta di navi
 			Posizione { Punto, direzione, lunghezza }
 
 
-FACTORY e BUILDER per creare nuove flotte in modo semplice senza tanti problemi
-Iniziare a pensare di fare navi solo di diversa grandezza e non di diversa forma
+FACTORY per creare nuove flotte in modo semplice senza tanti problemi
 
 FieldContainer -> Contiene entrambi i Field, accetta come costruttore Ruleset
 

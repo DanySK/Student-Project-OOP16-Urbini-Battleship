@@ -1,5 +1,6 @@
 package it.unibo.battleship.samples;
 
+import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.map.Field;
@@ -8,9 +9,10 @@ import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
-import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
+
+import java.util.Optional;
 
 /**
  * Singleton of a Controller of the battleship game.
@@ -20,16 +22,23 @@ import it.unibo.battleship.shots.ShotImpl;
 public enum BattleshipController {
   CONTROLLER;
 
-  private Fleet aiFleet;
-  private Field aiField;
+  private final Fleet aiFleet;
+  private final Field aiField;
+  private final Fleet playerFleet;
+  private final Field playerField;
+
+  BattleshipController() {
+    this.aiFleet = FleetFactoryImpl.getInstance().createFleet();
+    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
+    this.playerFleet = FleetFactoryImpl.getInstance().createFleet();
+    this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
+  }
 
   public boolean checkToContinue() {
     return !this.aiFleet.isSunk();
   }
 
   public void initialize() {
-    this.aiFleet = FleetFactoryImpl.getInstance().createFleet();
-    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
     placeFleet(this.aiField, this.aiFleet);
   }
 
@@ -39,7 +48,7 @@ public enum BattleshipController {
     while (!fleet.isReady()) {
       if (fleet.getNextNonPlacedShip().isPresent()) {
         final Ship ship = fleet.getNextNonPlacedShip().get();
-        field.placeShip(ship, new Point2dImpl(i++, j++), ShipDirection.EAST);
+        field.placeShip(ship, new Point2dImpl(i++, j++));
 
         // Placing the ships diagonally
       }
@@ -51,11 +60,35 @@ public enum BattleshipController {
     this.aiField.updateStateWithShot(shot);
   }
 
-  public char[][] getCharMap() {
-    return FieldHelper.getViewByEnemy(this.aiField);
+  public char[][] getCharMap(boolean isAi, boolean isOwner) {
+    Field field = isAi ? this.aiField : this.playerField;
+    if (isOwner) {
+      return FieldHelper.getViewByOwner(field);
+    }
+    return FieldHelper.getViewByEnemy(field);
   }
 
   public int getColumnsCount() {
-    return this.aiField.getBoundary().getColumnnCount();
+    return Ruleset.BOUNDARY.getColumnnCount();
+  }
+
+  public String getNextPlaceableShip() {
+    Optional<Ship> ship = playerFleet.getNextNonPlacedShip();
+    if (ship.isPresent()) {
+      return ship.get().toString();
+    }
+    return "No ship left to place";
+  }
+
+  public void placeNextPlaceableShip(final Point2d startingPosition) {
+    // TODO: controllo della posizione con RULESET
+    Optional<Ship> ship = playerFleet.getNextNonPlacedShip();
+    if (ship.isPresent()) {
+      playerField.placeShip(ship.get(), startingPosition);
+    }
+  }
+
+  public boolean playerFleetNotPlaced() {
+    return !playerFleet.isReady();
   }
 }

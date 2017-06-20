@@ -53,9 +53,10 @@ public final class Ruleset {
   }
 
   public enum ShipRules {
-    SUBMARINE("Submarine", SUBMARINE_SIZE, 3), CRUISER("Cruiser", CRUISER_SIZE,
-        2), BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2), AIR_CARRIER(
-        "Air Carrier", AIR_CARRIER_SIZE, 0);
+    SUBMARINE("Submarine", SUBMARINE_SIZE, 3),
+    CRUISER("Cruiser", CRUISER_SIZE, 2),
+    BATTLESHIP("Battleship", BATTLESHIP_SIZE, 2),
+    AIR_CARRIER("Air Carrier", AIR_CARRIER_SIZE, 0);
 
     // TODO: extract this enum and make a class (?)
     private final String name;
