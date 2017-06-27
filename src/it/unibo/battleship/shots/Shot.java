@@ -1,7 +1,6 @@
 package it.unibo.battleship.shots;
 
 import it.unibo.battleship.commons.Point2d;
-
 import java.io.Serializable;
 
 /**

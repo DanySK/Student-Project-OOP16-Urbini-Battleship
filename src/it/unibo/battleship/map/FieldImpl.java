@@ -6,8 +6,6 @@ import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 
-import java.util.Arrays;
-
 /**
  * Implementation of a Field.
  * @author fabio.urbini

@@ -3,7 +3,6 @@ package it.unibo.battleship.samples;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Point2dImpl;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

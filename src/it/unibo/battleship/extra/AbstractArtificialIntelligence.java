@@ -7,7 +7,6 @@ import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;

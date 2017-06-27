@@ -1,9 +1,7 @@
 package it.unibo.battleship.commons;
 
 import it.unibo.battleship.ships.Ship;
-
 import java.util.stream.IntStream;
-
 import static it.unibo.battleship.commons.GlobalProperties.*;
 
 /**

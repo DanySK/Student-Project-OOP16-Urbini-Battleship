@@ -5,7 +5,6 @@ import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
-
 import java.io.Serializable;
 
 /**

@@ -1,7 +1,6 @@
 package it.unibo.battleship.commons;
 
 import java.io.Serializable;
-// TODO: check names here
 
 /**
  * Represents the boundary of a field.

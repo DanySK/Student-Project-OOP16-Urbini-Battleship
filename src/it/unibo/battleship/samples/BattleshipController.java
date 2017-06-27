@@ -12,7 +12,6 @@ import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
-
 import java.util.Optional;
 
 /**

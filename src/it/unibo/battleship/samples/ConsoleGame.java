@@ -10,7 +10,6 @@ import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
-import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
 
 /**

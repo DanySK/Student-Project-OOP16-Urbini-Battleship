@@ -5,7 +5,6 @@ import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.shots.Shot;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -5,7 +5,6 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
-
 import java.util.Optional;
 
 /**

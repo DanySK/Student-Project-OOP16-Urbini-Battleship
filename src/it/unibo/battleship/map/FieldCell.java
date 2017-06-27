@@ -2,7 +2,6 @@ package it.unibo.battleship.map;
 
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
-
 import java.io.Serializable;
 import java.util.Optional;
 

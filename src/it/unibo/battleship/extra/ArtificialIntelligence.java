@@ -3,7 +3,6 @@ package it.unibo.battleship.extra;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.shots.Shot;
-
 import java.io.Serializable;
 
 /**

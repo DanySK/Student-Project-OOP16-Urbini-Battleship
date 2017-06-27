@@ -6,10 +6,7 @@ package it.unibo.battleship.commons;
  * @author fabio.urbini
  */
 public final class Point2dHelper {
-  private Point2dHelper() {
-  }
-
-  // TODO: test -> method results must match
+  private Point2dHelper() { }
 
   /**
    * Returns an index based on the point and the boundary. It starts from 0.
