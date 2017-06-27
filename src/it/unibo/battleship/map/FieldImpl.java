@@ -16,18 +16,12 @@ public final class FieldImpl implements Field {
    * The field cell matrix is like the first quadrant of the cartesian plane,
    * seen upside down.
    */
-  // TODO: use a List of FieldCells instead and use the index
-//  private final FieldCell[][] fieldCells; // todo: use List<List<>>
-  private final int rows;
-  private final int columns;
   private final Boundary boundary;
   private final FieldMatrix fieldMatrix;
 
 
   private FieldImpl(final Boundary boundary) {
     this.boundary = boundary;
-    this.rows = boundary.getRowsCount();
-    this.columns = boundary.getColumnnsCount();
     fieldMatrix = new FieldMatrix(boundary);
   }
 
@@ -95,9 +89,11 @@ public final class FieldImpl implements Field {
     return this.fieldMatrix.getMatrix();
   }
 
-  private boolean isShipPlaceable(final Ship ship, final Point2d point) {
+  public boolean isShipPlaceable(final Ship ship, final Point2d point) {
     // TODO: throws ArrayIndexOutOfBoundExceptions, solve it by throwing an ex
-    return ship.getProjectionPoints(point).stream()
+    return ship
+        .getProjectionPoints(point)
+        .stream()
         .allMatch(p -> {
           if(!Ruleset.isPointWithinLimits(p)) {
             throw new IllegalArgumentException(
@@ -121,19 +117,18 @@ public final class FieldImpl implements Field {
     final FieldImpl that = (FieldImpl) o;
 
     return Objects.equal(this.fieldMatrix, that.fieldMatrix)
-        && Objects.equal(this.rows, that.rows)
-        && Objects.equal(this.columns, that.columns);
+        && Objects.equal(this.boundary, that.boundary);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(this.fieldMatrix, this.rows, this.columns);
+    return Objects.hashCode(this.fieldMatrix, this.boundary);
   }
 
   @Override
   public String toString() {
-    return "Field { " + this.rows + " rows }; { " + this.columns
-        + " columns } ";
+    return "Field { " + this.boundary.getRowsCount() + " rows }; { " +
+        this.boundary.getColumnnsCount() + " columns } ";
   }
 
   private static class FieldMatrix {
