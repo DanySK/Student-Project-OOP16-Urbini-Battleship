@@ -1,6 +1,6 @@
 TODO test JUnit con tutto quel che riguarda piazzare una flotta, sparare
 TODO: Console game:
-
+TODO: Boundaries / Control (create fleet, create shoot, ...)
 
 DEVE ESSERCI SOLO UN BOUNDARY CORRENTE, GESTITO DA RULESET
 VEDERE SE RIFATTORIZZARE TUTTO
