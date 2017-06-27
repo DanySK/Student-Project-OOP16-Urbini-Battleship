@@ -22,6 +22,7 @@ import java.util.Optional;
 public enum BattleshipController {
   CONTROLLER;
 
+  // TODO : Divide into two controller instances with fleet+field
   private final Fleet aiFleet;
   private final Field aiField;
   private final Fleet playerFleet;
@@ -106,4 +107,6 @@ public enum BattleshipController {
   public boolean playerFleetNotPlaced() {
     return !playerFleet.isReady();
   }
+
+
 }

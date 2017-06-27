@@ -157,7 +157,7 @@ public final class FieldImpl implements Field {
 
       for (int row = 0; row < rows; row++) {
         for (int column = 0; column < cols; column++) {
-          final Point2d p = new Point2dImpl(row, column);
+          final Point2d p = new Point2dImpl(column, row);
           final int idx = Point2dHelper.getIndex(p, this.boundary);
           matrix[row][column] = this.fieldCells[idx];
         }

@@ -102,7 +102,7 @@ public final class SinglePlayerGame {
     final int row = readInt("Enter row to place a " + shipToPlace + ' ');
     final int column = readInt("Enter column to place a " + shipToPlace + ' ');
 
-    Point2d p = new Point2dImpl(row, column);
+    Point2d p = new Point2dImpl(column, row);
     System.out.println(Point2dHelper.isPointWithinLimits(p));
     // Controllo che non tocchi altre navi
     // Stampa del campo qui di seguito
