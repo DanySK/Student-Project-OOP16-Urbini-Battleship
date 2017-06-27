@@ -95,7 +95,7 @@ public enum BattleshipController {
     System.out.println();
     for (int i = 0; i < 99; i++) {
       Point2d p = Point2dHelper.createPoint2d(i, Ruleset.BOUNDARY);
-      boolean pres = playerField.getFieldCells()[p.getX()][p.getY()].isPresent();
+      boolean pres = playerField.getFieldCells()[p.getY()][p.getX()].isPresent();
       String tmp = "-" + (pres ? '@' : 'x');
       System.out.print(tmp + '-');
       // TODO: check the ship is not placed or viewed correctly

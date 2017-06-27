@@ -105,6 +105,7 @@ public final class SinglePlayerGame {
     Point2d p = new Point2dImpl(row, column);
     System.out.println(Point2dHelper.isPointWithinLimits(p));
     // Controllo che non tocchi altre navi
+    // Stampa del campo qui di seguito
     CONTROLLER.placeNextPlaceableShip(p);
   }
 }

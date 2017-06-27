@@ -38,7 +38,7 @@ public final class ConsoleGame {
 
     int shots = 0;
     while (!fleet.isSunk() && (shots < 100)) {
-      final Shot s = ai.createShot(field1); // RIMETTERE
+      final Shot s = ai.createShot(field1);
       field1.updateStateWithShot(s);
       stampaField(field1);
       System.out.println("shot : " + s);
