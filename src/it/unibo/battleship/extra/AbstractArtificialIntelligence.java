@@ -2,11 +2,11 @@ package it.unibo.battleship.extra;
 
 import it.unibo.battleship.commons.*;
 import it.unibo.battleship.map.Field;
-import it.unibo.battleship.ships.Fleet;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import java.util.Random;
 
 /**
  * Represents an Artificial Intelligence which can create fleets or create
- * shots. http://www.datagenetics.com/blog/december32011/ for advanced
+ * shots. See http://www.datagenetics.com/blog/december32011/ for advanced
  * algorithms
  *
  * @author fabio.urbini
@@ -78,9 +78,8 @@ public abstract class AbstractArtificialIntelligence implements
     }
 
     @Override
-    public Fleet createFleet() {
-      final FleetFactory f = FleetFactoryImpl.getInstance();
-      return f.createFleet();
+    public FleetFactory getFleetFactory() {
+      return FleetFactoryImpl.getInstance();
     }
 
     @Override
@@ -132,9 +131,8 @@ public abstract class AbstractArtificialIntelligence implements
     }
 
     @Override
-    public Fleet createFleet() {
-      final FleetFactory f = FleetFactoryImpl.getInstance();
-      return f.createFleet();
+    public FleetFactory getFleetFactory() {
+      return FleetFactoryImpl.getInstance();
     }
 
     @Override
@@ -157,14 +155,16 @@ public abstract class AbstractArtificialIntelligence implements
     private static final long serialVersionUID = 3990811369592412792L;
 
     /*
-     * http://www.datagenetics.com/blog/december32011/ Use New Algorithm here
+     * http://www.datagenetics.com/blog/december32011/
+     * Use New Algorithm here
      */
     private SuperHardAi(final Boundary boundary) {
       super(boundary);
     }
 
     @Override
-    public Fleet createFleet() {
+    public FleetFactory getFleetFactory() {
+      // TODO: create another FleetFactory
       throw new UnsupportedOperationException();
     }
 

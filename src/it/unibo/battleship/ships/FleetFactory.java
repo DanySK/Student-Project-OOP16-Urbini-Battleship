@@ -7,6 +7,7 @@ import java.io.Serializable;
  *
  * @author fabio.urbini
  */
+@FunctionalInterface
 public interface FleetFactory extends Serializable {
   /**
    * Creates a Fleet.

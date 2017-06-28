@@ -32,6 +32,8 @@ public final class SinglePlayerGame {
 
   public static void main(final String[] args) {
     System.out.println("Battleship game start");
+    System.out.println("Choose AI level");
+    // TODO : read AI level, create a new AI, a new fleet and field
     System.out.println("Place your fleet first");
     CONTROLLER.initialize();
 

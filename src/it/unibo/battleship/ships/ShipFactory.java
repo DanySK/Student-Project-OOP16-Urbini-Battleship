@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  * @author fabio.urbini
  */
+@FunctionalInterface
 public interface ShipFactory extends Serializable {
   /**
    * Creates a ship.

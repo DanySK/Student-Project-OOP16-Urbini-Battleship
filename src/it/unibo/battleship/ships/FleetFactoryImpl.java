@@ -51,6 +51,9 @@ public final class FleetFactoryImpl implements FleetFactory {
     return fleet;
   }
 
+  /**
+   * Private implementation of a Fleet
+   */
   private static final class FleetImpl implements Fleet {
 
     private static final long serialVersionUID = -5734887827627519552L;
@@ -102,7 +105,7 @@ public final class FleetFactoryImpl implements FleetFactory {
       if (!this.getAllNonPlacedShips().isEmpty()) {
         ship = Optional.of(this.getAllNonPlacedShips().get(0));
       }
-      // TODO: return a COPY?
+
       return ship;
     }
 
@@ -113,7 +116,7 @@ public final class FleetFactoryImpl implements FleetFactory {
       if (!this.getAllShipsByType(shipType).isEmpty()) {
         ship = Optional.of(this.getAllShipsByType(shipType).get(0));
       }
-      // TODO: RETURN A COPY?
+
       return ship;
     }
 
