@@ -8,7 +8,11 @@ package it.unibo.battleship.extra;
 public class Player {
   private final String name;
 
-  public Player(final String name) {
+  /**
+   * Not used yet.
+   * @param name name of the player.
+   */
+  private Player(final String name) {
     this.name = name;
   }
 

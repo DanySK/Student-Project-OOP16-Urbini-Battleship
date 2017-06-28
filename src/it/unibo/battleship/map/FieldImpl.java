@@ -164,6 +164,7 @@ public final class FieldImpl implements Field {
       }
       return matrix;
     }
+
     private void initialize() {
       for (int i = 0; i < boundary.getSize(); i++) {
         this.fieldCells[i] = new FieldCellImpl();

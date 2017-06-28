@@ -32,19 +32,14 @@ public final class SinglePlayerGame {
 
   public static void main(final String[] args) {
     System.out.println("Battleship game start");
-    System.out.println("Type 1 or 2 for the following modes: ");
-    System.out.println("-1 single player vs. the AI, hit its fleet");
-    System.out.println("-2 single player vs. the AI, place your fleet");
+    System.out.println("Place your fleet first");
     CONTROLLER.initialize();
 
     final int columnsCount = CONTROLLER.getColumnsCount();
-//    stampaField();
-
-    System.out.println("Place your fleet");
-    stampaField(false, true);
+    printField(false, true);
     do {
       place();
-      stampaField(false, true);
+      printField(false, true);
     } while (CONTROLLER.playerFleetNotPlaced());
 
     do {
@@ -54,13 +49,14 @@ public final class SinglePlayerGame {
       final int column = readInt("Enter column ");
 
       CONTROLLER.shoot(row, column);
-      stampaField(true, false);
+      printField(true, false);
     } while (CONTROLLER.checkToContinue());
 
 
   }
 
   private static int readInt(final String message) {
+    // TODO: use another class
     final BufferedReader br = new BufferedReader(new InputStreamReader(
         System.in));
 
@@ -77,7 +73,7 @@ public final class SinglePlayerGame {
     throw new IllegalArgumentException();
   }
 
-  private static void stampaField(final boolean isAi, final boolean isOwner) {
+  private static void printField(final boolean isAi, final boolean isOwner) {
     System.out.println(header(CONTROLLER.getColumnsCount()));
 
     int i = 0;

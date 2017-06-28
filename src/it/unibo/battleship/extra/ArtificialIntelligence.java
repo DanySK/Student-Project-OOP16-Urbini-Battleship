@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author fabio.urbini
  */
 public interface ArtificialIntelligence extends Serializable {
-  Fleet createFleet();
+  Fleet createFleet(); // TODO: make it a functional interface -> FleetFactory?
 
-  Shot createShot(Field field);
+  Shot createShot(Field field); // TODO: make it a functional interface -> ShotFactory?
 }
