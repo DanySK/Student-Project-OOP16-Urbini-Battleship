@@ -1,10 +1,12 @@
 package it.unibo.battleship.commons;
 
 import com.google.common.base.Objects;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
- * Implementation of Boundary {@see Boundary}.
+ * Implementation of {@link Boundary}
  */
+@Immutable
 public final class BoundaryImpl implements Boundary {
   private static final long serialVersionUID = -5121855953223117935L;
   private final int columnsCount;
@@ -23,15 +25,34 @@ public final class BoundaryImpl implements Boundary {
    * @param rowsCount
    *          Rows count
    * @return a {@link BoundaryImpl}
+   * @throws IllegalArgumentException if values are negative
    */
   public static BoundaryImpl createBoundary(final int columnsCount,
       final int rowsCount) {
+    checkParametersValidity(columnsCount, rowsCount);
+    return new BoundaryImpl(columnsCount, rowsCount);
+  }
+
+  private static void checkParametersValidity(final int columnsCount, final int rowsCount) {
     if (columnsCount < 0 || rowsCount < 0) {
       throw new IllegalArgumentException(
           GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
     }
+  }
 
-    return new BoundaryImpl(columnsCount, rowsCount);
+  @Override
+  public int getColumnnsCount() {
+    return this.columnsCount;
+  }
+
+  @Override
+  public int getRowsCount() {
+    return this.rowsCount;
+  }
+
+  @Override
+  public int getSize() {
+    return this.rowsCount * this.columnsCount;
   }
 
   @Override
@@ -60,18 +81,5 @@ public final class BoundaryImpl implements Boundary {
     return " x : " + this.columnsCount + " y : " + this.rowsCount;
   }
 
-  @Override
-  public int getColumnnsCount() {
-    return this.columnsCount;
-  }
 
-  @Override
-  public int getRowsCount() {
-    return this.rowsCount;
-  }
-
-  @Override
-  public int getSize() {
-    return this.rowsCount * this.columnsCount;
-  }
 }

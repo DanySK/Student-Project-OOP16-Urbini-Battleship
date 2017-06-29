@@ -4,10 +4,12 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Ruleset;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Implementation of a Shot.
  */
+@Immutable
 public final class ShotImpl implements Shot {
   private static final long serialVersionUID = 7357162445793535579L;
   private final Point2d point;
@@ -24,6 +26,11 @@ public final class ShotImpl implements Shot {
       throw new IllegalArgumentException(
           GlobalProperties.POINT_NOT_WITHIN_LIMITS);
     }
+  }
+
+  @Override
+  public Point2d getPoint() {
+    return this.point;
   }
 
   @Override
@@ -51,8 +58,4 @@ public final class ShotImpl implements Shot {
     return this.point.toString();
   }
 
-  @Override
-  public Point2d getPoint() {
-    return this.point;
-  }
 }

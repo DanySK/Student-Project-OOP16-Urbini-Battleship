@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * TODO: javadoc
+ * Represents a Ship which can have a direction,
+ * a size, and it can be sunk.
  *
  * @author fabio.urbini
  */
@@ -108,4 +109,10 @@ public interface Ship extends Serializable {
    * @return {@code true} if the ship was sunk
    */
   boolean isSunk();
+
+  /**
+   * Switches the direction of the ship if possible.
+   * @param direction {@link ShipDirection}
+   */
+  void switchDirection(ShipDirection direction);
 }

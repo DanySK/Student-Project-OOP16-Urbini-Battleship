@@ -6,6 +6,7 @@ import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Random;
  *
  * @author fabio.urbini
  */
+@Immutable
 public abstract class AbstractArtificialIntelligence implements
     ArtificialIntelligence {
   private static final long serialVersionUID = -7273836582211632939L;

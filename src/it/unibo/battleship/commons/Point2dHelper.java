@@ -20,13 +20,12 @@ public final class Point2dHelper {
   public static int getIndex(final Point2d point,
                              final Boundary boundary) {
 
-    // TODO: point must be within the boundary limit
-    // boundary(10,10) -> max point 9,9
+    checkPointWithinLimits(point);
     return boundary.getColumnnsCount() * point.getY() + point.getX();
   }
 
   /**
-   * Gets a Point2d based on the index and the boundary
+   * Creates a Point2d based on the index and the boundary
    *
    * @param zeroBasedIndex
    *          zero based index, starts from 0
@@ -45,7 +44,9 @@ public final class Point2dHelper {
     return new Point2dImpl(x, y);
   }
 
-  public static boolean isPointWithinLimits(final Point2d point) {
-    return Ruleset.isPointWithinLimits(point);
+  private static void checkPointWithinLimits(final Point2d point) {
+    if( !Ruleset.isPointWithinLimits(point) ) {
+      throw new IllegalArgumentException(GlobalProperties.POINT_NOT_WITHIN_LIMITS);
+    }
   }
 }

@@ -1,12 +1,14 @@
 package it.unibo.battleship.commons;
 
 import com.google.common.base.Objects;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Implementation of a 2 dimension point {@see Point2d}.
  *
  * @author fabio.urbini
  */
+@Immutable
 public final class Point2dImpl implements Point2d {
   private static final long serialVersionUID = -551958507759199801L;
   private final int x;
@@ -21,6 +23,16 @@ public final class Point2dImpl implements Point2d {
   public Point2dImpl(final int x, final int y) {
     this.x = x;
     this.y = y;
+  }
+
+  @Override
+  public int getX() {
+    return this.x;
+  }
+
+  @Override
+  public int getY() {
+    return this.y;
   }
 
   @Override
@@ -48,11 +60,4 @@ public final class Point2dImpl implements Point2d {
     return " x = " + this.x + ", y = " + this.y;
   }
 
-  public int getX() {
-    return this.x;
-  }
-
-  public int getY() {
-    return this.y;
-  }
 }

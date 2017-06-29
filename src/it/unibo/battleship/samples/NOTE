@@ -3,6 +3,12 @@ TODO: Console game:
 TODO: Boundaries / Control (create fleet, create shoot, ...)
 TODO. rewrite hashcode + equals + toString (use Guava library)
 
+There can be more boundaries in a game. Make Ruleset control one
+Ruleset instance + static methods
+Ship direction -> standard = EAST. switchDirection method
+Artificial Intelligence -> factory for shots. Use lambda for simple ones
+
+
 DEVE ESSERCI SOLO UN BOUNDARY CORRENTE, GESTITO DA RULESET
 VEDERE SE RIFATTORIZZARE TUTTO
 

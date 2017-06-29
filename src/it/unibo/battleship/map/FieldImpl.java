@@ -5,11 +5,13 @@ import it.unibo.battleship.commons.*;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Implementation of a Field.
  * @author fabio.urbini
  */
+@Immutable
 public final class FieldImpl implements Field {
   private static final long serialVersionUID = 4129869956647585285L;
   /*

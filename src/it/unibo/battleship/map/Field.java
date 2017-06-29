@@ -5,6 +5,8 @@ import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ import java.io.Serializable;
  *
  * @author fabio.urbini
  */
+@Immutable
 public interface Field extends Serializable {
 
   /**

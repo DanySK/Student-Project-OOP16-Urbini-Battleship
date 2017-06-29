@@ -1,5 +1,7 @@
 package it.unibo.battleship.commons;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  *
  * @author fabio.urbini
  */
+@Immutable
 public interface Point2d extends Serializable {
 
   /**

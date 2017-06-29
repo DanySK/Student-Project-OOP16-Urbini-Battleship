@@ -4,6 +4,7 @@ import it.unibo.battleship.commons.Boundary;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.shots.Shot;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  *
  * @author fabio.urbini
  */
+@Immutable
 public interface ArtificialIntelligence extends Serializable {
   // TODO: make it create a Field and populate it?
   FleetFactory getFleetFactory(); // TODO: make it a functional interface -> FleetFactory?

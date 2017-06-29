@@ -50,6 +50,7 @@ public final class Ruleset {
         x -> Ruleset.isPointWithinLimits(new Point2dImpl(x, point.getY())));
   }
 
+
   public enum ShipRules {
     SUBMARINE("Submarine", SUBMARINE_SIZE, 3),
     CRUISER("Cruiser", CRUISER_SIZE, 2),

@@ -51,6 +51,7 @@ public abstract class ShotCollection implements Serializable {
     }
   }
 
+
   private static final class IShot extends ShotCollection {
     private static final long serialVersionUID = 6019046647320383763L;
 
@@ -60,6 +61,7 @@ public abstract class ShotCollection implements Serializable {
     }
   }
 
+
   private static final class TShot extends ShotCollection {
     private static final long serialVersionUID = -1817573103704728259L;
 
@@ -68,6 +70,7 @@ public abstract class ShotCollection implements Serializable {
       throw new UnsupportedOperationException();
     }
   }
+
 
   private static final class XShot extends ShotCollection {
     private static final long serialVersionUID = 8779342634741299600L;

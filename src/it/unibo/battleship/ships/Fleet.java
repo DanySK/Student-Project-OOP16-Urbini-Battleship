@@ -1,6 +1,8 @@
 package it.unibo.battleship.ships;
 
 import it.unibo.battleship.commons.Ruleset;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.Optional;
  *
  * @author fabio.urbini
  */
+@Immutable
 public interface Fleet extends Serializable {
 
   /**

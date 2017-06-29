@@ -116,6 +116,19 @@ public abstract class AbstractShip implements Ship {
     return this.hitPoints.size() >= this.getSize();
   }
 
+  /**
+   * Not supported yet.
+   * @param direction {@link ShipDirection}
+   * @throws UnsupportedOperationException
+   */
+  @Override
+  public void switchDirection(final ShipDirection direction) {
+    if (this.direction != direction) {
+      // TODO: switch direction, not implemented yet
+      throw new UnsupportedOperationException("Operation not implemented yet");
+    }
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
