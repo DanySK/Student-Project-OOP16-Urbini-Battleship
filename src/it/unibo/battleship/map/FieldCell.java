@@ -7,7 +7,7 @@ import java.util.Optional;
 
 /**
  * Represents a field cell which can have different states.
- *
+ * @see State
  * @author fabio.urbini
  */
 public interface FieldCell extends Serializable {

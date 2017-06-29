@@ -1,5 +1,7 @@
 package it.unibo.battleship.samples;
 
+import it.unibo.battleship.commons.Point2d;
+
 import javax.swing.*;
 
 /**
@@ -10,13 +12,11 @@ import javax.swing.*;
  */
 public final class FieldButton {
   private final JButton btn;
-  private final int x;
-  private final int y;
+  private final Point2d point;
 
-  public FieldButton(final int x, final int y) {
-    this.btn = new JButton("" + x + ':' + y);
-    this.x = x;
-    this.y = y;
+  public FieldButton(final Point2d point) {
+    this.point = point;
+    this.btn = new JButton("" + point.getX() + ':' + point.getY());
   }
 
   /**
@@ -29,20 +29,10 @@ public final class FieldButton {
   }
 
   /**
-   * Returns the x value.
-   * 
-   * @return the x value.
+   * Returns the {@link Point2d}
+   * @return the {@link Point2d}
    */
-  public int getX() {
-    return this.x;
-  }
-
-  /**
-   * The y value.
-   * 
-   * @return the y value.
-   */
-  public int getY() {
-    return this.y;
+  public Point2d getPosition() {
+    return this.point;
   }
 }

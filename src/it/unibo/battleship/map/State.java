@@ -13,8 +13,15 @@ package it.unibo.battleship.map;
  * @author fabio.urbini
  */
 public enum State {
+  /** Water, nothing happened yet */
   WATER,
+
+  /** A ship has been hit */
   HIT,
+
+  /** There was water here and the cell was shot */
   MISSED,
+
+  /** A ship is present */
   PRESENT
 }

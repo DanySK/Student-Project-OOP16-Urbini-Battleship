@@ -2,6 +2,7 @@ package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.commons.Ruleset.ShipRules;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -90,6 +91,7 @@ public final class FleetFactoryImpl implements FleetFactory {
 
     @Override
     public List<Ship> getAllShipsByType(final ShipRules shipType) {
+      // The toString filter may not work, consider refactoring
       final List<Ship> ships = this.ships
           .stream()
           .filter(ship -> ship.toString().equals(shipType.toString()))
@@ -111,13 +113,10 @@ public final class FleetFactoryImpl implements FleetFactory {
 
     @Override
     public Optional<Ship> getNextShipByType(final ShipRules shipType) {
-      Optional<Ship> ship = Optional.empty();
-
       if (!this.getAllShipsByType(shipType).isEmpty()) {
-        ship = Optional.of(this.getAllShipsByType(shipType).get(0));
+        return Optional.of(this.getAllShipsByType(shipType).get(0));
       }
-
-      return ship;
+      return Optional.empty();
     }
 
     @Override

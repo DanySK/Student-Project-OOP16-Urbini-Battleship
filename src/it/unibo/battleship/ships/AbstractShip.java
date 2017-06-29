@@ -42,6 +42,12 @@ public abstract class AbstractShip implements Ship {
     this.placed = true;
   }
 
+  protected AbstractShip(final Point2d startingPosition,
+                         final ShipDirection direction) {
+    this(startingPosition);
+    this.direction = direction;
+  }
+
   @Override
   public boolean containsPosition(final Point2d point) {
     return this
@@ -55,6 +61,7 @@ public abstract class AbstractShip implements Ship {
   public void place(final Point2d startingPosition,
       final ShipDirection direction) {
     this.checkStartingPositionNullity(startingPosition);
+
     if (!this.placed) {
       this.placed = true;
     }

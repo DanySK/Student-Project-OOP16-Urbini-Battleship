@@ -5,22 +5,21 @@ import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Ruleset.ShipRules;
 
 /**
- * Implementation of a {@link ShipFactory}. There can be only one Ship Factory
- * at once.
+ * Implementation of a {@link ShipFactory}. There is a single instance.
  *
  * @author fabio.urbini
  */
 public final class ShipFactoryImpl implements ShipFactory {
   private static final long serialVersionUID = -1375681121821315440L;
-  /*
-   * Ship factory singleton. There's no need to have other instances around. The
-   * singleton is created with the thread-safe lazy initialization.
-   */
   private static ShipFactoryImpl instance;
 
   private ShipFactoryImpl() {
   }
 
+  /**
+   * Returns the {@code ShipFactoryImpl} instance
+   * @return the {@code ShipFactoryImpl} instance
+   */
   public static synchronized ShipFactoryImpl getInstance() {
     if (instance == null) {
       instance = new ShipFactoryImpl();
@@ -35,12 +34,11 @@ public final class ShipFactoryImpl implements ShipFactory {
    *          size of the ship. The value must be between 0 and {@see
    *          GlobalProperties.MAX_SIZE}
    * @return the ship created
+   * @throws IllegalArgumentException if the size is invalid
    */
   @Override
   public Ship createShip(final int size) {
-    if ((size < 0) || (size > GlobalProperties.MAX_SIZE)) {
-      throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
-    }
+    checkSize(size);
 
     switch (size) {
     case GlobalProperties.SUBMARINE_SIZE:
@@ -60,15 +58,22 @@ public final class ShipFactoryImpl implements ShipFactory {
     }
   }
 
+  private void checkSize(final int size) {
+    if ((size < 0) || (size > GlobalProperties.MAX_SIZE)) {
+      throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
+    }
+  }
+
+
   private static final class AirCarrier extends AbstractShip {
     private static final long serialVersionUID = -8323321815851042898L;
 
-    AirCarrier() {
+    private AirCarrier() {
       super();
     }
 
     @SuppressWarnings("unused")
-    AirCarrier(final Point2d start) {
+    private AirCarrier(final Point2d start) {
       super(start);
     }
 
@@ -134,12 +139,12 @@ public final class ShipFactoryImpl implements ShipFactory {
   private static final class Submarine extends AbstractShip {
     private static final long serialVersionUID = -2784639518931814680L;
 
-    Submarine() {
+    private Submarine() {
       super();
     }
 
     @SuppressWarnings("unused")
-    Submarine(final Point2d start) {
+    private Submarine(final Point2d start) {
       super(start);
     }
 

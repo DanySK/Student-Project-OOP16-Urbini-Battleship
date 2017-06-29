@@ -17,6 +17,12 @@ public final class ShotImpl implements Shot {
     this.point = p;
   }
 
+  /**
+   * Creates a {@code ShotImpl}.
+   * @param point a valid point which must be within the Boundary limit
+   * {@link it.unibo.battleship.commons.Ruleset#BOUNDARY}
+   * @return a {@code ShotImpl}.
+   */
   public static ShotImpl createShot(final Point2d point) {
     Point2dHelper.checkPointWithinBoundaryLimits(point);
     return new ShotImpl(point);

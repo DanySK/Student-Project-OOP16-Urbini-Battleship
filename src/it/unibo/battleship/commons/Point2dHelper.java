@@ -32,9 +32,7 @@ public final class Point2dHelper {
    * @return a Point2d
    */
   public static Point2d createPoint2d(final int zeroBasedIndex) {
-
-    // TODO: index must be within the boundary limit
-    // boundary(10,10) -> max index = 10*10 - 1
+    checkIndexWithinBoundaryLimits(zeroBasedIndex);
     final int y = zeroBasedIndex / Ruleset.BOUNDARY.getColumnnsCount();
     final int x = zeroBasedIndex % Ruleset.BOUNDARY.getColumnnsCount();
 
