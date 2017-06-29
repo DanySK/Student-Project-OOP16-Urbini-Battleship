@@ -2,7 +2,6 @@ package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
-import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.commons.Ruleset.ShipRules;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -31,11 +31,11 @@ public enum BattleshipController {
   private final ArtificialIntelligence ai;
 
   BattleshipController() {
-    ai = AbstractArtificialIntelligence.createArtificialIntelligence(
+    this.ai = AbstractArtificialIntelligence.createArtificialIntelligence(
         AbstractArtificialIntelligence.Level.EASY,
         Ruleset.BOUNDARY
     );
-    this.aiFleet = ai.getFleetFactory().createFleet();
+    this.aiFleet = this.ai.getFleetFactory().createFleet();
     this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
     this.playerFleet = FleetFactoryImpl.getInstance().createFleet();
     this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
@@ -74,8 +74,8 @@ public enum BattleshipController {
   // TODO: change here
   public char[][] getCharMap(final PlayerType playerType,
                              final ViewerType viewerType) {
-    final Field field = getField(playerType);
-    return getView(viewerType, field);
+    final Field field = this.getField(playerType);
+    return this.getView(viewerType, field);
   }
 
   private char[][] getView(final ViewerType viewerType, final Field field) {

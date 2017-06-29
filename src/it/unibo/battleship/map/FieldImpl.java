@@ -48,7 +48,7 @@ public final class FieldImpl implements Field {
 
   @Override
   public void placeShip(final Ship ship, final Point2d point) {
-    placeShip(ship, point, ShipDirection.EAST);
+    this.placeShip(ship, point, ShipDirection.EAST);
   }
 
   @Override
@@ -134,7 +134,7 @@ public final class FieldImpl implements Field {
     public FieldMatrix(final Boundary boundary) {
       this.boundary = boundary;
       this.fieldCells = new FieldCell[boundary.getSize()];
-      initialize();
+      this.initialize();
     }
 
     public FieldCell getAt(final int zeroBasedIndex) {
@@ -143,7 +143,7 @@ public final class FieldImpl implements Field {
 
     public FieldCell getAt(final Point2d point) {
       final int idx = Point2dHelper.getIndex(point);
-      return getAt(idx);
+      return this.getAt(idx);
     }
 
     public FieldCell[][] getMatrix() {

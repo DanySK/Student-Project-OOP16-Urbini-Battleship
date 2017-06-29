@@ -39,7 +39,7 @@ public final class ShipFactoryImpl implements ShipFactory {
    */
   @Override
   public Ship createShip(final int size) {
-    checkSize(size);
+    this.checkSize(size);
 
     switch (size) {
     case SUBMARINE_SIZE:
@@ -55,17 +55,17 @@ public final class ShipFactoryImpl implements ShipFactory {
       return new AirCarrier();
 
     default:
-      throw new IllegalArgumentException(exceptionMessage(size));
+      throw new IllegalArgumentException(this.getExceptionMessage(size));
     }
   }
 
   private void checkSize(final int size) {
     if ((size < 0) || (size > MAX_SIZE)) {
-      throw new IllegalArgumentException(exceptionMessage(size));
+      throw new IllegalArgumentException(this.getExceptionMessage(size));
     }
   }
 
-  private String exceptionMessage(final int size) {
+  private String getExceptionMessage(final int size) {
     return INVALID_SHIP_SIZE + " current size " + size +
         " - Maximum size : " + MAX_SIZE;
   }

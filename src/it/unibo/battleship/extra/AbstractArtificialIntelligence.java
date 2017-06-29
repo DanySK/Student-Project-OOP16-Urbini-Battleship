@@ -120,7 +120,7 @@ public abstract class AbstractArtificialIntelligence implements
     public ShotFactory getShotFactory() {
       // Creates a new random shot
       return (ShotFactory) () -> ShotImpl
-          .createShot(FreeWinAI.this.generateRandomPoint2d(getBoundary()));
+          .createShot(FreeWinAI.this.generateRandomPoint2d(this.getBoundary()));
 
     }
 
