@@ -38,7 +38,7 @@ public final class FieldImpl implements Field {
   @Override
   public void placeShip(final Ship ship, final Point2d point,
       final ShipDirection direction) {
-    this.validateShipPlacement(ship, point);
+    this.checkShipPlacement(ship, point);
     ship.place(point, direction);
 
     for (final Point2d p : ship.getAllPositions()) {
@@ -53,31 +53,30 @@ public final class FieldImpl implements Field {
 
   @Override
   public void updateStateWithShot(final Shot shot) {
-    if (!Ruleset.isPointWithinLimits(shot.getPoint())) {
-      throw new IllegalArgumentException(
-          GlobalProperties.POINT_NOT_WITHIN_LIMITS);
-    }
+    Point2dHelper.checkPointWithinBoundaryLimits(shot.getPoint());
 
     final Point2d p = shot.getPoint();
     this.fieldMatrix.getAt(p).shoot(shot);
   }
 
-  private void validateShipPlacement(final Ship ship, final Point2d point) {
-    if (!Ruleset.isPointWithinLimits(point)) {
-      throw new IllegalArgumentException(
-          GlobalProperties.POINT_NOT_WITHIN_LIMITS
-      );
-    }
+  private void checkShipPlacement(final Ship ship, final Point2d point) {
+    Point2dHelper.checkPointWithinBoundaryLimits(point);
+    this.checkShipPlaceable(ship, point);
+    this.checkShipWithinLimits(ship, point);
+  }
 
-    if (!this.isShipPlaceable(ship, point)) {
-      throw new IllegalArgumentException(
-          GlobalProperties.FIELD_CELLS_NOT_EMPTY
-      );
-    }
-
+  private void checkShipWithinLimits(final Ship ship, final Point2d point) {
     if (!Ruleset.isShipWithinLimits(ship, point)) {
       throw new IllegalArgumentException(
           GlobalProperties.SHIP_NOT_WITHIN_LIMITS
+      );
+    }
+  }
+
+  private void checkShipPlaceable(final Ship ship, final Point2d point) {
+    if (!this.isShipPlaceable(ship, point)) {
+      throw new IllegalArgumentException(
+          GlobalProperties.FIELD_CELLS_NOT_EMPTY
       );
     }
   }
@@ -97,18 +96,11 @@ public final class FieldImpl implements Field {
         .getProjectionPoints(point)
         .stream()
         .allMatch(p -> {
-          if(!Ruleset.isPointWithinLimits(p)) {
-            throw new IllegalArgumentException(
-                GlobalProperties.POINT_NOT_WITHIN_LIMITS
-            );
-          }
+          Point2dHelper.checkPointWithinBoundaryLimits(p);
           return this.fieldMatrix.getAt(p).isEmpty();
         });
   }
 
-  /*
-  TODO: equals, and hashCode -> rewrite
-   */
   @Override
   public boolean equals(final Object o) {
     if (this == o)
