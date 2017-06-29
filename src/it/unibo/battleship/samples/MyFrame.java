@@ -1,6 +1,7 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.commons.Boundary;
+import it.unibo.battleship.commons.Point2dImpl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,11 +36,11 @@ public class MyFrame extends JFrame {
     this.setVisible(true);
 
     for (int i = 0; i < this.boundary.getColumnnsCount(); i++) {
-      final FieldButton fb = new FieldButton(i, 0);
+      final FieldButton fb = new FieldButton(new Point2dImpl(i,0));
       this.fieldList.add(fb);
       this.addButton(fb);
       fb.getButton().addActionListener(
-          (ActionEvent e) -> System.out.println("x : " + fb.getX()));
+          (ActionEvent e) -> System.out.println("x : " + fb.getPosition().getX()));
     }
   }
 

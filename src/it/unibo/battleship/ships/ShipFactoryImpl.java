@@ -1,8 +1,9 @@
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Ruleset.ShipRules;
+
+import static it.unibo.battleship.commons.GlobalProperties.*;
 
 /**
  * Implementation of a {@link ShipFactory}. There is a single instance.
@@ -41,27 +42,32 @@ public final class ShipFactoryImpl implements ShipFactory {
     checkSize(size);
 
     switch (size) {
-    case GlobalProperties.SUBMARINE_SIZE:
+    case SUBMARINE_SIZE:
       return new Submarine();
 
-    case GlobalProperties.CRUISER_SIZE:
+    case CRUISER_SIZE:
       return new Cruiser();
 
-    case GlobalProperties.BATTLESHIP_SIZE:
+    case BATTLESHIP_SIZE:
       return new Battleship();
 
-    case GlobalProperties.AIR_CARRIER_SIZE:
+    case AIR_CARRIER_SIZE:
       return new AirCarrier();
 
     default:
-      throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
+      throw new IllegalArgumentException(exceptionMessage(size));
     }
   }
 
   private void checkSize(final int size) {
-    if ((size < 0) || (size > GlobalProperties.MAX_SIZE)) {
-      throw new IllegalArgumentException(GlobalProperties.INVALID_SHIP_SIZE);
+    if ((size < 0) || (size > MAX_SIZE)) {
+      throw new IllegalArgumentException(exceptionMessage(size));
     }
+  }
+
+  private String exceptionMessage(final int size) {
+    return INVALID_SHIP_SIZE + " current size " + size +
+        " - Maximum size : " + MAX_SIZE;
   }
 
 
@@ -84,7 +90,7 @@ public final class ShipFactoryImpl implements ShipFactory {
 
     @Override
     public int getSize() {
-      return GlobalProperties.AIR_CARRIER_SIZE;
+      return AIR_CARRIER_SIZE;
     }
   }
 
@@ -108,7 +114,7 @@ public final class ShipFactoryImpl implements ShipFactory {
     @Override
     public int getSize() {
       // return GlobalProperties.ShipRules.BATTLESHIP.getSize();
-      return GlobalProperties.BATTLESHIP_SIZE;
+      return BATTLESHIP_SIZE;
     }
   }
 
@@ -132,7 +138,7 @@ public final class ShipFactoryImpl implements ShipFactory {
     @Override
     public int getSize() {
       // return GlobalProperties.ShipRules.CRUISER.getSize();
-      return GlobalProperties.CRUISER_SIZE;
+      return CRUISER_SIZE;
     }
   }
 
@@ -156,7 +162,7 @@ public final class ShipFactoryImpl implements ShipFactory {
     @Override
     public int getSize() {
       // return GlobalProperties.ShipRules.SUBMARINE.getSize();
-      return GlobalProperties.SUBMARINE_SIZE;
+      return SUBMARINE_SIZE;
     }
   }
 }

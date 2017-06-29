@@ -47,7 +47,9 @@ public final class Point2dHelper {
    */
   public static void checkPointWithinBoundaryLimits(final Point2d point) {
     if( !Ruleset.isPointWithinLimits(point) ) {
-      throw new IllegalArgumentException(POINT_NOT_WITHIN_LIMITS);
+      final String message = POINT_NOT_WITHIN_LIMITS + " x : " + point.getX() +
+          " y : " + point.getY();
+      throw new IllegalArgumentException(message);
     }
   }
 
@@ -58,7 +60,9 @@ public final class Point2dHelper {
    */
   public static void checkIndexWithinBoundaryLimits(final int zeroBasedIndex) {
     if (zeroBasedIndex >= Ruleset.BOUNDARY.getSize()) {
-      throw new IllegalArgumentException(INDEX_NOT_WITHIN_LIMITS);
+      final String message = INDEX_NOT_WITHIN_LIMITS + " index : "
+          + zeroBasedIndex;
+      throw new IllegalArgumentException(message);
     }
   }
 }
