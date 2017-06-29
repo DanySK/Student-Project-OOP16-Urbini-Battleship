@@ -20,6 +20,8 @@ public final class GameTest {
   /*
    * This test is designed to check if a game works properly It won't test all
    * classes designed.
+   * Read 02.techniques~20/55
+   * todo: rename methods, adds throws Exception signature
    */
   // private fields
 
