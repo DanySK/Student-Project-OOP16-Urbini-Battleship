@@ -15,9 +15,17 @@ import java.io.Serializable;
  */
 @Immutable
 public interface ArtificialIntelligence extends Serializable {
-  // TODO: make it create a Field and populate it?
-  FleetFactory getFleetFactory(); // TODO: make it a functional interface -> FleetFactory?
 
+  /**
+   * Returns a {@link FleetFactory}
+   * @return a {@link FleetFactory}
+   */
+  FleetFactory getFleetFactory();
+
+  /**
+   * Returns a {@link ShotFactory}
+   * @return a {@link ShotFactory}
+   */
   ShotFactory getShotFactory(); // TODO: make it a functional interface -> ShotFactory?
 
   /**

@@ -68,6 +68,7 @@ public final class FieldImpl implements Field {
   private void checkShipWithinLimits(final Ship ship, final Point2d point) {
     if (!Ruleset.isShipWithinLimits(ship, point)) {
       throw new IllegalArgumentException(
+          // TODO: add more details
           GlobalProperties.SHIP_NOT_WITHIN_LIMITS
       );
     }
@@ -76,6 +77,7 @@ public final class FieldImpl implements Field {
   private void checkShipPlaceable(final Ship ship, final Point2d point) {
     if (!this.isShipPlaceable(ship, point)) {
       throw new IllegalArgumentException(
+          // ToDO: add more details to the exception
           GlobalProperties.FIELD_CELLS_NOT_EMPTY
       );
     }

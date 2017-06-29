@@ -48,7 +48,7 @@ public final class Point2dHelper {
   public static void checkPointWithinBoundaryLimits(final Point2d point) {
     if( !Ruleset.isPointWithinLimits(point) ) {
       final String message = POINT_NOT_WITHIN_LIMITS + " x : " + point.getX() +
-          " y : " + point.getY();
+          " y : " + point.getY() + " -- Map SIZE : " + Ruleset.BOUNDARY;
       throw new IllegalArgumentException(message);
     }
   }
