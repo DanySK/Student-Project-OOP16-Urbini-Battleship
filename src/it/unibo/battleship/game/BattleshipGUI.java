@@ -1,4 +1,4 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.game;
 
 /**
  * @author fabio.urbini

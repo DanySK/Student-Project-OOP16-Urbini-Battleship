@@ -21,12 +21,31 @@ import java.util.Random;
 @Immutable
 public abstract class AbstractArtificialIntelligence implements
     ArtificialIntelligence {
-  // TODO: an Artificial Intelligence may need the field to generate stuff
+  // TODO: an Artificial Intelligence may need the field to generate things
   private static final long serialVersionUID = -7273836582211632939L;
   private final Boundary boundary;
 
   public enum Level {
-    FREE_WIN, SUPER_EASY, EASY, AVERAGE, HARD, SUPER_HARD
+    /** Guaranteed win */
+    FREE_WIN,
+
+    /** Easy level */
+    EASY,
+
+    /** Average level, not supported yet */
+    AVERAGE,
+
+    /**
+     * Hard level, you got to think more than a second for each move,
+     * not supported yet
+     */
+    HARD,
+
+    /**
+     * Super hard level, you will need to build graphs and think like
+     * an engineer to win.
+     */
+    SUPER_HARD
   }
 
   private AbstractArtificialIntelligence(final Boundary boundary) {
@@ -36,11 +55,9 @@ public abstract class AbstractArtificialIntelligence implements
   public static ArtificialIntelligence createArtificialIntelligence(
       final Level level, final Boundary boundary) {
     switch (level) {
+
     case FREE_WIN:
       return new FreeWinAI(boundary);
-
-    case SUPER_EASY:
-      throw new UnsupportedOperationException();
 
     case EASY:
       return new EasyAI(boundary);

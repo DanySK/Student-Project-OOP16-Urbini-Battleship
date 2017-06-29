@@ -1,4 +1,4 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.game;
 
 import it.unibo.battleship.commons.Point2d;
 

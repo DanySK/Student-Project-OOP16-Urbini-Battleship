@@ -1,14 +1,20 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.game;
 
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.game.BattleshipController.PlayerType;
+import it.unibo.battleship.game.BattleshipController.ViewerType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static it.unibo.battleship.samples.BattleshipController.CONTROLLER;
+import static it.unibo.battleship.game.BattleshipController.CONTROLLER;
+import static it.unibo.battleship.game.BattleshipController.PlayerType.AI;
+import static it.unibo.battleship.game.BattleshipController.PlayerType.HUMAN;
+import static it.unibo.battleship.game.BattleshipController.ViewerType.ENEMY;
+import static it.unibo.battleship.game.BattleshipController.ViewerType.OWNER;
 
 /**
  * @author fabio.urbini
@@ -17,7 +23,7 @@ public final class SinglePlayerGame {
   private SinglePlayerGame() {
   }
 
-  private static String header(final int columnsCount) {
+  private static String getHeaderForConsole(final int columnsCount) {
     final StringBuilder sb = new StringBuilder("");
 
     sb.append("   ");
@@ -38,11 +44,10 @@ public final class SinglePlayerGame {
     System.out.println("Place your fleet first");
     CONTROLLER.initialize();
 
-    final int columnsCount = CONTROLLER.getColumnsCount();
-    printField(false, true);
+    printField(HUMAN, OWNER);
     do {
       place();
-      printField(false, true);
+      printField(HUMAN, OWNER);
     } while (CONTROLLER.isPlayerFleetNotPlaced());
 
     do {
@@ -51,8 +56,10 @@ public final class SinglePlayerGame {
       final int row = readInt("Enter row ");
       final int column = readInt("Enter column ");
 
-      CONTROLLER.shoot(row, column);
-      printField(true, false);
+      CONTROLLER.shootAiField(row, column);
+      CONTROLLER.shootPlayerField();
+      printField(HUMAN, OWNER);
+      printField(AI, ENEMY);
     } while (CONTROLLER.checkToContinue());
 
 
@@ -76,12 +83,15 @@ public final class SinglePlayerGame {
     throw new IllegalArgumentException();
   }
 
-  private static void printField(final boolean isAi, final boolean isOwner) {
-    System.out.println(header(CONTROLLER.getColumnsCount()));
+  private static void printField(final PlayerType playerType, final ViewerType viewerType) {
+    System.out.println("\n\n\n");
+
+    System.out.println( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
+    System.out.println(getHeaderForConsole(CONTROLLER.getColumnsCount()));
 
     int i = 0;
 
-    for (final char[] chars : CONTROLLER.getCharMap(isAi, isOwner)) {
+    for (final char[] chars : CONTROLLER.getCharMap(playerType, viewerType)) {
       System.out.print(" " + i++ + ' ');
 
       for (final char car : chars) {
@@ -100,7 +110,7 @@ public final class SinglePlayerGame {
 
     final int row = readInt("Enter row to place a " + shipToPlace + ' ');
     final int column = readInt("Enter column to place a " + shipToPlace + ' ');
-
+    // TODO: input = index, easier/faster to write.
     final Point2d p = new Point2dImpl(column, row);
     System.out.println(Ruleset.isPointWithinLimits(p));
     // Controllo che non tocchi altre navi

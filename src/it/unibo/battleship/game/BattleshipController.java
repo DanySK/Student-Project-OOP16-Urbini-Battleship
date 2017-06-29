@@ -1,9 +1,10 @@
-package it.unibo.battleship.samples;
+package it.unibo.battleship.game;
 
 import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Point2dImpl;
 import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.extra.AbstractArtificialIntelligence;
+import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldHelper;
 import it.unibo.battleship.map.FieldImpl;
@@ -27,9 +28,14 @@ public enum BattleshipController {
   private final Field aiField;
   private final Fleet playerFleet;
   private final Field playerField;
+  private final ArtificialIntelligence ai;
 
   BattleshipController() {
-    this.aiFleet = FleetFactoryImpl.getInstance().createFleet();
+    ai = AbstractArtificialIntelligence.createArtificialIntelligence(
+        AbstractArtificialIntelligence.Level.EASY,
+        Ruleset.BOUNDARY
+    );
+    this.aiFleet = ai.getFleetFactory().createFleet();
     this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
     this.playerFleet = FleetFactoryImpl.getInstance().createFleet();
     this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
@@ -56,18 +62,43 @@ public enum BattleshipController {
     }
   }
 
-  public void shoot(final int row, final int column) {
+  public void shootAiField(final int row, final int column) {
     final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
     this.aiField.updateStateWithShot(shot);
   }
 
+  public void shootPlayerField() {
+    this.playerField.updateStateWithShot(this.ai.getShotFactory().createShot());
+  }
+
   // TODO: change here
-  public char[][] getCharMap(final boolean isAi, final boolean isOwner) {
-    final Field field = isAi ? this.aiField : this.playerField;
-    if (isOwner) {
-      return FieldHelper.getViewByOwner(field);
+  public char[][] getCharMap(final PlayerType playerType,
+                             final ViewerType viewerType) {
+    final Field field = getField(playerType);
+    return getView(viewerType, field);
+  }
+
+  private char[][] getView(final ViewerType viewerType, final Field field) {
+
+    switch(viewerType) {
+      case OWNER:
+        return FieldHelper.getViewByOwner(field);
+      case ENEMY:
+        return FieldHelper.getViewByEnemy(field);
+      default :
+        throw new IllegalStateException("Invalid state for ViewerType");
     }
-    return FieldHelper.getViewByEnemy(field);
+  }
+
+  private Field getField(final PlayerType playerType) {
+    switch(playerType) {
+      case HUMAN:
+        return this.playerField;
+      case AI:
+        return this.aiField;
+      default :
+        throw new IllegalStateException("Invalid state for PlayerType");
+    }
   }
 
   public int getColumnsCount() {
@@ -83,21 +114,6 @@ public enum BattleshipController {
     // TODO: controllo della posizione con RULESET
     final Optional<Ship> ship = this.playerFleet.getNextNonPlacedShip();
     ship.ifPresent(ship1 -> this.playerField.placeShip(ship1, startingPosition));
-
-    for (int i = 0; i < 99; i++) {
-      final char c = '0';
-      final String fin = i > 9 ? i + "" : c + "" + i;
-      System.out.print(fin + '-');
-    }
-    System.out.println();
-    for (int i = 0; i < 99; i++) {
-      final Point2d p = Point2dHelper.createPoint2d(i);
-      final boolean pres = this.playerField.getFieldCells()[p.getY()][p.getX()].isPresent();
-      final String tmp = "-" + (pres ? '@' : 'x');
-      System.out.print(tmp + '-');
-      // TODO: check the ship is not placed or viewed correctly
-      // cruiser placed at 7,4 -> (7;4), (8;4) instead of (7;4), (7;5)
-    }
   }
 
   public boolean isPlayerFleetNotPlaced() {
@@ -105,4 +121,19 @@ public enum BattleshipController {
   }
 
 
+  public enum PlayerType {
+    /** Human type of player */
+    HUMAN,
+
+    /** Artificial intelligence / computer */
+    AI
+  }
+
+  public enum ViewerType {
+    /** The viewer of the field is the owner himself */
+    OWNER,
+
+    /** The viewer of the field is the enemy */
+    ENEMY
+  }
 }

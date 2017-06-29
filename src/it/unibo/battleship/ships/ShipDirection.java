@@ -11,5 +11,5 @@ public enum ShipDirection {
   EAST,
 
   /** South direction */
-  SOUTH;
+  SOUTH
 }

@@ -6,11 +6,14 @@ import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 /**
+ * This test is designed to test some of the game features,
+ * partially.
  * @author fabio.urbini
  */
 public final class GameTest {
@@ -18,9 +21,15 @@ public final class GameTest {
    * This test is designed to check if a game works properly It won't test all
    * classes designed.
    */
+  // private fields
+
+  @Before
+  public void initialize() {
+
+  }
 
   @Test
-  public void shotsTest() {
+  public void assertShotsWithinLimits() {
     // fail("Not yet implemented");
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
     final int maxIndex = bounds.getColumnnsCount() * bounds.getRowsCount();
@@ -39,7 +48,12 @@ public final class GameTest {
   }
 
   @Test
-  public void shipPlacementTest() {
+  public void assertFleetIsReadyAfterPlacingIt() {
+
+  }
+
+  @Test
+  public void assertFleetIsSunkAfterHittingAllShips() {
 
   }
 

@@ -71,6 +71,13 @@ public final class ShipFactoryImpl implements ShipFactory {
   }
 
 
+  /*
+   * Private concrete classes which extend AbstractShip.
+   * Actually there's little use of these classes, so depending on
+   * new features/ideas, they can evolve or turn into anonymous classes.
+   * There might be one single concrete Ship and different instances, like
+   * ShipImpl with private fields (size, name).
+   */
   private static final class AirCarrier extends AbstractShip {
     private static final long serialVersionUID = -8323321815851042898L;
 
@@ -165,4 +172,9 @@ public final class ShipFactoryImpl implements ShipFactory {
       return SUBMARINE_SIZE;
     }
   }
+
+  /*
+  develop ShipImpl and make instances of different ships (size, name)
+  instead of using static nested classes.
+   */
 }
