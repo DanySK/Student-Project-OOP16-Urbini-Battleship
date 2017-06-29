@@ -119,7 +119,7 @@ public abstract class AbstractShip implements Ship {
   /**
    * Not supported yet.
    * @param direction {@link ShipDirection}
-   * @throws UnsupportedOperationException
+   * @throws UnsupportedOperationException unsupported
    */
   @Override
   public void switchDirection(final ShipDirection direction) {

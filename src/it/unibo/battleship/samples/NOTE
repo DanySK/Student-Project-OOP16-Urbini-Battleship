@@ -19,6 +19,12 @@ SOLID,
 COMPOSITION > INHERITANCE
 design and document for inheritance or else prohibit i
 
+TODO:
+GAME STARTS -> CHOOSE A RULESET
+CHOOSE TYPE OF GAME (PLAYER VS AI?)
+PLACE FLEETS
+SHOOT EACH OTHER
+
 
 Place a fleet (player)
 Place a random fleet (AI)

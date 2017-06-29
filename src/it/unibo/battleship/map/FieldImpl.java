@@ -24,7 +24,7 @@ public final class FieldImpl implements Field {
 
   private FieldImpl(final Boundary boundary) {
     this.boundary = boundary;
-    fieldMatrix = new FieldMatrix(boundary);
+    this.fieldMatrix = new FieldMatrix(boundary);
   }
 
   public static FieldImpl createField(final Boundary boundary) {
@@ -148,7 +148,7 @@ public final class FieldImpl implements Field {
     }
 
     public FieldCell getAt(final Point2d point) {
-      final int idx = Point2dHelper.getIndex(point, boundary);
+      final int idx = Point2dHelper.getIndex(point);
       return getAt(idx);
     }
 
@@ -160,7 +160,7 @@ public final class FieldImpl implements Field {
       for (int row = 0; row < rows; row++) {
         for (int column = 0; column < cols; column++) {
           final Point2d p = new Point2dImpl(column, row);
-          final int idx = Point2dHelper.getIndex(p, this.boundary);
+          final int idx = Point2dHelper.getIndex(p);
           matrix[row][column] = this.fieldCells[idx];
         }
       }
@@ -168,7 +168,7 @@ public final class FieldImpl implements Field {
     }
 
     private void initialize() {
-      for (int i = 0; i < boundary.getSize(); i++) {
+      for (int i = 0; i < this.boundary.getSize(); i++) {
         this.fieldCells[i] = new FieldCellImpl();
       }
     }

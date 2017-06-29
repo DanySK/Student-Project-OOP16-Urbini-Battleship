@@ -5,6 +5,7 @@ import com.google.common.base.Objects;
 import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
+
 import java.util.Optional;
 
 /**
@@ -19,27 +20,6 @@ public final class FieldCellImpl implements FieldCell {
 
   public FieldCellImpl() {
     this.currentState = State.WATER;
-  }
-
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-
-    if ((o == null) || (this.getClass() != o.getClass())) {
-      return false;
-    }
-
-    final FieldCellImpl that = (FieldCellImpl) o;
-
-    return Objects.equal(this.currentState, that.currentState)
-        && Objects.equal(this.ship, that.ship);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(this.currentState, this.ship);
   }
 
   @Override
@@ -81,13 +61,6 @@ public final class FieldCellImpl implements FieldCell {
   }
 
   @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("currentState", this.currentState).add("ship", this.ship)
-        .toString();
-  }
-
-  @Override
   public boolean isEmpty() {
     return this.currentState == State.WATER;
   }
@@ -110,6 +83,34 @@ public final class FieldCellImpl implements FieldCell {
   @Override
   public Optional<Ship> getShip() {
     return Optional.ofNullable(this.ship);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if ((o == null) || (this.getClass() != o.getClass())) {
+      return false;
+    }
+
+    final FieldCellImpl that = (FieldCellImpl) o;
+
+    return Objects.equal(this.currentState, that.currentState)
+        && Objects.equal(this.ship, that.ship);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(this.currentState, this.ship);
+  }
+
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("currentState", this.currentState).add("ship", this.ship)
+        .toString();
   }
 
 }

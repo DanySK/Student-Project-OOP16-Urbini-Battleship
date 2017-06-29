@@ -25,8 +25,7 @@ public final class GameTest {
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
     final int maxIndex = bounds.getColumnnsCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
-      final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i,
-          bounds));
+      final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i));
       assertTrue(Ruleset.isPointWithinLimits(s.getPoint()));
     }
     // Try creating random shots

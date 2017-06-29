@@ -1,8 +1,9 @@
 package it.unibo.battleship.samples;
 
 import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Point2dImpl;
+import it.unibo.battleship.commons.Ruleset;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,7 +43,7 @@ public final class SinglePlayerGame {
     do {
       place();
       printField(false, true);
-    } while (CONTROLLER.playerFleetNotPlaced());
+    } while (CONTROLLER.isPlayerFleetNotPlaced());
 
     do {
       System.out.println("Create a new shot and point at the enemy fleet!");
@@ -100,8 +101,8 @@ public final class SinglePlayerGame {
     final int row = readInt("Enter row to place a " + shipToPlace + ' ');
     final int column = readInt("Enter column to place a " + shipToPlace + ' ');
 
-    Point2d p = new Point2dImpl(column, row);
-    System.out.println(Point2dHelper.isPointWithinLimits(p));
+    final Point2d p = new Point2dImpl(column, row);
+    System.out.println(Ruleset.isPointWithinLimits(p));
     // Controllo che non tocchi altre navi
     // Stampa del campo qui di seguito
     CONTROLLER.placeNextPlaceableShip(p);

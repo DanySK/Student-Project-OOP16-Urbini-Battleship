@@ -1,10 +1,13 @@
 package it.unibo.battleship.commons;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 /**
  * Contains the global properties of the battleship game, including ship rules.
  *
  * @author fabio.urbini
  */
+@Immutable
 public final class GlobalProperties {
   public static final int MAX_SIZE = 5;
   public static final int SUBMARINE_SIZE = 1;
@@ -12,6 +15,7 @@ public final class GlobalProperties {
   public static final int BATTLESHIP_SIZE = 3;
   public static final int AIR_CARRIER_SIZE = 4;
   public static final String POINT_NOT_WITHIN_LIMITS = "Point not defined within the map limit";
+  public static final String INDEX_NOT_WITHIN_LIMITS ="Index not defined within the boundary";
   public static final String FIELD_CELLS_NOT_EMPTY = "Field cells are not empty";
   public static final String SHIP_NOT_WITHIN_LIMITS = "Ship points are not within the boundary of the field";
   public static final String BOUNDARY_VALUE_IS_NEGATIVE = "Boundary values should be positive (greater than 0)";

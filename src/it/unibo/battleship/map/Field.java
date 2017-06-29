@@ -45,7 +45,7 @@ public interface Field extends Serializable {
    * Returns true if the ship is placeable.
    * @param ship the current ship to place
    * @param point position where the ship will start
-   * @return
+   * @return {@code true} if the ship is placeable
    */
   boolean isShipPlaceable(final Ship ship, final Point2d point);
 

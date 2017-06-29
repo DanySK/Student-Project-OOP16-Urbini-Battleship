@@ -33,9 +33,9 @@ public abstract class ShotCollection implements Serializable {
     }
   }
 
-  public abstract List<Shot> getShotCollection(final Point2d point2d);
+  public abstract Iterable<Shot> getShotCollection(final Point2d point2d);
 
-  public static final ShotCollection getShotCollectionByType(final Type shotType) {
+  public static ShotCollection getShotCollectionByType(final Type shotType) {
     switch (shotType) {
     case X:
       return new XShot();

@@ -1,9 +1,8 @@
 package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.commons.Point2dHelper;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
@@ -18,14 +17,9 @@ public final class ShotImpl implements Shot {
     this.point = p;
   }
 
-  public static ShotImpl createShot(final Point2d p) {
-    // Static factory method to avoid the use of the constructor
-    if (Ruleset.isPointWithinLimits(p)) {
-      return new ShotImpl(p);
-    } else {
-      throw new IllegalArgumentException(
-          GlobalProperties.POINT_NOT_WITHIN_LIMITS);
-    }
+  public static ShotImpl createShot(final Point2d point) {
+    Point2dHelper.checkPointWithinBoundaryLimits(point);
+    return new ShotImpl(point);
   }
 
   @Override

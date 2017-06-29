@@ -1,9 +1,8 @@
 package it.unibo.battleship.extra;
 
 import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.FleetFactory;
-import it.unibo.battleship.shots.Shot;
+import it.unibo.battleship.shots.ShotFactory;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.io.Serializable;
@@ -19,7 +18,7 @@ public interface ArtificialIntelligence extends Serializable {
   // TODO: make it create a Field and populate it?
   FleetFactory getFleetFactory(); // TODO: make it a functional interface -> FleetFactory?
 
-  Shot createShot(Field field); // TODO: make it a functional interface -> ShotFactory?
+  ShotFactory getShotFactory(); // TODO: make it a functional interface -> ShotFactory?
 
   /**
    * Returns the boundary.

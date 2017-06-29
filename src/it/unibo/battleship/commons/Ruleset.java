@@ -9,6 +9,7 @@ import static it.unibo.battleship.commons.GlobalProperties.*;
  * manually.
  */
 public final class Ruleset {
+  // TODO: make instances of this class in the future, and make it immutable
   public static final Boundary BOUNDARY = BoundaryImpl.createBoundary(10, 10);
   public static final boolean SHOOT_AGAIN_AFTER_HIT = false;
 

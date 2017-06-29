@@ -61,8 +61,9 @@ public enum BattleshipController {
     this.aiField.updateStateWithShot(shot);
   }
 
-  public char[][] getCharMap(boolean isAi, boolean isOwner) {
-    Field field = isAi ? this.aiField : this.playerField;
+  // TODO: change here
+  public char[][] getCharMap(final boolean isAi, final boolean isOwner) {
+    final Field field = isAi ? this.aiField : this.playerField;
     if (isOwner) {
       return FieldHelper.getViewByOwner(field);
     }
@@ -74,38 +75,33 @@ public enum BattleshipController {
   }
 
   public String getNextPlaceableShip() {
-    Optional<Ship> ship = playerFleet.getNextNonPlacedShip();
-    if (ship.isPresent()) {
-      return ship.get().toString();
-    }
-    return "No ship left to place";
+    final Optional<Ship> ship = this.playerFleet.getNextNonPlacedShip();
+    return ship.map(Object::toString).orElse("No ship left to place");
   }
 
   public void placeNextPlaceableShip(final Point2d startingPosition) {
     // TODO: controllo della posizione con RULESET
-    Optional<Ship> ship = playerFleet.getNextNonPlacedShip();
-    if (ship.isPresent()) {
-      playerField.placeShip(ship.get(), startingPosition);
-    }
+    final Optional<Ship> ship = this.playerFleet.getNextNonPlacedShip();
+    ship.ifPresent(ship1 -> this.playerField.placeShip(ship1, startingPosition));
 
     for (int i = 0; i < 99; i++) {
-      char c = '0';
-      String fin = i > 9 ? i + "" : c + "" + i;
+      final char c = '0';
+      final String fin = i > 9 ? i + "" : c + "" + i;
       System.out.print(fin + '-');
     }
     System.out.println();
     for (int i = 0; i < 99; i++) {
-      Point2d p = Point2dHelper.createPoint2d(i, Ruleset.BOUNDARY);
-      boolean pres = playerField.getFieldCells()[p.getY()][p.getX()].isPresent();
-      String tmp = "-" + (pres ? '@' : 'x');
+      final Point2d p = Point2dHelper.createPoint2d(i);
+      final boolean pres = this.playerField.getFieldCells()[p.getY()][p.getX()].isPresent();
+      final String tmp = "-" + (pres ? '@' : 'x');
       System.out.print(tmp + '-');
       // TODO: check the ship is not placed or viewed correctly
       // cruiser placed at 7,4 -> (7;4), (8;4) instead of (7;4), (7;5)
     }
   }
 
-  public boolean playerFleetNotPlaced() {
-    return !playerFleet.isReady();
+  public boolean isPlayerFleetNotPlaced() {
+    return !this.playerFleet.isReady();
   }
 
 

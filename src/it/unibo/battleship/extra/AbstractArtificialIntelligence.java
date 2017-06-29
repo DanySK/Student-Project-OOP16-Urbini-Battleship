@@ -1,17 +1,14 @@
 package it.unibo.battleship.extra;
 
 import it.unibo.battleship.commons.*;
-import it.unibo.battleship.map.Field;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.ships.FleetFactoryImpl;
-import it.unibo.battleship.shots.Shot;
+import it.unibo.battleship.shots.RandomLimitedShotFactory;
+import it.unibo.battleship.shots.ShotFactory;
 import it.unibo.battleship.shots.ShotImpl;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,6 +21,7 @@ import java.util.Random;
 @Immutable
 public abstract class AbstractArtificialIntelligence implements
     ArtificialIntelligence {
+  // TODO: an Artificial Intelligence may need the field to generate stuff
   private static final long serialVersionUID = -7273836582211632939L;
   private final Boundary boundary;
 
@@ -35,9 +33,8 @@ public abstract class AbstractArtificialIntelligence implements
     this.boundary = boundary;
   }
 
-  public static final ArtificialIntelligence createArtificialIntelligence(
+  public static ArtificialIntelligence createArtificialIntelligence(
       final Level level, final Boundary boundary) {
-    // Static factory method
     switch (level) {
     case FREE_WIN:
       return new FreeWinAI(boundary);
@@ -63,20 +60,20 @@ public abstract class AbstractArtificialIntelligence implements
   }
 
   public final Boundary getBoundary() {
-    return BoundaryImpl.createBoundary(this.boundary.getColumnnsCount(),
-        this.boundary.getRowsCount());
+    return BoundaryImpl.createBoundary(
+        this.boundary.getColumnnsCount(),
+        this.boundary.getRowsCount()
+    );
   }
+
 
   private static final class EasyAI extends AbstractArtificialIntelligence {
     private static final long serialVersionUID = -7273836582211632939L;
-    final List<Integer> values;
-    final int max;
+    final ShotFactory shotFactory;
 
     private EasyAI(final Boundary boundary) {
       super(boundary);
-      this.max = boundary.getColumnnsCount() * boundary.getRowsCount();
-      this.values = new ArrayList<>(this.max);
-      this.setUp();
+      this.shotFactory = new RandomLimitedShotFactory(boundary);
     }
 
     @Override
@@ -85,43 +82,8 @@ public abstract class AbstractArtificialIntelligence implements
     }
 
     @Override
-    public Shot createShot(final Field field) {
-      if (this.hasNextInt()) {
-        return ShotImpl.createShot(Point2dHelper.createPoint2d(
-            this.getRandomInt(), field.getBoundary()));
-      }
-
-      // There is no way the fleet couldn't be sunk at this time
-      // Because all shots were generated.
-      throw new IllegalStateException(
-          GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
-    }
-
-    private boolean hasNextInt() {
-      return !this.values.isEmpty();
-    }
-
-    private int getRandomInt() {
-      if (!this.hasNextInt()) {
-        throw new IllegalStateException(
-            GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
-      }
-
-      final int index = new Random().ints(0, this.values.size()).limit(1)
-          .iterator().nextInt();
-      final int val = this.values.get(index);
-
-      this.values.remove(index);
-
-      return val;
-    }
-
-    private void setUp() {
-      for (int i = 0; i < this.max; i++) {
-        this.values.add(i);
-      }
-
-      Collections.shuffle(this.values);
+    public ShotFactory getShotFactory() {
+      return this.shotFactory;
     }
   }
 
@@ -138,10 +100,11 @@ public abstract class AbstractArtificialIntelligence implements
     }
 
     @Override
-    public Shot createShot(final Field field) {
-      // Creates a new random shot without even looking at the field
-      return ShotImpl
-          .createShot(this.generateRandomPoint2d(field.getBoundary()));
+    public ShotFactory getShotFactory() {
+      // Creates a new random shot
+      return (ShotFactory) () -> ShotImpl
+          .createShot(FreeWinAI.this.generateRandomPoint2d(getBoundary()));
+
     }
 
     private Point2d generateRandomPoint2d(final Boundary boundary) {
@@ -159,6 +122,7 @@ public abstract class AbstractArtificialIntelligence implements
     /*
      * http://www.datagenetics.com/blog/december32011/
      * Use New Algorithm here
+     * This AI will need a Field reference
      */
     private SuperHardAi(final Boundary boundary) {
       super(boundary);
@@ -171,7 +135,7 @@ public abstract class AbstractArtificialIntelligence implements
     }
 
     @Override
-    public Shot createShot(final Field field) {
+    public ShotFactory getShotFactory() {
       throw new UnsupportedOperationException();
     }
 
