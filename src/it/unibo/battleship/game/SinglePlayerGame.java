@@ -9,6 +9,7 @@ import it.unibo.battleship.game.BattleshipController.ViewerType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -148,8 +149,7 @@ public final class SinglePlayerGame {
   }
 
   private static int readInt() throws NumberFormatException {
-    final BufferedReader br = new BufferedReader(new InputStreamReader(
-        System.in));
+    final BufferedReader br = getBufferedReader();
 
     boolean check = false;
     do {
@@ -165,7 +165,18 @@ public final class SinglePlayerGame {
       }
     } while (!check);
 
-    throw new IllegalArgumentException();
+    return -1;
+  }
+
+  private static BufferedReader getBufferedReader() {
+    BufferedReader br = null;
+    try {
+      return new BufferedReader(new InputStreamReader(
+          System.in, "UTF-8"));
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+    return br;
   }
 
   private static void printField(final PlayerType playerType, final ViewerType viewerType) {

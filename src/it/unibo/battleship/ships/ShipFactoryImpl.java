@@ -19,7 +19,6 @@ public enum ShipFactoryImpl implements ShipFactory {
 
   /**
    * Creates a ship.
-   *
    * @param size
    *          size of the ship. The value must be between 0 and {@see
    *          GlobalProperties.MAX_SIZE}

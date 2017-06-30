@@ -71,18 +71,17 @@ public enum BattleshipControllerImpl implements BattleshipController {
     );
     this.aiFleet = this.ai.getFleetFactory().createFleet();
     this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
-    placeFleet(this.aiField, this.aiFleet);
+    placeFleetDiagonally(this.aiField, this.aiFleet);
   }
 
-  private static void placeFleet(final Field field, final Fleet fleet) {
+  public static void placeFleetDiagonally(final Field field,
+                                           final Fleet fleet) {
     int i = 0, j = 0;
 
     while (!fleet.isReady()) {
       if (fleet.getNextNonPlacedShip().isPresent()) {
         final Ship ship = fleet.getNextNonPlacedShip().get();
         field.placeShip(ship, new Point2dImpl(i++, j++));
-
-        // Placing the ships diagonally
       }
     }
   }

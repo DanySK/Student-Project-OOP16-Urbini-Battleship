@@ -35,7 +35,9 @@ public class RandomLimitedShotFactory implements ShotFactory {
       // There is no way the fleet couldn't be sunk at this time
       // Because all shots were generated.
       throw new IllegalStateException(
-          GlobalProperties.INVALID_GENERATED_SHOTS_STATE);
+          GlobalProperties.INVALID_GENERATED_SHOTS_STATE
+          + " Shots generated : " + (max - this.values.size())
+      );
     }
   }
 

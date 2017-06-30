@@ -19,7 +19,7 @@ public final class FieldImpl implements Field {
    * seen upside down.
    */
   private final Boundary boundary;
-  private final FieldMatrix fieldMatrix;
+  private final transient FieldMatrix fieldMatrix;
 
 
   private FieldImpl(final Boundary boundary) {

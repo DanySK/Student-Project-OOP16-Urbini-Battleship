@@ -2,13 +2,22 @@ package it.unibo.battleship.test;
 
 import it.unibo.battleship.commons.Boundary;
 import it.unibo.battleship.commons.BoundaryImpl;
-import it.unibo.battleship.commons.Point2dHelper;
 import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.extra.AbstractArtificialIntelligence;
+import it.unibo.battleship.extra.ArtificialIntelligence;
+import it.unibo.battleship.game.BattleshipControllerImpl;
+import it.unibo.battleship.map.Field;
+import it.unibo.battleship.map.FieldImpl;
+import it.unibo.battleship.ships.Fleet;
+import it.unibo.battleship.ships.FleetFactoryImpl;
+import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.ships.ShipFactoryImpl;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+import static it.unibo.battleship.commons.Point2dHelper.createPoint2d;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -18,48 +27,62 @@ import static org.junit.Assert.assertTrue;
  */
 public final class GameTest {
   /*
-   * This test is designed to check if a game works properly It won't test all
-   * classes designed.
-   * Read 02.techniques~20/55
+   * These tests are designed to check if a game works properly.
+   * It won't test all classes designed.
    * todo: rename methods, adds throws Exception signature
+   * todo: make specific packages for tests, one for each feature if possible
    */
-  // private fields
+  ArtificialIntelligence ai;
+  Fleet aiFleet;
+  Field aiField;
 
   @Before
   public void initialize() {
-
+    ai = AbstractArtificialIntelligence.createArtificialIntelligence(
+        AbstractArtificialIntelligence.Level.EASY,
+        Ruleset.BOUNDARY
+    );
+    aiFleet = ai.getFleetFactory().createFleet();
+    aiField = FieldImpl.createField(Ruleset.BOUNDARY);
+    BattleshipControllerImpl.placeFleetDiagonally(aiField, aiFleet);
   }
 
   @Test
-  public void assertShotsWithinLimits() {
-    // fail("Not yet implemented");
+  public void createShots() {
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
     final int maxIndex = bounds.getColumnsCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
-      final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i));
+      final Shot s = ShotImpl.createShot(createPoint2d(i));
       assertTrue(Ruleset.isPointWithinLimits(s.getPoint()));
     }
-    // Try creating random shots
+  }
 
-    /*
-         *
-         *
-         *
-         *
-         */
+  @Test(expected = IllegalArgumentException.class)
+  public void createShips() {
+    final Fleet f = FleetFactoryImpl.INSTANCE.createFleet();
+    f.getNextNonPlacedShip().ifPresent(
+        (Ship ship) -> ship.place(createPoint2d(Ruleset.BOUNDARY.getSize()))
+    );
   }
 
   @Test
-  public void assertFleetIsReadyAfterPlacingIt() {
-
+  public void createAiFleet() {
+    assertTrue(aiFleet.isReady());
   }
 
   @Test
-  public void assertFleetIsSunkAfterHittingAllShips() {
-
+  public void hitShips() {
+    while (!this.aiFleet.isSunk()) {
+      final Shot shot = ai.getShotFactory().createShot();
+      this.aiField.updateStateWithShot(shot);
+    }
+    assertTrue(this.aiFleet.isSunk());
   }
 
-  public void setUpAiLevel() {
-
+  @Test(expected = IllegalArgumentException.class)
+  public void createShip() {
+    ShipFactoryImpl.INSTANCE.createShip(
+        Ruleset.ShipRules.AIR_CARRIER.getSize() + 1
+    );
   }
 }
