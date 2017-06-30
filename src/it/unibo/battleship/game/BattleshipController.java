@@ -1,127 +1,78 @@
 package it.unibo.battleship.game;
 
+import it.unibo.battleship.commons.Boundary;
 import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dImpl;
-import it.unibo.battleship.commons.Ruleset;
-import it.unibo.battleship.extra.AbstractArtificialIntelligence;
-import it.unibo.battleship.extra.ArtificialIntelligence;
-import it.unibo.battleship.map.Field;
-import it.unibo.battleship.map.FieldHelper;
-import it.unibo.battleship.map.FieldImpl;
-import it.unibo.battleship.ships.Fleet;
-import it.unibo.battleship.ships.FleetFactoryImpl;
-import it.unibo.battleship.ships.Ship;
-import it.unibo.battleship.shots.Shot;
-import it.unibo.battleship.shots.ShotImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Singleton of a Controller of the battleship game.
- *
+ * Battleship controller for a Human vs AI game.
  * @author fabio.urbini
  */
-public enum BattleshipController {
-  CONTROLLER;
+public interface BattleshipController {
 
-  // TODO : Divide into two controller instances with fleet+field
-  private final Fleet aiFleet;
-  private final Field aiField;
-  private final Fleet playerFleet;
-  private final Field playerField;
-  private final ArtificialIntelligence ai;
+  /**
+   * Returns {@code true} if the game is not finished yet.
+   * @return {@code true} if the game is not finished yet.
+   */
+  boolean isGameNotFinished();
 
-  BattleshipController() {
-    this.ai = AbstractArtificialIntelligence.createArtificialIntelligence(
-        AbstractArtificialIntelligence.Level.EASY,
-        Ruleset.BOUNDARY
-    );
-    this.aiFleet = this.ai.getFleetFactory().createFleet();
-    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
-    this.playerFleet = FleetFactoryImpl.getInstance().createFleet();
-    this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
-  }
+  /**
+   * Tries to shoot the current cell selected.
+   * @param row
+   * a valid int between 0 and {@link Boundary#getRowsCount()} -1
+   * @param column
+   * a valid int between 0 and {@link Boundary#getColumnsCount()} -1
+   * @throws IllegalArgumentException
+   * if row or column don't form a valid Point2d
+   */
+  void shootAiField(int row, int column);
 
-  public boolean checkToContinue() {
-    return !this.aiFleet.isSunk();
-  }
+  /**
+   * Tries to shoot the player field. It will generate a
+   * suitable {@link Point2d}.
+   */
+  void shootPlayerField();
 
-  public void initialize() {
-    placeFleet(this.aiField, this.aiFleet);
-  }
+  /**
+   * Get the proper field view depending on the player who owns it and
+   * who is actually accessing it.
+   * @param playerType the type of player who owns the field.
+   * @param viewerType who is accessing the field.
+   * @return the field view.
+   */
+  List<List<Character>> getFieldView(PlayerType playerType, ViewerType viewerType);
 
-  private static void placeFleet(final Field field, final Fleet fleet) {
-    int i = 0, j = 0;
+  /**
+   * Returns the actual boundary used.
+   * @return the actual boundary used.
+   */
+  Boundary getBoundary();
 
-    while (!fleet.isReady()) {
-      if (fleet.getNextNonPlacedShip().isPresent()) {
-        final Ship ship = fleet.getNextNonPlacedShip().get();
-        field.placeShip(ship, new Point2dImpl(i++, j++));
+  /**
+   * Returns the name of the next placeable ship.
+   * @return the name of the next placeable ship.
+   */
+  String getNextPlaceableShip();
 
-        // Placing the ships diagonally
-      }
-    }
-  }
+  /**
+   * Tries to place the next placeable ship on the player
+   * field.
+   * @param startingPosition the position where the ship will start.
+   * @throws IllegalArgumentException if the Point2d is invalid
+   */
+  void placeNextPlaceableShip(Point2d startingPosition);
 
-  public void shootAiField(final int row, final int column) {
-    final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
-    this.aiField.updateStateWithShot(shot);
-  }
+  /**
+   * Returns {@code true} if the player fleet isn't placed yet.
+   * @return {@code true} if the player fleet isn't placed yet.
+   */
+  boolean isPlayerFleetNotPlaced();
 
-  public void shootPlayerField() {
-    this.playerField.updateStateWithShot(this.ai.getShotFactory().createShot());
-  }
-
-  public List<List<Character>> getCharMapList(final PlayerType playerType,
-                             final ViewerType viewerType) {
-    return this.getViewList(viewerType, this.getField(playerType));
-  }
-
-  private List<List<Character>> getViewList(final ViewerType viewerType, final Field field) {
-
-    switch(viewerType) {
-      case OWNER:
-        return FieldHelper.getViewByOwner(field);
-      case ENEMY:
-        return FieldHelper.getViewByEnemy(field);
-      default :
-        throw new IllegalStateException("Invalid state for ViewerType");
-    }
-  }
-
-  private Field getField(final PlayerType playerType) {
-    switch(playerType) {
-      case HUMAN:
-        return this.playerField;
-      case AI:
-        return this.aiField;
-      default :
-        throw new IllegalStateException("Invalid state for PlayerType");
-    }
-  }
-
-  public int getColumnsCount() {
-    return Ruleset.BOUNDARY.getColumnnsCount();
-  }
-
-  public String getNextPlaceableShip() {
-    final Optional<Ship> ship = this.playerFleet.getNextNonPlacedShip();
-    return ship.map(Object::toString).orElse("No ship left to place");
-  }
-
-  public void placeNextPlaceableShip(final Point2d startingPosition) {
-    // TODO: controllo della posizione con RULESET
-    final Optional<Ship> ship = this.playerFleet.getNextNonPlacedShip();
-    ship.ifPresent(ship1 -> this.playerField.placeShip(ship1, startingPosition));
-  }
-
-  public boolean isPlayerFleetNotPlaced() {
-    return !this.playerFleet.isReady();
-  }
-
-
-  public enum PlayerType {
+  /**
+   * Player type enumeration for Human and Ai game
+   */
+  enum PlayerType {
     /** Human type of player */
     HUMAN,
 
@@ -129,7 +80,10 @@ public enum BattleshipController {
     AI
   }
 
-  public enum ViewerType {
+  /**
+   * Represents the types of viewers
+   */
+  enum ViewerType {
     /** The viewer of the field is the owner himself */
     OWNER,
 

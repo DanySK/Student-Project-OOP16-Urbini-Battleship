@@ -7,6 +7,7 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
  * Implementation of a Shot.
+ * @author fabio.urbini
  */
 @Immutable
 public final class ShotImpl implements Shot {

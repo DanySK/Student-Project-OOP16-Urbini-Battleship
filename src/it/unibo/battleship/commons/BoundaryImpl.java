@@ -41,7 +41,7 @@ public final class BoundaryImpl implements Boundary {
   }
 
   @Override
-  public int getColumnnsCount() {
+  public int getColumnsCount() {
     return this.columnsCount;
   }
 

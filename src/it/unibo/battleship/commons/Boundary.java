@@ -17,7 +17,7 @@ public interface Boundary extends Serializable {
    *
    * @return the Horizontal bound (x)
    */
-  int getColumnnsCount();
+  int getColumnsCount();
 
   /**
    * Returns the vertical bound, which is also the number of rows.

@@ -34,7 +34,7 @@ public final class GameTest {
   public void assertShotsWithinLimits() {
     // fail("Not yet implemented");
     final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
-    final int maxIndex = bounds.getColumnnsCount() * bounds.getRowsCount();
+    final int maxIndex = bounds.getColumnsCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
       final Shot s = ShotImpl.createShot(Point2dHelper.createPoint2d(i));
       assertTrue(Ruleset.isPointWithinLimits(s.getPoint()));

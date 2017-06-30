@@ -73,7 +73,7 @@ public final class FieldHelper {
       final Field field,
       final PlayerState playerState ) {
     final int rows = field.getBoundary().getRowsCount();
-    final int columns = field.getBoundary().getColumnnsCount();
+    final int columns = field.getBoundary().getColumnsCount();
     final List<List<Character>> view = new ArrayList<>(rows);
 
     for (int row = 0; row < rows; row++) {

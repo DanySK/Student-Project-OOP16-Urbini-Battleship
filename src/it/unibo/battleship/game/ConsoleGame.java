@@ -29,7 +29,7 @@ public final class ConsoleGame {
     final Field field1 = FieldImpl.createField(Ruleset.BOUNDARY);
 
     // Creating a new fleet
-    final Fleet fleet = FleetFactoryImpl.getInstance().createFleet();
+    final Fleet fleet = FleetFactoryImpl.INSTANCE.createFleet();
 
     // Placing the fleet in the field
     placeFleet(field1, fleet);
@@ -75,14 +75,5 @@ public final class ConsoleGame {
     System.out.println();
     System.out.println();
     System.out.println();
-//    for (final char[] chars : FieldHelper.getViewByEnemy(field)) {
-//      for (final char car : chars) {
-//        System.out.print(" " + car + ' ');
-//      }
-//
-//      System.out.println();
-//    }
-//
-//    System.out.println("\n\n\n");
   }
 }

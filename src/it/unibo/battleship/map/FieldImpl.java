@@ -28,7 +28,7 @@ public final class FieldImpl implements Field {
   }
 
   public static FieldImpl createField(final Boundary boundary) {
-    if ((boundary.getColumnnsCount() < 0) || (boundary.getRowsCount() < 0)) {
+    if ((boundary.getColumnsCount() < 0) || (boundary.getRowsCount() < 0)) {
       throw new IllegalArgumentException(
           GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
     }
@@ -124,7 +124,7 @@ public final class FieldImpl implements Field {
   @Override
   public String toString() {
     return "Field { " + this.boundary.getRowsCount() + " rows }; { " +
-        this.boundary.getColumnnsCount() + " columns } ";
+        this.boundary.getColumnsCount() + " columns } ";
   }
 
   private static class FieldMatrix {
@@ -148,7 +148,7 @@ public final class FieldImpl implements Field {
 
     public FieldCell[][] getMatrix() {
       final int rows = this.boundary.getRowsCount();
-      final int cols = this.boundary.getColumnnsCount();
+      final int cols = this.boundary.getColumnsCount();
       final FieldCell[][] matrix = new FieldCell[rows][cols];
 
       for (int row = 0; row < rows; row++) {

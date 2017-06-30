@@ -26,7 +26,7 @@ public final class Ruleset {
    */
   public static boolean isPointWithinLimits(final Point2d p) {
     return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsCount()))
-        && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnnsCount()));
+        && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnsCount()));
   }
 
   /**

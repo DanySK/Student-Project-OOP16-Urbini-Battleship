@@ -10,23 +10,12 @@ import static it.unibo.battleship.commons.GlobalProperties.*;
  *
  * @author fabio.urbini
  */
-public final class ShipFactoryImpl implements ShipFactory {
+public enum ShipFactoryImpl implements ShipFactory {
+  /** Singleton of ShipFactoryImpl */
+  INSTANCE;
+
   private static final long serialVersionUID = -1375681121821315440L;
-  private static ShipFactoryImpl instance;
 
-  private ShipFactoryImpl() {
-  }
-
-  /**
-   * Returns the {@code ShipFactoryImpl} instance
-   * @return the {@code ShipFactoryImpl} instance
-   */
-  public static synchronized ShipFactoryImpl getInstance() {
-    if (instance == null) {
-      instance = new ShipFactoryImpl();
-    }
-    return instance;
-  }
 
   /**
    * Creates a ship.

@@ -15,11 +15,11 @@ import java.util.Random;
  * @author fabio.urbini
  */
 public class RandomLimitedShotFactory implements ShotFactory {
-  final List<Integer> values;
-  final int max;
+  private final List<Integer> values;
+  private final int max;
 
   public RandomLimitedShotFactory(final Boundary boundary) {
-    this.max = boundary.getColumnnsCount() * boundary.getRowsCount();
+    this.max = boundary.getColumnsCount() * boundary.getRowsCount();
     this.values = new ArrayList<>(this.max);
     this.setUp();
   }

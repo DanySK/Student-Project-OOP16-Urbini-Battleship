@@ -14,20 +14,10 @@ import java.util.stream.Collectors;
  *
  * @author fabio.urbini
  */
-public final class FleetFactoryImpl implements FleetFactory {
+public enum FleetFactoryImpl implements FleetFactory {
+  INSTANCE;
 
   private static final long serialVersionUID = -3012942531548787956L;
-  private static FleetFactoryImpl instance;
-
-  private FleetFactoryImpl() {
-  }
-
-  public static synchronized FleetFactoryImpl getInstance() {
-    if (instance == null) {
-      instance = new FleetFactoryImpl();
-    }
-    return instance;
-  }
 
   @Override
   public Fleet createFleet() {
@@ -90,7 +80,7 @@ public final class FleetFactoryImpl implements FleetFactory {
 
     @Override
     public List<Ship> getAllShipsByType(final ShipRules shipType) {
-      // The toString filter may not work, consider refactoring
+      // todo toString filter is not flexible, consider refactoring
       final List<Ship> ships = this.ships
           .stream()
           .filter(ship -> ship.toString().equals(shipType.toString()))
@@ -130,7 +120,7 @@ public final class FleetFactoryImpl implements FleetFactory {
 
     @Override
     public ShipFactory getFactory() {
-      return ShipFactoryImpl.getInstance();
+      return ShipFactoryImpl.INSTANCE;
     }
 
     @Override

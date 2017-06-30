@@ -11,14 +11,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
-import static it.unibo.battleship.game.BattleshipController.CONTROLLER;
 import static it.unibo.battleship.game.BattleshipController.PlayerType.AI;
 import static it.unibo.battleship.game.BattleshipController.PlayerType.HUMAN;
 import static it.unibo.battleship.game.BattleshipController.ViewerType.ENEMY;
 import static it.unibo.battleship.game.BattleshipController.ViewerType.OWNER;
+import static it.unibo.battleship.game.BattleshipControllerImpl.CONTROLLER;
 
 /**
+ * Boundary of a battleship game. It works with the console.
  * @author fabio.urbini
  */
 public final class SinglePlayerGame {
@@ -61,7 +63,7 @@ public final class SinglePlayerGame {
       CONTROLLER.shootPlayerField();
       printField(HUMAN, OWNER);
       printField(AI, ENEMY);
-    } while (CONTROLLER.checkToContinue());
+    } while (CONTROLLER.isGameNotFinished());
 
 
   }
@@ -86,7 +88,7 @@ public final class SinglePlayerGame {
     final StringBuilder sb = new StringBuilder("\n\n");
     sb.append( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
     sb.append('\n');
-    sb.append(getHeaderForConsole(CONTROLLER.getColumnsCount()));
+    sb.append(getHeaderForConsole(CONTROLLER.getBoundary().getColumnsCount()));
     System.out.println(sb);
 
     getRowsToWrite(playerType, viewerType).forEach(System.out::println);
@@ -95,13 +97,16 @@ public final class SinglePlayerGame {
 
   private static List<String> getRowsToWrite(final PlayerType playerType, final ViewerType viewerType) {
     final List<String> rowsToWrite = new ArrayList<>();
-    final int[] i = { 0 }; // ugly solution?
-    CONTROLLER.getCharMapList(playerType, viewerType)
-        .forEach( (List<Character> row) -> {
-          final StringBuilder sb = new StringBuilder(" " + i[0]++ + ' ');
-          row.forEach( (Character c ) -> sb.append(" " + c + ' '));
+    final List<List<Character>> charMapList = CONTROLLER.getFieldView(playerType, viewerType);
+
+    IntStream.range(0, charMapList.size())
+        .forEach( idx -> {
+          final StringBuilder sb = new StringBuilder(" " + idx + ' ');
+          charMapList.get(idx).forEach( (Character c) -> sb.append(" " + c + ' '));
           rowsToWrite.add(sb.toString());
-        });
+        }
+    );
+
     return rowsToWrite;
   }
 

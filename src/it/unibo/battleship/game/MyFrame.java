@@ -35,7 +35,7 @@ public class MyFrame extends JFrame {
     this.setSize(WIDTH, HEIGHT);
     this.setVisible(true);
 
-    for (int i = 0; i < this.boundary.getColumnnsCount(); i++) {
+    for (int i = 0; i < this.boundary.getColumnsCount(); i++) {
       final FieldButton fb = new FieldButton(new Point2dImpl(i,0));
       this.fieldList.add(fb);
       this.addButton(fb);

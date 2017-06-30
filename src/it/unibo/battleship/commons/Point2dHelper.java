@@ -20,7 +20,7 @@ public final class Point2dHelper {
    */
   public static int getIndex(final Point2d point) {
     checkPointWithinBoundaryLimits(point);
-    return Ruleset.BOUNDARY.getColumnnsCount() * point.getY() + point.getX();
+    return Ruleset.BOUNDARY.getColumnsCount() * point.getY() + point.getX();
   }
 
   /**
@@ -33,8 +33,8 @@ public final class Point2dHelper {
    */
   public static Point2d createPoint2d(final int zeroBasedIndex) {
     checkIndexWithinBoundaryLimits(zeroBasedIndex);
-    final int y = zeroBasedIndex / Ruleset.BOUNDARY.getColumnnsCount();
-    final int x = zeroBasedIndex % Ruleset.BOUNDARY.getColumnnsCount();
+    final int y = zeroBasedIndex / Ruleset.BOUNDARY.getColumnsCount();
+    final int x = zeroBasedIndex % Ruleset.BOUNDARY.getColumnsCount();
 
     return new Point2dImpl(x, y);
   }
