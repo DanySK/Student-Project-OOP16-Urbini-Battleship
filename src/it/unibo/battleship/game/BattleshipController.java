@@ -13,6 +13,8 @@ import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 import it.unibo.battleship.shots.ShotImpl;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -71,13 +73,12 @@ public enum BattleshipController {
     this.playerField.updateStateWithShot(this.ai.getShotFactory().createShot());
   }
 
-  // TODO: change here
-  public char[][] getCharMap(final PlayerType playerType,
+  public List<List<Character>> getCharMapList(final PlayerType playerType,
                              final ViewerType viewerType) {
-    return this.getView(viewerType, this.getField(playerType));
+    return this.getViewList(viewerType, this.getField(playerType));
   }
 
-  private char[][] getView(final ViewerType viewerType, final Field field) {
+  private List<List<Character>> getViewList(final ViewerType viewerType, final Field field) {
 
     switch(viewerType) {
       case OWNER:

@@ -94,18 +94,14 @@ public final class SinglePlayerGame {
   }
 
   private static List<String> getRowsToWrite(final PlayerType playerType, final ViewerType viewerType) {
-    int i = 0;
     final List<String> rowsToWrite = new ArrayList<>();
-    for (final char[] chars : CONTROLLER.getCharMap(playerType, viewerType)) {
-
-      final StringBuilder sb = new StringBuilder(" " + i++ + ' ');
-      for (final char car : chars) {
-        sb.append(" " + car + ' ');
-      }
-
-      rowsToWrite.add(sb.toString());
-    }
-
+    final int[] i = { 0 }; // ugly solution?
+    CONTROLLER.getCharMapList(playerType, viewerType)
+        .forEach( (List<Character> row) -> {
+          final StringBuilder sb = new StringBuilder(" " + i[0]++ + ' ');
+          row.forEach( (Character c ) -> sb.append(" " + c + ' '));
+          rowsToWrite.add(sb.toString());
+        });
     return rowsToWrite;
   }
 

@@ -1,5 +1,8 @@
 package it.unibo.battleship.map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper class for the Field.
  *
@@ -51,8 +54,8 @@ public final class FieldHelper {
    * @return a representation of the field seen by the enemy @ stands for ship
    *         present * stands for ship hit
    */
-  public static char[][] getViewByEnemy(final Field field) {
-    return getViewByPlayerState(field, PlayerState.ENEMY);
+  public static List<List<Character>> getViewByEnemy(final Field field) {
+    return getViewByPlayerStateList(field, PlayerState.ENEMY);
   }
 
   /**
@@ -62,23 +65,37 @@ public final class FieldHelper {
    * @return a representation of the field viewed by the owner of the field @
    *         stands for ship present * stands for ship hit
    */
-  public static char[][] getViewByOwner(final Field field) {
-    return getViewByPlayerState(field, PlayerState.OWNER);
+  public static List<List<Character>> getViewByOwner(final Field field) {
+    return getViewByPlayerStateList(field, PlayerState.OWNER);
   }
 
-  private static char[][] getViewByPlayerState(final Field field,
-      final PlayerState playerState) {
+  private static List<List<Character>> getViewByPlayerStateList(
+      final Field field,
+      final PlayerState playerState ) {
     final int rows = field.getBoundary().getRowsCount();
     final int columns = field.getBoundary().getColumnnsCount();
-    final char[][] view = new char[rows][columns];
+    final List<List<Character>> view = new ArrayList<>(rows);
 
     for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < columns; col++) {
-        view[row][col] = getValueByPlayerState(playerState,
-            field.getFieldCells()[row][col]);
-      }
+      addColumnsByPlayerState(
+          field.getFieldCells()[row],
+          playerState,
+          columns,
+          view,
+          row
+      );
     }
-
     return view;
+  }
+
+  private static void addColumnsByPlayerState(final FieldCell[] fieldCells,
+                                              final PlayerState playerState,
+                                              final int columns,
+                                              final List<List<Character>> view,
+                                              final int row) {
+    view.add(new ArrayList<>());
+    for (int col = 0; col < columns; col++) {
+      view.get(row).add(getValueByPlayerState( playerState, fieldCells[col]) );
+    }
   }
 }

@@ -12,6 +12,8 @@ import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
+import java.util.List;
+
 /**
  * Simple console game
  *
@@ -65,14 +67,22 @@ public final class ConsoleGame {
   }
 
   private static void stampaField(final Field field) {
-    for (final char[] chars : FieldHelper.getViewByEnemy(field)) {
-      for (final char car : chars) {
-        System.out.print(" " + car + ' ');
-      }
-
-      System.out.println();
-    }
-
-    System.out.println("\n\n\n");
+    FieldHelper.getViewByEnemy(field)
+        .forEach( (List<Character> charList) -> {
+          charList.forEach( (Character c ) -> System.out.print(" " + c + ' '));
+          System.out.println();
+        });
+    System.out.println();
+    System.out.println();
+    System.out.println();
+//    for (final char[] chars : FieldHelper.getViewByEnemy(field)) {
+//      for (final char car : chars) {
+//        System.out.print(" " + car + ' ');
+//      }
+//
+//      System.out.println();
+//    }
+//
+//    System.out.println("\n\n\n");
   }
 }
