@@ -18,6 +18,18 @@ public interface BattleshipController {
   boolean isGameNotFinished();
 
   /**
+   * Returns {@code true} if the player fleet is sunk.
+   * @return {@code true} if the player fleet is sunk.
+   */
+  boolean isPlayerFleetSunk();
+
+  /**
+   * Returns {@code true} if the AI fleet is sunk.
+   * @return {@code true} if the AI fleet is sunk.
+   */
+  boolean isAiFleetSunk();
+
+  /**
    * Tries to shoot the current cell selected.
    * @param row
    * a valid int between 0 and {@link Boundary#getRowsCount()} -1
@@ -68,6 +80,24 @@ public interface BattleshipController {
    * @return {@code true} if the player fleet isn't placed yet.
    */
   boolean isPlayerFleetNotPlaced();
+
+  /**
+   * Sets the AI level to super easy
+   * @throws IllegalStateException if the level was setup already
+   */
+  void setUpAiLevelSuperEasy();
+
+  /**
+   * Sets the AI level to easy
+   * @throws IllegalStateException if the level was setup already
+   */
+  void setUpAiLevelEasy();
+
+  /**
+   * Initializes the Ai
+   * @throws IllegalStateException if the Ai was setup already
+   */
+  void initializeAi();
 
   /**
    * Player type enumeration for Human and Ai game

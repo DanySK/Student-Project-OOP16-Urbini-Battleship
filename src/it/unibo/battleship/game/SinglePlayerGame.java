@@ -24,12 +24,64 @@ import static it.unibo.battleship.game.BattleshipControllerImpl.CONTROLLER;
  * @author fabio.urbini
  */
 public final class SinglePlayerGame {
+  /*
+  Future refactorings :
+  make an instantiable class controlling the console
+  instantiate and use it in main
+  Refactor ai/player methods so that they are generified
+  Catch exceptions when creating a new ship or a new shot
+
+  Make it easy to play with different boundaries
+  place a ship or a shot with an index instead of row and column
+   */
   private SinglePlayerGame() {
+  }
+
+  public static void main(final String[] args) {
+    // TODO : read AI level, create a new AI, a new fleet and field
+    System.out.println("Battleship game start");
+    initializeAi();
+    System.out.println(getLegenda());
+    placePlayerFleet();
+
+    do {
+      shootAiField();
+      shootPlayerField();
+      printField(HUMAN, OWNER);
+      printField(AI, ENEMY);
+    } while (CONTROLLER.isGameNotFinished());
+
+    printAfterGameEnded();
+  }
+
+  private static void initializeAi() {
+    chooseAiLevel();
+    CONTROLLER.initializeAi();
+  }
+  private static void printAfterGameEnded() {
+    String s = "";
+    if (CONTROLLER.isAiFleetSunk()) {
+      s = "Congratulations! You won!";
+    }
+    if (CONTROLLER.isPlayerFleetSunk()) {
+      s = "Sorry! You lost!";
+    }
+    System.out.println(s);
+  }
+
+  private static void shootAiField() {
+    System.out.println("Create a new shot and point at the enemy fleet!");
+    final int row = writeMessageAndReadInt("Enter row ");
+    final int column = writeMessageAndReadInt("Enter column ");
+    CONTROLLER.shootAiField(row, column);
+  }
+
+  private static void shootPlayerField() {
+    CONTROLLER.shootPlayerField();
   }
 
   private static String getHeaderForConsole(final int columnsCount) {
     final StringBuilder sb = new StringBuilder("   ");
-
     final String values = "0123456789ABCDEFGH"; // raw method to show header
 
     for (int i = 0; i < columnsCount; i++) {
@@ -39,47 +91,79 @@ public final class SinglePlayerGame {
     return sb.toString();
   }
 
-  public static void main(final String[] args) {
-    System.out.println("Battleship game start");
-    System.out.println(getLegenda());
-    System.out.println("Choose AI level");
-    // TODO : read AI level, create a new AI, a new fleet and field
+  private static void placePlayerFleet() {
     System.out.println("Place your fleet first");
-    CONTROLLER.initialize();
-
     printField(HUMAN, OWNER);
     do {
       place();
       printField(HUMAN, OWNER);
     } while (CONTROLLER.isPlayerFleetNotPlaced());
-
-    do {
-      System.out.println("Create a new shot and point at the enemy fleet!");
-
-      final int row = readInt("Enter row ");
-      final int column = readInt("Enter column ");
-
-      CONTROLLER.shootAiField(row, column);
-      CONTROLLER.shootPlayerField();
-      printField(HUMAN, OWNER);
-      printField(AI, ENEMY);
-    } while (CONTROLLER.isGameNotFinished());
-
-
   }
 
-  private static int readInt(final String message) {
-    System.out.print(message);
+  private static void chooseAiLevel() {
+    boolean valid;
+    do {
+      printForAiLevel();
+      final int aiLevel = readInt();
+      valid = isValid(aiLevel, 1, 2);
+      if (!valid) {
+        System.out.println("Invalid number");
+      } else {
+        setUpAiLevel(aiLevel);
+      }
+    } while (!valid);
+  }
+
+  private static void printForAiLevel() {
+    System.out.println("Choose AI level. Type one of the following values");
+    System.out.println("1 : Super easy, guaranteed win, for beginners");
+    System.out.println("2 : Easy, no need to think about moves yet");
+  }
+
+  private static void setUpAiLevel(final int aiLevel) {
+    switch(aiLevel) {
+      case 1 : {
+        CONTROLLER.setUpAiLevelSuperEasy();
+        System.out.println("Super easy AI!");
+      }
+      break;
+      case 2 : {
+        CONTROLLER.setUpAiLevelEasy();
+        System.out.println("Easy AI!");
+      }
+      break;
+      default : break;
+    }
+  }
+
+  private static boolean isValid(final int input,
+                                 final int minRangeInclusive,
+                                 final int maxRangeInclusive) {
+    return input <= maxRangeInclusive && input >= minRangeInclusive;
+  }
+
+  private static int writeMessageAndReadInt(final String message) {
+    System.out.println(message);
+    return readInt();
+  }
+
+  private static int readInt() throws NumberFormatException {
     final BufferedReader br = new BufferedReader(new InputStreamReader(
         System.in));
 
-    try {
-      return Integer.parseInt(br.readLine());
-    } catch (final NumberFormatException nfe) {
-      System.err.println("Invalid Format! It's not a number!");
-    } catch (final IOException e) {
-      e.printStackTrace();
-    }
+    boolean check = false;
+    do {
+      try {
+        check = true;
+        return Integer.parseInt(br.readLine());
+      } catch (final NumberFormatException nfe) {
+        check = false;
+        System.err.println("Invalid Format! It's not a number!");
+        System.out.println("Reinsert value");
+      } catch (final IOException e) {
+        e.printStackTrace();
+      }
+    } while (!check);
 
     throw new IllegalArgumentException();
   }
@@ -91,11 +175,11 @@ public final class SinglePlayerGame {
     sb.append(getHeaderForConsole(CONTROLLER.getBoundary().getColumnsCount()));
     System.out.println(sb);
 
-    getRowsToWrite(playerType, viewerType).forEach(System.out::println);
+    getFieldRowsToPrint(playerType, viewerType).forEach(System.out::println);
 
   }
 
-  private static List<String> getRowsToWrite(final PlayerType playerType, final ViewerType viewerType) {
+  private static List<String> getFieldRowsToPrint(final PlayerType playerType, final ViewerType viewerType) {
     final List<String> rowsToWrite = new ArrayList<>();
     final List<List<Character>> charMapList = CONTROLLER.getFieldView(playerType, viewerType);
 
@@ -114,22 +198,15 @@ public final class SinglePlayerGame {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
     System.out.println("Trying to place a " + shipToPlace);
 
-    final int row = readInt("Enter row to place the " + shipToPlace + ' ');
-    final int column = readInt("Enter column to place the " + shipToPlace + ' ');
+    final int row = writeMessageAndReadInt("Enter row to place the " + shipToPlace + ' ');
+    final int column = writeMessageAndReadInt("Enter column to place the " + shipToPlace + ' ');
     // TODO: input = index, easier/faster to write.
     final Point2d p = new Point2dImpl(column, row);
     System.out.println(Ruleset.isPointWithinLimits(p));
-    // Controllo che non tocchi altre navi
-    // Stampa del campo qui di seguito
     CONTROLLER.placeNextPlaceableShip(p);
   }
 
   private static String getLegenda() {
-    final StringBuilder legenda = new StringBuilder("Legenda : \n");
-    legenda.append("E = Empty\n");
-    legenda.append("M = Missed\n");
-    legenda.append("@ = Ship\n");
-    legenda.append("* = Hit\n");
-    return legenda.toString();
+    return "Legenda : \n" + "E = Empty\n" + "M = Missed\n" + "@ = Ship\n" + "* = Hit\n";
   }
 }

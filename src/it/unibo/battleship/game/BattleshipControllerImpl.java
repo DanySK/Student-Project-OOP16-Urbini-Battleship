@@ -26,30 +26,51 @@ import java.util.Optional;
 public enum BattleshipControllerImpl implements BattleshipController {
   CONTROLLER;
 
-  // TODO : Divide into two controller instances with fleet+field
-  private final Fleet aiFleet;
-  private final Field aiField;
+  /* TODO: create a temporary wrapper of field + fleet for each player */
+  // TODO: refactor all the following methods/fields to generify
+  private Fleet aiFleet;
+  private Field aiField;
+  private ArtificialIntelligence ai;
+  private AbstractArtificialIntelligence.Level aiLevel;
+  private boolean isSetup;
+
   private final Fleet playerFleet;
   private final Field playerField;
-  private final ArtificialIntelligence ai;
 
   BattleshipControllerImpl() {
-    this.ai = AbstractArtificialIntelligence.createArtificialIntelligence(
-        AbstractArtificialIntelligence.Level.EASY,
-        Ruleset.BOUNDARY
-    );
-    this.aiFleet = this.ai.getFleetFactory().createFleet();
-    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
     this.playerFleet = FleetFactoryImpl.INSTANCE.createFleet();
     this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
+    this.isSetup = false;
   }
 
   @Override
   public boolean isGameNotFinished() {
-    return !this.aiFleet.isSunk();
+    return !this.isAiFleetSunk() && !this.isPlayerFleetSunk();
   }
 
-  public void initialize() {
+  public boolean isAiFleetSunk() {
+    return this.aiFleet.isSunk();
+  }
+
+  public boolean isPlayerFleetSunk() {
+    return this.playerFleet.isSunk();
+  }
+
+  public void initializeAi() {
+    if (!this.isSetup) {
+      throw new IllegalStateException("The AI level wasn't initialized yet");
+    }
+
+    if (ai != null) {
+      throw new IllegalStateException("The AI was setup already");
+    }
+
+    this.ai = AbstractArtificialIntelligence.createArtificialIntelligence(
+        aiLevel,
+        Ruleset.BOUNDARY
+    );
+    this.aiFleet = this.ai.getFleetFactory().createFleet();
+    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
     placeFleet(this.aiField, this.aiFleet);
   }
 
@@ -128,6 +149,21 @@ public enum BattleshipControllerImpl implements BattleshipController {
     return !this.playerFleet.isReady();
   }
 
+  @Override
+  public void setUpAiLevelSuperEasy() {
+    this.setUpAiLevel(AbstractArtificialIntelligence.Level.SUPER_EASY);
+  }
 
+  @Override
+  public void setUpAiLevelEasy() {
+    this.setUpAiLevel(AbstractArtificialIntelligence.Level.EASY);
+  }
 
+  private void setUpAiLevel(final AbstractArtificialIntelligence.Level level) {
+    if (this.isSetup ) {
+      throw new IllegalStateException("The AI Level was setup already");
+    }
+    this.aiLevel = level;
+    this.isSetup = true;
+  }
 }

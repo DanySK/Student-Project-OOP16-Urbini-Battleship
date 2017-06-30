@@ -8,7 +8,6 @@ import java.util.List;
  *
  * @author fabio.urbini
  */
-// TODO: move out magic numbers and magic chars?
 public final class FieldHelper {
   private enum PlayerState {
     OWNER, ENEMY

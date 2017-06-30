@@ -35,7 +35,6 @@ public abstract class AbstractShip implements Ship {
   }
 
   protected AbstractShip(final Point2d startingPosition) {
-    // TODO: static factory method?
     this();
     this.checkStartingPositionNullity(startingPosition);
     this.pos = startingPosition;
@@ -78,7 +77,6 @@ public abstract class AbstractShip implements Ship {
   public void resetPlacement() {
     this.placed = false;
     this.pos = null;
-    // TODO: use another Optional Library which is serializable
   }
 
   @Override

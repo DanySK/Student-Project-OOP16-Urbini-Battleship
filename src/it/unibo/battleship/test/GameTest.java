@@ -59,4 +59,7 @@ public final class GameTest {
 
   }
 
+  public void setUpAiLevel() {
+
+  }
 }

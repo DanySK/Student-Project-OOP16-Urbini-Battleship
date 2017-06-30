@@ -9,7 +9,16 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyFrame extends JFrame {
+/**
+ * Class not usable yet.
+ * @author fabio.urbini
+ */
+public final class MyFrame extends JFrame {
+  /*
+  Use composition over inheritance
+  Remove final
+  Make a static factory method or public constructor
+   */
   private static final long serialVersionUID = -4540296256743795166L;
   private static final int WIDTH = 600;
   private static final int HEIGHT = 600;

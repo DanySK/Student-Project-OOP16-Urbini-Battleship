@@ -93,7 +93,6 @@ public final class FieldImpl implements Field {
   }
 
   public boolean isShipPlaceable(final Ship ship, final Point2d point) {
-    // TODO: throws ArrayIndexOutOfBoundExceptions, solve it by throwing an ex
     return ship
         .getProjectionPoints(point)
         .stream()

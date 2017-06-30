@@ -26,7 +26,7 @@ public interface ArtificialIntelligence extends Serializable {
    * Returns a {@link ShotFactory}
    * @return a {@link ShotFactory}
    */
-  ShotFactory getShotFactory(); // TODO: make it a functional interface -> ShotFactory?
+  ShotFactory getShotFactory();
 
   /**
    * Returns the boundary.

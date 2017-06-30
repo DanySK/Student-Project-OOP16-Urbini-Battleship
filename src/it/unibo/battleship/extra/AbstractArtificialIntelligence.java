@@ -27,7 +27,7 @@ public abstract class AbstractArtificialIntelligence implements
 
   public enum Level {
     /** Guaranteed win */
-    FREE_WIN,
+    SUPER_EASY,
 
     /** Easy level */
     EASY,
@@ -56,7 +56,7 @@ public abstract class AbstractArtificialIntelligence implements
       final Level level, final Boundary boundary) {
     switch (level) {
 
-    case FREE_WIN:
+    case SUPER_EASY:
       return new FreeWinAI(boundary);
 
     case EASY:

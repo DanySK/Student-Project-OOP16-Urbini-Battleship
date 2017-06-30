@@ -31,7 +31,8 @@ public final class Ruleset {
 
   /**
    * Returns {@code true} if the ship is within the limits of the boundary,
-   * {@code false} otherwise.
+   * {@code false} otherwise. It currently works with standard direction,
+   * EAST.
    *
    * @param ship
    *          {@link Ship}
@@ -40,9 +41,8 @@ public final class Ruleset {
    * @return {@code true} if the ship is within the limits of the boundary
    */
   public static boolean isShipWithinLimits(final Ship ship, final Point2d point) {
-    // Standard direction : east
     /*
-     * todo: refactor in the future to permit using other directions Use
+     * todo: refactor in the future to permit using other directions
      * Point2dHelper for the purpose
      */
     final int length = ship.getSize();
