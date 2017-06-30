@@ -41,7 +41,7 @@ public final class FieldHelper {
       }
     }
 
-    throw new IllegalStateException(); // TODO: Exception?
+    throw new IllegalStateException("Invalid state");
   }
 
   /**

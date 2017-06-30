@@ -74,8 +74,7 @@ public enum BattleshipController {
   // TODO: change here
   public char[][] getCharMap(final PlayerType playerType,
                              final ViewerType viewerType) {
-    final Field field = this.getField(playerType);
-    return this.getView(viewerType, field);
+    return this.getView(viewerType, this.getField(playerType));
   }
 
   private char[][] getView(final ViewerType viewerType, final Field field) {

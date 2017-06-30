@@ -9,6 +9,8 @@ import it.unibo.battleship.game.BattleshipController.ViewerType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import static it.unibo.battleship.game.BattleshipController.CONTROLLER;
 import static it.unibo.battleship.game.BattleshipController.PlayerType.AI;
@@ -24,9 +26,7 @@ public final class SinglePlayerGame {
   }
 
   private static String getHeaderForConsole(final int columnsCount) {
-    final StringBuilder sb = new StringBuilder("");
-
-    sb.append("   ");
+    final StringBuilder sb = new StringBuilder("   ");
 
     final String values = "0123456789ABCDEFGH"; // raw method to show header
 
@@ -39,6 +39,7 @@ public final class SinglePlayerGame {
 
   public static void main(final String[] args) {
     System.out.println("Battleship game start");
+    System.out.println(getLegenda());
     System.out.println("Choose AI level");
     // TODO : read AI level, create a new AI, a new fleet and field
     System.out.println("Place your fleet first");
@@ -66,16 +67,14 @@ public final class SinglePlayerGame {
   }
 
   private static int readInt(final String message) {
-    // TODO: use another class
+    System.out.print(message);
     final BufferedReader br = new BufferedReader(new InputStreamReader(
         System.in));
-
-    System.out.print(message);
 
     try {
       return Integer.parseInt(br.readLine());
     } catch (final NumberFormatException nfe) {
-      System.err.println("Invalid Format!");
+      System.err.println("Invalid Format! It's not a number!");
     } catch (final IOException e) {
       e.printStackTrace();
     }
@@ -84,37 +83,52 @@ public final class SinglePlayerGame {
   }
 
   private static void printField(final PlayerType playerType, final ViewerType viewerType) {
-    System.out.println("\n\n\n");
+    final StringBuilder sb = new StringBuilder("\n\n");
+    sb.append( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
+    sb.append('\n');
+    sb.append(getHeaderForConsole(CONTROLLER.getColumnsCount()));
+    System.out.println(sb);
 
-    System.out.println( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
-    System.out.println(getHeaderForConsole(CONTROLLER.getColumnsCount()));
+    getRowsToWrite(playerType, viewerType).forEach(System.out::println);
 
+  }
+
+  private static List<String> getRowsToWrite(final PlayerType playerType, final ViewerType viewerType) {
     int i = 0;
-
+    final List<String> rowsToWrite = new ArrayList<>();
     for (final char[] chars : CONTROLLER.getCharMap(playerType, viewerType)) {
-      System.out.print(" " + i++ + ' ');
 
+      final StringBuilder sb = new StringBuilder(" " + i++ + ' ');
       for (final char car : chars) {
-        System.out.print(" " + car + ' ');
+        sb.append(" " + car + ' ');
       }
 
-      System.out.println();
+      rowsToWrite.add(sb.toString());
     }
 
-    System.out.println("\n\n\n");
+    return rowsToWrite;
   }
 
   private static void place() {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
-    System.out.println(shipToPlace);
+    System.out.println("Trying to place a " + shipToPlace);
 
-    final int row = readInt("Enter row to place a " + shipToPlace + ' ');
-    final int column = readInt("Enter column to place a " + shipToPlace + ' ');
+    final int row = readInt("Enter row to place the " + shipToPlace + ' ');
+    final int column = readInt("Enter column to place the " + shipToPlace + ' ');
     // TODO: input = index, easier/faster to write.
     final Point2d p = new Point2dImpl(column, row);
     System.out.println(Ruleset.isPointWithinLimits(p));
     // Controllo che non tocchi altre navi
     // Stampa del campo qui di seguito
     CONTROLLER.placeNextPlaceableShip(p);
+  }
+
+  private static String getLegenda() {
+    final StringBuilder legenda = new StringBuilder("Legenda : \n");
+    legenda.append("E = Empty\n");
+    legenda.append("M = Missed\n");
+    legenda.append("@ = Ship\n");
+    legenda.append("* = Hit\n");
+    return legenda.toString();
   }
 }
