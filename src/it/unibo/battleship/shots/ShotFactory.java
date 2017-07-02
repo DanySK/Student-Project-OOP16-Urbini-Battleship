@@ -3,7 +3,7 @@ package it.unibo.battleship.shots;
 import java.io.Serializable;
 
 /**
- * Represents a Shot Factory
+ * Represents a Shot Factory.
  * @author fabio.urbini
  */
 @FunctionalInterface

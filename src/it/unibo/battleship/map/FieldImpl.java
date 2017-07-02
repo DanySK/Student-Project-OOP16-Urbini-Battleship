@@ -21,7 +21,6 @@ public final class FieldImpl implements Field {
   private final Boundary boundary;
   private final transient FieldMatrix fieldMatrix;
 
-
   private FieldImpl(final Boundary boundary) {
     this.boundary = boundary;
     this.fieldMatrix = new FieldMatrix(boundary);

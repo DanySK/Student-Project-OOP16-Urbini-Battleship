@@ -17,13 +17,13 @@ import java.io.Serializable;
 public interface ArtificialIntelligence extends Serializable {
 
   /**
-   * Returns a {@link FleetFactory}
+   * Returns a {@link FleetFactory}.
    * @return a {@link FleetFactory}
    */
   FleetFactory getFleetFactory();
 
   /**
-   * Returns a {@link ShotFactory}
+   * Returns a {@link ShotFactory}.
    * @return a {@link ShotFactory}
    */
   ShotFactory getShotFactory();

@@ -4,7 +4,7 @@ import static it.unibo.battleship.commons.GlobalProperties.POINT_NOT_WITHIN_LIMI
 import static it.unibo.battleship.commons.GlobalProperties.INDEX_NOT_WITHIN_LIMITS;
 
 /**
- * Helper class for Point2d
+ * Helper class for Point2d.
  *
  * @author fabio.urbini
  */
@@ -25,7 +25,7 @@ public final class Point2dHelper {
 
   /**
    * Creates a Point2d based on the index and the current Boundary
-   * set in the Ruleset
+   * set in the Ruleset.
    *
    * @param zeroBasedIndex
    *          zero based index, starts from 0

@@ -19,7 +19,7 @@ public final class BoundaryImpl implements Boundary {
 
   /**
    * Creates a boundary.
-   * 
+   *
    * @param columnsCount
    *          Columns count
    * @param rowsCount

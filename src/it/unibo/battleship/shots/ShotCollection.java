@@ -17,6 +17,11 @@ public abstract class ShotCollection implements Serializable {
   private ShotCollection() {
   }
 
+  /**
+   * Type of the Shot collection.
+   * @author fabio.urbini
+   *
+   */
   public enum Type {
     X(5),
     T(5),
@@ -35,6 +40,11 @@ public abstract class ShotCollection implements Serializable {
 
   public abstract Iterable<Shot> getShotCollection(final Point2d point2d);
 
+  /**
+   * Returns a ShotCollection given the input shot type.
+   * @param shotType shot type of the shot collection
+   * @return a shot collection.
+   */
   public static ShotCollection getShotCollectionByType(final Type shotType) {
     switch (shotType) {
     case X:

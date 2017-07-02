@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  * Wrapper of a JButton.
- * 
+ *
  * @author fabio
  *
  */
@@ -21,7 +21,7 @@ public final class FieldButton {
 
   /**
    * Returns the JButton contained in the object.
-   * 
+   *
    * @return the JButton
    */
   public JButton getButton() {
@@ -29,7 +29,7 @@ public final class FieldButton {
   }
 
   /**
-   * Returns the {@link Point2d}
+   * Returns the {@link Point2d}.
    * @return the {@link Point2d}
    */
   public Point2d getPosition() {

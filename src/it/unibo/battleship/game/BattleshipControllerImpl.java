@@ -74,6 +74,11 @@ public enum BattleshipControllerImpl implements BattleshipController {
     placeFleetDiagonally(this.aiField, this.aiFleet);
   }
 
+  /**
+   * Places a fleet in diagonal lines.
+   * @param field the current field used.
+   * @param fleet the fleet that will be placed.
+   */
   public static void placeFleetDiagonally(final Field field,
                                            final Fleet fleet) {
     int i = 0, j = 0;

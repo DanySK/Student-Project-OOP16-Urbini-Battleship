@@ -25,6 +25,12 @@ public abstract class AbstractArtificialIntelligence implements
   private static final long serialVersionUID = -7273836582211632939L;
   private final Boundary boundary;
 
+
+  /**
+   * Represents the Level of the Artificial Intelligence
+   * @author fabio.urbini
+   *
+   */
   public enum Level {
     /** Guaranteed win */
     SUPER_EASY,
@@ -52,6 +58,12 @@ public abstract class AbstractArtificialIntelligence implements
     this.boundary = boundary;
   }
 
+  /**
+   * Creates an ArtificialIntelligence depending on the {@link Level}.
+   * @param level level of the AI
+   * @param boundary current boundary used
+   * @return an ArtificialIntelligence.
+   */
   public static ArtificialIntelligence createArtificialIntelligence(
       final Level level, final Boundary boundary) {
     switch (level) {

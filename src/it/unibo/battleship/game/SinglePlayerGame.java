@@ -213,7 +213,6 @@ public final class SinglePlayerGame {
     final int column = writeMessageAndReadInt("Enter column to place the " + shipToPlace + ' ');
     // TODO: input = index, easier/faster to write.
     final Point2d p = new Point2dImpl(column, row);
-    System.out.println(Ruleset.isPointWithinLimits(p));
     CONTROLLER.placeNextPlaceableShip(p);
   }
 

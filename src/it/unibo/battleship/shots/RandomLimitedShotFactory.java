@@ -11,10 +11,11 @@ import java.util.Random;
 
 /**
  * Shot factory which produces a limited number
- * of random shots, depending on the current Boundary
+ * of random shots, depending on the current Boundary.
  * @author fabio.urbini
  */
 public class RandomLimitedShotFactory implements ShotFactory {
+  private static final long serialVersionUID = 5368676318205669298L;
   private final List<Integer> values;
   private final int max;
 

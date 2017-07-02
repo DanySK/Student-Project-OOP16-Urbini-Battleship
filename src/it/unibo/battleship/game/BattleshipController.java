@@ -100,7 +100,7 @@ public interface BattleshipController {
   void initializeAi();
 
   /**
-   * Player type enumeration for Human and Ai game
+   * Player type enumeration for Human and Ai game.
    */
   enum PlayerType {
     /** Human type of player */

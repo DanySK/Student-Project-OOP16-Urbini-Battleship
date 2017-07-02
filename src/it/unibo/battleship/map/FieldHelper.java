@@ -9,6 +9,7 @@ import java.util.List;
  * @author fabio.urbini
  */
 public final class FieldHelper {
+
   private enum PlayerState {
     OWNER, ENEMY
   }
@@ -48,21 +49,21 @@ public final class FieldHelper {
 
   /**
    * Returns a representation of the field viewed by the enemy. E stands for
-   * Empty M stands for Missed
-   *
-   * @return a representation of the field seen by the enemy @ stands for ship
-   *         present * stands for ship hit
+   * Empty; M stands for Missed; @ stands for ship present;
+   * * stands for ship hit
+   * @param field the field that wants to be viewed
+   * @return a representation of the field seen by the enemy
    */
   public static List<List<Character>> getViewByEnemy(final Field field) {
     return getViewByPlayerStateList(field, PlayerState.ENEMY);
   }
 
   /**
-   * Returns a representation of the field viewied by the owner of the field E
-   * stands for Empty M stands for Missed.
-   *
-   * @return a representation of the field viewed by the owner of the field @
-   *         stands for ship present * stands for ship hit
+   * Returns a representation of the field viewied by the owner of the field. E
+   * stands for Empty; M stands for Missed. @ stands for ship present
+   * * stands for ship hit
+   * @param field the field that wants to be viewed
+   * @return a representation of the field viewed by the owner of the field
    */
   public static List<List<Character>> getViewByOwner(final Field field) {
     return getViewByPlayerStateList(field, PlayerState.OWNER);
@@ -94,7 +95,7 @@ public final class FieldHelper {
                                               final int row) {
     view.add(new ArrayList<>());
     for (int col = 0; col < columns; col++) {
-      view.get(row).add(getValueByPlayerState( playerState, fieldCells[col]) );
+      view.get(row).add(getValueByPlayerState(playerState, fieldCells[col]));
     }
   }
 }

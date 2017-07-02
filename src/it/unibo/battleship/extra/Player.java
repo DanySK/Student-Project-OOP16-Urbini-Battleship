@@ -5,7 +5,7 @@ package it.unibo.battleship.extra;
  * Not supported yet.
  * @author fabio.urbini
  */
-public class Player {
+public final class Player {
   private final String name;
 
   /**
