@@ -1,18 +1,19 @@
 TODO JUnit tests
 TODO: Console game:
 TODO: Boundaries / Control (create fleet, create shoot, ...)
-TODO. rewrite hashcode + equals + toString (use Guava library)
+TODO. rewrite better hashcode + equals + toString (use Guava library)
+TODO: make a boundary interface + instance. Refactor methods
+
 
 There can be more boundaries in a game. Make Ruleset control one
-Ruleset instance + static methods
-Ship direction -> standard = EAST. switchDirection method
+Ship direction -> standard = EAST. implement switchDirection method
 Artificial Intelligence -> factory for shots. Use lambda for simple ones
 
 There must be a Boundary only (?), handled by the Ruleset.
 Consider refactoring
 
 KISS,
-DRY
+DRY,
 SOLID,
 COMPOSITION > INHERITANCE
 design and document for inheritance or else prohibit it

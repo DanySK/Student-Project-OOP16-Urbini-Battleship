@@ -31,7 +31,7 @@ import static it.unibo.battleship.game.BattleshipControllerImpl.CONTROLLER;
  * Boundary of a battleship game. It works with the console.
  * @author fabio.urbini
  */
-public final class SinglePlayerGame {
+public final class BattleshipBoundary {
   /*
   Future refactorings :
   make an instantiable class controlling the console
@@ -42,7 +42,7 @@ public final class SinglePlayerGame {
   Make it easy to play with different boundaries
   place a ship or a shot with an index instead of row and column
    */
-  private SinglePlayerGame() {
+  private BattleshipBoundary() {
   }
 
   public static void main(final String[] args) {
@@ -72,6 +72,7 @@ public final class SinglePlayerGame {
     chooseAiLevel();
     CONTROLLER.initializeAi();
   }
+
   private static void printAfterGameEnded() {
     String s = "";
     if (CONTROLLER.isAiFleetSunk()) {
@@ -85,7 +86,7 @@ public final class SinglePlayerGame {
 
   private static void shootAiField() {
     System.out.println("Create a new shot and point at the enemy fleet!");
-    final Point2d p = getValidPoint2d();
+    final Point2d p = IoHelper.getValidPoint2d();
     CONTROLLER.shootAiField(p);
   }
 
@@ -117,8 +118,8 @@ public final class SinglePlayerGame {
     boolean valid;
     do {
       printForAiLevel();
-      final int aiLevel = readInt();
-      valid = isValid(aiLevel, 1, 2);
+      final int aiLevel = IoHelper.readInt();
+      valid = IoHelper.isValid(aiLevel, 1, 2);
       if (!valid) {
         System.out.println("Invalid number");
       } else {
@@ -148,49 +149,6 @@ public final class SinglePlayerGame {
       default : break;
     }
   }
-
-  private static boolean isValid(final int input,
-                                 final int minRangeInclusive,
-                                 final int maxRangeInclusive) {
-    return input <= maxRangeInclusive && input >= minRangeInclusive;
-  }
-
-  private static int writeMessageAndReadInt(final String message) {
-    System.out.println(message);
-    return readInt();
-  }
-
-  private static int readInt() throws NumberFormatException {
-    final BufferedReader br = getBufferedReader();
-
-    boolean check = false;
-    do {
-      try {
-        check = true;
-        return Integer.parseInt(br.readLine());
-      } catch (final NumberFormatException nfe) {
-        check = false;
-        System.err.println("Invalid Format! It's not a number!");
-        System.out.println("Reinsert value");
-      } catch (final IOException e) {
-        e.printStackTrace();
-      }
-    } while (!check);
-
-    return -1;
-  }
-
-  private static BufferedReader getBufferedReader() {
-    BufferedReader br = null;
-    try {
-      return new BufferedReader(new InputStreamReader(
-          System.in, "UTF-8"));
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
-    return br;
-  }
-
   private static void printField(final PlayerType playerType, final ViewerType viewerType) {
     final StringBuilder sb = new StringBuilder("\n\n");
     sb.append( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
@@ -208,11 +166,11 @@ public final class SinglePlayerGame {
 
     IntStream.range(0, charMapList.size())
         .forEach( idx -> {
-          final StringBuilder sb = new StringBuilder(" " + idx + ' ');
-          charMapList.get(idx).forEach( (Character c) -> sb.append(" " + c + ' '));
-          rowsToWrite.add(sb.toString());
-        }
-    );
+              final StringBuilder sb = new StringBuilder(" " + idx + ' ');
+              charMapList.get(idx).forEach( (Character c) -> sb.append(" " + c + ' '));
+              rowsToWrite.add(sb.toString());
+            }
+        );
 
     return rowsToWrite;
   }
@@ -220,30 +178,84 @@ public final class SinglePlayerGame {
   private static void place() {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
     System.out.println("Trying to place a " + shipToPlace);
-    final Point2d p = getValidPoint2d();
+    final Point2d p = IoHelper.getValidPoint2d();
     CONTROLLER.placeNextPlaceableShip(p);
-  }
-
-  private static Point2d getValidPoint2d() {
-    Point2d p;
-    boolean pointOk;
-    do {
-     p = readPoint2d();
-     pointOk = CONTROLLER.isPointWithinBoundaryLimits(p);
-     if (!pointOk) {
-       System.out.println("Invalid values for a point, reinsert them");
-     }
-    } while(!pointOk);
-    return p;
-  }
-
-  private static Point2d readPoint2d() {
-    final int row = writeMessageAndReadInt("Enter row to create a point");
-    final int column = writeMessageAndReadInt("Enter column to create a point");
-    return new Point2dImpl(column, row);
   }
 
   private static String getLegenda() {
     return "Legenda : \n" + "E = Empty\n" + "M = Missed\n" + "@ = Ship\n" + "* = Hit\n";
   }
+
+
+  private static final class IoHelper {
+    /*
+    Make this an utility class in the future.
+    Consider refactoring all methods
+     */
+
+    private IoHelper() {}
+
+    private static boolean isValid(final int input,
+                                   final int minRangeInclusive,
+                                   final int maxRangeInclusive) {
+      return input <= maxRangeInclusive && input >= minRangeInclusive;
+    }
+
+    private static int writeMessageAndReadInt(final String message) {
+      System.out.println(message);
+      return readInt();
+    }
+
+    private static int readInt() throws NumberFormatException {
+      final BufferedReader br = getBufferedReader();
+
+      boolean check = false;
+      do {
+        try {
+          check = true;
+          return Integer.parseInt(br.readLine());
+        } catch (final NumberFormatException nfe) {
+          check = false;
+          System.err.println("Invalid Format! It's not a number!");
+          System.out.println("Reinsert value");
+        } catch (final IOException e) {
+          e.printStackTrace();
+        }
+      } while (!check);
+
+      return -1;
+    }
+
+    private static BufferedReader getBufferedReader() {
+      BufferedReader br = null;
+      try {
+        return new BufferedReader(new InputStreamReader(
+            System.in, "UTF-8"));
+      } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+      }
+      return br;
+    }
+
+    private static Point2d getValidPoint2d() {
+      Point2d p;
+      boolean pointOk;
+      do {
+        p = readPoint2d();
+        pointOk = CONTROLLER.isPointWithinBoundaryLimits(p);
+        if (!pointOk) {
+          System.out.println("Invalid values for a point, reinsert them");
+        }
+      } while(!pointOk);
+      return p;
+    }
+
+    private static Point2d readPoint2d() {
+      final int row = writeMessageAndReadInt("Enter row to create a point");
+      final int column = writeMessageAndReadInt("Enter column to create a point");
+      return new Point2dImpl(column, row);
+    }
+
+  }
+
 }
