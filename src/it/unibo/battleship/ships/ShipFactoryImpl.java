@@ -1,5 +1,6 @@
 package it.unibo.battleship.ships;
 
+import it.unibo.battleship.commons.GlobalProperties;
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Ruleset.ShipRules;
 
@@ -20,8 +21,8 @@ public enum ShipFactoryImpl implements ShipFactory {
   /**
    * Creates a ship.
    * @param size
-   *          size of the ship. The value must be between 0 and {@see
-   *          GlobalProperties.MAX_SIZE}
+   *          size of the ship. The value must be between 0 and {@link
+   *          GlobalProperties#MAX_SIZE}
    * @return the ship created
    * @throws IllegalArgumentException if the size is invalid
    */

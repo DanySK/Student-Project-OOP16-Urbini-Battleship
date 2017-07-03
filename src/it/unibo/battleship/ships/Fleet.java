@@ -47,7 +47,7 @@ public interface Fleet extends Serializable {
    * Returns all ships of a type.
    *
    * @param shipType
-   *          {@see GlobalProperties.ShipRules}
+   *          {@link Ruleset.ShipRules}
    * @return all ships of a type
    */
   List<Ship> getAllShipsByType(Ruleset.ShipRules shipType);
@@ -63,7 +63,7 @@ public interface Fleet extends Serializable {
    * Returns the next ship of a type.
    *
    * @param shipType
-   *          {@see GlobalProperties.ShipRules}
+   *          {@link Ruleset.ShipRules}
    * @return the next ship of a type
    */
   Optional<Ship> getNextShipByType(Ruleset.ShipRules shipType);

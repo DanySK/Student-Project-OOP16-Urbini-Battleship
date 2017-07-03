@@ -4,7 +4,7 @@ import com.google.common.base.Objects;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
- * Implementation of a 2 dimension point {@see Point2d}.
+ * Implementation of a 2 dimension point {@link Point2d}.
  *
  * @author fabio.urbini
  */
