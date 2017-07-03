@@ -4,6 +4,9 @@ TODO: Boundaries / Control (create fleet, create shoot, ...)
 TODO. rewrite better hashcode + equals + toString (use Guava library)
 TODO: make a boundary interface + instance. Refactor methods
 
+Consider Chain of Responsibility Pattern for shooting :
+    Field, FieldCell, Fleet, Ship involved.
+
 
 There can be more boundaries in a game. Make Ruleset control one
 Ship direction -> standard = EAST. implement switchDirection method
