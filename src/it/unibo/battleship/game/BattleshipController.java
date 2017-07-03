@@ -31,14 +31,11 @@ public interface BattleshipController {
 
   /**
    * Tries to shoot the current cell selected.
-   * @param row
-   * a valid int between 0 and {@link Boundary#getRowsCount()} -1
-   * @param column
-   * a valid int between 0 and {@link Boundary#getColumnsCount()} -1
-   * @throws IllegalArgumentException
-   * if row or column don't form a valid Point2d
+   * @param point a valid point
+   * @throws IllegalArgumentException if point isn't valid for the
+   * current boundary.
    */
-  void shootAiField(int row, int column);
+  void shootAiField(Point2d point);
 
   /**
    * Tries to shoot the player field. It will generate a
@@ -80,6 +77,14 @@ public interface BattleshipController {
    * @return {@code true} if the player fleet isn't placed yet.
    */
   boolean isPlayerFleetNotPlaced();
+
+  /**
+   * Returns {@code true if the point is within the boundary limits},
+   * false otherwise.
+   * @param point the point to check
+   * @return {@code true if the point is within the boundary limits}.
+   */
+  boolean isPointWithinBoundaryLimits(Point2d point);
 
   /**
    * Sets the AI level to super easy

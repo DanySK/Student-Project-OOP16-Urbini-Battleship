@@ -92,8 +92,8 @@ public enum BattleshipControllerImpl implements BattleshipController {
   }
 
   @Override
-  public void shootAiField(final int row, final int column) {
-    final Shot shot = ShotImpl.createShot(new Point2dImpl(column, row));
+  public void shootAiField(final Point2d point) {
+    final Shot shot = ShotImpl.createShot(point);
     this.aiField.updateStateWithShot(shot);
   }
 
@@ -161,6 +161,11 @@ public enum BattleshipControllerImpl implements BattleshipController {
   @Override
   public void setUpAiLevelEasy() {
     this.setUpAiLevel(AbstractArtificialIntelligence.Level.EASY);
+  }
+
+  @Override
+  public boolean isPointWithinBoundaryLimits(final Point2d point) {
+    return Ruleset.isPointWithinLimits(point);
   }
 
   private void setUpAiLevel(final AbstractArtificialIntelligence.Level level) {

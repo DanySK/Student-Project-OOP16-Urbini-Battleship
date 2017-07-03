@@ -2,7 +2,6 @@ package it.unibo.battleship.game;
 
 import it.unibo.battleship.commons.Point2d;
 import it.unibo.battleship.commons.Point2dImpl;
-import it.unibo.battleship.commons.Ruleset;
 import it.unibo.battleship.game.BattleshipController.PlayerType;
 import it.unibo.battleship.game.BattleshipController.ViewerType;
 
@@ -39,10 +38,8 @@ public final class SinglePlayerGame {
   }
 
   public static void main(final String[] args) {
-    // TODO : read AI level, create a new AI, a new fleet and field
-    System.out.println("Battleship game start");
+    printStringsForGameStart();
     initializeAi();
-    System.out.println(getLegenda());
     placePlayerFleet();
 
     do {
@@ -53,6 +50,14 @@ public final class SinglePlayerGame {
     } while (CONTROLLER.isGameNotFinished());
 
     printAfterGameEnded();
+  }
+
+  private static void printStringsForGameStart() {
+    System.out.println("Battleship game start");
+    System.out.println("CARE! Don't insert values out of the current boundary");
+    System.out.println("Don't try to place ships that will be out of the boundaries");
+    System.out.println("Don't make ships overlap, the game will end");
+    System.out.println(getLegenda());
   }
 
   private static void initializeAi() {
@@ -72,9 +77,8 @@ public final class SinglePlayerGame {
 
   private static void shootAiField() {
     System.out.println("Create a new shot and point at the enemy fleet!");
-    final int row = writeMessageAndReadInt("Enter row ");
-    final int column = writeMessageAndReadInt("Enter column ");
-    CONTROLLER.shootAiField(row, column);
+    final Point2d p = getValidPoint2d();
+    CONTROLLER.shootAiField(p);
   }
 
   private static void shootPlayerField() {
@@ -208,12 +212,27 @@ public final class SinglePlayerGame {
   private static void place() {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
     System.out.println("Trying to place a " + shipToPlace);
-
-    final int row = writeMessageAndReadInt("Enter row to place the " + shipToPlace + ' ');
-    final int column = writeMessageAndReadInt("Enter column to place the " + shipToPlace + ' ');
-    // TODO: input = index, easier/faster to write.
-    final Point2d p = new Point2dImpl(column, row);
+    final Point2d p = getValidPoint2d();
     CONTROLLER.placeNextPlaceableShip(p);
+  }
+
+  private static Point2d getValidPoint2d() {
+    Point2d p;
+    boolean pointOk;
+    do {
+     p = readPoint2d();
+     pointOk = CONTROLLER.isPointWithinBoundaryLimits(p);
+     if (!pointOk) {
+       System.out.println("Invalid values for a point, reinsert them");
+     }
+    } while(!pointOk);
+    return p;
+  }
+
+  private static Point2d readPoint2d() {
+    final int row = writeMessageAndReadInt("Enter row to create a point");
+    final int column = writeMessageAndReadInt("Enter column to create a point");
+    return new Point2dImpl(column, row);
   }
 
   private static String getLegenda() {
