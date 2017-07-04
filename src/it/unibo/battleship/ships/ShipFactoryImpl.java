@@ -8,11 +8,11 @@
 
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.commons.GlobalProperties;
-import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Ruleset.ShipRules;
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Ruleset.ShipRules;
 
-import static it.unibo.battleship.commons.GlobalProperties.*;
+import static it.unibo.battleship.common.GlobalProperties.*;
 
 /**
  * Implementation of a {@link ShipFactory}. There is a single instance.

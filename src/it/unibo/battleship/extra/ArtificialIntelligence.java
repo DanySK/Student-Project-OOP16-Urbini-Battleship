@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.extra;
 
-import it.unibo.battleship.commons.Boundary;
+import it.unibo.battleship.common.Boundary;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.shots.ShotFactory;
 import jdk.nashorn.internal.ir.annotations.Immutable;

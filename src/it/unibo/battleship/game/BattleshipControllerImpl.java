@@ -8,10 +8,10 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dImpl;
-import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Point2dImpl;
+import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
 import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.map.Field;

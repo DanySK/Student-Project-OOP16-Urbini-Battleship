@@ -8,8 +8,8 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.Point2d;
 
 import java.util.List;
 

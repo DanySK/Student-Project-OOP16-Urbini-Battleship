@@ -4,5 +4,5 @@
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.commons;
+package it.unibo.battleship.common;
 

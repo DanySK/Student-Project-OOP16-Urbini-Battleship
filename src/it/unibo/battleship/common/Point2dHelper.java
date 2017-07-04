@@ -6,10 +6,10 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-package it.unibo.battleship.commons;
+package it.unibo.battleship.common;
 
-import static it.unibo.battleship.commons.GlobalProperties.POINT_NOT_WITHIN_LIMITS;
-import static it.unibo.battleship.commons.GlobalProperties.INDEX_NOT_WITHIN_LIMITS;
+import static it.unibo.battleship.common.GlobalProperties.POINT_NOT_WITHIN_LIMITS;
+import static it.unibo.battleship.common.GlobalProperties.INDEX_NOT_WITHIN_LIMITS;
 
 /**
  * Helper class for Point2d.

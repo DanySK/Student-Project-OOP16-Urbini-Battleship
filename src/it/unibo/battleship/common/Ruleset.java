@@ -6,11 +6,11 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-package it.unibo.battleship.commons;
+package it.unibo.battleship.common;
 
 import it.unibo.battleship.ships.Ship;
 import java.util.stream.IntStream;
-import static it.unibo.battleship.commons.GlobalProperties.*;
+import static it.unibo.battleship.common.GlobalProperties.*;
 
 /**
  * Represents the ruleset of the battlefield game. Some rules can be changed

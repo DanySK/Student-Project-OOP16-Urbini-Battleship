@@ -6,7 +6,7 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-package it.unibo.battleship.commons;
+package it.unibo.battleship.common;
 
 import com.google.common.base.Objects;
 import jdk.nashorn.internal.ir.annotations.Immutable;

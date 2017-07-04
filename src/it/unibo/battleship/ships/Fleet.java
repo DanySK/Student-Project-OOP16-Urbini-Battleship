@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.common.Ruleset;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.io.Serializable;

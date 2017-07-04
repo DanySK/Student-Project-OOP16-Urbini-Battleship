@@ -8,9 +8,9 @@
 
 package it.unibo.battleship.shots;
 
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.GlobalProperties;
-import it.unibo.battleship.commons.Point2dHelper;
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2dHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -8,9 +8,9 @@
 
 package it.unibo.battleship.test;
 
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.BoundaryImpl;
-import it.unibo.battleship.commons.Ruleset;
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.BoundaryImpl;
+import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
 import it.unibo.battleship.extra.ArtificialIntelligence;
 import it.unibo.battleship.game.BattleshipControllerImpl;
@@ -25,7 +25,7 @@ import it.unibo.battleship.shots.ShotImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import static it.unibo.battleship.commons.Point2dHelper.createPoint2d;
+import static it.unibo.battleship.common.Point2dHelper.createPoint2d;
 import static org.junit.Assert.assertTrue;
 
 /**

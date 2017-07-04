@@ -9,9 +9,9 @@
 package it.unibo.battleship.ships;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.commons.GlobalProperties;
-import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dImpl;
+import it.unibo.battleship.common.GlobalProperties;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.shots.Shot;
 import java.util.ArrayList;
 import java.util.List;

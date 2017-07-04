@@ -8,8 +8,8 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dImpl;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.game.BattleshipController.PlayerType;
 import it.unibo.battleship.game.BattleshipController.ViewerType;
 

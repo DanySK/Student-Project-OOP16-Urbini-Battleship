@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.extra;
 
-import it.unibo.battleship.commons.*;
+import it.unibo.battleship.common.*;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.ships.FleetFactoryImpl;
 import it.unibo.battleship.shots.RandomLimitedShotFactory;

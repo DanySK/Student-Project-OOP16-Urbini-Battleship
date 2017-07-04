@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.common.Point2d;
 
 import javax.swing.*;
 

@@ -9,8 +9,8 @@
 package it.unibo.battleship.shots;
 
 import com.google.common.base.Objects;
-import it.unibo.battleship.commons.Point2d;
-import it.unibo.battleship.commons.Point2dHelper;
+import it.unibo.battleship.common.Point2d;
+import it.unibo.battleship.common.Point2dHelper;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
@@ -29,7 +29,7 @@ public final class ShotImpl implements Shot {
   /**
    * Creates a {@code ShotImpl}.
    * @param point a valid point which must be within the Boundary limit
-   * {@link it.unibo.battleship.commons.Ruleset#BOUNDARY}
+   * {@link it.unibo.battleship.common.Ruleset#BOUNDARY}
    * @return a {@code ShotImpl}.
    */
   public static ShotImpl createShot(final Point2d point) {

@@ -8,8 +8,8 @@
 
 package it.unibo.battleship.map;
 
-import it.unibo.battleship.commons.Boundary;
-import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
 import it.unibo.battleship.shots.Shot;

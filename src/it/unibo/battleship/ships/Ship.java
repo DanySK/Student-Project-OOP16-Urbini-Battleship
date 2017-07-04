@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.ships;
 
-import it.unibo.battleship.commons.Point2d;
+import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.shots.Shot;
 import java.io.Serializable;
 import java.util.List;

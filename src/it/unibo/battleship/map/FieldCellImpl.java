@@ -10,7 +10,7 @@ package it.unibo.battleship.map;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import it.unibo.battleship.commons.GlobalProperties;
+import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.shots.Shot;
 
