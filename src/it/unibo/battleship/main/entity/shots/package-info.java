@@ -7,8 +7,9 @@
  */
 
 /**
- * Provides test classes for a battleship game.
+ * Provides classes to use and create shots.
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+package it.unibo.battleship.main.entity.shots;
+

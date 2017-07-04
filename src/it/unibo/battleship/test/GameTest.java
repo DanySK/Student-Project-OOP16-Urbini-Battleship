@@ -8,24 +8,24 @@
 
 package it.unibo.battleship.test;
 
-import it.unibo.battleship.common.FieldBound;
-import it.unibo.battleship.common.FieldBoundImpl;
-import it.unibo.battleship.common.Ruleset;
-import it.unibo.battleship.entity.extra.AbstractArtificialIntelligence;
-import it.unibo.battleship.entity.extra.ArtificialIntelligence;
-import it.unibo.battleship.control.BattleshipControlImpl;
-import it.unibo.battleship.entity.map.Field;
-import it.unibo.battleship.entity.map.FieldImpl;
-import it.unibo.battleship.entity.ships.Fleet;
-import it.unibo.battleship.entity.ships.FleetFactoryImpl;
-import it.unibo.battleship.entity.ships.Ship;
-import it.unibo.battleship.entity.ships.ShipFactoryImpl;
-import it.unibo.battleship.entity.shots.Shot;
-import it.unibo.battleship.entity.shots.ShotImpl;
+import it.unibo.battleship.main.common.FieldBound;
+import it.unibo.battleship.main.common.FieldBoundImpl;
+import it.unibo.battleship.main.common.Ruleset;
+import it.unibo.battleship.main.entity.extra.AbstractArtificialIntelligence;
+import it.unibo.battleship.main.entity.extra.ArtificialIntelligence;
+import it.unibo.battleship.main.control.BattleshipControlImpl;
+import it.unibo.battleship.main.entity.map.Field;
+import it.unibo.battleship.main.entity.map.FieldImpl;
+import it.unibo.battleship.main.entity.ships.Fleet;
+import it.unibo.battleship.main.entity.ships.FleetFactoryImpl;
+import it.unibo.battleship.main.entity.ships.Ship;
+import it.unibo.battleship.main.entity.ships.ShipFactoryImpl;
+import it.unibo.battleship.main.entity.shots.Shot;
+import it.unibo.battleship.main.entity.shots.ShotImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import static it.unibo.battleship.common.Point2dHelper.createPoint2d;
+import static it.unibo.battleship.main.common.Point2dHelper.createPoint2d;
 import static org.junit.Assert.assertTrue;
 
 /**

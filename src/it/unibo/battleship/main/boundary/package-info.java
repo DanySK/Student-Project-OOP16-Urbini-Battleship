@@ -7,8 +7,7 @@
  */
 
 /**
- * Provides test classes for a battleship game.
- *
+ * Contains all boundary classes to interact with the user.
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+package it.unibo.battleship.main.boundary;

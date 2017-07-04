@@ -6,9 +6,20 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+package it.unibo.battleship.main.entity.ships;
+
+import java.io.Serializable;
+
 /**
- * Provides test classes for a battleship game.
+ * Represents a Fleet Factory. It can be used to instantiate new fleets.
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+@FunctionalInterface
+public interface FleetFactory extends Serializable {
+  /**
+   * Creates a Fleet.
+   * @return a Fleet
+   */
+  Fleet createFleet();
+}

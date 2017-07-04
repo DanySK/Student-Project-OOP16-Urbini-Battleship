@@ -6,9 +6,18 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+package it.unibo.battleship.main.entity.ships;
+
 /**
- * Provides test classes for a battleship game.
+ * Represents the direction for a ship placement. There can be only two
+ * directions, {@code EAST} and {@code SOUTH}.
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+public enum ShipDirection {
+  /** East direction */
+  EAST,
+
+  /** South direction */
+  SOUTH
+}

@@ -7,8 +7,10 @@
  */
 
 /**
- * Provides test classes for a battleship game.
+ * Contains extra features not needed for the game itself,
+ * such as Artificial Intelligence or Player
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+package it.unibo.battleship.main.entity.extra;
+

@@ -7,8 +7,7 @@
  */
 
 /**
- * Provides test classes for a battleship game.
- *
+ * Contains all entities needed for a battleship game.
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+package it.unibo.battleship.main.entity;

@@ -6,9 +6,15 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+package it.unibo.battleship.main.entity.shots;
+
+import java.io.Serializable;
+
 /**
- * Provides test classes for a battleship game.
- *
+ * Represents a Shot Factory.
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+@FunctionalInterface
+public interface ShotFactory extends Serializable {
+  Shot createShot();
+}

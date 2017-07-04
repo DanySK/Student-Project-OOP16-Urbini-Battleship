@@ -7,8 +7,12 @@
  */
 
 /**
- * Provides test classes for a battleship game.
+ * Contains all the sample classes
+ * to play a battleship game.
  *
  * @author fabio.urbini
  */
-package it.unibo.battleship.test;
+package it.unibo.battleship.main.gui;
+/*
+This package will probably be removed in the future
+ */
