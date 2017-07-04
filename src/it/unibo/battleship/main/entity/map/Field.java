@@ -88,4 +88,5 @@ public interface Field extends Serializable {
    * @return the field cells matrix
    */
   FieldCell[][] getFieldCells();
+  // TODO: consider wrapping FieldCell[][] or using List<List<>>
 }

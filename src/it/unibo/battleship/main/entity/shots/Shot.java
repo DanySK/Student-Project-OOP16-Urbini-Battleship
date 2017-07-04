@@ -19,6 +19,7 @@ import java.io.Serializable;
  * @author fabio.urbini
  */
 @Immutable
+@FunctionalInterface
 public interface Shot extends Serializable {
   /**
    * Gets the point of the shot.
