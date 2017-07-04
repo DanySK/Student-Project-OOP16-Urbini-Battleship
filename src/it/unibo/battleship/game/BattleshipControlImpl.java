@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
 import it.unibo.battleship.common.Ruleset;
@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Singleton of a Controller of the battleship game.
+ * Singleton of a control of the battleship game.
  *
  * @author fabio.urbini
  */
-public enum BattleshipControllerImpl implements BattleshipController {
+public enum BattleshipControlImpl implements BattleshipControl {
   CONTROLLER;
 
   /* TODO: create a temporary wrapper of field + fleet for each player */
@@ -45,9 +45,9 @@ public enum BattleshipControllerImpl implements BattleshipController {
   private final Fleet playerFleet;
   private final Field playerField;
 
-  BattleshipControllerImpl() {
+  BattleshipControlImpl() {
     this.playerFleet = FleetFactoryImpl.INSTANCE.createFleet();
-    this.playerField = FieldImpl.createField(Ruleset.BOUNDARY);
+    this.playerField = FieldImpl.createField(Ruleset.FIELD_BOUND);
     this.isSetup = false;
   }
 
@@ -75,10 +75,10 @@ public enum BattleshipControllerImpl implements BattleshipController {
 
     this.ai = AbstractArtificialIntelligence.createArtificialIntelligence(
         aiLevel,
-        Ruleset.BOUNDARY
+        Ruleset.FIELD_BOUND
     );
     this.aiFleet = this.ai.getFleetFactory().createFleet();
-    this.aiField = FieldImpl.createField(Ruleset.BOUNDARY);
+    this.aiField = FieldImpl.createField(Ruleset.FIELD_BOUND);
     placeFleetDiagonally(this.aiField, this.aiFleet);
   }
 
@@ -139,8 +139,8 @@ public enum BattleshipControllerImpl implements BattleshipController {
   }
 
   @Override
-  public Boundary getBoundary() {
-    return Ruleset.BOUNDARY;
+  public FieldBound getBoundary() {
+    return Ruleset.FIELD_BOUND;
   }
 
   @Override

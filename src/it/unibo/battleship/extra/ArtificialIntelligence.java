@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.extra;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.ships.FleetFactory;
 import it.unibo.battleship.shots.ShotFactory;
 import jdk.nashorn.internal.ir.annotations.Immutable;
@@ -40,5 +40,5 @@ public interface ArtificialIntelligence extends Serializable {
    * Returns the boundary.
    * @return the boundary.
    */
-  Boundary getBoundary();
+  FieldBound getFieldBound();
 }

@@ -8,12 +8,12 @@
 
 package it.unibo.battleship.test;
 
-import it.unibo.battleship.common.Boundary;
-import it.unibo.battleship.common.BoundaryImpl;
+import it.unibo.battleship.common.FieldBound;
+import it.unibo.battleship.common.FieldBoundImpl;
 import it.unibo.battleship.common.Ruleset;
 import it.unibo.battleship.extra.AbstractArtificialIntelligence;
 import it.unibo.battleship.extra.ArtificialIntelligence;
-import it.unibo.battleship.game.BattleshipControllerImpl;
+import it.unibo.battleship.game.BattleshipControlImpl;
 import it.unibo.battleship.map.Field;
 import it.unibo.battleship.map.FieldImpl;
 import it.unibo.battleship.ships.Fleet;
@@ -48,16 +48,16 @@ public final class GameTest {
   public void initialize() {
     ai = AbstractArtificialIntelligence.createArtificialIntelligence(
         AbstractArtificialIntelligence.Level.EASY,
-        Ruleset.BOUNDARY
+        Ruleset.FIELD_BOUND
     );
     aiFleet = ai.getFleetFactory().createFleet();
-    aiField = FieldImpl.createField(Ruleset.BOUNDARY);
-    BattleshipControllerImpl.placeFleetDiagonally(aiField, aiFleet);
+    aiField = FieldImpl.createField(Ruleset.FIELD_BOUND);
+    BattleshipControlImpl.placeFleetDiagonally(aiField, aiFleet);
   }
 
   @Test
   public void createShots() {
-    final Boundary bounds = BoundaryImpl.createBoundary(10, 10);
+    final FieldBound bounds = FieldBoundImpl.createBoundary(10, 10);
     final int maxIndex = bounds.getColumnsCount() * bounds.getRowsCount();
     for (int i = 0; i < maxIndex; i++) {
       final Shot s = ShotImpl.createShot(createPoint2d(i));
@@ -69,7 +69,7 @@ public final class GameTest {
   public void createShips() {
     final Fleet f = FleetFactoryImpl.INSTANCE.createFleet();
     f.getNextNonPlacedShip().ifPresent(
-        (Ship ship) -> ship.place(createPoint2d(Ruleset.BOUNDARY.getSize()))
+        (Ship ship) -> ship.place(createPoint2d(Ruleset.FIELD_BOUND.getSize()))
     );
   }
 

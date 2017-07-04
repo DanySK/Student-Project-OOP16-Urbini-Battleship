@@ -29,7 +29,7 @@ public final class ShotImpl implements Shot {
   /**
    * Creates a {@code ShotImpl}.
    * @param point a valid point which must be within the Boundary limit
-   * {@link it.unibo.battleship.common.Ruleset#BOUNDARY}
+   * {@link it.unibo.battleship.common.Ruleset#FIELD_BOUND}
    * @return a {@code ShotImpl}.
    */
   public static ShotImpl createShot(final Point2d point) {

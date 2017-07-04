@@ -10,8 +10,8 @@ package it.unibo.battleship.game;
 
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.common.Point2dImpl;
-import it.unibo.battleship.game.BattleshipController.PlayerType;
-import it.unibo.battleship.game.BattleshipController.ViewerType;
+import it.unibo.battleship.game.BattleshipControl.PlayerType;
+import it.unibo.battleship.game.BattleshipControl.ViewerType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static it.unibo.battleship.game.BattleshipController.PlayerType.AI;
-import static it.unibo.battleship.game.BattleshipController.PlayerType.HUMAN;
-import static it.unibo.battleship.game.BattleshipController.ViewerType.ENEMY;
-import static it.unibo.battleship.game.BattleshipController.ViewerType.OWNER;
-import static it.unibo.battleship.game.BattleshipControllerImpl.CONTROLLER;
+import static it.unibo.battleship.game.BattleshipControl.PlayerType.AI;
+import static it.unibo.battleship.game.BattleshipControl.PlayerType.HUMAN;
+import static it.unibo.battleship.game.BattleshipControl.ViewerType.ENEMY;
+import static it.unibo.battleship.game.BattleshipControl.ViewerType.OWNER;
+import static it.unibo.battleship.game.BattleshipControlImpl.CONTROLLER;
 
 /**
  * Boundary of a battleship game. It works with the console.

@@ -8,16 +8,16 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.common.Point2d;
 
 import java.util.List;
 
 /**
- * Battleship controller for a Human vs AI game.
+ * Battleship control for a Human vs AI game.
  * @author fabio.urbini
  */
-public interface BattleshipController {
+public interface BattleshipControl {
 
   /**
    * Returns {@code true} if the game is not finished yet.
@@ -64,7 +64,7 @@ public interface BattleshipController {
    * Returns the actual boundary used.
    * @return the actual boundary used.
    */
-  Boundary getBoundary();
+  FieldBound getBoundary();
 
   /**
    * Returns the name of the next placeable ship.

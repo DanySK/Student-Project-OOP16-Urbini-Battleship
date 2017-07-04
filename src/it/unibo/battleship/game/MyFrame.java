@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.game;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.common.Point2dImpl;
 
 import javax.swing.*;
@@ -31,15 +31,15 @@ public final class MyFrame extends JFrame {
   private static final int WIDTH = 600;
   private static final int HEIGHT = 600;
   private final List<FieldButton> fieldList;
-  private final Boundary boundary;
+  private final FieldBound fieldBound;
 
   // The constructor is private until everything works
   private MyFrame(final String title, final LayoutManager lm,
-      final Boundary boundary) {
+      final FieldBound fieldBound) {
     super(title);
     this.getContentPane().add(new JPanel(lm));
     this.fieldList = new ArrayList<>();
-    this.boundary = boundary;
+    this.fieldBound = fieldBound;
     this.initialize();
   }
 
@@ -52,7 +52,7 @@ public final class MyFrame extends JFrame {
     this.setSize(WIDTH, HEIGHT);
     this.setVisible(true);
 
-    for (int i = 0; i < this.boundary.getColumnsCount(); i++) {
+    for (int i = 0; i < this.fieldBound.getColumnsCount(); i++) {
       final FieldButton fb = new FieldButton(new Point2dImpl(i,0));
       this.fieldList.add(fb);
       this.addButton(fb);

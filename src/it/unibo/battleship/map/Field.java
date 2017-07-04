@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.map;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.common.Point2d;
 import it.unibo.battleship.ships.Ship;
 import it.unibo.battleship.ships.ShipDirection;
@@ -80,7 +80,7 @@ public interface Field extends Serializable {
    *
    * @return the boundary of the field
    */
-  Boundary getBoundary();
+  FieldBound getFieldBound();
 
   /**
    * Returns the field cells matrix.

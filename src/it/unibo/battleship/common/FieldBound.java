@@ -13,12 +13,13 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
 import java.io.Serializable;
 
 /**
- * Represents the boundary of a field.
+ * Represents the bound of a field in the
+ * vertical and horizontal direction.
  *
  * @author fabio.urbini
  */
 @Immutable
-public interface Boundary extends Serializable {
+public interface FieldBound extends Serializable {
 
   /**
    * Returns the horizontal bound, which is also the number of columns.

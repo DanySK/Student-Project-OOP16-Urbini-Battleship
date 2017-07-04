@@ -80,8 +80,8 @@ public final class FieldHelper {
   private static List<List<Character>> getViewByPlayerStateList(
       final Field field,
       final PlayerState playerState ) {
-    final int rows = field.getBoundary().getRowsCount();
-    final int columns = field.getBoundary().getColumnsCount();
+    final int rows = field.getFieldBound().getRowsCount();
+    final int columns = field.getFieldBound().getColumnsCount();
     final List<List<Character>> view = new ArrayList<>(rows);
 
     for (int row = 0; row < rows; row++) {

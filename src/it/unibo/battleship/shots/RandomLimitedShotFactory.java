@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.shots;
 
-import it.unibo.battleship.common.Boundary;
+import it.unibo.battleship.common.FieldBound;
 import it.unibo.battleship.common.GlobalProperties;
 import it.unibo.battleship.common.Point2dHelper;
 
@@ -27,8 +27,8 @@ public class RandomLimitedShotFactory implements ShotFactory {
   private final List<Integer> values;
   private final int max;
 
-  public RandomLimitedShotFactory(final Boundary boundary) {
-    this.max = boundary.getColumnsCount() * boundary.getRowsCount();
+  public RandomLimitedShotFactory(final FieldBound fieldBound) {
+    this.max = fieldBound.getColumnsCount() * fieldBound.getRowsCount();
     this.values = new ArrayList<>(this.max);
     this.setUp();
   }

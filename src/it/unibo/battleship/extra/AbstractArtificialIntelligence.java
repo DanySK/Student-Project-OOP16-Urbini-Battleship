@@ -31,7 +31,7 @@ public abstract class AbstractArtificialIntelligence implements
     ArtificialIntelligence {
   // TODO: an Artificial Intelligence may need the field to generate things
   private static final long serialVersionUID = -7273836582211632939L;
-  private final Boundary boundary;
+  private final FieldBound fieldBound;
 
 
   /**
@@ -62,25 +62,25 @@ public abstract class AbstractArtificialIntelligence implements
     SUPER_HARD
   }
 
-  private AbstractArtificialIntelligence(final Boundary boundary) {
-    this.boundary = boundary;
+  private AbstractArtificialIntelligence(final FieldBound fieldBound) {
+    this.fieldBound = fieldBound;
   }
 
   /**
    * Creates an ArtificialIntelligence depending on the {@link Level}.
    * @param level level of the AI
-   * @param boundary current boundary used
+   * @param fieldBound current boundary used
    * @return an ArtificialIntelligence.
    */
   public static ArtificialIntelligence createArtificialIntelligence(
-      final Level level, final Boundary boundary) {
+      final Level level, final FieldBound fieldBound) {
     switch (level) {
 
     case SUPER_EASY:
-      return new FreeWinAI(boundary);
+      return new FreeWinAI(fieldBound);
 
     case EASY:
-      return new EasyAI(boundary);
+      return new EasyAI(fieldBound);
 
     case AVERAGE:
       throw new UnsupportedOperationException();
@@ -96,10 +96,10 @@ public abstract class AbstractArtificialIntelligence implements
     }
   }
 
-  public final Boundary getBoundary() {
-    return BoundaryImpl.createBoundary(
-        this.boundary.getColumnsCount(),
-        this.boundary.getRowsCount()
+  public final FieldBound getFieldBound() {
+    return FieldBoundImpl.createBoundary(
+        this.fieldBound.getColumnsCount(),
+        this.fieldBound.getRowsCount()
     );
   }
 
@@ -108,9 +108,9 @@ public abstract class AbstractArtificialIntelligence implements
     private static final long serialVersionUID = -7273836582211632939L;
     final ShotFactory shotFactory;
 
-    private EasyAI(final Boundary boundary) {
-      super(boundary);
-      this.shotFactory = new RandomLimitedShotFactory(boundary);
+    private EasyAI(final FieldBound fieldBound) {
+      super(fieldBound);
+      this.shotFactory = new RandomLimitedShotFactory(fieldBound);
     }
 
     @Override
@@ -127,8 +127,8 @@ public abstract class AbstractArtificialIntelligence implements
   private static final class FreeWinAI extends AbstractArtificialIntelligence {
     private static final long serialVersionUID = -7970147935843938741L;
 
-    private FreeWinAI(final Boundary boundary) {
-      super(boundary);
+    private FreeWinAI(final FieldBound fieldBound) {
+      super(fieldBound);
     }
 
     @Override
@@ -140,14 +140,14 @@ public abstract class AbstractArtificialIntelligence implements
     public ShotFactory getShotFactory() {
       // Creates a new random shot
       return (ShotFactory) () -> ShotImpl
-          .createShot(FreeWinAI.this.generateRandomPoint2d(this.getBoundary()));
+          .createShot(FreeWinAI.this.generateRandomPoint2d(this.getFieldBound()));
 
     }
 
-    private Point2d generateRandomPoint2d(final Boundary boundary) {
+    private Point2d generateRandomPoint2d(final FieldBound fieldBound) {
       final Random random = new Random(Instant.now().getNano());
-      final int column = random.nextInt(boundary.getColumnsCount());
-      final int row = random.nextInt(boundary.getRowsCount());
+      final int column = random.nextInt(fieldBound.getColumnsCount());
+      final int row = random.nextInt(fieldBound.getRowsCount());
 
       return new Point2dImpl(column, row);
     }
@@ -161,8 +161,8 @@ public abstract class AbstractArtificialIntelligence implements
      * Use New Algorithm here
      * This AI will need a Field reference
      */
-    private SuperHardAi(final Boundary boundary) {
-      super(boundary);
+    private SuperHardAi(final FieldBound fieldBound) {
+      super(fieldBound);
     }
 
     @Override

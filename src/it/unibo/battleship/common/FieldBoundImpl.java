@@ -12,15 +12,15 @@ import com.google.common.base.Objects;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
- * Implementation of {@link Boundary}
+ * Implementation of {@link FieldBound}
  */
 @Immutable
-public final class BoundaryImpl implements Boundary {
+public final class FieldBoundImpl implements FieldBound {
   private static final long serialVersionUID = -5121855953223117935L;
   private final int columnsCount;
   private final int rowsCount;
 
-  private BoundaryImpl(final int columnsNumber, final int rowsNumber) {
+  private FieldBoundImpl(final int columnsNumber, final int rowsNumber) {
     this.columnsCount = columnsNumber;
     this.rowsCount = rowsNumber;
   }
@@ -32,13 +32,13 @@ public final class BoundaryImpl implements Boundary {
    *          Columns count
    * @param rowsCount
    *          Rows count
-   * @return a {@link BoundaryImpl}
+   * @return a {@link FieldBoundImpl}
    * @throws IllegalArgumentException if values are negative
    */
-  public static BoundaryImpl createBoundary(final int columnsCount,
-      final int rowsCount) {
+  public static FieldBoundImpl createBoundary(final int columnsCount,
+                                              final int rowsCount) {
     checkParametersValidity(columnsCount, rowsCount);
-    return new BoundaryImpl(columnsCount, rowsCount);
+    return new FieldBoundImpl(columnsCount, rowsCount);
   }
 
   private static void checkParametersValidity(final int columnsCount, final int rowsCount) {
@@ -73,7 +73,7 @@ public final class BoundaryImpl implements Boundary {
       return false;
     }
 
-    final BoundaryImpl that = (BoundaryImpl) o;
+    final FieldBoundImpl that = (FieldBoundImpl) o;
 
     return Objects.equal(this.columnsCount, that.columnsCount)
         && Objects.equal(this.rowsCount, that.rowsCount);

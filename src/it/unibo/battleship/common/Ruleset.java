@@ -18,7 +18,7 @@ import static it.unibo.battleship.common.GlobalProperties.*;
  */
 public final class Ruleset {
   // TODO: make instances of this class in the future, and make it immutable
-  public static final Boundary BOUNDARY = BoundaryImpl.createBoundary(10, 10);
+  public static final FieldBound FIELD_BOUND = FieldBoundImpl.createBoundary(10, 10);
   public static final boolean SHOOT_AGAIN_AFTER_HIT = false;
 
   private Ruleset() {
@@ -33,8 +33,8 @@ public final class Ruleset {
    * @return {@code true} if the point is within the limits
    */
   public static boolean isPointWithinLimits(final Point2d p) {
-    return ((p.getY() >= 0) && (p.getY() < BOUNDARY.getRowsCount()))
-        && ((p.getX() >= 0) && (p.getX() < BOUNDARY.getColumnsCount()));
+    return ((p.getY() >= 0) && (p.getY() < FIELD_BOUND.getRowsCount()))
+        && ((p.getX() >= 0) && (p.getX() < FIELD_BOUND.getColumnsCount()));
   }
 
   /**

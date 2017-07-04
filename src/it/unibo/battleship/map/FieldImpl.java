@@ -26,20 +26,20 @@ public final class FieldImpl implements Field {
    * The field cell matrix is like the first quadrant of the cartesian plane,
    * seen upside down.
    */
-  private final Boundary boundary;
+  private final FieldBound fieldBound;
   private final transient FieldMatrix fieldMatrix;
 
-  private FieldImpl(final Boundary boundary) {
-    this.boundary = boundary;
-    this.fieldMatrix = new FieldMatrix(boundary);
+  private FieldImpl(final FieldBound fieldBound) {
+    this.fieldBound = fieldBound;
+    this.fieldMatrix = new FieldMatrix(fieldBound);
   }
 
-  public static FieldImpl createField(final Boundary boundary) {
-    if ((boundary.getColumnsCount() < 0) || (boundary.getRowsCount() < 0)) {
+  public static FieldImpl createField(final FieldBound fieldBound) {
+    if ((fieldBound.getColumnsCount() < 0) || (fieldBound.getRowsCount() < 0)) {
       throw new IllegalArgumentException(
           GlobalProperties.BOUNDARY_VALUE_IS_NEGATIVE);
     }
-    return new FieldImpl(boundary);
+    return new FieldImpl(fieldBound);
   }
 
   @Override
@@ -91,8 +91,8 @@ public final class FieldImpl implements Field {
   }
 
   @Override
-  public Boundary getBoundary() {
-    return this.boundary;
+  public FieldBound getFieldBound() {
+    return this.fieldBound;
   }
 
   public FieldCell[][] getFieldCells() {
@@ -119,42 +119,42 @@ public final class FieldImpl implements Field {
     final FieldImpl that = (FieldImpl) o;
 
     return Objects.equal(this.fieldMatrix, that.fieldMatrix)
-        && Objects.equal(this.boundary, that.boundary);
+        && Objects.equal(this.fieldBound, that.fieldBound);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(this.fieldMatrix, this.boundary);
+    return Objects.hashCode(this.fieldMatrix, this.fieldBound);
   }
 
   @Override
   public String toString() {
-    return "Field { " + this.boundary.getRowsCount() + " rows }; { " +
-        this.boundary.getColumnsCount() + " columns } ";
+    return "Field { " + this.fieldBound.getRowsCount() + " rows }; { " +
+        this.fieldBound.getColumnsCount() + " columns } ";
   }
 
   private static class FieldMatrix {
     private final FieldCell[] fieldCells;
-    private final Boundary boundary;
+    private final FieldBound fieldBound;
 
-    public FieldMatrix(final Boundary boundary) {
-      this.boundary = boundary;
-      this.fieldCells = new FieldCell[boundary.getSize()];
+    private FieldMatrix(final FieldBound fieldBound) {
+      this.fieldBound = fieldBound;
+      this.fieldCells = new FieldCell[fieldBound.getSize()];
       this.initialize();
     }
 
-    public FieldCell getAt(final int zeroBasedIndex) {
+    private FieldCell getAt(final int zeroBasedIndex) {
       return this.fieldCells[zeroBasedIndex];
     }
 
-    public FieldCell getAt(final Point2d point) {
+    private FieldCell getAt(final Point2d point) {
       final int idx = Point2dHelper.getIndex(point);
       return this.getAt(idx);
     }
 
-    public FieldCell[][] getMatrix() {
-      final int rows = this.boundary.getRowsCount();
-      final int cols = this.boundary.getColumnsCount();
+    private FieldCell[][] getMatrix() {
+      final int rows = this.fieldBound.getRowsCount();
+      final int cols = this.fieldBound.getColumnsCount();
       final FieldCell[][] matrix = new FieldCell[rows][cols];
 
       for (int row = 0; row < rows; row++) {
@@ -168,7 +168,7 @@ public final class FieldImpl implements Field {
     }
 
     private void initialize() {
-      for (int i = 0; i < this.boundary.getSize(); i++) {
+      for (int i = 0; i < this.fieldBound.getSize(); i++) {
         this.fieldCells[i] = new FieldCellImpl();
       }
     }
