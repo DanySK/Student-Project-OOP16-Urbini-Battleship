@@ -1,6 +1,6 @@
 /**
  * Provides classes which can be used by
- * many modules plus helper classes.
+ * different modules.
  *
  * @author fabio.urbini
  */

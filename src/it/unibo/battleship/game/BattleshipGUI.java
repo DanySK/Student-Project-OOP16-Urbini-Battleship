@@ -19,7 +19,7 @@ public final class BattleshipGUI {
 
     // MyFrame myFrame = new MyFrame("Battleship", new FlowLayout(),
     // BoundaryImpl.createBoundary(10, 10));
-    // myFrame.getMainPanel().validate();
+    // myFrame.getMainPanel().validate(); -> place it in MyFrame constructor
     throw new UnsupportedOperationException();
   }
 }

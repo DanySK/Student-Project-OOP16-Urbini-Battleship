@@ -8,7 +8,7 @@
 
 package it.unibo.battleship.common;
 
-import it.unibo.battleship.ships.Ship;
+import it.unibo.battleship.entity.ships.Ship;
 import java.util.stream.IntStream;
 import static it.unibo.battleship.common.GlobalProperties.*;
 

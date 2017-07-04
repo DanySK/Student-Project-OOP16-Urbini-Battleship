@@ -20,7 +20,7 @@ DRY,
 SOLID,
 COMPOSITION > INHERITANCE
 design and document for inheritance or else prohibit it
-
+package -> by feature (not by layer)
 
 
 
