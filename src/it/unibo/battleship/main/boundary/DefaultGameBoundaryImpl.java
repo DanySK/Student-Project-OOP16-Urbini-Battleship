@@ -9,14 +9,9 @@
 package it.unibo.battleship.main.boundary;
 
 import it.unibo.battleship.main.common.Point2d;
-import it.unibo.battleship.main.common.Point2dImpl;
 import it.unibo.battleship.main.control.BattleshipControl.PlayerType;
 import it.unibo.battleship.main.control.BattleshipControl.ViewerType;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -32,12 +27,23 @@ import static it.unibo.battleship.main.control.BattleshipControlImpl.CONTROLLER;
  * @author fabio.urbini
  */
 public final class DefaultGameBoundaryImpl {
-  private final String LEGENDA =
+  /* actually hard coded - refactor legenda*/
+  private static final String LEGENDA =
       "Legenda : \n" +
       "E = Empty\n" +
       "M = Missed\n" +
       "@ = Ship\n" +
       "* = Hit\n";
+  private static final String aiLevelMessages =
+      "Choose AI level. Type one of the following values\n"+
+      "1 : Super easy, guaranteed win, for beginners\n"+
+      "2 : Easy, no need to think about moves yet";
+  private static final String gameStartedMessages =
+      "Battleship game start\n"+
+      "CARE! Don't insert values out of the current boundary\n"+
+      "Don't try to place ships that will be out of the boundaries\n"+
+      "Don't make ships overlap, the game will end";
+  private static final IoHelper ioHelper = new IoHelper();
   /*
   Future refactorings :
   make an instantiable class controlling the console
@@ -50,10 +56,9 @@ public final class DefaultGameBoundaryImpl {
   Note : the code has to be refactored and polished.
    */
   private DefaultGameBoundaryImpl() {
-  }
-
-  public static void main(final String[] args) {
-    printStringsForGameStart();
+    System.out.println(gameStartedMessages);
+    System.out.println();
+    System.out.println(LEGENDA);
     initializeAi();
     placePlayerFleet();
 
@@ -67,20 +72,16 @@ public final class DefaultGameBoundaryImpl {
     printAfterGameEnded();
   }
 
-  private static void printStringsForGameStart() {
-    System.out.println("Battleship game start");
-    System.out.println("CARE! Don't insert values out of the current boundary");
-    System.out.println("Don't try to place ships that will be out of the boundaries");
-    System.out.println("Don't make ships overlap, the game will end");
-    System.out.println(getLegenda());
+  public static void main(final String[] args) {
+    new DefaultGameBoundaryImpl();
   }
 
-  private static void initializeAi() {
+  private void initializeAi() {
     chooseAiLevel();
     CONTROLLER.initializeAi();
   }
 
-  private static void printAfterGameEnded() {
+  private void printAfterGameEnded() {
     String s = "";
     if (CONTROLLER.isAiFleetSunk()) {
       s = "Congratulations! You won!";
@@ -91,17 +92,17 @@ public final class DefaultGameBoundaryImpl {
     System.out.println(s);
   }
 
-  private static void shootAiField() {
+  private void shootAiField() {
     System.out.println("Create a new shot and point at the enemy fleet!");
-    final Point2d p = IoHelper.getValidPoint2d();
+    final Point2d p = ioHelper.getValidPoint2d();
     CONTROLLER.shootAiField(p);
   }
 
-  private static void shootPlayerField() {
+  private void shootPlayerField() {
     CONTROLLER.shootPlayerField();
   }
 
-  private static String getHeaderForConsole(final int columnsCount) {
+  private String getHeaderForConsole(final int columnsCount) {
     final StringBuilder sb = new StringBuilder("   ");
     final String values = "0123456789ABCDEFGH"; // raw method to show header
 
@@ -112,7 +113,7 @@ public final class DefaultGameBoundaryImpl {
     return sb.toString();
   }
 
-  private static void placePlayerFleet() {
+  private void placePlayerFleet() {
     System.out.println("Place your fleet first");
     printField(HUMAN, OWNER);
     do {
@@ -121,12 +122,12 @@ public final class DefaultGameBoundaryImpl {
     } while (CONTROLLER.isPlayerFleetNotPlaced());
   }
 
-  private static void chooseAiLevel() {
+  private void chooseAiLevel() {
     boolean valid;
     do {
-      printForAiLevel();
-      final int aiLevel = IoHelper.readInt();
-      valid = IoHelper.isValid(aiLevel, 1, 2);
+      System.out.println(aiLevelMessages);
+      final int aiLevel = ioHelper.readInt();
+      valid = ioHelper.isValid(aiLevel, 1, 2);
       if (!valid) {
         System.out.println("Invalid number");
       } else {
@@ -135,13 +136,7 @@ public final class DefaultGameBoundaryImpl {
     } while (!valid);
   }
 
-  private static void printForAiLevel() {
-    System.out.println("Choose AI level. Type one of the following values");
-    System.out.println("1 : Super easy, guaranteed win, for beginners");
-    System.out.println("2 : Easy, no need to think about moves yet");
-  }
-
-  private static void setUpAiLevel(final int aiLevel) {
+  private void setUpAiLevel(final int aiLevel) {
     switch(aiLevel) {
       case 1 : {
         CONTROLLER.setUpAiLevelSuperEasy();
@@ -156,18 +151,23 @@ public final class DefaultGameBoundaryImpl {
       default : break;
     }
   }
-  private static void printField(final PlayerType playerType, final ViewerType viewerType) {
-    final StringBuilder sb = new StringBuilder("\n\n");
-    sb.append( playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---");
-    sb.append('\n');
-    sb.append(getHeaderForConsole(CONTROLLER.getBoundary().getColumnsCount()));
-    System.out.println(sb);
+
+  private void printField(final PlayerType playerType, final ViewerType viewerType) {
+    final StringBuilder headerBuilder = new StringBuilder("\n\n");
+    headerBuilder.append(
+        playerType == AI ? "--- AI FIELD ---" : "--- PLAYER FIELD ---"
+    );
+    headerBuilder.append('\n');
+    headerBuilder.append(getHeaderForConsole(
+        CONTROLLER.getBoundary().getColumnsCount())
+    );
+    System.out.println(headerBuilder);
 
     getFieldRowsToPrint(playerType, viewerType).forEach(System.out::println);
 
   }
 
-  private static List<String> getFieldRowsToPrint(final PlayerType playerType, final ViewerType viewerType) {
+  private List<String> getFieldRowsToPrint(final PlayerType playerType, final ViewerType viewerType) {
     final List<String> rowsToWrite = new ArrayList<>();
     final List<List<Character>> charMapList = CONTROLLER.getFieldView(playerType, viewerType);
 
@@ -182,87 +182,10 @@ public final class DefaultGameBoundaryImpl {
     return rowsToWrite;
   }
 
-  private static void place() {
+  private void place() {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
     System.out.println("Trying to place a " + shipToPlace);
-    final Point2d p = IoHelper.getValidPoint2d();
+    final Point2d p = ioHelper.getValidPoint2d();
     CONTROLLER.placeNextPlaceableShip(p);
   }
-
-  private static String getLegenda() {
-    return "Legenda : \n" + "E = Empty\n" + "M = Missed\n" + "@ = Ship\n" + "* = Hit\n";
-  }
-
-
-  private static final class IoHelper {
-    /*
-    Make this an utility class in the future.
-    Consider refactoring all methods
-     */
-
-    private IoHelper() {}
-
-    private static boolean isValid(final int input,
-                                   final int minRangeInclusive,
-                                   final int maxRangeInclusive) {
-      return input <= maxRangeInclusive && input >= minRangeInclusive;
-    }
-
-    private static int writeMessageAndReadInt(final String message) {
-      System.out.println(message);
-      return readInt();
-    }
-
-    private static int readInt() throws NumberFormatException {
-      final BufferedReader br = getBufferedReader();
-
-      boolean check = false;
-      do {
-        try {
-          check = true;
-          return Integer.parseInt(br.readLine());
-        } catch (final NumberFormatException nfe) {
-          check = false;
-          System.err.println("Invalid Format! It's not a number!");
-          System.out.println("Reinsert value");
-        } catch (final IOException e) {
-          e.printStackTrace();
-        }
-      } while (!check);
-
-      return -1;
-    }
-
-    private static BufferedReader getBufferedReader() {
-      BufferedReader br = null;
-      try {
-        return new BufferedReader(new InputStreamReader(
-            System.in, "UTF-8"));
-      } catch (UnsupportedEncodingException e) {
-        e.printStackTrace();
-      }
-      return br;
-    }
-
-    private static Point2d getValidPoint2d() {
-      Point2d p;
-      boolean pointOk;
-      do {
-        p = readPoint2d();
-        pointOk = CONTROLLER.isPointWithinBoundaryLimits(p);
-        if (!pointOk) {
-          System.out.println("Invalid values for a point, reinsert them");
-        }
-      } while(!pointOk);
-      return p;
-    }
-
-    private static Point2d readPoint2d() {
-      final int row = writeMessageAndReadInt("Enter row to create a point");
-      final int column = writeMessageAndReadInt("Enter column to create a point");
-      return new Point2dImpl(column, row);
-    }
-
-  }
-
 }
