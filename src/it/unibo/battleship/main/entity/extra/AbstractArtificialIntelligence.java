@@ -35,23 +35,23 @@ public abstract class AbstractArtificialIntelligence implements
 
 
   /**
-   * Represents the Level of the Artificial Intelligence
+   * Represents the Level of the Artificial Intelligence.
    * @author fabio.urbini
    *
    */
   public enum Level {
-    /** Guaranteed win */
+    /** Guaranteed win. */
     SUPER_EASY,
 
-    /** Easy level */
+    /** Easy level. */
     EASY,
 
-    /** Average level, not supported yet */
+    /** Average level, not supported yet. */
     AVERAGE,
 
     /**
      * Hard level, you got to think more than a second for each move,
-     * not supported yet
+     * not supported yet.
      */
     HARD,
 

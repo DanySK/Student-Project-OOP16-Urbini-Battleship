@@ -13,6 +13,7 @@ import it.unibo.battleship.main.common.Point2d;
 import it.unibo.battleship.main.common.Point2dImpl;
 import it.unibo.battleship.main.common.Ruleset;
 import it.unibo.battleship.main.entity.extra.AbstractArtificialIntelligence;
+import it.unibo.battleship.main.entity.extra.AbstractArtificialIntelligence.Level;
 import it.unibo.battleship.main.entity.extra.ArtificialIntelligence;
 import it.unibo.battleship.main.entity.map.Field;
 import it.unibo.battleship.main.entity.map.FieldHelper;
@@ -39,7 +40,7 @@ public enum BattleshipControlImpl implements BattleshipControl {
   private Fleet aiFleet;
   private Field aiField;
   private ArtificialIntelligence ai;
-  private AbstractArtificialIntelligence.Level aiLevel;
+  private Level aiLevel;
   private boolean isSetup;
 
   private final Fleet playerFleet;
@@ -163,12 +164,12 @@ public enum BattleshipControlImpl implements BattleshipControl {
 
   @Override
   public void setUpAiLevelSuperEasy() {
-    this.setUpAiLevel(AbstractArtificialIntelligence.Level.SUPER_EASY);
+    this.setUpAiLevel(Level.SUPER_EASY);
   }
 
   @Override
   public void setUpAiLevelEasy() {
-    this.setUpAiLevel(AbstractArtificialIntelligence.Level.EASY);
+    this.setUpAiLevel(Level.EASY);
   }
 
   @Override
@@ -176,7 +177,7 @@ public enum BattleshipControlImpl implements BattleshipControl {
     return Ruleset.isPointWithinLimits(point);
   }
 
-  private void setUpAiLevel(final AbstractArtificialIntelligence.Level level) {
+  private void setUpAiLevel(final Level level) {
     if (this.isSetup ) {
       throw new IllegalStateException("The AI Level was setup already");
     }

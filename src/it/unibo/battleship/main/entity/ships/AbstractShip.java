@@ -127,6 +127,7 @@ public abstract class AbstractShip implements Ship {
   @Override
   public boolean isSunk() {
     return this.hitPoints.size() >= this.getSize();
+    // TODO: make an event in the future
   }
 
   /**

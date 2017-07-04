@@ -28,10 +28,16 @@ import static it.unibo.battleship.main.control.BattleshipControl.ViewerType.OWNE
 import static it.unibo.battleship.main.control.BattleshipControlImpl.CONTROLLER;
 
 /**
- * Boundary of a battleship game. It works with the console.
+ * Boundary of a battleship game. It uses the console.
  * @author fabio.urbini
  */
-public final class BattleshipBoundary {
+public final class DefaultGameBoundaryImpl {
+  private final String LEGENDA =
+      "Legenda : \n" +
+      "E = Empty\n" +
+      "M = Missed\n" +
+      "@ = Ship\n" +
+      "* = Hit\n";
   /*
   Future refactorings :
   make an instantiable class controlling the console
@@ -41,8 +47,9 @@ public final class BattleshipBoundary {
 
   Make it easy to play with different boundaries
   place a ship or a shot with an index instead of row and column
+  Note : the code has to be refactored and polished.
    */
-  private BattleshipBoundary() {
+  private DefaultGameBoundaryImpl() {
   }
 
   public static void main(final String[] args) {
