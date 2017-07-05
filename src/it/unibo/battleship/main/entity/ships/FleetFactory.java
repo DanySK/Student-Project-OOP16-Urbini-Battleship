@@ -8,6 +8,7 @@
 
 package it.unibo.battleship.main.entity.ships;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,7 @@ import java.io.Serializable;
  * @author fabio.urbini
  */
 @FunctionalInterface
+@Immutable
 public interface FleetFactory extends Serializable {
   /**
    * Creates a Fleet.

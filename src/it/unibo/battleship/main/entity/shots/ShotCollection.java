@@ -10,8 +10,9 @@ package it.unibo.battleship.main.entity.shots;
 
 import it.unibo.battleship.main.common.GlobalProperties;
 import it.unibo.battleship.main.common.Point2d;
+
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a collection of shots. It can be extended by subclasses by
@@ -46,7 +47,13 @@ public abstract class ShotCollection implements Serializable {
     }
   }
 
-  public abstract Iterable<Shot> getShotCollection(final Point2d point2d);
+  /**
+   * Returns a {@link Set} of any class that extends Shot
+   * which contains all shots
+   * @param startingPoint the starting point
+   * @return all shots
+   */
+  public abstract Set<? extends Shot> getShotCollection(final Point2d startingPoint);
 
   /**
    * Returns a ShotCollection given the input shot type.
@@ -74,7 +81,7 @@ public abstract class ShotCollection implements Serializable {
     private static final long serialVersionUID = 6019046647320383763L;
 
     @Override
-    public List<Shot> getShotCollection(final Point2d point2d) {
+    public Set<Shot> getShotCollection(final Point2d startingPoint) {
       throw new UnsupportedOperationException();
     }
   }
@@ -84,7 +91,7 @@ public abstract class ShotCollection implements Serializable {
     private static final long serialVersionUID = -1817573103704728259L;
 
     @Override
-    public List<Shot> getShotCollection(final Point2d point2d) {
+    public Set<Shot> getShotCollection(final Point2d startingPoint) {
       throw new UnsupportedOperationException();
     }
   }
@@ -94,7 +101,7 @@ public abstract class ShotCollection implements Serializable {
     private static final long serialVersionUID = 8779342634741299600L;
 
     @Override
-    public List<Shot> getShotCollection(final Point2d point2d) {
+    public Set<Shot> getShotCollection(final Point2d startingPoint) {
       throw new UnsupportedOperationException();
     }
   }

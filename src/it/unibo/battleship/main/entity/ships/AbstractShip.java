@@ -84,7 +84,7 @@ public abstract class AbstractShip implements Ship {
   @Override
   public void resetPlacement() {
     this.placed = false;
-    this.pos = null;
+    this.pos = null; // consider refactoring to Optional
   }
 
   @Override

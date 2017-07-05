@@ -99,4 +99,6 @@ public final class IoHelper {
     final int column = writeMessageAndReadInt("Enter column ( x ) to create a point");
     return new Point2dImpl(column, row);
   }
+
+  // todo: ask method (message) : String
 }

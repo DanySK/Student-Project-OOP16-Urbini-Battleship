@@ -44,6 +44,16 @@ public final class Point2dImpl implements Point2d {
   }
 
   @Override
+  public Point2dImpl incrementX() {
+    return new Point2dImpl(this.x + 1, this.y);
+  }
+
+  @Override
+  public Point2dImpl incrementY() {
+    return new Point2dImpl(this.x, this.y + 1);
+  }
+
+  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;

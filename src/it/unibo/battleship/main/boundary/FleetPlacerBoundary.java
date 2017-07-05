@@ -16,7 +16,7 @@ import it.unibo.battleship.main.common.Point2d;
  */
 public interface FleetPlacerBoundary {
 
-  void placeShip(Point2d startingPoint);
+  void placeShip(Point2d startingPoint); // todo: move to its controller
 
   void reset();
 

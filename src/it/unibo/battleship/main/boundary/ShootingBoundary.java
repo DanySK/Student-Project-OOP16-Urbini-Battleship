@@ -16,7 +16,7 @@ import it.unibo.battleship.main.common.Point2d;
  */
 public interface ShootingBoundary {
 
-  void shoot(Point2d shootingPoint);
+  void shoot(Point2d shootingPoint); // todo: move to its controller
 
   void quit();
 }

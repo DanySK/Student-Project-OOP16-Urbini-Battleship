@@ -25,7 +25,6 @@ public enum ShipFactoryImpl implements ShipFactory {
 
   private static final long serialVersionUID = -1375681121821315440L;
 
-
   /**
    * Creates a ship.
    * @param size
@@ -171,7 +170,7 @@ public enum ShipFactoryImpl implements ShipFactory {
   }
 
   /*
-  develop ShipImpl and make instances of different ships (size, name)
+  Consider creating ShipImpl and make instances of different ships (size, name)
   instead of using static nested classes.
    */
 }

@@ -27,6 +27,7 @@ import static it.unibo.battleship.main.control.BattleshipControlImpl.CONTROLLER;
  * @author fabio.urbini
  */
 public final class DefaultGameBoundaryImpl {
+  private static final String CLEAR_CONSOLE = "\033[2J\033[;H";
   /* actually hard coded - refactor legenda*/
   private static final String LEGENDA =
       "Legenda : \n" +
@@ -65,6 +66,7 @@ public final class DefaultGameBoundaryImpl {
     do {
       shootAiField();
       shootPlayerField();
+      System.out.println(LEGENDA);
       printField(HUMAN, OWNER);
       printField(AI, ENEMY);
     } while (CONTROLLER.isGameNotFinished());

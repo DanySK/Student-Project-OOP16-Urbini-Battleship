@@ -33,4 +33,16 @@ public interface Point2d extends Serializable {
    * @return the y coordinate (row)
    */
   int getY();
+
+  /**
+   * Returns a new Point2d instance with x incremented by 1.
+   * @return a new Point2d instance with x incremented by 1.
+   */
+  Point2d incrementX();
+
+  /**
+   * Returns a new Point2d instance with y incremented by 1.
+   * @return a new Point2d instance with y incremented by 1.
+   */
+  Point2d incrementY();
 }
