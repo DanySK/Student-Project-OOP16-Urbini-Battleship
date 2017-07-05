@@ -8,20 +8,12 @@
 
 package it.unibo.battleship.main.boundary;
 
-import it.unibo.battleship.main.common.Point2d;
-
 /**
- * Represents the boundary used to shoot a fleet.
- * @author fabio.urbini
+ * Created by fabio.urbini on 05/07/2017.
  */
-public interface ShootingBoundary extends IoBoundary {
+public interface GameBoundary extends IoBoundary {
 
-  void shoot(Point2d shootingPoint); // todo: move to its controller
-
-  /**
-   * Shows the field.
-   */
   void showField();
 
-  void quit();
+  void showSettings();
 }

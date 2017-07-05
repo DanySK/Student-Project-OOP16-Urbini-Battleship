@@ -1,0 +1,6 @@
+-Make an unified boundary with Settings, FleetPlacement, Shooting?
+-They all extend IoBoundary which is used to deliver simple console messages
+
+-Make one single control to handle all boundaries? (probably yes).
+-Move all methods from boundaries to control if they don't
+belong to the boundary.

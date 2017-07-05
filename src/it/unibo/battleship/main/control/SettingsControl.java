@@ -6,22 +6,17 @@
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
-package it.unibo.battleship.main.boundary;
-
-import it.unibo.battleship.main.common.Point2d;
+package it.unibo.battleship.main.control;
 
 /**
- * Represents the boundary used to shoot a fleet.
+ * Represents the settings control.
  * @author fabio.urbini
  */
-public interface ShootingBoundary extends IoBoundary {
+public interface SettingsControl {
 
-  void shoot(Point2d shootingPoint); // todo: move to its controller
+  void setDifficulty(int difficulty);
 
-  /**
-   * Shows the field.
-   */
-  void showField();
+  void enableShootingAgainAfterHit();
 
-  void quit();
+  void disableShootingAgainAfterHit();
 }

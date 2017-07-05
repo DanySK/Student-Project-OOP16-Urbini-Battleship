@@ -15,15 +15,18 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Represents a collection of shots. It can be extended by subclasses by
+ * Represents a set of shots. It can be extended by subclasses by
  * defining getShotCollection.
  *
  * @author fabio.urbini
  */
-public abstract class ShotCollection implements Serializable {
+public abstract class ShotsCollection implements Serializable {
   private static final long serialVersionUID = -8675395549867915077L;
 
-  private ShotCollection() {
+  /*
+  Consider refactoring in the future : generic types, wildcards
+   */
+  private ShotsCollection() {
   }
 
   /**
@@ -42,25 +45,25 @@ public abstract class ShotCollection implements Serializable {
       this.totalSize = totalSize;
     }
 
-    public int getTotalSize() {
+    public final int getTotalSize() {
       return this.totalSize;
     }
   }
 
   /**
-   * Returns a {@link Set} of any class that extends Shot
+   * Returns a {@link Set} of Shot
    * which contains all shots
    * @param startingPoint the starting point
    * @return all shots
    */
-  public abstract Set<? extends Shot> getShotCollection(final Point2d startingPoint);
+  public abstract Set<Shot> getShotCollection(final Point2d startingPoint);
 
   /**
    * Returns a ShotCollection given the input shot type.
    * @param shotType shot type of the shot collection
    * @return a shot collection.
    */
-  public static ShotCollection getShotCollectionByType(final Type shotType) {
+  public static ShotsCollection getShotCollectionByType(final Type shotType) {
     switch (shotType) {
     case X:
       return new XShot();
@@ -77,7 +80,7 @@ public abstract class ShotCollection implements Serializable {
   }
 
 
-  private static final class IShot extends ShotCollection {
+  private static final class IShot extends ShotsCollection {
     private static final long serialVersionUID = 6019046647320383763L;
 
     @Override
@@ -87,7 +90,7 @@ public abstract class ShotCollection implements Serializable {
   }
 
 
-  private static final class TShot extends ShotCollection {
+  private static final class TShot extends ShotsCollection {
     private static final long serialVersionUID = -1817573103704728259L;
 
     @Override
@@ -97,7 +100,7 @@ public abstract class ShotCollection implements Serializable {
   }
 
 
-  private static final class XShot extends ShotCollection {
+  private static final class XShot extends ShotsCollection {
     private static final long serialVersionUID = 8779342634741299600L;
 
     @Override

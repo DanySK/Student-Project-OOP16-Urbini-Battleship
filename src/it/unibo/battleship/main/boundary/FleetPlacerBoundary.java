@@ -14,12 +14,10 @@ import it.unibo.battleship.main.common.Point2d;
  * Represents the boundary used to place a fleet.
  * @author fabio.urbini
  */
-public interface FleetPlacerBoundary {
+public interface FleetPlacerBoundary extends IoBoundary {
+
+  void showFleet(); // maybe showField? like ShootingBoundary
 
   void placeShip(Point2d startingPoint); // todo: move to its controller
-
-  void reset();
-
-  void quit();
 
 }
