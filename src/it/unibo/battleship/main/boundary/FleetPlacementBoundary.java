@@ -16,8 +16,15 @@ import it.unibo.battleship.main.common.Point2d;
  */
 public interface FleetPlacementBoundary extends IoBoundary {
 
+  /**
+   * Shows the fleet.
+   */
   void showFleet(); // maybe showField? like ShootingBoundary
 
+  /**
+   * Places a ship in the current field.
+   * @param startingPoint point where the ship will start
+   */
   void placeShip(Point2d startingPoint); // todo: move to its controller
 
 }

@@ -27,6 +27,9 @@ public final class IoHelper {
   Consider refactoring all methods
    */
 
+  /**
+   * Creates an instance of IoHelper
+   */
   public IoHelper() {
     this.br = new BufferedReader(new InputStreamReader(System.in));
   }
@@ -38,14 +41,14 @@ public final class IoHelper {
    * @param maxRangeInclusive maximum range included
    * @return {@code true} if the value is contained in the range.
    */
-  public final boolean isValid(final int input,
+  public boolean isValid(final int input,
                                 final int minRangeInclusive,
                                 final int maxRangeInclusive) {
     return input <= maxRangeInclusive && input >= minRangeInclusive;
   }
 
   /**
-   * Writes a message in the console and tries to read an int
+   * Writes a message in the console and tries to read an int.
    * @param message message that will be printed in the console output
    * @return an int value
    */
@@ -61,7 +64,7 @@ public final class IoHelper {
    */
   public int readInt() throws NumberFormatException {
     boolean check = false;
-    while(!check) {
+    while (!check) {
       try {
         check = true;
         return Integer.parseInt(br.readLine());

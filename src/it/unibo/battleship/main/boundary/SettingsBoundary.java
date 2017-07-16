@@ -10,7 +10,7 @@ package it.unibo.battleship.main.boundary;
 
 /**
  * Represents the boundary used to set all
- * the environment variables for the game
+ * the environment variables for the game.
  * @author fabio.urbini
  */
 public interface SettingsBoundary extends IoBoundary {
@@ -20,10 +20,11 @@ public interface SettingsBoundary extends IoBoundary {
    */
   void showSettings();
 
-// todo: move to control
+  /* Move to a control
   void setDifficulty(int difficulty);
 
   void enableShootingAgainAfterHit() throws UnsupportedOperationException;
 
   void disableShootingAgainAfterHit() throws UnsupportedOperationException;
+  */
 }

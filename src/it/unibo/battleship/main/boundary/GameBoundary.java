@@ -13,7 +13,13 @@ package it.unibo.battleship.main.boundary;
  */
 public interface GameBoundary extends IoBoundary {
 
+  /**
+   * Shows the current game field.
+   */
   void showField();
 
+  /**
+   * Shows the current game settings.
+   */
   void showSettings();
 }
