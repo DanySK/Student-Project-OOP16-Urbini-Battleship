@@ -35,16 +35,16 @@ public final class DefaultGameBoundaryImpl {
       "M = Missed\n" +
       "@ = Ship\n" +
       "* = Hit\n";
-  private static final String aiLevelMessages =
+  private static final String AI_LEVEL_MESSAGES =
       "Choose AI level. Type one of the following values\n"+
       "1 : Super easy, guaranteed win, for beginners\n"+
       "2 : Easy, no need to think about moves yet";
-  private static final String gameStartedMessages =
+  private static final String GAME_STARTED_MESSAGES =
       "Battleship game start\n"+
       "CARE! Don't insert values out of the current boundary\n"+
       "Don't try to place ships that will be out of the boundaries\n"+
       "Don't make ships overlap, the game will end";
-  private static final IoHelper ioHelper = new IoHelper();
+  private static final IoHelper IO_HELPER = new IoHelper();
   /*
   Future refactorings :
   make an instantiable class controlling the console
@@ -57,7 +57,7 @@ public final class DefaultGameBoundaryImpl {
   Note : the code has to be refactored and polished.
    */
   private DefaultGameBoundaryImpl() {
-    System.out.println(gameStartedMessages);
+    System.out.println(GAME_STARTED_MESSAGES);
     System.out.println();
     System.out.println(LEGENDA);
     initializeAi();
@@ -96,7 +96,7 @@ public final class DefaultGameBoundaryImpl {
 
   private void shootAiField() {
     System.out.println("Create a new shot and point at the enemy fleet!");
-    final Point2d p = ioHelper.getValidPoint2d();
+    final Point2d p = IO_HELPER.getValidPoint2d();
     CONTROLLER.shootAiField(p);
   }
 
@@ -127,9 +127,9 @@ public final class DefaultGameBoundaryImpl {
   private void chooseAiLevel() {
     boolean valid;
     do {
-      System.out.println(aiLevelMessages);
-      final int aiLevel = ioHelper.readInt();
-      valid = ioHelper.isValid(aiLevel, 1, 2);
+      System.out.println(AI_LEVEL_MESSAGES);
+      final int aiLevel = IO_HELPER.readInt();
+      valid = IO_HELPER.isValid(aiLevel, 1, 2);
       if (!valid) {
         System.out.println("Invalid number");
       } else {
@@ -187,7 +187,7 @@ public final class DefaultGameBoundaryImpl {
   private void place() {
     final String shipToPlace = CONTROLLER.getNextPlaceableShip();
     System.out.println("Trying to place a " + shipToPlace);
-    final Point2d p = ioHelper.getValidPoint2d();
+    final Point2d p = IO_HELPER.getValidPoint2d();
     CONTROLLER.placeNextPlaceableShip(p);
   }
 }
