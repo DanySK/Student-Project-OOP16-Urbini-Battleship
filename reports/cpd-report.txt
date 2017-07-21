@@ -1,0 +1,18 @@
+Found a 14 line (50 tokens) duplication in the following files: 
+Starting at line 53 of /home/danysk/Dropbox/Didattica/2016-17/Programmazione ad Oggetti/Progetti/oop16-battleship-urbini/src/it/unibo/battleship/main/common/Point2dImpl.java
+Starting at line 93 of /home/danysk/Dropbox/Didattica/2016-17/Programmazione ad Oggetti/Progetti/oop16-battleship-urbini/src/it/unibo/battleship/main/entity/map/FieldCellImpl.java
+
+    return new Point2dImpl(this.x, this.y + 1);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if ((o == null) || (this.getClass() != o.getClass())) {
+      return false;
+    }
+
+    final Point2dImpl that = (Point2dImpl) o;

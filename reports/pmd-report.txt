@@ -1,0 +1,17 @@
+src/it/unibo/battleship/main/boundary/DefaultGameBoundaryImpl.java:30:	Avoid unused private fields such as 'CLEAR_CONSOLE'.
+src/it/unibo/battleship/main/boundary/IoHelper.java:76:	Avoid printStackTrace(); use a logger call instead.
+src/it/unibo/battleship/main/entity/extra/AbstractArtificialIntelligence.java:109:	Use explicit scoping instead of the default package private level
+src/it/unibo/battleship/main/entity/extra/Player.java:16:	Class cannot be instantiated and does not provide any static methods or fields
+src/it/unibo/battleship/main/entity/map/FieldImpl.java:16:	Avoid unused imports such as 'jdk.nashorn.internal.ir.annotations.Immutable'
+src/it/unibo/battleship/main/entity/map/FieldImpl.java:113:	Avoid using if statements without curly braces
+src/it/unibo/battleship/main/entity/map/FieldImpl.java:115:	Avoid using if statements without curly braces
+src/it/unibo/battleship/main/entity/ships/ShipFactoryImpl.java:11:	Avoid unused imports such as 'it.unibo.battleship.main.common.GlobalProperties'
+src/it/unibo/battleship/main/entity/ships/ShipFactoryImpl.java:84:	The String literal "unused" appears 4 times in this file; the first occurrence is on line 84
+src/it/unibo/battleship/main/entity/shots/RandomLimitedShotFactory.java:72:	JUnit 4 tests that set up tests should use the @Before annotation
+src/it/unibo/battleship/main/gui/FieldButton.java:27:	Do not add empty strings
+src/it/unibo/battleship/main/gui/MyFrame.java:24:	Class cannot be instantiated and does not provide any static methods or fields
+src/it/unibo/battleship/main/gui/MyFrame.java:64:	Avoid unused private methods such as 'getGridOfButtons()'.
+src/it/unibo/battleship/main/gui/MyFrame.java:72:	Consider simply returning the value vs storing it in local variable 'jcomponents'
+src/it/unibo/battleship/test/GameTest.java:43:	Use explicit scoping instead of the default package private level
+src/it/unibo/battleship/test/GameTest.java:44:	Use explicit scoping instead of the default package private level
+src/it/unibo/battleship/test/GameTest.java:45:	Use explicit scoping instead of the default package private level
